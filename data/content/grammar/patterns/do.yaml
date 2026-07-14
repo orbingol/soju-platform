@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: do
+form: -도
+romanization: do
+english: also / even
+category: particles
+summary: 'Additive particle: “also/too”, or “even” in negative or surprising contexts.'
+sections:
+- id: also
+  label: Also / too
+  examples:
+  - hangul: 저도 학생이에요.
+    english: I am also a student.
+  - hangul: 친구도 왔어요.
+    english: My friend came too.
+- id: even
+  label: Even
+  examples:
+  - hangul: 1분도 없어요.
+    english: I don't even have one minute.
+conversations:
+- title: Same class, same plan
+  turns:
+  - speaker: A
+    hangul: 저는 한국어 학생이에요.
+    english: I am a Korean student.
+  - speaker: B
+    hangul: 저도 학생이에요.
+    english: I am also a student.
+  - speaker: A
+    hangul: 오늘 수업 후에 공부해요?
+    english: Do you study after class today?
+  - speaker: B
+    hangul: 네. 친구도 같이 공부해요.
+    english: Yes. A friend studies together too.
+  - speaker: A
+    hangul: 저도 가고 싶어요.
+    english: I want to go too.
+  - speaker: B
+    hangul: 좋아요. 도서관에서 만나요.
+    english: Good. Let’s meet at the library.
+phrase_refs:
+- 7f6e2df2-ed97-4eb9-aad1-9792ea895435
+- bfa8aebf-d50e-4158-8867-77bd15d6650f
+- 997d9cdc-65da-4319-8951-9008e2585669

@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: dongan
+form: -동안
+romanization: dong-an
+english: for / during / while
+category: time_place
+summary: Express how long something lasts, during a period, or while an action happens
+  (-는 동안).
+sections:
+- id: duration
+  label: Time durations
+  examples:
+  - hangul: 3일 동안
+    english: for 3 days
+  - hangul: 한 시간 동안
+    english: for one hour
+  - hangul: 오랫동안
+    english: for a long time
+  - hangul: 한국에서 일 년 동안 살았어요.
+    english: I lived in Korea for one year.
+- id: periods
+  label: Period nouns
+  examples:
+  - hangul: 방학 동안
+    english: during vacation
+  - hangul: 휴가 동안
+    english: during holiday / leave
+  - hangul: 방학 동안에 책을 많이 읽었어요.
+    english: I read many books during the vacation.
+- id: while
+  label: While doing (-는 동안)
+  examples:
+  - hangul: 공부하는 동안
+    english: while studying
+  - hangul: 기다리는 동안
+    english: while waiting
+  - hangul: 제가 요리하는 동안 제 친구는 청소했어요.
+    english: While I was cooking, my friend cleaned.
+conversations:
+- title: During vacation
+  turns:
+  - speaker: A
+    hangul: 방학 동안 뭐 했어요?
+    english: What did you do during vacation?
+  - speaker: B
+    hangul: 한 달 동안 한국에 있었어요.
+    english: I was in Korea for one month.
+  - speaker: A
+    hangul: 그 동안 한국어를 공부했어요?
+    english: Did you study Korean during that time?
+  - speaker: B
+    hangul: 네. 친구하고 매일 공부했어요.
+    english: Yes. I studied every day with a friend.
+  - speaker: A
+    hangul: 기다리는 동안 뭐 했어요?
+    english: What did you do while waiting?
+  - speaker: B
+    hangul: 책을 읽었어요.
+    english: I read a book.
+phrase_refs:
+- 0170d3a0-0216-4fcc-9d5e-a58207116059
+- 1a720319-cbe3-4218-9aee-9b8324bbe0b5
+- b639f845-bcd0-4453-8628-3eb5d9247f73
+- d9ea8a06-adfc-4f48-bbe2-2465c5dfe641

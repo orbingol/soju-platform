@@ -1,0 +1,54 @@
+# AGENTS.local.md (example)
+
+This is an **example template** for a personal `AGENTS.local.md` file. To use it, copy this file to `AGENTS.local.md` at the repository root and edit it to suit your needs:
+
+```bash
+cp AGENTS.local.md-example AGENTS.local.md
+```
+
+`AGENTS.local.md` is git-ignored (see `.gitignore`), so your local notes stay out of source control. Do not commit it.
+
+## Ground rules
+
+* This file is **additive only**. It must not override, weaken, or contradict the rules in `AGENTS.md`. If a conflict arises, `AGENTS.md` wins.
+* Keep entries scoped to your local environment, in-flight work, or personal preferences—nothing that should ship to the team belongs here.
+* Delete sections you do not use; agents will read whatever is present.
+
+---
+
+## Local shortcuts
+
+Document any aliases or shell helpers you rely on so agents reproduce your workflow.
+
+* `uvp` → `uv run` (alias)
+* `uvpo` → `uv run poe` (poe-the-poet alias)
+* … *(soju-specific: e.g. `docker compose --profile ollama up ollama ollama-pull web` to start web + local AI)*
+
+## Environment quirks
+
+Note non-default paths, credentials handling, OS-specific quirks, etc.
+
+* … *(soju-specific: Ollama on host vs Docker; `PUBLIC_AI_*` overrides in `docker-compose.yml`; Linux may need `extra_hosts` for `host.docker.internal`)*
+
+## In-flight context
+
+Brief context for the task you are currently working on, so an agent picking up mid-session has the same mental model.
+
+* Branch:
+* Goal:
+* Open questions:
+* *(soju-specific: active word topic — `common`, `family`, etc.; staging file under review in `data/staging/`)*
+
+## Scratch tasks / TODOs
+
+Personal task list. Agents may consult this to align on priorities, but should still defer to explicit user requests.
+
+* [ ] …
+* [ ] … *(soju-specific: e.g. import vocabulary via `soju-import`, then `uv run poe validate`)*
+
+## Notes
+
+Free-form notes that do not fit elsewhere.
+
+*
+* *(soju-specific: prefer host `uv run poe validate` vs `docker compose --profile validate run --rm validate`; default Ollama model in compose; browser used for Korean TTS testing)*

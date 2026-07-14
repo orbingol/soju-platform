@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../../schemas/topics_topic.schema.json
+
+sections:
+- id: parents
+  label: Parents
+  entries:
+  - ref: f112ffea-6d68-4873-992f-7861fcc796fe
+  - ref: 9e055ca8-fd65-4ec6-85f4-a07bb5d5481b
+  - ref: 29e60ff9-a779-4b80-bd25-35cefa4d22ec
+  - ref: 2b831bcf-f0de-4920-b8fb-1f286fb849b5
+  - ref: 697ada42-4ef8-42d6-957d-a7e2895af2af
+- id: siblings
+  label: Siblings
+  entries:
+  - ref: b22e9b7d-4b58-4a02-9970-49523767a269
+  - ref: 1b055d9b-0a5a-48f4-a5b9-136f2e7e1858
+  - ref: 8873f9c1-73c7-417f-998f-938f23555108
+  - ref: 75eaef4d-5847-46e4-9a54-6e96c8fd8aa0
+  - ref: 47995919-f769-4867-bfef-b7c704188421
+  - ref: 0f2a8357-1b9c-4328-ba96-f19835b05bea
+  - ref: 3ab39f9f-6bd1-4e2e-9f1a-ab6bd4266b44
+- id: children
+  label: Children
+  entries:
+  - ref: 6cf20fe1-b66a-494d-a804-5c31f24c8ddc
+  - ref: 32b81c42-b72a-4ead-ad1e-0aec20f2b562
+  - ref: eabcd488-7722-4768-8023-0edbddbb9fbc
+  - ref: 9bc14e02-4b4e-4df1-b5f0-43968db97cc7
+- id: spouse
+  label: Spouse
+  entries:
+  - ref: 389b13dc-c7b1-46a7-99ce-ff2a879b64f6
+  - ref: e546d115-36db-4e5d-9720-5bf8a2037641
+- id: extended
+  label: Extended family
+  entries:
+  - ref: c8149379-420a-46ed-8ccd-5797bc6c9670
+  - ref: 7bd70a37-ba8d-4c36-866c-fb562843bdfa
+  - ref: 120290d6-54c8-4002-ac83-deb4cf81313e
+  - ref: d93cddda-e47a-4b66-93cd-cc8bff0e84fc
+  - ref: 2ca41b95-82dd-41bc-8d22-5cd1d2250fec
+  - ref: 0605b9b4-d704-4fd5-a632-babf3fc68ed6
+  - ref: 0d72534f-4d53-46fd-8c0c-ee8b7bca0b6e
+- id: verbs
+  label: Related verbs
+  description: Common verbs used when talking about family
+  entries:
+  - ref: 723ad49e-9e9c-4293-a0c7-64399a8c7120
+  - ref: 345dd719-7e46-4a05-9131-cf90aa49b187
+  - ref: 56b00e45-39ce-4956-a16c-19a02ec878f8
+  - ref: 33935457-ea10-42bc-b5a6-3c9776012b03

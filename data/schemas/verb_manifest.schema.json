@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://soju.local/schemas/verb_manifest.schema.json",
+  "title": "Verb type data manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["table", "forms"],
+  "properties": {
+    "table": { "type": "string", "minLength": 1 },
+    "forms": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "type": "string", "minLength": 1 },
+      "propertyNames": { "pattern": "^[a-z][a-z0-9_]*$" }
+    },
+    "constructions": {
+      "type": "object",
+      "additionalProperties": { "type": "string", "minLength": 1 },
+      "propertyNames": { "pattern": "^[a-z][a-z0-9_]*$" }
+    }
+  }
+}

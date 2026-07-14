@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: deul
+form: -들
+romanization: deul
+english: plural marker
+category: particles
+summary: Mark people (and sometimes other nouns) as plural. For many inanimate things,
+  prefer number + counter.
+sections:
+- id: people
+  label: People
+  examples:
+  - hangul: 친구들이 왔어요.
+    english: My friends came.
+  - hangul: 학생들이 많아요.
+    english: There are many students.
+- id: counters
+  label: Inanimate objects
+  description: Prefer number + counter instead of -들.
+  examples:
+  - hangul: 책 세 권
+    english: three books
+notes:
+- 'Common with people: 친구들, 학생들.'
+- For books, trees, etc., use number + counter (책 세 권).
+conversations:
+- title: Friends came
+  turns:
+  - speaker: A
+    hangul: 누가 왔어요?
+    english: Who came?
+  - speaker: B
+    hangul: 친구들이 왔어요.
+    english: My friends came.
+  - speaker: A
+    hangul: 몇 명이에요?
+    english: How many people?
+  - speaker: B
+    hangul: 세 명이에요.
+    english: There are three people.
+  - speaker: A
+    hangul: 책도 가져왔어요?
+    english: Did they bring books too?
+  - speaker: B
+    hangul: 네. 책 세 권이 있어요.
+    english: Yes. There are three books.
+phrase_refs:
+- faa6cf0a-6611-4bf5-af38-98bfd216da53
+- 923933e2-68c8-42e9-98ce-d938d37a189f

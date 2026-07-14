@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: kkaji
+form: -까지
+romanization: kka-ji
+english: until / up to
+category: particles
+summary: Mark an endpoint in time, place, or extent. Often pairs with -부터 or -에서.
+sections:
+- id: until
+  label: Until / up to
+  examples:
+  - hangul: 저녁까지 공부해요.
+    english: I study until evening.
+  - hangul: 서울역까지 가요.
+    english: I go as far as Seoul Station.
+conversations:
+- title: Until when?
+  turns:
+  - speaker: A
+    hangul: 오늘 몇 시까지 있어요?
+    english: Until what time are you here today?
+  - speaker: B
+    hangul: 다섯 시까지 있어요.
+    english: I’m here until five.
+  - speaker: A
+    hangul: 도서관까지 같이 걸어요?
+    english: Shall we walk together to the library?
+  - speaker: B
+    hangul: 네. 저녁까지 공부하고 싶어요.
+    english: Yes. I want to study until evening.
+  - speaker: A
+    hangul: 저도요.
+    english: Me too.
+  - speaker: B
+    hangul: 그럼 지금부터 가요.
+    english: Then let’s go from now.
+phrase_refs:
+- 10964051-bcbd-4313-a604-3486cb882fc9
+- 6a6eb778-ba64-4ae8-ab8f-28904b6c69ba

@@ -1,0 +1,96 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: mwoeyo_vs_mwo_haeyo
+form: 뭐예요 / 뭐 해요
+romanization: mwo-ye-yo / mwo hae-yo
+english: what is it? vs what are you doing?
+category: question_words
+summary: 'Two questions that look alike but use different verbs: 예요 (be) vs 해요 (do).'
+notes:
+- 뭐예요? = 뭐 + 이에요/예요 → “What is it?” (asking for identity).
+- 뭐 해요? = 뭐 + 하다 → “What are you doing?” / “What do you do?” (asking about an action).
+- 'Tip: if you can answer with a noun (책이에요), use 뭐예요. If you answer with a verb (공부해요),
+  use 뭐 해요.'
+sections:
+- id: mwoeyo
+  label: 뭐예요? — What is it?
+  description: Use with 이다 (이에요/예요) when asking what something or someone is.
+  examples:
+  - hangul: 이게 뭐예요?
+    english: What is this?
+  - hangul: 저게 뭐예요?
+    english: What is that?
+  - hangul: 이름이 뭐예요?
+    english: What is your name?
+- id: mwo_haeyo
+  label: 뭐 해요? — What are you doing?
+  description: Use with 하다 when asking what someone does or is doing.
+  examples:
+  - hangul: 지금 뭐 해요?
+    english: What are you doing now?
+  - hangul: 주말에 뭐 해요?
+    english: What do you do on the weekend?
+  - hangul: 내일 뭐 해요?
+    english: What are you doing tomorrow?
+- id: contrast
+  label: Side by side
+  description: Same 뭐, different endings — different answers.
+  examples:
+  - hangul: 'A: 이게 뭐예요?  B: 책이에요.'
+    english: 'A: What is this?  B: It’s a book.'
+  - hangul: 'A: 지금 뭐 해요?  B: 책을 읽어요.'
+    english: 'A: What are you doing now?  B: I’m reading a book.'
+conversations:
+- title: At a cafe
+  turns:
+  - speaker: A
+    hangul: 이게 뭐예요?
+    english: What is this?
+  - speaker: B
+    hangul: 커피예요.
+    english: It’s coffee.
+  - speaker: A
+    hangul: 그리고 저건 뭐예요?
+    english: And what is that?
+  - speaker: B
+    hangul: 케이크예요.
+    english: It’s cake.
+  - speaker: A
+    hangul: 주말에 뭐 해요?
+    english: What do you do on the weekend?
+  - speaker: B
+    hangul: 친구하고 같이 카페에 가요.
+    english: I go to a cafe with a friend.
+  - speaker: A
+    hangul: 오늘도 뭐 해요?
+    english: What are you doing today too?
+  - speaker: B
+    hangul: 공부해요. 그런데 커피도 마시고 싶어요.
+    english: I’m studying. But I also want to drink coffee.
+- title: Meeting a classmate
+  turns:
+  - speaker: A
+    hangul: 이름이 뭐예요?
+    english: What is your name?
+  - speaker: B
+    hangul: 민수예요. 이름이 뭐예요?
+    english: I’m Minsu. What is your name?
+  - speaker: A
+    hangul: 지영이에요. 지금 뭐 해요?
+    english: I’m Jiyoung. What are you doing now?
+  - speaker: B
+    hangul: 한국어를 공부해요.
+    english: I’m studying Korean.
+  - speaker: A
+    hangul: 그래요. 그럼 같이 공부해요.
+    english: I see. Then let’s study together.
+  - speaker: B
+    hangul: 좋아요.
+    english: Sounds good.
+phrase_refs:
+- 7049357c-80ed-4a2b-86bb-feccaa6441f3
+- 5cf2246c-0bc0-456a-b238-4b4e609f2b74
+- 063a5ebd-5df3-4261-9d1e-7acf9c231779
+- 3c6f619f-3199-4e99-aad0-ac722a9afe26
+- 8bfb0972-4c04-49b2-a13b-23e8c8123543
+- e4bc4fac-8f3d-47fc-9786-65e1aedc3342

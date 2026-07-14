@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: hante
+form: -한테
+romanization: han-te
+english: to / for (a person)
+category: particles
+summary: Mark the person who receives an action (give, tell, ask).
+sections:
+- id: to_person
+  label: To someone
+  examples:
+  - hangul: 친구한테 말해요.
+    english: I tell a friend.
+  - hangul: 동생한테 줘요.
+    english: I give it to my younger sibling.
+conversations:
+- title: Who is this for?
+  turns:
+  - speaker: A
+    hangul: 이 선물을 누구한테 줘요?
+    english: Who are you giving this present to?
+  - speaker: B
+    hangul: 엄마한테 줘요.
+    english: I’m giving it to my mom.
+  - speaker: A
+    hangul: 카드도 써요?
+    english: Are you writing a card too?
+  - speaker: B
+    hangul: 네. 동생한테도 작은 선물이 있어요.
+    english: Yes. There is also a small gift for my younger sibling.
+  - speaker: A
+    hangul: 같이 가요?
+    english: Shall we go together?
+  - speaker: B
+    hangul: 좋아요.
+    english: Sounds good.
+phrase_refs:
+- 7bc9d8dd-490b-4968-9d4f-49f71a6aefbf
+- c7eca61f-d868-4282-8559-d7d16ca64cc4

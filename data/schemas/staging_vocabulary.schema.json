@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://soju.local/schemas/staging_vocabulary.schema.json",
+  "title": "Staging vocabulary candidates",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["staging", "entries"],
+  "properties": {
+    "staging": { "const": true },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "hangul", "romanization", "english"],
+        "properties": {
+          "id": { "type": "string", "format": "uuid" },
+          "hangul": { "type": "string", "minLength": 1 },
+          "romanization": { "type": "string", "minLength": 1 },
+          "english": { "type": "string", "minLength": 1 },
+          "examples": {
+            "type": "array",
+            "items": { "$ref": "_defs.schema.json#/$defs/example" }
+          },
+          "type": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$"
+          }
+        }
+      }
+    }
+  }
+}

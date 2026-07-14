@@ -1,0 +1,197 @@
+# yaml-language-server: $schema=../../../schemas/topics_topic.schema.json
+
+sections:
+- id: overview
+  label: Prepositions of place
+  description: |
+    <p>Korean location words are usually a <strong>noun + 에</strong> placed after the reference point.</p>
+    <p>Pattern: <em>[place] + [location word] + 에</em> — e.g. 책상 <strong>위에</strong> (on the desk), 가방 <strong>안에</strong> (in the bag).</p>
+  entries: []
+
+- id: location
+  label: Common location words
+  description: |
+    <p>Attach these to a noun and add <strong>에</strong> to say where something is. <strong>위</strong> covers both “on” and “above.” <strong>왼쪽</strong> / <strong>오른쪽</strong> are left and right.</p>
+  entries:
+  - id: c8245da4-f265-4c11-a7e2-a4b8a5abd33f
+    local: true
+    hangul: 위
+    romanization: wi
+    english: on / on top of / above
+    examples:
+    - hangul: 책상 위에 있어요.
+      english: It's on the desk.
+  - id: a9a8731d-915c-49a9-bb55-40cecd4123bb
+    local: true
+    hangul: 아래
+    romanization: a-rae
+    english: under / below
+    examples:
+    - hangul: 의자 아래에 있어요.
+      english: It's under the chair.
+  - id: f40f7c24-8d76-496d-af4a-20fbd106657f
+    local: true
+    hangul: 밑
+    romanization: mit
+    english: under (directly beneath)
+    examples:
+    - hangul: 침대 밑에 있어요.
+      english: It's under the bed.
+  - id: 16bc11ee-715a-4c53-a78a-a15709bf2e84
+    local: true
+    hangul: 옆
+    romanization: yeop
+    english: by / next to
+    examples:
+    - hangul: 은행 옆에 있어요.
+      english: It's next to the bank.
+  - id: ab41c512-3c7f-4785-9f8d-7bf755f76cd7
+    local: true
+    hangul: 왼쪽
+    romanization: oen-jjok
+    english: on the left
+    examples:
+    - hangul: 은행 왼쪽에 있어요.
+      english: It's on the left of the bank.
+  - id: d9ef10a8-c171-40fd-916a-59c67f52849b
+    local: true
+    hangul: 오른쪽
+    romanization: o-reun-jjok
+    english: on the right
+    examples:
+    - hangul: 학교 오른쪽에 있어요.
+      english: It's on the right of the school.
+  - id: d519e859-9f30-46a6-a518-1c8260c876ff
+    local: true
+    hangul: 건너편
+    romanization: geon-neo-pyeon
+    english: across (on the other side)
+    examples:
+    - hangul: 길 건너편에 있어요.
+      english: It's across the street.
+  - id: 81a7603b-ea83-4d9e-8236-8aaa18edace1
+    local: true
+    hangul: 앞
+    romanization: ap
+    english: in front of
+    examples:
+    - hangul: 학교 앞에 있어요.
+      english: It's in front of the school.
+  - id: d43a4ad4-0435-4608-892a-58842e318e77
+    local: true
+    hangul: 뒤
+    romanization: dwi
+    english: behind
+    examples:
+    - hangul: 건물 뒤에 있어요.
+      english: It's behind the building.
+  - id: c00ca3ff-4153-48d5-a3e1-7c6cd3540ee3
+    local: true
+    hangul: 안
+    romanization: an
+    english: in / inside
+    examples:
+    - hangul: 가방 안에 있어요.
+      english: It's in the bag.
+  - id: 79b0c507-9024-4b1e-af90-2c44b080330d
+    local: true
+    hangul: 밖
+    romanization: bakk
+    english: outside
+    examples:
+    - hangul: 집 밖에 있어요.
+      english: It's outside the house.
+  - id: f498712c-3a54-4fbf-acbb-f1159d578723
+    local: true
+    hangul: 사이
+    romanization: sa-i
+    english: between (two things)
+    examples:
+    - hangul: 책상하고 의자 사이에 있어요.
+      english: It's between the desk and the chair.
+  - id: 2eec03ad-61ff-4598-a94c-d3e1c8e8ee2c
+    local: true
+    hangul: 가운데
+    romanization: ga-un-de
+    english: among / in the middle
+    examples:
+    - hangul: 사람들 가운데에 있어요.
+      english: It's among the people.
+  - id: 6f0b38be-3387-4e64-be14-da70f73979d0
+    local: true
+    hangul: 근처
+    romanization: geun-cheo
+    english: near / nearby
+    examples:
+    - hangul: 역 근처에 있어요.
+      english: It's near the station.
+
+- id: compass
+  label: Compass directions
+  description: |
+    <p>Compass directions use <strong>쪽</strong> (side): 북쪽 (north), 남쪽 (south), 동쪽 (east), 서쪽 (west). Add <strong>에</strong> for location; combine for northwest, etc.</p>
+  entries:
+  - id: f8278a29-db5a-4ab5-acdc-02126461fa6e
+    local: true
+    hangul: 북쪽
+    romanization: buk-jjok
+    english: north / on the north side
+    examples:
+    - hangul: 산 북쪽에 있어요.
+      english: It's on the north side of the mountain.
+  - id: 25084141-4750-4df9-8276-957e13a2a508
+    local: true
+    hangul: 남쪽
+    romanization: nam-jjok
+    english: south / on the south side
+    examples:
+    - hangul: 한국 남쪽에 있어요.
+      english: It's in the south of Korea.
+  - id: 138548d1-84b9-4571-8a9a-55a7c08b9b9b
+    local: true
+    hangul: 동쪽
+    romanization: dong-jjok
+    english: east / on the east side
+    examples:
+    - hangul: 서울 동쪽에 있어요.
+      english: It's east of Seoul.
+  - id: 849c6649-5307-4aa2-93cd-e01ee71b3661
+    local: true
+    hangul: 서쪽
+    romanization: seo-jjok
+    english: west / on the west side
+    examples:
+    - hangul: 바다 서쪽에 있어요.
+      english: It's on the west side, toward the sea.
+  - id: 2b630dfe-bd86-4a46-97db-c5f448934598
+    local: true
+    hangul: 북동쪽
+    romanization: buk-dong-jjok
+    english: northeast
+    examples:
+    - hangul: 북동쪽으로 가요.
+      english: I'm going northeast.
+  - id: 57c8b0d7-06b7-4ddb-b3fb-c45b27923097
+    local: true
+    hangul: 북서쪽
+    romanization: buk-seo-jjok
+    english: northwest
+    examples:
+    - hangul: 북서쪽에 바람이 불어요.
+      english: The wind blows from the northwest.
+  - id: a4ff5006-4fdd-4815-9e90-6205eaec9959
+    local: true
+    hangul: 남동쪽
+    romanization: nam-dong-jjok
+    english: southeast
+    examples:
+    - hangul: 남동쪽 바다가 예뻐요.
+      english: The sea to the southeast is beautiful.
+  - id: 9f8c4211-a67a-4db2-acd8-af95ffef4eff
+    local: true
+    hangul: 남서쪽
+    romanization: nam-seo-jjok
+    english: southwest
+    examples:
+    - hangul: 남서쪽에 공원이 있어요.
+      english: There's a park in the southwest.

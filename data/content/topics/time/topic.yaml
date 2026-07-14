@@ -1,0 +1,64 @@
+# yaml-language-server: $schema=../../../schemas/topics_topic.schema.json
+
+sections:
+- id: days
+  label: Days of the week
+  entries:
+  - ref: 74c769ff-777f-4d9e-a571-8c6c64e1b153
+  - ref: a7d8e423-42b4-46fa-a812-e5c72212cce3
+  - ref: 523215a4-69d7-4a3e-84a1-0a8ec866cfd0
+  - ref: 4bffcc8b-74f4-42d3-bde0-3db71323789e
+  - ref: ef9fe650-cdd3-48a6-b2f6-a7035b4085e6
+  - ref: 0f662ad6-eba9-4dfe-a0de-e81210ad0976
+  - ref: 85d84cff-45b0-4af2-bbc8-00bdb0337dd6
+- id: months
+  label: Months
+  entries:
+  - ref: 3e5550e5-972c-45dd-ba6c-6e16c28d180e
+  - ref: 39c434fa-3050-43fc-a7cb-57dbbca79807
+  - ref: f63119d2-7815-4d82-8ad5-7c4c6704cf26
+  - ref: 0b19e1f0-9374-4bae-8666-4ad287a3da2b
+  - ref: ed9d3ec8-c357-446d-87c7-6bc12acb5241
+  - ref: f1ec263b-8ca6-4565-a274-89a547417af1
+  - ref: 04659e0d-9c30-4505-9314-28e7049c954c
+  - ref: e8eece0d-d030-4906-8e95-5a43e1771f68
+  - ref: c1f0c5e4-4586-49bc-9f87-6e549bbe7e86
+  - ref: e2f4eda5-207b-44da-9524-fdbc56b88df5
+  - ref: a89aef40-5566-4c1c-b838-d8abb44f097c
+  - ref: 0bb478a7-f6e9-44ea-af27-7f438cdc7969
+- id: relative_days
+  label: Relative days
+  description: Yesterday, today, tomorrow, and nearby day offsets
+  entries:
+  - ref: 9c3a9adf-52ec-4c15-8518-1cd588648061
+  - ref: 35b1f61b-75fe-4f84-85f9-7043850e424a
+  - ref: c08970c2-17b3-4d5d-9692-9db737bc7c61
+  - ref: 16de5ca4-b6b1-4d29-b59d-d110480e1c8b
+  - ref: ddf21ddd-318d-4f0b-9f7b-e4ce1e83374f
+- id: relative_months
+  label: Relative months
+  description: Last, this, and next month, plus nearby month offsets
+  entries:
+  - ref: e176adf3-73de-44ba-b4a1-421c154c725f
+  - ref: 2a88a8ce-3cfa-427b-8593-8983ef296ff8
+  - ref: 1c7a0597-aa03-4d04-b410-5550017db29a
+  - ref: f09f4b32-65af-483e-9730-9460458854c3
+  - ref: 408527fb-be38-4651-ba10-1b79c00e62b5
+- id: relative_years
+  label: Relative years
+  description: Last, this, and next year, plus nearby year offsets
+  entries:
+  - ref: 3a854f9a-df5b-4378-8bf9-8179fa1293fa
+  - ref: 6485694a-825f-44be-b178-42bd63f643da
+  - ref: 8bde57dc-7438-4632-a15d-184359c1655c
+  - ref: 8c249aa5-6aee-48c6-9e73-c2edb50a7e19
+  - ref: 546daccc-a801-46e0-b4c8-f6507968a221
+- id: relative_hours
+  label: Relative hours
+  description: An hour ago, now, an hour later, plus nearby hour offsets
+  entries:
+  - ref: f38c61a9-e4a0-4ddf-bc24-0e65b2ac1b60
+  - ref: 339744f7-db3f-4fd1-bb63-d0651ed5cdfc
+  - ref: b640dd41-c567-490b-97ad-b21392df91b0
+  - ref: 7608a136-bc43-4888-9d24-5024ff51c746
+  - ref: 533dc7c5-a15f-458f-8696-e83ad985a003

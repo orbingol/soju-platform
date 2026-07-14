@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://soju.local/schemas/registry_types.schema.json",
+  "title": "Vocabulary types registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["types"],
+  "properties": {
+    "types": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "slug", "label"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "slug": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]*$"
+          },
+          "label": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

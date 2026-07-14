@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: go_sipeoyo
+form: -고 싶어요
+romanization: go si-peo-yo
+english: want to / would like to
+category: verb_patterns
+summary: 'Express desire to do something: verb stem + 고 싶어요.'
+sections:
+- id: want
+  label: Want to do
+  examples:
+  - hangul: 한국어를 배우고 싶어요.
+    english: I want to learn Korean.
+  - hangul: 집에 가고 싶어요.
+    english: I want to go home.
+  - hangul: 사진을 찍고 싶어요.
+    english: I want to take a picture.
+conversations:
+- title: What do you want to do?
+  turns:
+  - speaker: A
+    hangul: 오늘 뭐 하고 싶어요?
+    english: What do you want to do today?
+  - speaker: B
+    hangul: 영화를 보고 싶어요.
+    english: I want to watch a movie.
+  - speaker: A
+    hangul: 좋아요. 그리고 밥도 먹고 싶어요.
+    english: Sounds good. And I also want to eat.
+  - speaker: B
+    hangul: 그런데 영화가 비싸요.
+    english: But the movie is expensive.
+  - speaker: A
+    hangul: 하지만 보고 싶어요.
+    english: However, I want to see it.
+  - speaker: B
+    hangul: 그럼 같이 가요.
+    english: Then let’s go together.
+  - speaker: A
+    hangul: 그래요.
+    english: Okay.
+phrase_refs:
+- 86852c5a-1e48-479a-96d1-d0a2a6c6cee4
+- eff77196-957e-4985-bc82-0a868d8641c6
+- 86b984a4-10a2-4760-8cb0-5db749c25d51

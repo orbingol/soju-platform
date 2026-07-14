@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=../../../schemas/topics_table.schema.json
+
+fields:
+  hangul:
+    label: Hangul
+  romanization:
+    label: Romanization
+  english:
+    label: English

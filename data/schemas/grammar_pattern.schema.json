@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://soju.local/schemas/grammar_pattern.schema.json",
+  "title": "Grammar pattern lesson",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "form", "romanization", "english", "category", "summary", "sections"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "form": { "type": "string", "minLength": 1 },
+    "romanization": { "type": "string", "minLength": 1 },
+    "english": { "type": "string", "minLength": 1 },
+    "category": {
+      "type": "string",
+      "enum": ["particles", "time_place", "verb_patterns", "question_words", "connectors"]
+    },
+    "summary": { "type": "string", "minLength": 1 },
+    "notes": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "label", "examples"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "label": { "type": "string", "minLength": 1 },
+          "description": { "type": "string", "minLength": 1 },
+          "examples": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "$ref": "_defs.schema.json#/$defs/example" }
+          }
+        }
+      }
+    },
+    "conversations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["title", "turns"],
+        "properties": {
+          "title": { "type": "string", "minLength": 1 },
+          "turns": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["speaker", "hangul", "english"],
+              "properties": {
+                "speaker": { "type": "string", "minLength": 1 },
+                "hangul": { "type": "string", "minLength": 1 },
+                "english": { "type": "string", "minLength": 1 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "phrase_refs": {
+      "type": "array",
+      "items": { "$ref": "_defs.schema.json#/$defs/uuid" },
+      "uniqueItems": true
+    }
+  }
+}

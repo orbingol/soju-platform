@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://soju.local/schemas/words_table.schema.json",
+  "title": "Words table layout",
+  "description": "Row field labels for vocabulary word tables.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["fields"],
+  "properties": {
+    "fields": {
+      "$ref": "#/$defs/rowFields"
+    },
+    "examples": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label"],
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  },
+  "$defs": {
+    "fieldColumn": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label"],
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subtitle": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "rowFields": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hangul", "romanization", "english"],
+      "properties": {
+        "hangul": { "$ref": "#/$defs/fieldColumn" },
+        "romanization": { "$ref": "#/$defs/fieldColumn" },
+        "english": { "$ref": "#/$defs/fieldColumn" }
+      }
+    }
+  }
+}

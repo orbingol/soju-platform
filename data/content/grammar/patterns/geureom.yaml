@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: geureom
+form: 그럼
+romanization: geu-reom
+english: then / in that case
+category: connectors
+summary: 'Move the conversation forward after agreeing or deciding: “Then let’s …”'
+sections:
+- id: basic
+  label: Then / in that case
+  examples:
+  - hangul: 그럼 같이 가요.
+    english: Then let’s go together.
+  - hangul: 그럼 내일 만나요.
+    english: Then let’s meet tomorrow.
+  - hangul: 그럼 버스나 지하철로 가요.
+    english: Then let’s go by bus or subway.
+conversations:
+- title: Deciding what to do
+  turns:
+  - speaker: A
+    hangul: 오늘 뭐 하고 싶어요?
+    english: What do you want to do today?
+  - speaker: B
+    hangul: 커피 마시고 싶어요.
+    english: I want to drink coffee.
+  - speaker: A
+    hangul: 좋아요. 그럼 카페에 가요.
+    english: Sounds good. Then let’s go to a cafe.
+  - speaker: B
+    hangul: 친구하고 같이 가요?
+    english: Shall we go together with a friend?
+  - speaker: A
+    hangul: 네. 그럼 두 시에 만나요.
+    english: Yes. Then let’s meet at two.
+  - speaker: B
+    hangul: 그래요.
+    english: Okay.
+phrase_refs:
+- a3f9346a-2354-43b6-9a17-98d16858c513
+- 6c97c1ed-1531-4562-8bca-25f7fda8399c

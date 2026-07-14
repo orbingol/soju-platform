@@ -1,0 +1,43 @@
+# See https://pre-commit.com for more information
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v6.0.0
+  hooks:
+    - id: trailing-whitespace
+      exclude: ^data/
+    - id: end-of-file-fixer
+      exclude: ^data/
+    - id: check-yaml
+    - id: check-toml
+- repo: https://github.com/Lucas-C/pre-commit-hooks
+  rev: v1.5.6
+  hooks:
+    - id: forbid-crlf
+    - id: remove-crlf
+    - id: forbid-tabs
+      exclude: ^(data/|docs/Makefile$)
+    - id: remove-tabs
+      exclude: ^(data/|docs/Makefile$)
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.15.21
+  hooks:
+    - id: ruff-check
+      args: [--fix]
+    - id: ruff-format
+- repo: https://github.com/PyCQA/doc8
+  rev: v2.0.0
+  hooks:
+    - id: doc8
+      files: ^docs/soju/.*\.rst$
+      args: [--max-line-length, "180"]
+- repo: local
+  hooks:
+    - id: prettier-web
+      name: prettier (apps/web)
+      language: node
+      entry: bash scripts/pre-commit-prettier.sh
+      files: ^apps/web/.*\.(js|ts|css|html|json|svelte)$
+      additional_dependencies:
+        - prettier@3.9.5
+        - prettier-plugin-svelte@3.5.2
+        - svelte@5.56.4

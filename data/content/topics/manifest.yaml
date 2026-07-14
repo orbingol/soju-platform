@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../../schemas/topics_manifest.schema.json
+
+topics:
+  common:
+    label: Common
+    description: Everyday vocabulary from class units
+  family:
+    label: Family
+    description: Family relationships and related verbs
+  time:
+    label: Time
+    description: Days, months, and relative time phrases
+  numbers:
+    label: Numbers
+    description: Native and Sino-Korean numbers with everyday uses
+  place:
+    label: Prepositions of place
+    description: Location words with 에

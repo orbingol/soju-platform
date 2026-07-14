@@ -1,0 +1,211 @@
+# yaml-language-server: $schema=../../schemas/grammar_manifest.schema.json
+
+patterns:
+  hada:
+    path: patterns/hada.yaml
+    label: 하다
+    form: -하다
+    english: verb maker
+    category: verb_patterns
+    description: Attach 하다 to activity nouns to make verbs (공부하다, 운동하다). Works for
+      activities, not places.
+  hago:
+    path: patterns/hago.yaml
+    label: 하고
+    form: -하고
+    english: and / with
+    category: particles
+    description: Connect nouns with “and”, or mark that you do something “with” someone.
+  deul:
+    path: patterns/deul.yaml
+    label: 들
+    form: -들
+    english: plural marker
+    category: particles
+    description: Mark people (and sometimes other nouns) as plural. For many inanimate
+      things, prefer number + counter.
+  do:
+    path: patterns/do.yaml
+    label: 도
+    form: -도
+    english: also / even
+    category: particles
+    description: 'Additive particle: “also/too”, or “even” in negative or surprising
+      contexts.'
+  buteo_kkaji:
+    path: patterns/buteo_kkaji.yaml
+    label: 부터 … -까지
+    form: -부터 … -까지
+    english: from … to …
+    category: time_place
+    description: Mark a range in time or sequence. For locations, prefer -에서 … -까지.
+  dongan:
+    path: patterns/dongan.yaml
+    label: 동안
+    form: -동안
+    english: for / during / while
+    category: time_place
+    description: Express how long something lasts, during a period, or while an action
+      happens (-는 동안).
+  hareo:
+    path: patterns/hareo.yaml
+    label: 하러
+    form: -하러
+    english: in order to
+    category: verb_patterns
+    description: 'State the purpose of going somewhere: V-(으)러 가다/오다.'
+  hu:
+    path: patterns/hu.yaml
+    label: 후
+    form: -후
+    english: after
+    category: time_place
+    description: Attach to a time amount or event noun to mean “after …”.
+  cheung:
+    path: patterns/cheung.yaml
+    label: 층
+    form: -층
+    english: floor / story
+    category: time_place
+    description: Sino-Korean number + 층 names building floors.
+  euro:
+    path: patterns/euro.yaml
+    label: 으로 / -로
+    form: -으로 / -로
+    english: by means of / toward
+    category: particles
+    description: Mark means, method, or direction. Use -으로 after a consonant, -로 after
+      a vowel (and often after ㄹ).
+  go_sipeoyo:
+    path: patterns/go_sipeoyo.yaml
+    label: 고 싶어요
+    form: -고 싶어요
+    english: want to / would like to
+    category: verb_patterns
+    description: 'Express desire to do something: verb stem + 고 싶어요.'
+  seyo:
+    path: patterns/seyo.yaml
+    label: 으세요 / -세요
+    form: -으세요 / -세요
+    english: please do …
+    category: verb_patterns
+    description: 'Polite request or soft command: verb stem + (으)세요.'
+  ji_maseyo:
+    path: patterns/ji_maseyo.yaml
+    label: 지 마세요
+    form: -지 마세요
+    english: please don't …
+    category: verb_patterns
+    description: 'Polite prohibition: verb stem + 지 마세요.'
+  hanteseo:
+    path: patterns/hanteseo.yaml
+    label: 한테서
+    form: -한테서
+    english: from (a person)
+    category: particles
+    description: Mark the person something comes from (receive, hear, get).
+  hante:
+    path: patterns/hante.yaml
+    label: 한테
+    form: -한테
+    english: to / for (a person)
+    category: particles
+    description: Mark the person who receives an action (give, tell, ask).
+  ina:
+    path: patterns/ina.yaml
+    label: 이나 / -나
+    form: -이나 / -나
+    english: or / about
+    category: particles
+    description: Offer alternatives between nouns (“or”), or soften a quantity (“about”).
+  kkaji:
+    path: patterns/kkaji.yaml
+    label: 까지
+    form: -까지
+    english: until / up to
+    category: particles
+    description: Mark an endpoint in time, place, or extent. Often pairs with -부터
+      or -에서.
+  museun:
+    path: patterns/museun.yaml
+    label: 무슨
+    form: 무슨
+    english: what kind of / what
+    category: question_words
+    description: Ask “what/which kind of” before a noun (무슨 요일, 무슨 책).
+  eonje:
+    path: patterns/eonje.yaml
+    label: 언제
+    form: 언제
+    english: when
+    category: question_words
+    description: Ask when something happens.
+  wae:
+    path: patterns/wae.yaml
+    label: 왜
+    form: 왜
+    english: why
+    category: question_words
+    description: Ask for a reason.
+  wae_an:
+    path: patterns/wae_an.yaml
+    label: 왜 안
+    form: 왜 안
+    english: why not / why don’t you
+    category: question_words
+    description: Ask why something is not happening, or gently suggest doing it.
+  eotteoke:
+    path: patterns/eotteoke.yaml
+    label: 어떻게
+    form: 어떻게
+    english: how
+    category: question_words
+    description: Ask how something is done or how someone is.
+  eolmana:
+    path: patterns/eolmana.yaml
+    label: 얼마나
+    form: 얼마나
+    english: how much / how long
+    category: question_words
+    description: 'Ask about amount or duration. Common: 얼마나 걸려요? (How long does it
+      take?).'
+  geureom:
+    path: patterns/geureom.yaml
+    label: 그럼
+    form: 그럼
+    english: then / in that case
+    category: connectors
+    description: 'Move the conversation forward after agreeing or deciding: “Then
+      let’s …”'
+  geurigo:
+    path: patterns/geurigo.yaml
+    label: 그리고
+    form: 그리고
+    english: and / and then
+    category: connectors
+    description: Add another action or idea after a full sentence (different from
+      noun + 하고).
+  geureonde:
+    path: patterns/geureonde.yaml
+    label: 그런데
+    form: 그런데
+    english: but / by the way
+    category: connectors
+    description: Contrast what was just said, or change topic lightly (“but / by the
+      way”).
+  hajiman:
+    path: patterns/hajiman.yaml
+    label: 하지만
+    form: 하지만
+    english: but / however
+    category: connectors
+    description: A clearer “however” than 그런데 — good for written style and careful
+      contrast.
+  mwoeyo_vs_mwo_haeyo:
+    path: patterns/mwoeyo_vs_mwo_haeyo.yaml
+    label: 뭐예요 / 뭐 해요
+    form: 뭐예요 / 뭐 해요
+    english: what is it? vs what are you doing?
+    category: question_words
+    description: 'Two questions that look alike but use different verbs: 예요 (be) vs
+      해요 (do).'

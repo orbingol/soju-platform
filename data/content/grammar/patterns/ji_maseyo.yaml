@@ -1,0 +1,70 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: ji_maseyo
+form: -지 마세요
+romanization: ji ma-se-yo
+english: please don't …
+category: verb_patterns
+summary: 'Polite prohibition: verb stem + 지 마세요.'
+sections:
+- id: dont
+  label: Please don't
+  examples:
+  - hangul: 담배를 피우지 마세요.
+    english: Please do not smoke.
+  - hangul: 전화하지 마세요.
+    english: Please do not make a call.
+  - hangul: 영화관에서 먹지 마세요.
+    english: Please do not eat in the movie theater.
+  - hangul: 도서관에서 크게 말하지 마세요.
+    english: Please do not speak loudly in the library.
+  - hangul: 수업 시간에 쓰지 마세요.
+    english: Please do not write during class.
+  - hangul: 영어를 말하지 마세요.
+    english: Please do not speak English.
+  - hangul: 술을 마시지 마세요.
+    english: Please do not drink alcohol.
+  - hangul: 노래하지 마세요.
+    english: Please do not sing.
+  - hangul: 책을 사용하지 마세요.
+    english: Please do not use the book.
+  - hangul: 뛰지 마세요.
+    english: Please do not jump.
+  - hangul: 음식을 먹지 마세요.
+    english: Please do not eat food.
+  - hangul: 음악을 듣지 마세요.
+    english: Please do not listen to music.
+  - hangul: 책을 크게 읽지 마세요.
+    english: Please do not read the book loudly.
+  - hangul: 박물관에서 사진을 찍지 마세요.
+    english: Please do not take a picture at the museum.
+conversations:
+- title: Library rules
+  turns:
+  - speaker: A
+    hangul: 여기서 전화해도 돼요?
+    english: May I make a call here?
+  - speaker: B
+    hangul: 아니요. 전화하지 마세요.
+    english: No. Please don’t make a call.
+  - speaker: A
+    hangul: 음악을 들어도 돼요?
+    english: May I listen to music?
+  - speaker: B
+    hangul: 도서관에서는 듣지 마세요.
+    english: Please don’t listen in the library.
+  - speaker: A
+    hangul: 사진은요?
+    english: What about photos?
+  - speaker: B
+    hangul: 여기서는 찍지 마세요.
+    english: Please don’t take pictures here.
+  - speaker: A
+    hangul: 알겠어요. 조용히 공부할게요.
+    english: I understand. I’ll study quietly.
+phrase_refs:
+- c340f242-0fbf-4537-ac7e-08836c9f9e22
+- dde62520-d32e-4817-a08b-fe70e6b79441
+- a2062f25-5a5c-4386-abd7-70da927b5025
+- 21033fbc-99ae-4f06-8430-cf76679cd189
+- 78bf49ef-d461-45a9-a82b-7bbf21224889

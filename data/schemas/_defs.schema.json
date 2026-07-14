@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Soju shared schema definitions",
+  "$defs": {
+    "uuid": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "example": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hangul", "english"],
+      "properties": {
+        "hangul": { "type": "string", "minLength": 1 },
+        "english": { "type": "string", "minLength": 1 }
+      }
+    },
+    "variantForms": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      },
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_]*$"
+      }
+    },
+    "variantExamples": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "$ref": "#/$defs/example" }
+      },
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_]*$"
+      }
+    },
+    "fieldColumn": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label"],
+      "properties": {
+        "label": { "type": "string", "minLength": 1 },
+        "subtitle": { "type": "string", "minLength": 1 }
+      }
+    },
+    "rowFields": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hangul", "romanization", "english"],
+      "properties": {
+        "hangul": { "$ref": "#/$defs/fieldColumn" },
+        "romanization": { "$ref": "#/$defs/fieldColumn" },
+        "english": { "$ref": "#/$defs/fieldColumn" }
+      }
+    }
+  }
+}

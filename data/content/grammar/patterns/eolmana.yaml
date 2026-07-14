@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: eolmana
+form: 얼마나
+romanization: eol-ma-na
+english: how much / how long
+category: question_words
+summary: 'Ask about amount or duration. Common: 얼마나 걸려요? (How long does it take?).'
+sections:
+- id: basic
+  label: How much / how long
+  examples:
+  - hangul: 얼마나 걸려요?
+    english: How long does it take?
+  - hangul: 얼마나 예요?
+    english: How much is it?
+  - hangul: 한국어를 얼마나 공부해요?
+    english: How much do you study Korean?
+conversations:
+- title: How long does it take?
+  turns:
+  - speaker: A
+    hangul: 집에서 학교까지 얼마나 걸려요?
+    english: How long does it take from home to school?
+  - speaker: B
+    hangul: 버스나 지하철로 사십 분쯤 걸려요.
+    english: It takes about forty minutes by bus or subway.
+  - speaker: A
+    hangul: 매일 가요?
+    english: Do you go every day?
+  - speaker: B
+    hangul: 네. 월요일부터 금요일까지 가요.
+    english: Yes. I go from Monday to Friday.
+  - speaker: A
+    hangul: 피곤하지 않아요?
+    english: Aren’t you tired?
+  - speaker: B
+    hangul: 조금 피곤해요. 그래도 괜찮아요.
+    english: I’m a little tired. Still, I’m okay.
+phrase_refs:
+- dad307e1-b846-42f6-9ed1-2b605aa12cf1
+- bf971565-2f69-4406-b32a-afd2c1f66e61
+- 54c5a7ba-5dce-44e0-ac01-f2a5e1ee939f
+- 6e8e06bc-866c-4a1c-9486-c9ef375346ed

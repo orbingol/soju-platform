@@ -1,0 +1,53 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  // Agents are defined in .ai/commands/*.md (YAML frontmatter + prompt body).
+  "agent": {
+    "import-words": {
+      "prompt": "{file:../.ai/commands/import-words.md}"
+    },
+    "import-words-to": {
+      "prompt": "{file:../.ai/commands/import-words-to.md}"
+    },
+    "import-verbs": {
+      "prompt": "{file:../.ai/commands/import-verbs.md}"
+    },
+    "import-staging": {
+      "prompt": "{file:../.ai/commands/import-staging.md}"
+    },
+    "promote-local": {
+      "prompt": "{file:../.ai/commands/promote-local.md}"
+    }
+  },
+  "command": {
+    "import-words": {
+      "description": "Parse a word list and import via soju-import (topic common)",
+      "agent": "import-words",
+      "template": "Optional topic id (default common): leave blank for common\n\nInput file path, @-mentioned file, or pasted lines:\n\n$ARGUMENTS",
+      "subtask": true
+    },
+    "import-words-to": {
+      "description": "Parse a word list and import via soju-import to a topic id",
+      "agent": "import-words-to",
+      "template": "Input file path or pasted lines: $1\n\nTopic id (required; e.g. travel): $2",
+      "subtask": true
+    },
+    "import-verbs": {
+      "description": "Parse a verb list and import via soju-import verbs --stdin-json",
+      "agent": "import-verbs",
+      "template": "Input file path, @-mentioned file, or pasted lines:\n\n$ARGUMENTS",
+      "subtask": true
+    },
+    "import-staging": {
+      "description": "Promote reviewed staging vocabulary via soju-import --from-staging",
+      "agent": "import-staging",
+      "template": "Staging file path (e.g. data/staging/vocabulary-candidates.yaml): $1\n\nTopic id (e.g. common): $2",
+      "subtask": true
+    },
+    "promote-local": {
+      "description": "Promote local topic entries via soju-promote",
+      "agent": "promote-local",
+      "template": "Topic id (e.g. family): $1",
+      "subtask": true
+    }
+  }
+}

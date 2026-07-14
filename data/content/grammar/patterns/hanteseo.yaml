@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: hanteseo
+form: -한테서
+romanization: han-te-seo
+english: from (a person)
+category: particles
+summary: Mark the person something comes from (receive, hear, get).
+sections:
+- id: from_person
+  label: From someone
+  examples:
+  - hangul: 친구한테서 들었어요.
+    english: I heard it from a friend.
+  - hangul: 선생님한테서 받았어요.
+    english: I received it from the teacher.
+notes:
+- Often written -한테서 in notes as 한데서; standard form is 한테서.
+conversations:
+- title: Who told you?
+  turns:
+  - speaker: A
+    hangul: 그 소식을 누구한테서 들었어요?
+    english: Who did you hear that news from?
+  - speaker: B
+    hangul: 친구한테서 들었어요.
+    english: I heard it from a friend.
+  - speaker: A
+    hangul: 선생님한테서도 들었어요?
+    english: Did you hear it from the teacher too?
+  - speaker: B
+    hangul: 아니요. 친구한테서만 들었어요.
+    english: No. I only heard it from a friend.
+  - speaker: A
+    hangul: 나중에 저도 물어볼게요.
+    english: I’ll ask later too.
+  - speaker: B
+    hangul: 네.
+    english: Okay.
+phrase_refs:
+- e7ea607e-dcca-4fd9-b69d-71bf4895f40e
+- b2f90de9-f33c-4a79-a47e-61818be18783

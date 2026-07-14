@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://soju.local/schemas/staging_exercises.schema.json",
+  "title": "Staging exercises",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["staging", "date", "exercises"],
+  "properties": {
+    "staging": { "const": true },
+    "date": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "exercises": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sentences": { "type": "array", "items": { "type": "object" } },
+        "questions": { "type": "array", "items": { "type": "object" } },
+        "fill_in_blank": { "type": "array", "items": { "type": "object" } }
+      }
+    }
+  }
+}

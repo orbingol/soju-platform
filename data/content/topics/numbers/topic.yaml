@@ -1,0 +1,302 @@
+# yaml-language-server: $schema=../../../schemas/topics_topic.schema.json
+
+sections:
+- id: number_systems
+  label: Native vs Sino-Korean numbers
+  description: |
+    <p>Korean has two number systems. Use the right one for counting, dates, money, and floors.</p>
+    <p>Before a counter, native numbers often shorten: 하나→한, 둘→두, 셋→세, 넷→네, 스물→스무 (20).</p>
+  entries: []
+
+- id: native_numbers
+  label: Native Korean (하나, 둘, 셋…)
+  description: |
+    <p>Used with counters for small counts (usually 1–99): people, hours, age, and items with native counters.</p>
+  entries:
+  - id: 359c2fed-715b-486f-b454-7550883086d3
+    local: true
+    hangul: 하나
+    romanization: ha-na
+    english: '1'
+  - id: a8fc9a4d-0bd9-4526-806d-b2d8768d5965
+    local: true
+    hangul: 둘
+    romanization: dul
+    english: '2'
+  - id: 347718f1-940f-45d5-8e02-100646b11764
+    local: true
+    hangul: 셋
+    romanization: set
+    english: '3'
+  - id: d775dec0-57a5-4cd1-ac23-d6e2ae531338
+    local: true
+    hangul: 넷
+    romanization: net
+    english: '4'
+  - id: 1c91ad5e-17e6-49b9-9483-1c19743df16e
+    local: true
+    hangul: 다섯
+    romanization: da-seot
+    english: '5'
+  - id: ca8fbbcb-bf3d-45d9-a8cd-b3f365de4551
+    local: true
+    hangul: 여섯
+    romanization: yeo-seot
+    english: '6'
+  - id: 73d77a59-abed-4acb-9117-fc9e2c891e59
+    local: true
+    hangul: 일곱
+    romanization: il-gop
+    english: '7'
+  - id: d9b8626a-5e75-452b-a4cc-f20bba2f957b
+    local: true
+    hangul: 여덟
+    romanization: yeo-deol
+    english: '8'
+  - id: c407828c-1059-4668-b3b0-b0095f0e41f0
+    local: true
+    hangul: 아홉
+    romanization: a-hop
+    english: '9'
+  - id: 3dfcabb6-0160-4098-89d4-4c697f126105
+    local: true
+    hangul: 열
+    romanization: yeol
+    english: '10'
+
+- id: sino_numbers
+  label: Sino-Korean (일, 이, 삼…)
+  description: |
+    <p>Used for dates, money, phone numbers, floors, minutes, and most numbers above 99.</p>
+  entries:
+  - id: 842ada33-2227-45a5-aed7-441728f5e493
+    local: true
+    hangul: 영
+    romanization: yeong
+    english: '0 (general)'
+  - id: 45a14a70-ace1-4489-9e1c-f466b27fb259
+    local: true
+    hangul: 공
+    romanization: gong
+    english: '0 (phone digits)'
+  - id: 372b695f-c2ec-4159-8c52-cfe2b22e4270
+    local: true
+    hangul: 일
+    romanization: il
+    english: '1'
+  - id: 08985d3b-c6f5-4d91-a282-052ddce73a7d
+    local: true
+    hangul: 이
+    romanization: i
+    english: '2'
+  - id: b4688b29-8a39-4901-bf1c-31317b56bf4d
+    local: true
+    hangul: 삼
+    romanization: sam
+    english: '3'
+  - id: 7ff806ef-324b-40ad-8cdb-41277ffe701d
+    local: true
+    hangul: 사
+    romanization: sa
+    english: '4'
+  - id: 6f97610e-7e57-415c-9c0c-69814939d717
+    local: true
+    hangul: 오
+    romanization: o
+    english: '5'
+  - id: 74600b23-9a52-4b3e-96f3-aaaba7efce0e
+    local: true
+    hangul: 육
+    romanization: yuk
+    english: '6'
+  - id: a3a9207b-613c-4157-9015-45bd186d6587
+    local: true
+    hangul: 칠
+    romanization: chil
+    english: '7'
+  - id: ce45d06a-1465-4216-8d3d-f57669103960
+    local: true
+    hangul: 팔
+    romanization: pal
+    english: '8'
+  - id: eb23f8ab-b738-47ea-9199-57da62963011
+    local: true
+    hangul: 구
+    romanization: gu
+    english: '9'
+  - id: 0dbf0986-a7bf-42fc-9551-952a896198fc
+    local: true
+    hangul: 십
+    romanization: sip
+    english: '10'
+  - id: 124b3757-fcd1-4677-a9c4-7d5976c74f7e
+    local: true
+    hangul: 백
+    romanization: baek
+    english: '100'
+  - id: 8aa499ec-12de-4850-ab2b-eded4f30dbcb
+    local: true
+    hangul: 천
+    romanization: cheon
+    english: '1,000'
+  - id: 60bdf772-5d85-45dc-a725-0bf2e6d9f743
+    local: true
+    hangul: 만
+    romanization: man
+    english: '10,000'
+
+- id: how_many
+  label: How many? (몇)
+  description: |
+    <p><strong>몇</strong> asks “how many?” Pair it with a <strong>counter</strong> and use <strong>native Korean</strong> numbers in the answer (e.g. 세 개, 다섯 명).</p>
+    <p>Pattern: [noun] + 몇 + [counter] + 이에요/예요? · Answer: [native number] + [counter].</p>
+  entries:
+  - id: 2ff0fac4-67bd-4bfa-b731-56431b0e96bc
+    local: true
+    hangul: 몇
+    romanization: myeot
+    english: how many
+    examples:
+    - hangul: 몇 개 있어요?
+      english: How many are there?
+  - id: 8b26f1e4-4802-4ab8-9ec6-dca780d8bd03
+    local: true
+    hangul: 몇 개
+    romanization: myeot gae
+    english: how many (things / general items)
+    examples:
+    - hangul: 사과 몇 개예요?
+      english: How many apples?
+  - id: fd27e5cb-f5a7-4953-b2d2-a2fc6d49541b
+    local: true
+    hangul: 몇 명
+    romanization: myeot myeong
+    english: how many (people)
+    examples:
+    - hangul: 버스에 몇 명이에요?
+      english: How many people are on the bus?
+  - id: fc012b0c-fbf7-4db2-9c94-c5e3ea7f8853
+    local: true
+    hangul: 몇 병
+    romanization: myeot byeong
+    english: how many (bottles)
+    examples:
+    - hangul: 맥주 몇 병이에요?
+      english: How many bottles of beer?
+  - id: 8d26fed6-ecea-4d4b-adba-f90f2b2293e7
+    local: true
+    hangul: 몇 권
+    romanization: myeot gwon
+    english: how many (books)
+    examples:
+    - hangul: 공책 몇 권이에요?
+      english: How many notebooks?
+  - id: 496c5334-73c7-4233-95d7-e0a3978dc4fe
+    local: true
+    hangul: 몇 장
+    romanization: myeot jang
+    english: how many (pieces of paper)
+    examples:
+    - hangul: 해리 포터 표 몇 장이에요?
+      english: How many tickets for Harry Potter?
+  - id: af994da3-10cc-4e0c-b233-9bee5ef562ee
+    local: true
+    hangul: 몇 마리
+    romanization: myeot ma-ri
+    english: how many (animals)
+    examples:
+    - hangul: 고양이 몇 마리예요?
+      english: How many cats?
+  - id: 18e909fd-b1fc-4c02-9e07-b8fee8d6a760
+    local: true
+    hangul: 몇 송이
+    romanization: myeot song-i
+    english: how many (flowers)
+    examples:
+    - hangul: 꽃 몇 송이예요?
+      english: How many flowers?
+
+- id: which_floor
+  label: Which floor?
+  description: |
+    <p>Building floors use <strong>Sino-Korean</strong> numbers + the counter <strong>층</strong> (floor/story).</p>
+    <p>Ask with <strong>몇</strong> (how many): 몇 층이에요? · Answer: 삼 층이에요 (3rd floor).</p>
+  entries:
+  - id: f240293b-91e2-4934-b6c2-7a6c17560bf8
+    local: true
+    hangul: 몇 층이에요?
+    romanization: myeot cheung-i-e-yo?
+    english: Which floor is it? / What floor?
+  - id: 100537c2-043c-4006-a575-173919aecdb2
+    local: true
+    hangul: 삼 층이에요.
+    romanization: sam cheung-i-e-yo.
+    english: It's the 3rd floor.
+
+- id: phone_numbers
+  label: Phone numbers
+  description: |
+    <p>Ask <strong>전화번호가 뭐예요?</strong> (What's your phone number?).</p>
+    <p>Read phone numbers digit by digit in <strong>Sino-Korean</strong>. Zero is usually <strong>공</strong> (not 영).</p>
+    <p>When dictating, the hyphen between groups is read <strong>에</strong> (<em>e</em>) — not “dash.”</p>
+    <p>Example: 010-1234-5678 → 공일공-일이삼사-오육칠팔 (say <strong>에</strong> at each dash).</p>
+  entries:
+  - id: 06fdd0e4-f4df-45fd-8948-1c7510a5130d
+    local: true
+    hangul: 전화번호가 뭐예요?
+    romanization: jeon-hwa-beon-ho-ga mwo-ye-yo?
+    english: What's your phone number?
+  - id: 03dc6348-4646-470c-ad5c-0ff1242e7e60
+    local: true
+    hangul: 공일공-일이삼사-오육칠팔
+    romanization: gong-il-gong-il-i-sam-sa-o-yuk-chil-pal
+    english: 010-1234-5678 (read aloud digit by digit; dashes = 에)
+
+- id: how_much
+  label: How much?
+  description: |
+    <p>Prices use <strong>Sino-Korean</strong> + <strong>원</strong> (won). <strong>얼마</strong> asks “how much?”</p>
+  entries:
+  - id: bbb55499-e233-4b65-b5e4-5203d847c3ef
+    local: true
+    hangul: 얼마예요?
+    romanization: eol-ma-ye-yo?
+    english: How much is it?
+  - id: e1f59efc-9024-43a4-84c7-07c948b5f82c
+    local: true
+    hangul: 오천 원이에요.
+    romanization: o-cheon won-i-e-yo.
+    english: It's 5,000 won.
+
+- id: calendar
+  label: Calendar (month & year)
+  description: |
+    <p>Months and years use <strong>Sino-Korean</strong>: <strong>월</strong> (month), <strong>년</strong> (year).</p>
+    <p>July 2026 → 이천이십육년 유월 (year + month). See the <em>Time</em> topic for all month names.</p>
+  entries:
+  - ref: 3e5550e5-972c-45dd-ba6c-6e16c28d180e
+  - ref: f1ec263b-8ca6-4565-a274-89a547417af1
+  - ref: 0bb478a7-f6e9-44ea-af27-7f438cdc7969
+  - id: f9888ae6-bfee-4ca1-8373-89c640461469
+    local: true
+    hangul: 이천이십육년
+    romanization: i-cheon-i-sip-yuk-nyeon
+    english: the year 2026
+
+- id: birthday
+  label: When is your birthday?
+  description: |
+    <p>Ask with <strong>언제</strong> (when). The date uses Sino-Korean month + <strong>일</strong> (day).</p>
+    <p>Example answer: 유월 십오일 (July 15).</p>
+  entries:
+  - ref: 563100a7-0a8d-464c-aaf3-986b3a48de2f
+  - id: 35452e2a-572d-415b-be8f-412e02970517
+    local: true
+    hangul: 생일이 언제예요?
+    romanization: saeng-il-i eon-je-ye-yo?
+    english: When is your birthday?
+  - id: 2c950d9f-54b0-4810-acc0-39ff80a97ecc
+    local: true
+    hangul: 유월 십오일이에요.
+    romanization: yu-wol sip-o-il-i-e-yo.
+    english: It's July 15th.

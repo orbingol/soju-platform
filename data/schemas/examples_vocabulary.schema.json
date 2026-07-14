@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://soju.local/schemas/examples_vocabulary.schema.json",
+  "title": "Vocabulary examples by entry id",
+  "type": "object",
+  "additionalProperties": { "$ref": "#/$defs/entryExamples" },
+  "propertyNames": {
+    "format": "uuid"
+  },
+  "$defs": {
+    "example": { "$ref": "_defs.schema.json#/$defs/example" },
+    "exampleList": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/example" }
+    },
+    "variantExamples": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "$ref": "#/$defs/example" }
+      },
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_]*$"
+      }
+    },
+    "entryExamples": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["default"],
+          "additionalProperties": false,
+          "properties": {
+            "default": { "$ref": "#/$defs/exampleList" }
+          }
+        },
+        {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": { "$ref": "#/$defs/variantExamples" },
+          "propertyNames": {
+            "pattern": "^[a-z][a-z0-9_]*$"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: hu
+form: -후
+romanization: hu
+english: after
+category: time_place
+summary: Attach to a time amount or event noun to mean “after …”.
+sections:
+- id: after
+  label: After a time or event
+  examples:
+  - hangul: 1시간 후
+    english: after one hour / one hour later
+  - hangul: 식사 후
+    english: after the meal
+  - hangul: 수업 후에 집에 가요.
+    english: I go home after class.
+conversations:
+- title: After class
+  turns:
+  - speaker: A
+    hangul: 수업 후에 뭐 해요?
+    english: What do you do after class?
+  - speaker: B
+    hangul: 친구하고 커피 마셔요.
+    english: I drink coffee with a friend.
+  - speaker: A
+    hangul: 식사 후에는요?
+    english: What about after the meal?
+  - speaker: B
+    hangul: 한 시간 후에 집에 가요.
+    english: I go home after one hour.
+  - speaker: A
+    hangul: 내일도 수업 후에 만나요?
+    english: Shall we meet after class tomorrow too?
+  - speaker: B
+    hangul: 네. 도서관에서 만나요.
+    english: Yes. Let’s meet at the library.
+phrase_refs:
+- c11d874b-9490-4394-9efb-3f8c15f0ae48
+- 0d53e3b8-ae40-473b-b5f4-c6608f4a5700
+- eae0a170-b8d3-4355-aa35-cb484152d146

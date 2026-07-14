@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: ina
+form: -이나 / -나
+romanization: i-na / na
+english: or / about
+category: particles
+summary: Offer alternatives between nouns (“or”), or soften a quantity (“about”).
+sections:
+- id: or
+  label: Or
+  examples:
+  - hangul: 버스나 지하철로 가요.
+    english: I go by bus or subway.
+  - hangul: 커피나 차 마실래요?
+    english: Would you like coffee or tea?
+conversations:
+- title: Bus or subway?
+  turns:
+  - speaker: A
+    hangul: 박물관까지 어떻게 가요?
+    english: How do we get to the museum?
+  - speaker: B
+    hangul: 버스나 지하철로 가요.
+    english: We go by bus or subway.
+  - speaker: A
+    hangul: 뭐가 더 빨라요?
+    english: Which is faster?
+  - speaker: B
+    hangul: 지하철이 더 빨라요.
+    english: The subway is faster.
+  - speaker: A
+    hangul: 그럼 지하철로 가요. 커피나 차 마실래요?
+    english: Then let’s go by subway. Would you like coffee or tea?
+  - speaker: B
+    hangul: 커피 마실래요.
+    english: I’d like coffee.
+phrase_refs:
+- 3530883f-81ef-4cdc-b713-269a08c237e1
+- fb7e528d-f404-41ee-b7ea-29cfb7cb6290

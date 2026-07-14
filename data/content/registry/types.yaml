@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schemas/registry_types.schema.json
+
+types:
+- id: verb
+  slug: verbs
+  label: Verb
+- id: noun
+  slug: nouns
+  label: Noun
+- id: pronoun
+  slug: pronouns
+  label: Pronoun
+- id: adjective
+  slug: adjectives
+  label: Adjective
+- id: adverb
+  slug: adverbs
+  label: Adverb
+- id: phrase
+  slug: phrases
+  label: Phrase

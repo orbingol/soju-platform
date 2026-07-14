@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: wae_an
+form: 왜 안
+romanization: wae an
+english: why not / why don’t you
+category: question_words
+summary: Ask why something is not happening, or gently suggest doing it.
+sections:
+- id: basic
+  label: Why not
+  examples:
+  - hangul: 왜 안 와요?
+    english: Why aren’t you coming?
+  - hangul: 왜 안 먹어요?
+    english: Why aren’t you eating?
+  - hangul: 왜 안 해요?
+    english: Why don’t you do it?
+conversations:
+- title: Why not come?
+  turns:
+  - speaker: A
+    hangul: 오늘 같이 가요.
+    english: Let’s go together today.
+  - speaker: B
+    hangul: 오늘은 못 가요.
+    english: I can’t go today.
+  - speaker: A
+    hangul: 왜 안 가요?
+    english: Why aren’t you going?
+  - speaker: B
+    hangul: 일이 많아요.
+    english: I have a lot of work.
+  - speaker: A
+    hangul: 그럼 주말에 가요.
+    english: Then let’s go on the weekend.
+  - speaker: B
+    hangul: 좋아요.
+    english: Okay.
+phrase_refs:
+- a2fb03ce-937e-4f25-8863-874f02557b96
+- 077c9f24-d87f-4f20-bd04-a96800528776
+- ba2e8d9d-c0e1-402e-afcd-06319bc1a238
+- 98dae3dd-bf00-489f-aeb4-b34a2e2597bd

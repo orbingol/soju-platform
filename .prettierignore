@@ -1,0 +1,12 @@
+# Repo-wide Prettier ignore (pre-commit / root invocations)
+data/
+.venv/
+**/node_modules/
+**/build/
+**/.svelte-kit/
+**/dist/
+**/coverage/
+docs/_build/
+*.egg-info/
+uv.lock
+package-lock.json

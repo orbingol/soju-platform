@@ -1,0 +1,82 @@
+# Node / SvelteKit (apps/web)
+apps/web/node_modules/
+apps/web/.svelte-kit/
+apps/web/build/
+apps/web/.output/
+apps/web/package/
+apps/web/.vite/
+apps/web/.turbo/
+apps/web/coverage/
+apps/web/dist/
+apps/web/.vercel/
+apps/web/.netlify/
+apps/web/test-results/
+apps/web/playwright-report/
+apps/web/playwright/.cache/
+apps/web/.eslintcache
+apps/web/*.tsbuildinfo
+apps/web/vite.config.js.timestamp-*
+apps/web/vite.config.ts.timestamp-*
+
+# Staging drafts (committed staging YAML is tracked after review)
+data/staging/**/*.draft.yaml
+data/staging/**/*.tmp.yaml
+
+# Local import scratch (examples in docs; keep out of git)
+/words*.txt
+
+# OS junk
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editor / IDE
+*.swp
+*~
+.idea/
+.vs*/
+*.sublime-project
+*.sublime-workspace
+.cursor/plans/
+
+# Local agent notes (template AGENTS.local.md-example is tracked)
+AGENTS.local.md
+
+# Local env / secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Docker (local overrides only — keep compose + Dockerfile tracked)
+docker-compose.override.yml
+
+# Python tooling
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.poe/
+.python-version
+*.egg-info/
+.eggs/
+dist/
+build/
+src/soju/_version.py
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.tox/
+.coverage
+.coverage.*
+htmlcov/
+.cache/
+.uv/
+
+# Sphinx
+docs/_build/

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://soju.local/schemas/verbs_forms.schema.json",
+  "title": "Verb forms by tense",
+  "type": "object",
+  "additionalProperties": { "$ref": "#/$defs/variantForms" },
+  "propertyNames": {
+    "format": "uuid"
+  },
+  "$defs": {
+    "variantForms": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      },
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_]*$"
+      }
+    }
+  }
+}

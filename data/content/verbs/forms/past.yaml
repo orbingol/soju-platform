@@ -1,0 +1,281 @@
+# yaml-language-server: $schema=../../../schemas/verbs_forms.schema.json
+
+f097e4eb-ab4a-49d6-bd7d-06cd4df7e1a9:
+  casual_polite: 학교에 왔어요
+  formal_polite: 학교에 왔습니다
+e82c8d54-86c3-49ac-9443-526db3d5b736:
+  casual_polite: 학교에 갔어요
+  formal_polite: 학교에 갔습니다
+dfbb3f58-a4a6-42b2-a64d-70b4fa36a1e5:
+  casual_polite: 쇼핑했어요
+  formal_polite: 쇼핑했습니다
+24161884-87a3-4b0a-8919-3097f8ce3755:
+  casual_polite: 이야기했어요
+  formal_polite: 이야기했습니다
+96148473-44f8-488c-b1da-8ecb8dff4088:
+  casual_polite: 읽었어요
+  formal_polite: 읽었습니다
+b7927563-bdee-44b8-a801-81401e421355:
+  casual_polite: 먹었어요
+  formal_polite: 먹었습니다
+efe788f7-8db8-4328-a934-10563db4b1fd:
+  casual_polite: 배웠어요
+  formal_polite: 배웠습니다
+0c818196-e474-483f-82cd-5d3172eba866:
+  casual_polite: 가르쳤어요
+  formal_polite: 가르쳤습니다
+723ad49e-9e9c-4293-a0c7-64399a8c7120:
+  casual_polite: 만났어요
+  formal_polite: 만났습니다
+13598715-b996-4c29-a414-43c8c196b94d:
+  casual_polite: 마셨어요
+  formal_polite: 마셨습니다
+f58e655b-3df5-4fa3-b271-39b07cf67e85:
+  casual_polite: 물을 마셨어요
+  formal_polite: 물을 마셨습니다
+f2e85524-0e1b-4867-8da5-538687871427:
+  casual_polite: 책을 읽었어요
+  formal_polite: 책을 읽었습니다
+2ad321c2-9f57-4867-98bf-b82c6f9d7975:
+  casual_polite: 봤어요
+  formal_polite: 봤습니다
+5a86af96-d6d2-492c-b7a7-a53a73eef228:
+  casual_polite: 받았어요
+  formal_polite: 받았습니다
+f8cd9f7f-5a2b-4af4-a5b4-6535ac870a28:
+  casual_polite: 기다렸어요
+  formal_polite: 기다렸습니다
+0ee4c2d3-2054-4310-9904-b5ef3257352e:
+  casual_polite: 비자를 받았어요
+  formal_polite: 비자를 받았습니다
+c02d7606-ff4e-41f5-8df6-aaa5746379a5:
+  casual_polite: 영화를 봤어요
+  formal_polite: 영화를 봤습니다
+3236ee6d-36b0-415f-9cb5-49ca68c2730b:
+  casual_polite: 춤췄어요
+  formal_polite: 춤췄습니다
+7c513960-a68d-4323-9591-94955172b031:
+  casual_polite: 들었어요
+  formal_polite: 들었습니다
+9a45b171-62e7-42d6-ab0a-9e50dd6c9757:
+  casual_polite: 음악을 들었어요
+  formal_polite: 음악을 들었습니다
+f68246fa-297f-428a-818c-7beebcac0b48:
+  casual_polite: 테니스를 쳤어요
+  formal_polite: 테니스를 쳤습니다
+956d9cf2-5562-4b38-bffb-309b83ace266:
+  casual_polite: 드럼을 쳤어요
+  formal_polite: 드럼을 쳤습니다
+7e255ea6-9990-4dad-a17f-6e4147949bf7:
+  casual_polite: 기타를 쳤어요
+  formal_polite: 기타를 쳤습니다
+0320469b-9b2c-499d-a354-78f548cf153a:
+  casual_polite: 샀어요
+  formal_polite: 샀습니다
+3873cac9-9b9f-46d9-8c34-f5b82b786d34:
+  casual_polite: 빌렸어요
+  formal_polite: 빌렸습니다
+e2a03578-d2a2-4491-b9f5-f7af3aae9502:
+  casual_polite: 줬어요
+  formal_polite: 줬습니다
+acbe5268-c8aa-4c6a-93f6-50efd4f1147c:
+  casual_polite: 쳤어요
+  formal_polite: 쳤습니다
+ae0c6389-e883-4e58-86c9-2d1604359452:
+  casual_polite: 수영장에 갔어요
+  formal_polite: 수영장에 갔습니다
+f2de4757-237d-4c6d-a059-07d53e815f14:
+  casual_polite: 집에 갔어요
+  formal_polite: 집에 갔습니다
+1fd75b38-dd8f-4c75-b894-44515416096f:
+  casual_polite: 친구 집에 갔어요
+  formal_polite: 친구 집에 갔습니다
+288cc559-f5e1-4f6d-b4ac-28f4f8e3d09a:
+  casual_polite: 아침 식사했어요
+  formal_polite: 아침 식사했습니다
+10bd0e87-ba63-4813-bf04-16405d7d9b03:
+  casual_polite: 아침을 먹었어요
+  formal_polite: 아침을 먹었습니다
+83d3f179-7838-419e-85f6-6e856b0c8f50:
+  casual_polite: 점심을 먹었어요
+  formal_polite: 점심을 먹었습니다
+b1ad2c53-570a-4368-b779-b5694b65c32c:
+  casual_polite: 저녁을 먹었어요
+  formal_polite: 저녁을 먹었습니다
+9f1bf47c-bb47-42e1-b089-a64291d02d71:
+  casual_polite: 식당에서 먹었어요
+  formal_polite: 식당에서 먹었습니다
+a360b5eb-61a9-43c7-8afa-6f4ad92b212b:
+  casual_polite: 한국어를 공부했어요
+  formal_polite: 한국어를 공부했습니다
+d29c2008-f57b-4595-89c9-c8b0abc1cf36:
+  casual_polite: 커피를 마셨어요
+  formal_polite: 커피를 마셨습니다
+895fff63-f2ed-4447-bb9f-15f331e890f1:
+  casual_polite: 숙제했어요
+  formal_polite: 숙제했습니다
+52816c9b-f678-44da-8956-e33e540d944c:
+  casual_polite: 운동했어요
+  formal_polite: 운동했습니다
+dcb4ef49-55e5-4eea-9e8c-77c90a9327ab:
+  casual_polite: 공부했어요
+  formal_polite: 공부했습니다
+36ad457d-ad70-4c89-828a-97478eff9d1b:
+  casual_polite: 생각했어요
+  formal_polite: 생각했습니다
+bf52c177-987c-4018-b8cd-8c845606ba56:
+  casual_polite: 일했어요
+  formal_polite: 일했습니다
+67feca10-2c88-4a98-92d1-5f1aaa59d6bd:
+  casual_polite: 컴퓨터 했어요
+  formal_polite: 컴퓨터 했습니다
+3f9ba750-098e-4855-8cd6-08ea2fe7f8ba:
+  casual_polite: 인터넷했어요
+  formal_polite: 인터넷했습니다
+56b00e45-39ce-4956-a16c-19a02ec878f8:
+  casual_polite: 좋아했어요
+  formal_polite: 좋아했습니다
+24f7b7b7-56d1-44a3-8b83-8c49f1577ef1:
+  casual_polite: 싫어했어요
+  formal_polite: 싫어했습니다
+7493d7c3-db93-45b6-961e-9f105ad7616b:
+  casual_polite: 세수했어요
+  formal_polite: 세수했습니다
+a073bd81-80ca-4f86-abed-f0806d6317b7:
+  casual_polite: 전화했어요
+  formal_polite: 전화했습니다
+5ab9c09c-4906-4bda-9d7a-d97046701bcd:
+  casual_polite: 수영했어요
+  formal_polite: 수영했습니다
+ba82c095-5e1d-47f6-b336-8a6db41c9296:
+  casual_polite: 여행했어요
+  formal_polite: 여행했습니다
+b567d796-1c56-4fcf-a700-96d58bfca8c2:
+  casual_polite: 여행을 했어요
+  formal_polite: 여행을 했습니다
+5afb6a59-5c48-4453-8ad5-a75ce31fbe0e:
+  casual_polite: 등산했어요
+  formal_polite: 등산했습니다
+3667c4f9-2b25-4b8b-8489-9eec111999f8:
+  casual_polite: 시작했어요
+  formal_polite: 시작했습니다
+6afa7451-6802-4986-abe0-a0cafcf2bbc8:
+  casual_polite: 끝났어요
+  formal_polite: 끝났습니다
+59a2ce59-07a3-4ca9-a0b3-83d6b0561400:
+  casual_polite: 몰랐어요
+  formal_polite: 몰랐습니다
+adc81a77-67bb-455b-8792-4a20898a1640:
+  casual_polite: 알았어요
+  formal_polite: 알았습니다
+808676a3-4278-4917-a679-a9d5ae5d6540:
+  casual_polite: 농구했어요
+  formal_polite: 농구했습니다
+cf079837-1303-4168-811b-a696788f351e:
+  casual_polite: 농구를 했어요
+  formal_polite: 농구를 했습니다
+bc04b2db-8235-4aa4-9277-4500df110019:
+  casual_polite: 이사를 했어요
+  formal_polite: 이사를 했습니다
+33935457-ea10-42bc-b5a6-3c9776012b03:
+  casual_polite: 결혼을 했어요
+  formal_polite: 결혼을 했습니다
+f127d6b0-9ac6-455e-ab4a-617c2ed3b1a6:
+  casual_polite: 학교를 졸업했어요
+  formal_polite: 학교를 졸업했습니다
+9a5ba9d4-379a-4f84-9cc2-dfbe5563ceb6:
+  casual_polite: 컴퓨터 게임을 했어요
+  formal_polite: 컴퓨터 게임을 했습니다
+baab4ba8-4ae5-4f22-9422-a964ceee96a6:
+  casual_polite: 신문을 읽었어요
+  formal_polite: 신문을 읽었습니다
+32563d25-b774-4a31-867e-600b8c06ca3b:
+  casual_polite: 요리했어요
+  formal_polite: 요리했습니다
+cb51db5f-b097-4b28-b273-71f0d2f5db8d:
+  casual_polite: 청소를 했어요
+  formal_polite: 청소를 했습니다
+e41a496c-d5e9-476c-8ba5-6a45e438fe92:
+  casual_polite: 청소했어요
+  formal_polite: 청소했습니다
+942cd694-c5f9-45de-933d-481692e49e32:
+  casual_polite: 정리를 했어요
+  formal_polite: 정리를 했습니다
+1c0f4671-982f-4f96-b424-fd759d8b197a:
+  casual_polite: 씻었어요
+  formal_polite: 씻었습니다
+d6629adf-9e97-4ed0-a69f-2f834cc2b2e0:
+  casual_polite: 세탁했어요
+  formal_polite: 세탁했습니다
+06d82021-6956-4adf-b23a-86889024a2f6:
+  casual_polite: 빨래를 했어요
+  formal_polite: 빨래를 했습니다
+ecfab8d9-bf1b-435a-a305-39be796fc809:
+  casual_polite: 빨래했어요
+  formal_polite: 빨래했습니다
+458b0165-a6ca-4c7f-aa7e-096f2bbdf562:
+  casual_polite: 산책했어요
+  formal_polite: 산책했습니다
+d4de8994-9b0e-4e8b-a91b-6e20ade16f95:
+  casual_polite: 보냈어요
+  formal_polite: 보냈습니다
+43544bc3-2154-4f8c-9551-c51c870c4b24:
+  casual_polite: 도착했어요
+  formal_polite: 도착했습니다
+4193b3b6-0c72-46ac-8118-4cf10c2c9888:
+  casual_polite: 돈을 찾 돈을 찾았어요
+  formal_polite: 돈을 찾 돈을 찾았습니다
+efb9a9cc-e0b2-4667-91a7-832f191dc0d7:
+  casual_polite: 돈을 입금했어요
+  formal_polite: 돈을 입금했습니다
+58ef9ee8-0122-4c3f-b1ba-f367158b36f5:
+  casual_polite: 돈을 보냈어요
+  formal_polite: 돈을 보냈습니다
+c9098849-9abf-4265-b993-47d8c4676fd7:
+  casual_polite: 말했어요
+  formal_polite: 말했습니다
+59101948-acc9-40a0-8f56-215becdd35c7:
+  casual_polite: 가지고 왔어요
+  formal_polite: 가지고 왔습니다
+345dd719-7e46-4a05-9131-cf90aa49b187:
+  casual_polite: 사랑했어요
+  formal_polite: 사랑했습니다
+e4366dc3-3e4a-4cff-b29c-778b2ba7f4f5:
+  casual_polite: 걸렸어요
+  formal_polite: 걸렸습니다
+4da843db-1224-4915-8f1e-40fd42326a29:
+  casual_polite: 썼어요
+  formal_polite: 썼습니다
+b8fead97-c8de-4563-9fa7-22a46fa9cfd7:
+  casual_polite: 쉬었어요
+  formal_polite: 쉬었습니다
+d9f60ae0-155a-422a-bab8-8eb0799df071:
+  casual_polite: 열었어요
+  formal_polite: 열었습니다
+d5e12bb4-ccbb-481d-8c15-999ff8291b16:
+  casual_polite: 만들었어요
+  formal_polite: 만들었습니다
+cb03ebd1-488d-4bdb-ae35-94ae14c3e9f4:
+  casual_polite: 탔어요
+  formal_polite: 탔습니다
+54f8af42-9b0d-4b32-a531-f3047f210319:
+  casual_polite: 갈아탔어요
+  formal_polite: 갈아탔습니다
+68130dd6-50b9-4915-9e9c-62017e68f571:
+  casual_polite: 내렸어요
+  formal_polite: 내렸습니다
+ce14623b-4b7d-4fa2-8bf9-37a795b63fbc:
+  casual_polite: 뛰었어요
+  formal_polite: 뛰었습니다
+604ae239-3073-488d-988b-1e3a1a6747fc:
+  casual_polite: 찍었어요
+  formal_polite: 찍었습니다
+b19c0250-b301-4f88-bdf9-db7aae9c533e:
+  casual_polite: 찍어 왔어요
+  formal_polite: 찍어 왔습니다
+21dca706-90ea-4e9b-89b5-148059eac22e:
+  casual_polite: 잤어요
+  formal_polite: 잤습니다
+9885e85e-5c84-4178-9abf-093ff060df69:
+  casual_polite: 찾았어요
+  formal_polite: 찾았습니다

@@ -1,0 +1,5200 @@
+# yaml-language-server: $schema=../../schemas/examples_vocabulary.schema.json
+
+f097e4eb-ab4a-49d6-bd7d-06cd4df7e1a9:
+  present:
+    casual_polite:
+    - hangul: |-
+        내일 학교에 와요. 같이 공부해요.
+      english: |-
+        I will come to school tomorrow. Let's study together.
+    formal_polite:
+    - hangul: |-
+        저는 내일 학교에 옵니다. 수업이 기대돼요.
+      english: |-
+        I will come to school tomorrow. I am looking forward to the class.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구하고 학교에 왔어요. 재미있었어요.
+      english: |-
+        I came to school with a friend yesterday. It was fun.
+    formal_polite:
+    - hangul: |-
+        지난주에 저희 팀이 학교에 왔습니다. 회의가 길었어요.
+      english: |-
+        Our team came to school last week. The meeting was long.
+  future:
+    casual_polite:
+    - hangul: |-
+        다음 주에는 가족들이랑 학교에 올 거예요.
+      english: |-
+        My family will come to school next week.
+    formal_polite:
+    - hangul: |-
+        내년 봄에 저희가 학교에 오겠습니다. 환영해주세요.
+      english: |-
+        We will come to school next spring. Please give us a warm welcome.
+e82c8d54-86c3-49ac-9443-526db3d5b736:
+  present:
+    casual_polite:
+    - hangul: |-
+        점심 먹고 학교에 가요. 같이 산책해요.
+      english: |-
+        After eating lunch, we go to school. Let's take a walk together.
+    formal_polite:
+    - hangul: |-
+        저는 지금 회사에서 학교에 갑니다. 버스를 탈 거예요.
+      english: |-
+        I am going to school from the company now. I will take the bus.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구하고 학교에 갔어요. 재미있는 영화를 봤어요.
+      english: |-
+        I went to school with a friend yesterday. We watched an interesting movie.
+    formal_polite:
+    - hangul: |-
+        지난달 저희는 학교에 갔습니다. 새로운 수업을 들었어요.
+      english: |-
+        We went to school last month. We took a new class.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 친구랑 같이 학교에 갈 거예요. 공부할 게 많아요.
+      english: |-
+        I will go to school with my friend tomorrow. There is a lot of studying to do.
+    formal_polite:
+    - hangul: |-
+        다음 학기에는 저희가 학교에 가겠습니다. 준비를 할게요.
+      english: |-
+        We will go to school next semester. We will prepare for it.
+dfbb3f58-a4a6-42b2-a64d-70b4fa36a1e5:
+  present:
+    casual_polite:
+    - hangul: |-
+        주말에 백화점에서 쇼핑해요. 뭘 살 거예요?
+      english: |-
+        I shop at the department store on the weekend. What will you buy?
+    formal_polite:
+    - hangul: |-
+        저는 주말마다 백화점에서 쇼핑합니다. 옷을 많이 봐요.
+      english: |-
+        I shop at the department store every weekend. I look at many clothes.
+  past:
+    casual_polite:
+    - hangul: |-
+        지난 주에 친구랑 백화점에서 쇼핑했어요. 정말 재미있었어요.
+      english: |-
+        I shopped at the department store with my friend last week. It was really fun.
+    formal_polite:
+    - hangul: |-
+        어제 저희 가족은 백화점에서 쇼핑했습니다. 좋은 선물을 샀어요.
+      english: |-
+        Our family shopped at the department store yesterday. We bought a good present.
+  future:
+    casual_polite:
+    - hangul: |-
+        다음 달에 엄마랑 같이 백화점에서 쇼핑할 거예요. 필요한 게 있어요.
+      english: |-
+        I will shop at the department store with my mom next month. I need something.
+    formal_polite:
+    - hangul: |-
+        내년 생일에는 친구들과 백화점에서 쇼핑하겠습니다. 같이 재미있어요.
+      english: |-
+        For my birthday next year, I will shop at the department store with friends. It is fun together.
+24161884-87a3-4b0a-8919-3097f8ce3755:
+  present:
+    casual_polite:
+    - hangul: |-
+        카페에서 친구하고 이야기해요.
+      english: |-
+        I talk with a friend at a cafe.
+    formal_polite:
+    - hangul: |-
+        학교에서 선생님하고 이야기합니다.
+      english: |-
+        I talk with the teacher at school.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 라디오 방송에서 이야기했어요.
+      english: |-
+        I talked on a radio show yesterday.
+    formal_polite:
+    - hangul: |-
+        지난주에 학교에서 친구들과 이야기했습니다.
+      english: |-
+        I talked with my friends at school last week.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 친구하고 공원에서 이야기할 거예요.
+      english: |-
+        I will talk with a friend at the park tomorrow.
+    formal_polite:
+    - hangul: |-
+        다음 주에 회의에서 이야기하겠습니다.
+      english: |-
+        I will talk at the meeting next week.
+96148473-44f8-488c-b1da-8ecb8dff4088:
+  present:
+    casual_polite:
+    - hangul: |-
+        도서관에서 책을 읽어요.
+      english: |-
+        I read a book at the library.
+    formal_polite:
+    - hangul: |-
+        친구와 도서관에서 책을 읽습니다.
+      english: |-
+        I read a book with my friend at the library.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 재미있는 신문을 읽었어요.
+      english: |-
+        I read an interesting newspaper yesterday.
+    formal_polite:
+    - hangul: |-
+        할머니께서 책을 읽었습니다.
+      english: |-
+        Grandmother read a book.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 재미있는 이야기를 읽을 거예요.
+      english: |-
+        I will read an interesting story tomorrow.
+    formal_polite:
+    - hangul: |-
+        선생님은 책을 읽겠습니다.
+      english: |-
+        The teacher will read a book.
+b7927563-bdee-44b8-a801-81401e421355:
+  present:
+    casual_polite:
+    - hangul: |-
+        점심 식사로 비빔밥을 먹어요.
+      english: |-
+        I eat bibimbap for lunch.
+    formal_polite:
+    - hangul: |-
+        식당에서 불고기를 먹습니다.
+      english: |-
+        I eat bulgogi at a restaurant.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구와 같이 라면을 먹었어요.
+      english: |-
+        I ate ramen with my friend yesterday.
+    formal_polite:
+    - hangul: |-
+        아침에 엄마가 밥을 먹었습니다.
+      english: |-
+        Mom ate rice in the morning.
+  future:
+    casual_polite:
+    - hangul: |-
+        주말에 케이크를 먹을 거예요.
+      english: |-
+        I will eat cake on the weekend.
+    formal_polite:
+    - hangul: |-
+        다음 주에 친구와서 같이 라면을 먹겠습니다.
+      english: |-
+        I will come and eat ramen with my friend next week.
+efe788f7-8db8-4328-a934-10563db4b1fd:
+  present:
+    casual_polite:
+    - hangul: |-
+        저는 한국어를 배워요.
+      english: |-
+        I learn Korean.
+    formal_polite:
+    - hangul: |-
+        학생은 학교에서 영어를 배웁니다.
+      english: |-
+        The student learns English at school.
+  past:
+    casual_polite:
+    - hangul: |-
+        어렸을 때 피아노를 배웠어요.
+      english: |-
+        I learned the piano when I was young.
+    formal_polite:
+    - hangul: |-
+        그는 작년에 운전을 배웠습니다.
+      english: |-
+        He learned to drive last year.
+  future:
+    casual_polite:
+    - hangul: |-
+        다음 달에 요리하는 것을 배울 거예요.
+      english: |-
+        I will learn how to cook next month.
+    formal_polite:
+    - hangul: |-
+        저는 회사에서 새로운 기술을 배우겠습니다.
+      english: |-
+        I will learn new skills at the company.
+0c818196-e474-483f-82cd-5d3172eba866:
+  present:
+    casual_polite:
+    - hangul: |-
+        선생님이 한국어를 가르쳐요.
+      english: |-
+        The teacher teaches Korean.
+    formal_polite:
+    - hangul: |-
+        그분은 아이들에게 그림을 가르칩니다.
+      english: |-
+        He teaches pictures to the children.
+  past:
+    casual_polite:
+    - hangul: |-
+        오빠가 저에게 기타를 치는 것을 가르쳤어요.
+      english: |-
+        My older brother taught me how to play the guitar.
+    formal_polite:
+    - hangul: |-
+        회사 동료가 컴퓨터 사용을 가르쳤습니다.
+      english: |-
+        My colleague taught me how to use the computer.
+  future:
+    casual_polite:
+    - hangul: |-
+        저는 동생에게 축구하는 것을 가르칠 거예요.
+      english: |-
+        I will teach my younger sibling how to play soccer.
+    formal_polite:
+    - hangul: |-
+        그는 다음 학기에 음악을 가르치겠습니다.
+      english: |-
+        He will teach music next semester.
+723ad49e-9e9c-4293-a0c7-64399a8c7120:
+  present:
+    casual_polite:
+    - hangul: |-
+        오늘 친구를 만나요.
+      english: |-
+        I meet a friend today.
+    formal_polite:
+    - hangul: |-
+        저는 회사에서 동료를 만납니다.
+      english: |-
+        I meet a colleague at the company.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 공원에서 친구를 만났어요.
+      english: |-
+        I met a friend in the park yesterday.
+    formal_polite:
+    - hangul: |-
+        지난주에 병원에서 의사 선생님을 만났습니다.
+      english: |-
+        I met a doctor at the hospital last week.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 학교에서 친구를 만날 거예요.
+      english: |-
+        I will meet a friend at school tomorrow.
+    formal_polite:
+    - hangul: |-
+        다음 달에 대학교에서 동료를 만나겠습니다.
+      english: |-
+        I will meet a colleague at the university next month.
+13598715-b996-4c29-a414-43c8c196b94d:
+  present:
+    casual_polite:
+    - hangul: |-
+        배가 고파서 물을 마셔요.
+      english: |-
+        I drink water because I am hungry.
+    formal_polite:
+    - hangul: |-
+        저는 목마를 때마다 물을 마십니다.
+      english: |-
+        I drink water whenever I am thirsty.
+  past:
+    casual_polite:
+    - hangul: |-
+        운동 후에 시원하게 물을 마셨어요.
+      english: |-
+        I drank water coolly after exercising.
+    formal_polite:
+    - hangul: |-
+        아파서 집에 와서 물을 마셨습니다.
+      english: |-
+        I drank water when I came home because I was sick.
+  future:
+    casual_polite:
+    - hangul: |-
+        지금 목마르면 물을 마실 거예요.
+      english: |-
+        If I am thirsty now, I will drink water.
+    formal_polite:
+    - hangul: |-
+        회의가 끝나면 물을 마시겠습니다.
+      english: |-
+        I will drink water when the meeting finishes.
+f58e655b-3df5-4fa3-b271-39b07cf67e85:
+  present:
+    casual_polite:
+    - hangul: |-
+        더워서 시원하게 물을 마셔요.
+      english: |-
+        I drink water coolly because it is hot.
+    formal_polite:
+    - hangul: |-
+        저는 공부할 때마다 물을 마십니다.
+      english: |-
+        I drink water whenever I study.
+  past:
+    casual_polite:
+    - hangul: |-
+        여행하다가 목마르니까 물을 마셨어요.
+      english: |-
+        Because I was thirsty while traveling, I drank water.
+    formal_polite:
+    - hangul: |-
+        운동 후에 갈증이 나서 물을 마셨습니다.
+      english: |-
+        I drank water because I felt thirsty after exercising.
+  future:
+    casual_polite:
+    - hangul: |-
+        점심 식사 후에 물을 마실 거예요.
+      english: |-
+        I will drink water after lunch.
+    formal_polite:
+    - hangul: |-
+        지금 바로 갈증이 나면 물을 마시겠습니다.
+      english: |-
+        If I feel thirsty right now, I will drink water.
+f2e85524-0e1b-4867-8da5-538687871427:
+  present:
+    casual_polite:
+    - hangul: |-
+        쉬는 시간에 책을 읽어요.
+      english: |-
+        I read a book during the break time.
+    formal_polite:
+    - hangul: |-
+        저는 도서관에서 친구와 함께 책을 읽습니다.
+      english: |-
+        I read a book with my friend at the library.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 밤에 재미있는 책을 읽었어요.
+      english: |-
+        I read an interesting book last night.
+    formal_polite:
+    - hangul: |-
+        주말에 서점에서 새 책을 읽었습니다.
+      english: |-
+        I read a new book at the bookstore on the weekend.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 집에 가서 책을 읽을 거예요.
+      english: |-
+        I will go home tomorrow and read a book.
+    formal_polite:
+    - hangul: |-
+        저는 다음 주에 이 책을 읽겠습니다.
+      english: |-
+        I will read this book next week.
+2ad321c2-9f57-4867-98bf-b82c6f9d7975:
+  present:
+    casual_polite:
+    - hangul: |-
+        카페에서 영화를 봐요.
+      english: |-
+        I watch a movie at the cafe.
+    formal_polite:
+    - hangul: |-
+        저는 친구와 같이 드라마를 봅니다.
+      english: |-
+        I watch a drama with my friend.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 영화관에서 재미있는 것을 봤어요.
+      english: |-
+        I saw something interesting at the movie theater yesterday.
+    formal_polite:
+    - hangul: |-
+        지난 주말에 가족들과 같이 사진을 많이 봤습니다.
+      english: |-
+        I viewed many pictures with my family last weekend.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 친구랑 같이 노래방에서 재미있는 것을 볼 거예요.
+      english: |-
+        I will see something fun at the karaoke room with my friend tomorrow.
+    formal_polite:
+    - hangul: |-
+        저는 다음 주에 새로운 전시회를 보겠습니다.
+      english: |-
+        I will see a new exhibition next week.
+5a86af96-d6d2-492c-b7a7-a53a73eef228:
+  present:
+    casual_polite:
+    - hangul: |-
+        저는 책을 받아요.
+      english: |-
+        I receive a book.
+    formal_polite:
+    - hangul: |-
+        회사에서 중요한 서류를 받습니다.
+      english: |-
+        I receive important documents at the company.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구에게 선물을 받았어요.
+      english: |-
+        I received a gift from my friend yesterday.
+    formal_polite:
+    - hangul: |-
+        저는 어제 어머니께 돈을 받았습니다.
+      english: |-
+        I received money from my mother yesterday.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 친구에게 카드를 받을 거예요.
+      english: |-
+        I will receive a card from my friend tomorrow.
+    formal_polite:
+    - hangul: |-
+        여행을 가서 기념품을 받겠습니다.
+      english: |-
+        I will receive souvenirs when I travel.
+f8cd9f7f-5a2b-4af4-a5b4-6535ac870a28:
+  present:
+    casual_polite:
+    - hangul: |-
+        저는 공원에서 친구를 기다려요.
+      english: |-
+        I wait for my friend in the park.
+    formal_polite:
+    - hangul: |-
+        우리는 기차역에서 부모님을 기다립니다.
+      english: |-
+        We wait for our parents at the train station.
+  past:
+    casual_polite:
+    - hangul: |-
+        저는 버스 정류장에서 한 시간 동안 기다렸어요.
+      english: |-
+        I waited at the bus stop for one hour.
+    formal_polite:
+    - hangul: |-
+        어제 공항에서 친구를 오래 기다렸습니다.
+      english: |-
+        I waited for my friend for a long time at the airport yesterday.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 엄마가 오실 때까지 기다릴 거예요.
+      english: |-
+        I will wait until my mom comes tomorrow.
+    formal_polite:
+    - hangul: |-
+        다음 주에 결과를 알 때까지 기다리겠습니다.
+      english: |-
+        I will wait until I know the results next week.
+0ee4c2d3-2054-4310-9904-b5ef3257352e:
+  present:
+    casual_polite:
+    - hangul: |-
+        학교에 가서 비자를 받아요.
+      english: |-
+        I receive a visa at the school.
+    formal_polite:
+    - hangul: |-
+        여행을 위해 공항에서 비자를 받습니다.
+      english: |-
+        I receive a visa at the airport for travel.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 대사관에 가서 비자를 받았어요.
+      english: |-
+        I received a visa at the embassy yesterday.
+    formal_polite:
+    - hangul: |-
+        지난달에 공항에서 비자를 받았습니다.
+      english: |-
+        I received a visa at the airport last month.
+  future:
+    casual_polite:
+    - hangul: |-
+        다음 주에 대사관에 가서 비자를 받을 거예요.
+      english: |-
+        I will receive a visa at the embassy next week.
+    formal_polite:
+    - hangul: |-
+        저는 여행을 위해 공항에서 비자를 받겠습니다.
+      english: |-
+        I will receive a visa at the airport for travel.
+c02d7606-ff4e-41f5-8df6-aaa5746379a5:
+  present:
+    casual_polite:
+    - hangul: |-
+        주말에 친구랑 영화를 봐요.
+      english: |-
+        I watch a movie with my friend on the weekend.
+    formal_polite:
+    - hangul: |-
+        내일 극장에서 영화를 봅니다.
+      english: |-
+        I will watch a movie at the theater tomorrow.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구하고 영화를 봤어요.
+      english: |-
+        I watched a movie with my friend yesterday.
+    formal_polite:
+    - hangul: |-
+        지난 주말에 가족과 영화를 봤습니다.
+      english: |-
+        I watched a movie with my family last weekend.
+  future:
+    casual_polite:
+    - hangul: |-
+        다음 달에 같이 영화를 볼 거예요.
+      english: |-
+        We will watch a movie together next month.
+    formal_polite:
+    - hangul: |-
+        이번 주말에 친구와 영화를 보겠습니다.
+      english: |-
+        I will watch a movie with my friend this weekend.
+3236ee6d-36b0-415f-9cb5-49ca68c2730b:
+  present:
+    casual_polite:
+    - hangul: |-
+        공원에서 춤춰요.
+      english: |-
+        I dance in the park.
+    formal_polite:
+    - hangul: |-
+        무대에서 춤춥니다.
+      english: |-
+        They dance on the stage.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 파티에서 춤췄어요.
+      english: |-
+        I danced at the party yesterday.
+    formal_polite:
+    - hangul: |-
+        친구와 함께 춤췄습니다.
+      english: |-
+        I danced with my friend.
+  future:
+    casual_polite:
+    - hangul: |-
+        내년에 같이 춤출 거예요.
+      english: |-
+        We will dance together next year.
+    formal_polite:
+    - hangul: |-
+        우리는 곧 여기서 춤추겠습니다.
+      english: |-
+        We will dance here soon.
+7c513960-a68d-4323-9591-94955172b031:
+  present:
+    casual_polite:
+    - hangul: |-
+        도서관에서 책을 읽고 들어요.
+      english: |-
+        I listen while reading a book in the library.
+    formal_polite:
+    - hangul: |-
+        선생님께서 이야기를 듣습니다.
+      english: |-
+        The teacher listens to the story.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구가 재미있는 이야기를 들었어요.
+      english: |-
+        My friend told me a fun story yesterday.
+    formal_polite:
+    - hangul: |-
+        저는 어젯밤에 음악을 들었습니다.
+      english: |-
+        I listened to music last night.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 아침에 라디오를 들을 거예요.
+      english: |-
+        I will listen to the radio tomorrow morning.
+    formal_polite:
+    - hangul: |-
+        다음 주에 재미있는 이야기를 듣겠습니다.
+      english: |-
+        I will listen to a fun story next week.
+9a45b171-62e7-42d6-ab0a-9e50dd6c9757:
+  present:
+    casual_polite:
+    - hangul: |-
+        카페에서 친구랑 음악을 들어요.
+      english: |-
+        I listen to music with my friend at the cafe.
+    formal_polite:
+    - hangul: |-
+        저는 집에서 음악을 듣습니다.
+      english: |-
+        I listen to music at home.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 콘서트에서 멋진 음악을 들었어요.
+      english: |-
+        I listened to wonderful music at the concert yesterday.
+    formal_polite:
+    - hangul: |-
+        지난 주말에 가족과 음악을 들었습니다.
+      english: |-
+        I listened to music with my family last weekend.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 여행할 때 음악을 들을 거예요.
+      english: |-
+        I will listen to music when I travel tomorrow.
+    formal_polite:
+    - hangul: |-
+        다음 달에 친구와 음악을 듣겠습니다.
+      english: |-
+        I will listen to music with a friend next month.
+f68246fa-297f-428a-818c-7beebcac0b48:
+  present:
+    casual_polite:
+    - hangul: |-
+        카페에서 친구와 같이 테니스를 쳐요.
+      english: |-
+        I play tennis with a friend at the cafe.
+    formal_polite:
+    - hangul: |-
+        오늘 오후에 동료와 함께 테니스를 칩니다.
+      english: |-
+        I play tennis with my colleague this afternoon.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 공원에서 친구하고 테니스를 쳤어요.
+      english: |-
+        I played tennis with a friend at the park yesterday.
+    formal_polite:
+    - hangul: |-
+        지난 주말에 가족들이 함께 테니스를 쳤습니다.
+      english: |-
+        My family played tennis together last weekend.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 친구와 같이 테니스를 칠 거예요.
+      english: |-
+        I will play tennis with my friend tomorrow.
+    formal_polite:
+    - hangul: |-
+        다음 주에 회사 동료들과 테니스를 치겠습니다.
+      english: |-
+        I will play tennis with my company colleagues next week.
+956d9cf2-5562-4b38-bffb-309b83ace266:
+  present:
+    casual_polite:
+    - hangul: |-
+        집에서 음악을 들으며 드럼을 쳐요.
+      english: |-
+        I play drums while listening to music at home.
+    formal_polite:
+    - hangul: |-
+        취미로 친구와 함께 드럼을 칩니다.
+      english: |-
+        I play drums with my friend as a hobby.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 음악 수업에서 선생님께 드럼을 쳤어요.
+      english: |-
+        I played drums for the teacher in music class yesterday.
+    formal_polite:
+    - hangul: |-
+        지난 주말에 친구와 함께 드럼을 쳤습니다.
+      english: |-
+        I played drums with my friend last weekend.
+  future:
+    casual_polite:
+    - hangul: |-
+        다음 달부터 노래방에서 드럼을 칠 거예요.
+      english: |-
+        I will play drums at the karaoke room starting next month.
+    formal_polite:
+    - hangul: |-
+        대학교에 가서 친구들과 드럼을 치겠습니다.
+      english: |-
+        I will play drums with my friends at the university.
+7e255ea6-9990-4dad-a17f-6e4147949bf7:
+  present:
+    casual_polite:
+    - hangul: |-
+        카페에서 친구와 같이 기타를 쳐요.
+      english: |-
+        I play guitar with a friend at the cafe.
+    formal_polite:
+    - hangul: |-
+        매일 저녁에 혼자서 기타를 칩니다.
+      english: |-
+        I play guitar by myself every evening.
+  past:
+    casual_polite:
+    - hangul: |-
+        지난 주말에 친구와 함께 기타를 쳤어요.
+      english: |-
+        I played guitar with my friend last weekend.
+    formal_polite:
+    - hangul: |-
+        어제 콘서트에서 가수가 기타를 쳤습니다.
+      english: |-
+        The singer played guitar at the concert yesterday.
+  future:
+    casual_polite:
+    - hangul: |-
+        내년에 친구랑 같이 기타를 칠 거예요.
+      english: |-
+        I will play guitar with my friend next year.
+    formal_polite:
+    - hangul: |-
+        대학교에 가서 그룹으로 기타를 치겠습니다.
+      english: |-
+        I will play guitar in a group at the university.
+0320469b-9b2c-499d-a354-78f548cf153a:
+  present:
+    casual_polite:
+    - hangul: |-
+        마트에서 엄마에게 선물을 사요.
+      english: |-
+        I buy a gift for my mother at the mart.
+    formal_polite:
+    - hangul: |-
+        저는 책상에 앉아 연필을 삽니다.
+      english: |-
+        I buy pencils sitting at the desk.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구와 같이 영화관에서 간식을 샀어요.
+      english: |-
+        I bought snacks with my friend at the movie theater yesterday.
+    formal_polite:
+    - hangul: |-
+        지난주에 병원에서 약을 샀습니다.
+      english: |-
+        I bought medicine at the hospital last week.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 아빠 생신 선물로 케이크를 살 거예요.
+      english: |-
+        I will buy a cake for my dad's birthday gift tomorrow.
+    formal_polite:
+    - hangul: |-
+        다음 달에 여행을 가서 기념품을 사겠습니다.
+      english: |-
+        I will buy souvenirs when I travel next month.
+3873cac9-9b9f-46d9-8c34-f5b82b786d34:
+  present:
+    casual_polite:
+    - hangul: |-
+        도서관에서 책을 빌려요.
+      english: |-
+        I borrow a book at the library.
+    formal_polite:
+    - hangul: |-
+        친구에게 펜을 빌립니다.
+      english: |-
+        I borrow a pen from my friend.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구에게 지갑을 빌렸어요.
+      english: |-
+        I borrowed a wallet from my friend yesterday.
+    formal_polite:
+    - hangul: |-
+        지난주에 책을 빌렸습니다.
+      english: |-
+        I borrowed a book last week.
+  future:
+    formal_polite:
+    - hangul: |-
+        내년에 친구에게 선물을 빌리겠습니다.
+      english: |-
+        I will borrow a gift from my friend next year.
+    casual_polite:
+    - hangul: |-
+        내일 학교에서 숙제를 빌릴 거예요.
+      english: |-
+        I will borrow homework at school tomorrow.
+e2a03578-d2a2-4491-b9f5-f7af3aae9502:
+  present:
+    casual_polite:
+    - hangul: |-
+        엄마가 저에게 사과를 줘요.
+      english: |-
+        Mom gives me an apple.
+    formal_polite:
+    - hangul: |-
+        선생님이 학생들에게 숙제를 줍니다.
+      english: |-
+        The teacher gives homework to the students.
+  past:
+    casual_polite:
+    - hangul: |-
+        친구에게 돈을 줬어요.
+      english: |-
+        I gave money to my friend.
+    formal_polite:
+    - hangul: |-
+        할아버지께서 저에게 책을 줬습니다.
+      english: |-
+        My grandfather gave me a book.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 친구가 나에게 선물을 줄 거예요.
+      english: |-
+        My friend will give me a gift tomorrow.
+    formal_polite:
+    - hangul: |-
+        회사에서 상사에게 보고서를 주겠습니다.
+      english: |-
+        I will give the report to my superior at work.
+acbe5268-c8aa-4c6a-93f6-50efd4f1147c:
+  present:
+    casual_polite:
+    - hangul: |-
+        농구공을 친구에게 쳐요.
+      english: |-
+        I hit the basketball ball to my friend.
+    formal_polite:
+    - hangul: |-
+        저는 공을 강하게 칩니다.
+      english: |-
+        I hit the ball strongly.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구와 축구공을 쳤어요.
+      english: |-
+        I played soccer with a friend yesterday.
+    formal_polite:
+    - hangul: |-
+        그는 공을 아주 세게 쳤습니다.
+      english: |-
+        He hit the ball very hard.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 테니스공을 친구에게 칠 거예요.
+      english: |-
+        I will hit a tennis ball to my friend tomorrow.
+    formal_polite:
+    - hangul: |-
+        다음 주에는 공을 더 잘 치겠습니다.
+      english: |-
+        I will hit the ball better next week.
+ae0c6389-e883-4e58-86c9-2d1604359452:
+  present:
+    casual_polite:
+    - hangul: |-
+        우리 오늘 수영장에 가요.
+      english: |-
+        We are going to the swimming pool today.
+    formal_polite:
+    - hangul: |-
+        내일도 수영장에 갑니다.
+      english: |-
+        I go to the swimming pool tomorrow too.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구하고 수영장에 갔어요.
+      english: |-
+        I went to the swimming pool with a friend yesterday.
+    formal_polite:
+    - hangul: |-
+        지난 주말에 가족과 수영장에 갔습니다.
+      english: |-
+        I went to the swimming pool with my family last weekend.
+  future:
+    casual_polite:
+    - hangul: |-
+        다음 달에 수영장에 갈 거예요.
+      english: |-
+        I will go to the swimming pool next month.
+    formal_polite:
+    - hangul: |-
+        다음 기회에 수영장에 가겠습니다.
+      english: |-
+        I will go to the swimming pool next time.
+f2de4757-237d-4c6d-a059-07d53e815f14:
+  present:
+    casual_polite:
+    - hangul: |-
+        저녁에 친구와 같이 집에 가요.
+      english: |-
+        I go home with my friend in the evening.
+    formal_polite:
+    - hangul: |-
+        오늘 저녁에는 가족들이 함께 집에 갑니다.
+      english: |-
+        Today, my family goes home together.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 일이 끝나고 친구하고 집에 갔어요.
+      english: |-
+        I went home with my friend after work yesterday.
+    formal_polite:
+    - hangul: |-
+        회의가 끝난 후에 저는 회사에 돌아와서 집에 갔습니다.
+      english: |-
+        After the meeting finished, I returned to the company and went home.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 시간이 되면 같이 집에 갈 거예요.
+      english: |-
+        If I have time tomorrow, we will go home together.
+    formal_polite:
+    - hangul: |-
+        주말에는 부모님과 함께 집에 가겠습니다.
+      english: |-
+        On the weekend, I will go home with my parents.
+1fd75b38-dd8f-4c75-b894-44515416096f:
+  present:
+    casual_polite:
+    - hangul: |-
+        주말에 같이 친구 집에 가요.
+      english: |-
+        I go to my friend's house together on the weekend.
+    formal_polite:
+    - hangul: |-
+        이번 주 토요일에는 친구 집에 갑니다.
+      english: |-
+        This Saturday, I am going to my friend's house.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 저녁에 재미있게 친구 집에 갔어요.
+      english: |-
+        I went to my friend's house happily yesterday evening.
+    formal_polite:
+    - hangul: |-
+        지난 주말에는 오랜만에 친구 집에 갔습니다.
+      english: |-
+        Last weekend, I went to my friend's house after a long time.
+  future:
+    casual_polite:
+    - hangul: |-
+        다음 달에 같이 친구 집에 갈 거예요.
+      english: |-
+        We will go to my friend's house next month.
+    formal_polite:
+    - hangul: |-
+        내년에는 꼭 친구 집에 가겠습니다.
+      english: |-
+        Next year, I will definitely go to my friend's house.
+288cc559-f5e1-4f6d-b4ac-28f4f8e3d09a:
+  present:
+    casual_polite:
+    - hangul: |-
+        아침에 친구와 같이 아침 식사해요.
+      english: |-
+        I have breakfast with my friend in the morning.
+    formal_polite:
+    - hangul: |-
+        저는 매일 아침 식사합니다.
+      english: |-
+        I have breakfast every day.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구와 같이 근사하게 아침 식사했어요.
+      english: |-
+        I had a nice breakfast with my friend yesterday.
+    formal_polite:
+    - hangul: |-
+        지난주에 친구와 함께 아침 식사했습니다.
+      english: |-
+        Last week, I had breakfast with a friend.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일은 늦잠 자고 친구와 아침 식사할 거예요.
+      english: |-
+        Tomorrow, I will sleep in and have breakfast with my friend.
+    formal_polite:
+    - hangul: |-
+        다음부터는 건강하게 아침 식사하겠습니다.
+      english: |-
+        From next time, I will have a healthy breakfast.
+10bd0e87-ba63-4813-bf04-16405d7d9b03:
+  present:
+    casual_polite:
+    - hangul: |-
+        오늘 아침을 먹어요. 무엇을 드실 거예요?
+      english: |-
+        I eat breakfast today. What will you eat?
+    formal_polite:
+    - hangul: |-
+        저는 보통 빵으로 아침을 먹습니다.
+      english: |-
+        I usually eat bread for breakfast.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구가 맛있는 아침을 먹었어요.
+      english: |-
+        My friend ate a delicious breakfast yesterday.
+    formal_polite:
+    - hangul: |-
+        저는 어제 밥으로 아침을 먹었습니다.
+      english: |-
+        I ate rice for breakfast yesterday.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일은 간단하게 아침을 먹을 거예요.
+      english: |-
+        Tomorrow, I will eat a simple breakfast.
+    formal_polite:
+    - hangul: |-
+        다음 주부터는 규칙적으로 아침을 먹겠습니다.
+      english: |-
+        Starting next week, I will eat breakfast regularly.
+83d3f179-7838-419e-85f6-6e856b0c8f50:
+  present:
+    casual_polite:
+    - hangul: |-
+        오늘 점심을 먹어요.
+      english: |-
+        I eat lunch today.
+    formal_polite:
+    - hangul: |-
+        저는 매일 점심을 먹습니다.
+      english: |-
+        I have lunch every day.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구하고 점심을 먹었어요.
+      english: |-
+        I had lunch with a friend yesterday.
+    formal_polite:
+    - hangul: |-
+        지난주에 가족과 점심을 먹었습니다.
+      english: |-
+        I ate lunch with my family last week.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 학교에서 점심을 먹을 거예요.
+      english: |-
+        I will eat lunch at school tomorrow.
+    formal_polite:
+    - hangul: |-
+        다음 주에 회사에서 점심을 먹겠습니다.
+      english: |-
+        I will have lunch at the company next week.
+b1ad2c53-570a-4368-b779-b5694b65c32c:
+  present:
+    casual_polite:
+    - hangul: |-
+        오늘 저녁을 먹어요.
+      english: |-
+        I eat dinner today.
+    formal_polite:
+    - hangul: |-
+        저희는 보통 저녁을 먹습니다.
+      english: |-
+        We usually have dinner.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구하고 저녁을 먹었어요.
+      english: |-
+        I had dinner with a friend yesterday.
+    formal_polite:
+    - hangul: |-
+        지난밤에 가족과 저녁을 먹었습니다.
+      english: |-
+        I ate dinner with my family last night.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 엄마랑 저녁을 먹을 거예요.
+      english: |-
+        I will have dinner with my mom tomorrow.
+    formal_polite:
+    - hangul: |-
+        저희는 내일 친구와 저녁을 먹겠습니다.
+      english: |-
+        We will have dinner with a friend tomorrow.
+9f1bf47c-bb47-42e1-b089-a64291d02d71:
+  present:
+    casual_polite:
+    - hangul: |-
+        주말에 친구하고 식당에서 먹어요.
+      english: |-
+        I eat at a restaurant with a friend on the weekend.
+    formal_polite:
+    - hangul: |-
+        저희는 점심시간에 식당에서 먹습니다.
+      english: |-
+        We eat at a restaurant during lunchtime.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구하고 식당에서 먹었어요.
+      english: |-
+        I ate at a restaurant with a friend yesterday.
+    formal_polite:
+    - hangul: |-
+        지난달에 회사 동료들과 식당에서 먹었습니다.
+      english: |-
+        I ate at a restaurant with my company colleagues last month.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 가족하고 식당에서 먹을 거예요.
+      english: |-
+        I will eat at a restaurant with my family tomorrow.
+    formal_polite:
+    - hangul: |-
+        다음 주에 친구와 식당에서 먹겠습니다.
+      english: |-
+        I will eat at a restaurant with a friend next week.
+a360b5eb-61a9-43c7-8afa-6f4ad92b212b:
+  present:
+    casual_polite:
+    - hangul: |-
+        저는 공원에서 한국어를 공부해요.
+      english: |-
+        I study Korean in the park.
+    formal_polite:
+    - hangul: |-
+        학생들은 학교에서 한국어를 공부합니다.
+      english: |-
+        Students study Korean at school.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구하고 한국어를 공부했어요.
+      english: |-
+        I studied Korean with a friend yesterday.
+    formal_polite:
+    - hangul: |-
+        지난 학기에 저는 한국어를 공부했습니다.
+      english: |-
+        I studied Korean last semester.
+  future:
+    casual_polite:
+    - hangul: |-
+        내년에 친구랑 한국어를 공부할 거예요.
+      english: |-
+        I will study Korean with a friend next year.
+    formal_polite:
+    - hangul: |-
+        저는 다음 달에 한국어를 공부하겠습니다.
+      english: |-
+        I will study Korean next month.
+d29c2008-f57b-4595-89c9-c8b0abc1cf36:
+  present:
+    casual_polite:
+    - hangul: |-
+        카페에서 친구와 커피를 마셔요.
+      english: |-
+        I drink coffee with my friend at the cafe.
+    formal_polite:
+    - hangul: |-
+        저는 아침에 커피를 마십니다.
+      english: |-
+        I drink coffee in the morning.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구하고 카페에서 커피를 마셨어요.
+      english: |-
+        I drank coffee with my friend at the cafe yesterday.
+    formal_polite:
+    - hangul: |-
+        지난주에 회사 동료와 커피를 마셨습니다.
+      english: |-
+        I drank coffee with a colleague last week.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 친구랑 같이 카페에서 커피를 마실 거예요.
+      english: |-
+        I will drink coffee at the cafe with my friend tomorrow.
+    formal_polite:
+    - hangul: |-
+        다음 주에 저는 회사에서 커피를 마시겠습니다.
+      english: |-
+        I will drink coffee at the company next week.
+895fff63-f2ed-4447-bb9f-15f331e890f1:
+  present:
+    casual_polite:
+    - hangul: |-
+        저녁에 숙제해요.
+      english: |-
+        I do homework in the evening.
+    formal_polite:
+    - hangul: |-
+        학생들은 매일 학교에서 숙제합니다.
+      english: |-
+        Students do homework at school every day.
+  past:
+    casual_polite:
+    - hangul: |-
+        어젯밤에 친구랑 같이 숙제했어요.
+      english: |-
+        I did homework with my friend last night.
+    formal_polite:
+    - hangul: |-
+        저는 어제 학교에서 숙제했습니다.
+      english: |-
+        I did homework at school yesterday.
+  future:
+    casual_polite:
+    - hangul: |-
+        주말에 가족이랑 같이 재미있게 숙제할 거예요.
+      english: |-
+        I will do homework fun with my family on the weekend.
+    formal_polite:
+    - hangul: |-
+        내일은 학교에서 숙제하겠습니다.
+      english: |-
+        I will do homework at school tomorrow.
+52816c9b-f678-44da-8956-e33e540d944c:
+  present:
+    casual_polite:
+    - hangul: |-
+        저는 아침에 헬스장에서 운동해요.
+      english: |-
+        I work out at the gym in the morning.
+    formal_polite:
+    - hangul: |-
+        건강을 위해 매일 체육관에서 운동합니다.
+      english: |-
+        I work out at the gymnasium every day for health.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구랑 같이 공원에서 운동했어요.
+      english: |-
+        I worked out in the park with my friend yesterday.
+    formal_polite:
+    - hangul: |-
+        저는 지난 주말에 헬스장에서 운동했습니다.
+      english: |-
+        I worked out at the gym last weekend.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일은 가족이랑 같이 공원에서 운동할 거예요.
+      english: |-
+        I will work out in the park with my family tomorrow.
+    formal_polite:
+    - hangul: |-
+        저는 내년에 체육관에서 운동하겠습니다.
+      english: |-
+        I will work out at the gymnasium next year.
+dcb4ef49-55e5-4eea-9e8c-77c90a9327ab:
+  present:
+    casual_polite:
+    - hangul: |-
+        도서관에서 친구랑 같이 공부해요.
+      english: |-
+        I study with my friend at the library.
+    formal_polite:
+    - hangul: |-
+        저는 회사에서 한국어를 공부합니다.
+      english: |-
+        I study Korean at the company.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 학교에서 친구랑 같이 공부했어요.
+      english: |-
+        I studied with my friend at school yesterday.
+    formal_polite:
+    - hangul: |-
+        저는 지난 학기에 도서관에서 공부했습니다.
+      english: |-
+        I studied at the library last semester.
+  future:
+    casual_polite:
+    - hangul: |-
+        다음 주에 가족이랑 같이 재미있게 공부할 거예요.
+      english: |-
+        I will study fun with my family next week.
+    formal_polite:
+    - hangul: |-
+        저는 다음 달부터 학교에서 공부하겠습니다.
+      english: |-
+        I will study at school starting next month.
+36ad457d-ad70-4c89-828a-97478eff9d1b:
+  present:
+    casual_polite:
+    - hangul: |-
+        저는 오늘 무엇을 할지 생각해요.
+      english: |-
+        I think about what I will do today.
+    formal_polite:
+    - hangul: |-
+        그는 다음 계획에 대해 생각합니다.
+      english: |-
+        He thinks about the next plan.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구와 만나서 많이 생각했어요.
+      english: |-
+        I thought a lot after meeting my friend yesterday.
+    formal_polite:
+    - hangul: |-
+        저는 그 문제에 대해 오래 생각했습니다.
+      english: |-
+        I thought about that problem for a long time.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 무엇을 할지 같이 생각해 봐요. 생각할 거예요.
+      english: |-
+        Let's think about what to do tomorrow.
+    formal_polite:
+    - hangul: |-
+        저희는 다음 주에 여행할 곳을 생각하겠습니다.
+      english: |-
+        We will think about a place to travel next week.
+bf52c177-987c-4018-b8cd-8c845606ba56:
+  present:
+    casual_polite:
+    - hangul: |-
+        저는 회사에서 열심히 일해요.
+      english: |-
+        I work hard at the company.
+    formal_polite:
+    - hangul: |-
+        그는 매일 아침 학교 근처에서 일합니다.
+      english: |-
+        He works near the school every morning.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구와 같이 재미있게 일했어요.
+      english: |-
+        I worked fun with my friend yesterday.
+    formal_polite:
+    - hangul: |-
+        지난달에 그 프로젝트로 많이 일했습니다.
+      english: |-
+        I worked a lot on that project last month.
+  future:
+    casual_polite:
+    - hangul: |-
+        내년에는 더 큰 회사에서 일할 거예요.
+      english: |-
+        I will work at a bigger company next year.
+    formal_polite:
+    - hangul: |-
+        저는 다음부터는 다른 분야에서 일하겠습니다.
+      english: |-
+        I will work in a different field from now on.
+67feca10-2c88-4a98-92d1-5f1aaa59d6bd:
+  present:
+    casual_polite:
+    - hangul: |-
+        저는 방에서 컴퓨터 해요.
+      english: |-
+        I use the computer in my room.
+    formal_polite:
+    - hangul: |-
+        학생들은 도서관에서 컴퓨터 합니다.
+      english: |-
+        Students use the computer at the library.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구하고 컴퓨터 했어요. 재미있었어요.
+      english: |-
+        I used the computer with my friend yesterday. It was fun.
+    formal_polite:
+    - hangul: |-
+        지난주에 회사에서 컴퓨터 했습니다.
+      english: |-
+        I used the computer at the company last week.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일도 학교에서 컴퓨터 할 거예요.
+      english: |-
+        I will use the computer at school tomorrow too.
+    formal_polite:
+    - hangul: |-
+        저는 다음 주에 집에서 컴퓨터 하겠습니다.
+      english: |-
+        I will use the computer at home next week.
+3f9ba750-098e-4855-8cd6-08ea2fe7f8ba:
+  present:
+    casual_polite:
+    - hangul: |-
+        저는 침대에 누워서 인터넷해요.
+      english: |-
+        I surf the internet lying on the bed.
+    formal_polite:
+    - hangul: |-
+        그는 카페에서 친구와 인터넷합니다.
+      english: |-
+        He surfs the internet with a friend at the cafe.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 밤에 재미있는 것을 많이 인터넷했어요.
+      english: |-
+        I surfed the internet about interesting things last night.
+    formal_polite:
+    - hangul: |-
+        저는 지난 주말에 여행 정보를 인터넷했습니다.
+      english: |-
+        I surfed the internet for travel information last weekend.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일은 공원에서 같이 인터넷할 거예요.
+      english: |-
+        We will surf the internet together in the park tomorrow.
+    formal_polite:
+    - hangul: |-
+        저는 다음 달에 회사에서 인터넷하겠습니다.
+      english: |-
+        I will surf the internet at the company next month.
+56b00e45-39ce-4956-a16c-19a02ec878f8:
+  present:
+    casual_polite:
+    - hangul: |-
+        저는 음악을 정말 좋아해요.
+      english: |-
+        I really like music.
+    formal_polite:
+    - hangul: |-
+        저는 한국 문화를 아주 좋아합니다.
+      english: |-
+        I like Korean culture very much.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 본 영화가 재미있어서 정말 좋아했어요.
+      english: |-
+        The movie I watched yesterday was fun, so I liked it very much.
+    formal_polite:
+    - hangul: |-
+        지난 주말에 만난 친구와 이야기하는 것을 좋아했습니다.
+      english: |-
+        I liked talking with a friend I met last weekend.
+  future:
+    casual_polite:
+    - hangul: |-
+        나중에 이탈리아에 가면 음식을 좋아할 거예요.
+      english: |-
+        If I go to Italy later, I will like the food.
+    formal_polite:
+    - hangul: |-
+        다음 여행에서는 바다를 좋아하겠습니다.
+      english: |-
+        On my next trip, I will like the sea.
+24f7b7b7-56d1-44a3-8b83-8c49f1577ef1:
+  present:
+    casual_polite:
+    - hangul: |-
+        저는 아침에 일찍 일어나는 것을 싫어해요.
+      english: |-
+        I dislike waking up early in the morning.
+    formal_polite:
+    - hangul: |-
+        시끄러운 곳에서는 공부하는 것을 싫어합니다.
+      english: |-
+        I dislike studying in a noisy place.
+  past:
+    casual_polite:
+    - hangul: |-
+        지난번에 본 드라마가 재미없어서 싫어했어요.
+      english: |-
+        The drama I watched last time was not fun, so I disliked it.
+    formal_polite:
+    - hangul: |-
+        그 식당의 음식은 너무 짜서 싫어했습니다.
+      english: |-
+        The food at that restaurant was too salty, so I disliked it.
+  future:
+    casual_polite:
+    - hangul: |-
+        다음 학기에는 숙제하는 것을 싫어할 거예요.
+      english: |-
+        Next semester, I will dislike doing homework.
+    formal_polite:
+    - hangul: |-
+        저는 아침 식사 대신 커피 마시는 것을 싫어하겠습니다.
+      english: |-
+        I will dislike drinking coffee instead of breakfast.
+7493d7c3-db93-45b6-961e-9f105ad7616b:
+  present:
+    casual_polite:
+    - hangul: |-
+        외출하기 전에 꼭 세수해요.
+      english: |-
+        I always wash my face before going out.
+    formal_polite:
+    - hangul: |-
+        아침에 일어나면 먼저 세수합니다.
+      english: |-
+        When I wake up in the morning, I first wash my face.
+  past:
+    casual_polite:
+    - hangul: |-
+        운동하고 와서 얼굴이 더러워서 세수했어요.
+      english: |-
+        I washed my face because it was dirty after working out.
+    formal_polite:
+    - hangul: |-
+        친구와 만나기 전에 세수했습니다.
+      english: |-
+        I washed my face before meeting my friend.
+  future:
+    casual_polite:
+    - hangul: |-
+        여행 가서도 매일 아침에 세수할 거예요.
+      english: |-
+        Even when I travel, I will wash my face every morning.
+    formal_polite:
+    - hangul: |-
+        내일 아침에는 일찍 일어나서 세수하겠습니다.
+      english: |-
+        Tomorrow morning, I will wake up early and wash my face.
+a073bd81-80ca-4f86-abed-f0806d6317b7:
+  present:
+    casual_polite:
+    - hangul: |-
+        엄마에게 전화해요.
+      english: |-
+        I call my mom.
+    formal_polite:
+    - hangul: |-
+        친구와 만나기 전에 먼저 전화합니다.
+      english: |-
+        Before meeting a friend, I first call.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 할아버지께 전화했어요.
+      english: |-
+        I called my grandfather yesterday.
+    formal_polite:
+    - hangul: |-
+        회사에 도착해서 동료에게 전화했습니다.
+      english: |-
+        When I arrived at the company, I called a colleague.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 아침에 친구에게 전화할 거예요.
+      english: |-
+        I will call my friend tomorrow morning.
+    formal_polite:
+    - hangul: |-
+        여행 전에 비자 문제로 대사관에 전화하겠습니다.
+      english: |-
+        Before traveling, I will call the embassy about visa issues.
+5ab9c09c-4906-4bda-9d7a-d97046701bcd:
+  present:
+    casual_polite:
+    - hangul: |-
+        수영장에서 친구와 수영해요.
+      english: |-
+        I swim with a friend at the swimming pool.
+    formal_polite:
+    - hangul: |-
+        저는 매일 아침에 수영합니다.
+      english: |-
+        I swim every morning.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 공원에서 재미있게 수영했어요.
+      english: |-
+        I swam fun times at the park yesterday.
+    formal_polite:
+    - hangul: |-
+        지난주에 친구와 함께 수영했습니다.
+      english: |-
+        Last week, I swam with a friend.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일도 같이 수영할 거예요.
+      english: |-
+        We will swim together tomorrow too.
+    formal_polite:
+    - hangul: |-
+        다음 달에 가족들과 수영하겠습니다.
+      english: |-
+        I will swim with my family next month.
+ba82c095-5e1d-47f6-b336-8a6db41c9296:
+  present:
+    casual_polite:
+    - hangul: |-
+        주말에 친구와 여행해요.
+      english: |-
+        I travel with a friend on the weekend.
+    formal_polite:
+    - hangul: |-
+        저는 다음 달에 가족과 해외로 여행합니다.
+      english: |-
+        I will travel abroad with my family next month.
+  past:
+    casual_polite:
+    - hangul: |-
+        지난 여름에 재미있게 여행했어요.
+      english: |-
+        I traveled fun times last summer.
+    formal_polite:
+    - hangul: |-
+        할머니와 함께 부산에 여행했습니다.
+      english: |-
+        I traveled to Busan with my grandmother.
+  future:
+    casual_polite:
+    - hangul: |-
+        내년에는 유럽으로 여행할 거예요.
+      english: |-
+        I will travel to Europe next year.
+    formal_polite:
+    - hangul: |-
+        다음 주에 친구와 함께 도서관에 여행하겠습니다.
+      english: |-
+        I will travel to the library with my friend next week.
+b567d796-1c56-4fcf-a700-96d58bfca8c2:
+  present:
+    casual_polite:
+    - hangul: |-
+        저희는 이번 주말에 여행을 해요.
+      english: |-
+        We travel this weekend.
+    formal_polite:
+    - hangul: |-
+        저는 다음 달에 친구와 여행을 합니다.
+      english: |-
+        I will travel with a friend next month.
+  past:
+    casual_polite:
+    - hangul: |-
+        지난번에 가족과 함께 여행을 했어요.
+      english: |-
+        Last time, I traveled with my family.
+    formal_polite:
+    - hangul: |-
+        어제 친구와 함께 여행을 했습니다.
+      english: |-
+        Yesterday, I traveled with a friend.
+  future:
+    casual_polite:
+    - hangul: |-
+        다음에는 부모님과 여행을 할 거예요.
+      english: |-
+        Next time, I will travel with my parents.
+    formal_polite:
+    - hangul: |-
+        내년에 회사와 함께 여행을 하겠습니다.
+      english: |-
+        I will travel with the company next year.
+5afb6a59-5c48-4453-8ad5-a75ce31fbe0e:
+  present:
+    casual_polite:
+    - hangul: |-
+        주말에 공원에서 등산해요.
+      english: |-
+        I hike at the park on the weekend.
+    formal_polite:
+    - hangul: |-
+        저는 건강을 위해 매일 등산합니다.
+      english: |-
+        I hike every day for my health.
+  past:
+    casual_polite:
+    - hangul: |-
+        지난 주말에 가족과 함께 등산했어요.
+      english: |-
+        I hiked with my family last weekend.
+    formal_polite:
+    - hangul: |-
+        어제 친구와 같이 등산했습니다.
+      english: |-
+        Yesterday, I hiked with a friend.
+  future:
+    casual_polite:
+    - hangul: |-
+        다음 주에는 학교에 등산할 거예요.
+      english: |-
+        I will hike to school next week.
+    formal_polite:
+    - hangul: |-
+        내년에 친구와 함께 등산하겠습니다.
+      english: |-
+        I will hike with a friend next year.
+3667c4f9-2b25-4b8b-8489-9eec111999f8:
+  present:
+    casual_polite:
+    - hangul: |-
+        내일 아침에 수업이 시작해요.
+      english: |-
+        The class starts tomorrow morning.
+    formal_polite:
+    - hangul: |-
+        다음 주부터 새 프로젝트가 시작합니다.
+      english: |-
+        A new project will start from next week.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 영화가 재미있게 시작했어요.
+      english: |-
+        The movie started interestingly yesterday.
+    formal_polite:
+    - hangul: |-
+        회의는 10시에 시작했습니다.
+      english: |-
+        The meeting started at 10 o'clock.
+  future:
+    casual_polite:
+    - hangul: |-
+        내년에는 한국어를 더 많이 시작할 거예요.
+      english: |-
+        I will start Korean more next year.
+    formal_polite:
+    - hangul: |-
+        저희는 다음 달에 새로운 일을 시작하겠습니다.
+      english: |-
+        We will start new work next month.
+6afa7451-6802-4986-abe0-a0cafcf2bbc8:
+  present:
+    casual_polite:
+    - hangul: |-
+        지금 숙제가 끝나요?
+      english: |-
+        Does the homework end now?
+    formal_polite:
+    - hangul: |-
+        수업이 곧 끝납니다.
+      english: |-
+        The class will soon end.
+  past:
+    casual_polite:
+    - hangul: |-
+        점심 식사가 1시에 끝났어요.
+      english: |-
+        Lunch finished at 1 o'clock.
+    formal_polite:
+    - hangul: |-
+        어제 회의는 오후 3시에 끝났습니다.
+      english: |-
+        The meeting ended at 3 PM yesterday.
+  future:
+    casual_polite:
+    - hangul: |-
+        이 책은 오늘 밤에 끝날 거예요.
+      english: |-
+        This book will finish tonight.
+    formal_polite:
+    - hangul: |-
+        저희는 내일 아침 일찍 끝나겠습니다.
+      english: |-
+        We will finish early tomorrow morning.
+59a2ce59-07a3-4ca9-a0b3-83d6b0561400:
+  present:
+    casual_polite:
+    - hangul: |-
+        저는 그 사람을 몰라요.
+      english: |-
+        I don't know that person.
+    formal_polite:
+    - hangul: |-
+        이 문제는 저도 모릅니다.
+      english: |-
+        I also do not know this problem.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 무슨 일이 있었는지 몰랐어요.
+      english: |-
+        I didn't know what happened yesterday.
+    formal_polite:
+    - hangul: |-
+        그는 사실을 몰랐습니다.
+      english: |-
+        He did not know the truth.
+  future:
+    formal_polite:
+    - hangul: |-
+        그는 다음 주에 오지 못할 거라 모르겠습니다.
+      english: |-
+        He will not be able to come next week, I don't know.
+    casual_polite:
+    - hangul: |-
+        내일은 그 방법을 모를 거예요.
+      english: |-
+        I will not know that method tomorrow.
+adc81a77-67bb-455b-8792-4a20898a1640:
+  present:
+    casual_polite:
+    - hangul: |-
+        저는 한국어를 알아요.
+      english: |-
+        I know Korean.
+    formal_polite:
+    - hangul: |-
+        이 식당은 맛있다는 것을 압니다.
+      english: |-
+        I know that this restaurant is delicious.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 그 영화를 알았어요.
+      english: |-
+        I knew that movie yesterday.
+    formal_polite:
+    - hangul: |-
+        저는 그의 이름을 알았습니다.
+      english: |-
+        I knew his name.
+  future:
+    casual_polite:
+    - hangul: |-
+        다음 학기에는 더 많은 것을 알 거예요.
+      english: |-
+        Next semester, I will know more things.
+    formal_polite:
+    - hangul: |-
+        저는 그 방법을 알겠습니다.
+      english: |-
+        I will know that method.
+808676a3-4278-4917-a679-a9d5ae5d6540:
+  present:
+    casual_polite:
+    - hangul: |-
+        저는 친구와 함께 농구해요.
+      english: |-
+        I play basketball with my friend.
+    formal_polite:
+    - hangul: |-
+        저희는 체육관에서 농구합니다.
+      english: |-
+        We play basketball in the gymnasium.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 학교에서 친구와 농구했어요.
+      english: |-
+        I played basketball with my friend at school yesterday.
+    formal_polite:
+    - hangul: |-
+        지난 주말에 동료들과 농구했습니다.
+      english: |-
+        We played basketball with colleagues last weekend.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 공원에서 농구할 거예요.
+      english: |-
+        I will play basketball in the park tomorrow.
+    formal_polite:
+    - hangul: |-
+        다음 주에 친구와 농구하겠습니다.
+      english: |-
+        I will play basketball with my friend next week.
+cf079837-1303-4168-811b-a696788f351e:
+  present:
+    casual_polite:
+    - hangul: |-
+        오늘 오후에 친구와 농구를 해요.
+      english: |-
+        I play basketball with my friend this afternoon.
+    formal_polite:
+    - hangul: |-
+        저희는 체육관에서 농구를 합니다.
+      english: |-
+        We play basketball in the gymnasium.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 학교에서 친구와 농구를 했어요.
+      english: |-
+        I played basketball with my friend at school yesterday.
+    formal_polite:
+    - hangul: |-
+        지난 주말에 동료들과 농구를 했습니다.
+      english: |-
+        We played basketball with colleagues last weekend.
+  future:
+    casual_polite:
+    - hangul: |-
+        주말에 공원에서 농구를 할 거예요.
+      english: |-
+        I will play basketball in the park on the weekend.
+    formal_polite:
+    - hangul: |-
+        다음 주에 친구와 농구를 하겠습니다.
+      english: |-
+        I will play basketball with my friend next week.
+bc04b2db-8235-4aa4-9277-4500df110019:
+  present:
+    casual_polite:
+    - hangul: |-
+        다음 달에 친구와 이사를 해요.
+      english: |-
+        I move to a new place with my friend next month.
+    formal_polite:
+    - hangul: |-
+        저희는 다음 주에 이사를 합니다.
+      english: |-
+        We are moving next week.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 부모님과 함께 이사를 했어요.
+      english: |-
+        I moved with my parents yesterday.
+    formal_polite:
+    - hangul: |-
+        지난달에 회사 근처로 이사를 했습니다.
+      english: |-
+        We moved near the company last month.
+  future:
+    casual_polite:
+    - hangul: |-
+        내년에 친구와 같이 이사를 할 거예요.
+      english: |-
+        I will move with my friend next year.
+    formal_polite:
+    - hangul: |-
+        이번 주말에 저희는 이사를 하겠습니다.
+      english: |-
+        We will move this weekend.
+33935457-ea10-42bc-b5a6-3c9776012b03:
+  present:
+    casual_polite:
+    - hangul: |-
+        친구와 같이 결혼을 해요.
+      english: |-
+        I get married with my friend.
+    formal_polite:
+    - hangul: |-
+        저희 부모님은 곧 결혼을 합니다.
+      english: |-
+        My parents are getting married soon.
+  past:
+    casual_polite:
+    - hangul: |-
+        작년에 친구와 같이 결혼을 했어요.
+      english: |-
+        I got married with my friend last year.
+    formal_polite:
+    - hangul: |-
+        삼촌은 지난달에 결혼을 했습니다.
+      english: |-
+        My uncle got married last month.
+  future:
+    casual_polite:
+    - hangul: |-
+        내년에 친구와 같이 결혼을 할 거예요.
+      english: |-
+        I will get married with my friend next year.
+    formal_polite:
+    - hangul: |-
+        저희는 곧 결혼을 하겠습니다.
+      english: |-
+        We will get married soon.
+f127d6b0-9ac6-455e-ab4a-617c2ed3b1a6:
+  present:
+    casual_polite:
+    - hangul: |-
+        저는 다음 달에 학교를 졸업해요.
+      english: |-
+        I will graduate from school next month.
+    formal_polite:
+    - hangul: |-
+        그는 오늘 학교를 졸업합니다.
+      english: |-
+        He graduates from school today.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구하고 학교를 졸업했어요.
+      english: |-
+        I graduated from school with a friend yesterday.
+    formal_polite:
+    - hangul: |-
+        그는 작년에 학교를 졸업했습니다.
+      english: |-
+        He graduated from school last year.
+  future:
+    casual_polite:
+    - hangul: |-
+        내년에는 학교를 졸업할 거예요.
+      english: |-
+        I will graduate from school next year.
+    formal_polite:
+    - hangul: |-
+        저는 곧 학교를 졸업하겠습니다.
+      english: |-
+        I will graduate from school soon.
+9a5ba9d4-379a-4f84-9cc2-dfbe5563ceb6:
+  present:
+    casual_polite:
+    - hangul: |-
+        쉬는 시간에 컴퓨터 게임을 해요.
+      english: |-
+        I play a computer game during the break time.
+    formal_polite:
+    - hangul: |-
+        동료가 컴퓨터 게임을 합니다.
+      english: |-
+        My colleague plays a computer game.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구하고 컴퓨터 게임을 했어요.
+      english: |-
+        I played a computer game with a friend yesterday.
+    formal_polite:
+    - hangul: |-
+        지난 주말에 컴퓨터 게임을 했습니다.
+      english: |-
+        We played a computer game last weekend.
+  future:
+    casual_polite:
+    - hangul: |-
+        주말에 컴퓨터 게임을 할 거예요.
+      english: |-
+        I will play a computer game on the weekend.
+    formal_polite:
+    - hangul: |-
+        내일 친구와 컴퓨터 게임을 하겠습니다.
+      english: |-
+        I will play a computer game with my friend tomorrow.
+baab4ba8-4ae5-4f22-9422-a964ceee96a6:
+  present:
+    casual_polite:
+    - hangul: |-
+        아침에 일어나서 신문을 읽어요.
+      english: |-
+        I read the newspaper after waking up in the morning.
+    formal_polite:
+    - hangul: |-
+        그는 매일 아침 신문을 읽습니다.
+      english: |-
+        He reads the newspaper every morning.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구하고 신문을 읽었어요.
+      english: |-
+        I read the newspaper with a friend yesterday.
+    formal_polite:
+    - hangul: |-
+        가족들이 함께 신문을 읽었습니다.
+      english: |-
+        The family members read the newspaper together.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일도 신문을 읽을 거예요.
+      english: |-
+        I will read the newspaper tomorrow too.
+    formal_polite:
+    - hangul: |-
+        저는 내일 아침에 신문을 읽겠습니다.
+      english: |-
+        I will read the newspaper tomorrow morning.
+32563d25-b774-4a31-867e-600b8c06ca3b:
+  present:
+    casual_polite:
+    - hangul: |-
+        엄마가 맛있는 요리해요.
+      english: |-
+        Mom cooks delicious food.
+    formal_polite:
+    - hangul: |-
+        요리사는 전문적으로 요리합니다.
+      english: |-
+        The chef professionally cooks.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 저녁에 친구와 요리했어요.
+      english: |-
+        I cooked dinner with a friend yesterday evening.
+    formal_polite:
+    - hangul: |-
+        우리는 함께 맛있는 음식을 요리했습니다.
+      english: |-
+        We cooked delicious food together.
+  future:
+    casual_polite:
+    - hangul: |-
+        주말에 가족들과 요리할 거예요.
+      english: |-
+        I will cook with my family on the weekend.
+    formal_polite:
+    - hangul: |-
+        다음 주에는 새로운 레시피로 음식을 요리하겠습니다.
+      english: |-
+        Next week, I will cook food with a new recipe.
+cb51db5f-b097-4b28-b273-71f0d2f5db8d:
+  present:
+    casual_polite:
+    - hangul: |-
+        엄마와 함께 방에서 청소를 해요.
+      english: |-
+        I clean in the room with my mother.
+    formal_polite:
+    - hangul: |-
+        저는 오늘 아침에 집에서 청소를 합니다.
+      english: |-
+        I clean at home this morning.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구하고 같이 방을 청소를 했어요.
+      english: |-
+        I cleaned the room with my friend yesterday.
+    formal_polite:
+    - hangul: |-
+        지난 주말에 가족들과 함께 집에서 청소를 했습니다.
+      english: |-
+        I cleaned at home with my family last weekend.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 아침에는 같이 방을 청소를 할 거예요.
+      english: |-
+        We will clean the room together tomorrow morning.
+    formal_polite:
+    - hangul: |-
+        다음 주에 친구와 함께 집에서 청소를 하겠습니다.
+      english: |-
+        I will clean at home with a friend next week.
+e41a496c-d5e9-476c-8ba5-6a45e438fe92:
+  present:
+    casual_polite:
+    - hangul: |-
+        저는 방을 깨끗하게 청소해요.
+      english: |-
+        I clean the room cleanly.
+    formal_polite:
+    - hangul: |-
+        매일 아침에 저는 집을 청소합니다.
+      english: |-
+        I clean the house every morning.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 엄마가 저와 함께 방을 청소했어요.
+      english: |-
+        My mom and I cleaned the room yesterday.
+    formal_polite:
+    - hangul: |-
+        친구랑 같이 어제 교실을 청소했습니다.
+      english: |-
+        I cleaned the classroom with a friend yesterday.
+  future:
+    casual_polite:
+    - hangul: |-
+        주말에 가족들이 다 같이 집을 청소할 거예요.
+      english: |-
+        The family will clean the house together on the weekend.
+    formal_polite:
+    - hangul: |-
+        다음 달에 저희는 아파트 전체를 청소하겠습니다.
+      english: |-
+        We will clean the entire apartment next month.
+942cd694-c5f9-45de-933d-481692e49e32:
+  present:
+    casual_polite:
+    - hangul: |-
+        방에서 정리를 해요.
+      english: |-
+        I tidy up in my room.
+    formal_polite:
+    - hangul: |-
+        집에 와서 정리를 합니다.
+      english: |-
+        I tidy up when I come home.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구하고 방에서 정리를 했어요.
+      english: |-
+        I tidied up my room with a friend yesterday.
+    formal_polite:
+    - hangul: |-
+        지난주에 가족과 함께 정리를 했습니다.
+      english: |-
+        I organized things with my family last week.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 정리를 할 거예요.
+      english: |-
+        I will tidy up tomorrow.
+    formal_polite:
+    - hangul: |-
+        다음 주에 방에서 정리를 하겠습니다.
+      english: |-
+        I will tidy up in my room next week.
+1c0f4671-982f-4f96-b424-fd759d8b197a:
+  present:
+    casual_polite:
+    - hangul: |-
+        운동하고 집에서 씻어요.
+      english: |-
+        I wash after exercising at home.
+    formal_polite:
+    - hangul: |-
+        아침에 일어나서 씻습니다.
+      english: |-
+        I wash after waking up in the morning.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 운동하고 집에서 씻었어요.
+      english: |-
+        I washed after exercising at home yesterday.
+    formal_polite:
+    - hangul: |-
+        지난주에 목욕탕에서 씻었습니다.
+      english: |-
+        I washed at the public bathhouse last week.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 집에서 씻을 거예요.
+      english: |-
+        I will wash at home tomorrow.
+    formal_polite:
+    - hangul: |-
+        다음 주에 운동 후에 씻겠습니다.
+      english: |-
+        I will wash after exercising next week.
+d6629adf-9e97-4ed0-a69f-2f834cc2b2e0:
+  present:
+    casual_polite:
+    - hangul: |-
+        엄마가 옷을 세탁해요.
+      english: |-
+        Mom washes the clothes.
+    formal_polite:
+    - hangul: |-
+        저는 매일 아침에 세탁합니다.
+      english: |-
+        I wash every morning.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구랑 같이 옷을 세탁했어요.
+      english: |-
+        Yesterday, I washed clothes with a friend.
+    formal_polite:
+    - hangul: |-
+        지난주에 빨래를 세탁했습니다.
+      english: |-
+        I washed laundry last week.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 아침에 세탁할 거예요.
+      english: |-
+        I will wash tomorrow morning.
+    formal_polite:
+    - hangul: |-
+        다음 주에는 옷을 세탁하겠습니다.
+      english: |-
+        I will wash clothes next week.
+06d82021-6956-4adf-b23a-86889024a2f6:
+  present:
+    casual_polite:
+    - hangul: |-
+        우리 엄마가 빨래를 해요.
+      english: |-
+        My mom does laundry.
+    formal_polite:
+    - hangul: |-
+        저는 지금 빨래를 합니다.
+      english: |-
+        I am doing laundry now.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구랑 같이 빨래를 했어요.
+      english: |-
+        Yesterday, I did laundry with a friend.
+    formal_polite:
+    - hangul: |-
+        지난 주말에 가족들이 함께 빨래를 했습니다.
+      english: |-
+        The family members did laundry together last weekend.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 아침에 빨래를 할 거예요.
+      english: |-
+        I will do laundry tomorrow morning.
+    formal_polite:
+    - hangul: |-
+        다음 달에는 빨래를 하겠습니다.
+      english: |-
+        I will do laundry next month.
+ecfab8d9-bf1b-435a-a305-39be796fc809:
+  present:
+    casual_polite:
+    - hangul: |-
+        같이 빨래해요.
+      english: |-
+        Let's do laundry together.
+    formal_polite:
+    - hangul: |-
+        저는 매일 저녁에 빨래합니다.
+      english: |-
+        I do laundry every evening.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구하고 같이 빨래했어요.
+      english: |-
+        Yesterday, I did laundry with a friend.
+    formal_polite:
+    - hangul: |-
+        지난 주말에 가족들이 함께 빨래했습니다.
+      english: |-
+        The family members did laundry together last weekend.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 같이 빨래할 거예요.
+      english: |-
+        I will do laundry with you tomorrow.
+    formal_polite:
+    - hangul: |-
+        다음 주에 빨래하겠습니다.
+      english: |-
+        I will do laundry next week.
+458b0165-a6ca-4c7f-aa7e-096f2bbdf562:
+  present:
+    casual_polite:
+    - hangul: |-
+        공원에서 친구와 산책해요.
+      english: |-
+        I take a walk with a friend in the park.
+    formal_polite:
+    - hangul: |-
+        아침에 학교 근처에서 산책합니다.
+      english: |-
+        I take a walk near school in the morning.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 공원에서 친구와 산책했어요.
+      english: |-
+        I took a walk with a friend in the park yesterday.
+    formal_polite:
+    - hangul: |-
+        지난주에 가족과 함께 산책했습니다.
+      english: |-
+        I took a walk with my family last week.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 공원에서 산책할 거예요.
+      english: |-
+        I will take a walk in the park tomorrow.
+    formal_polite:
+    - hangul: |-
+        다음 주에 친구와 산책하겠습니다.
+      english: |-
+        I will take a walk with a friend next week.
+d4de8994-9b0e-4e8b-a91b-6e20ade16f95:
+  present:
+    casual_polite:
+    - hangul: |-
+        내일 친구에게 선물을 보내요.
+      english: |-
+        I will send a gift to my friend tomorrow.
+    formal_polite:
+    - hangul: |-
+        저는 어머니께 편지를 보냅니다.
+      english: |-
+        I send a letter to my mother.
+  past:
+    formal_polite:
+    - hangul: |-
+        지난주에 친구에게 선물을 보냈습니다.
+      english: |-
+        I sent a gift to my friend last week.
+    casual_polite:
+    - hangul: |-
+        어제 어머니께 돈을 보냈어요.
+      english: |-
+        I sent money to my mother yesterday.
+  future:
+    formal_polite:
+    - hangul: |-
+        내년에는 친구에게 카드를 보내겠습니다.
+      english: |-
+        I will send a card to my friend next year.
+    casual_polite:
+    - hangul: |-
+        내일 가족에게 사진을 보낼 거예요.
+      english: |-
+        I will send photos to my family tomorrow.
+43544bc3-2154-4f8c-9551-c51c870c4b24:
+  present:
+    casual_polite:
+    - hangul: |-
+        기차가 5분 뒤에 도착해요.
+      english: |-
+        The train arrives in five minutes.
+    formal_polite:
+    - hangul: |-
+        비행기가 곧 공항에 도착합니다.
+      english: |-
+        The airplane will arrive at the airport soon.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구가 학교에 도착했어요.
+      english: |-
+        My friend arrived at school yesterday.
+    formal_polite:
+    - hangul: |-
+        우리는 약속 장소에 일찍 도착했습니다.
+      english: |-
+        We arrived early at the meeting place.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 아침에 엄마가 집에 도착할 거예요.
+      english: |-
+        Mom will arrive home tomorrow morning.
+    formal_polite:
+    - hangul: |-
+        저희는 오후에 호텔에 도착하겠습니다.
+      english: |-
+        We will arrive at the hotel in the afternoon.
+4193b3b6-0c72-46ac-8118-4cf10c2c9888:
+  present:
+    casual_polite:
+    - hangul: |-
+        은행에 가서 돈을 찾 돈을 찾아요.
+      english: |-
+        I withdraw money at the bank.
+    formal_polite:
+    - hangul: |-
+        직원에게 요청해서 돈을 찾 돈을 찾습니다.
+      english: |-
+        I withdraw money upon request from the staff.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 은행에서 돈을 찾 돈을 찾았어요.
+      english: |-
+        I withdrew money at the bank yesterday.
+    formal_polite:
+    - hangul: |-
+        지난달에 친구가 돈을 찾 돈을 찾았습니다.
+      english: |-
+        My friend withdrew money last month.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 아침에 은행에서 돈을 찾 돈을 찾을 거예요.
+      english: |-
+        I will withdraw money at the bank tomorrow morning.
+    formal_polite:
+    - hangul: |-
+        다음 주에는 회사에서 돈을 찾 돈을 찾겠습니다.
+      english: |-
+        I will withdraw money from the company next week.
+efb9a9cc-e0b2-4667-91a7-832f191dc0d7:
+  present:
+    casual_polite:
+    - hangul: |-
+        은행에 가서 돈을 입금해요.
+      english: |-
+        I deposit money at the bank.
+    formal_polite:
+    - hangul: |-
+        회사 동료가 돈을 입금합니다.
+      english: |-
+        My colleague deposits money.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 엄마가 은행에 가서 돈을 입금했어요.
+      english: |-
+        Mom deposited money at the bank yesterday.
+    formal_polite:
+    - hangul: |-
+        지난주에 친구가 돈을 입금했습니다.
+      english: |-
+        My friend deposited money last week.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 아침에 은행에서 돈을 입금할 거예요.
+      english: |-
+        I will deposit money at the bank tomorrow morning.
+    formal_polite:
+    - hangul: |-
+        다음 주에는 회사에 돈을 입금하겠습니다.
+      english: |-
+        I will deposit money at the company next week.
+58ef9ee8-0122-4c3f-b1ba-f367158b36f5:
+  present:
+    casual_polite:
+    - hangul: |-
+        엄마에게 돈을 보내요.
+      english: |-
+        I send money to Mom.
+    formal_polite:
+    - hangul: |-
+        회사에 돈을 보냅니다.
+      english: |-
+        I send money to the company.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구하고 돈을 보냈어요.
+      english: |-
+        I sent money with a friend yesterday.
+    formal_polite:
+    - hangul: |-
+        지난달에 돈을 보냈습니다.
+      english: |-
+        I sent money last month.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 친구에게 돈을 보낼 거예요.
+      english: |-
+        I will send money to a friend tomorrow.
+    formal_polite:
+    - hangul: |-
+        다음 주에 돈을 보내겠습니다.
+      english: |-
+        I will send money next week.
+c9098849-9abf-4265-b993-47d8c4676fd7:
+  present:
+    casual_polite:
+    - hangul: |-
+        저는 한국어로 말해요.
+      english: |-
+        I speak Korean.
+    formal_polite:
+    - hangul: |-
+        선생님은 영어로 말합니다.
+      english: |-
+        The teacher speaks English.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구와 재미있는 이야기를 말했어요.
+      english: |-
+        I told an interesting story with a friend yesterday.
+    formal_polite:
+    - hangul: |-
+        할머니께서 옛날이야기를 말했습니다.
+      english: |-
+        Grandma told old stories.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 가족들에게 안부를 말할 거예요.
+      english: |-
+        I will speak greetings to my family tomorrow.
+    formal_polite:
+    - hangul: |-
+        저는 한국어로 더 많이 말하겠습니다.
+      english: |-
+        I will speak Korean more.
+59101948-acc9-40a0-8f56-215becdd35c7:
+  present:
+    casual_polite:
+    - hangul: |-
+        엄마가 선물로 책을 가지고 와요.
+      english: |-
+        Mom brings a book as a gift.
+    formal_polite:
+    - hangul: |-
+        친구에게 연필을 가지고 옵니다.
+      english: |-
+        I bring a pencil to my friend.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구하고 숙제를 가지고 왔어요.
+      english: |-
+        I brought homework with a friend yesterday.
+    formal_polite:
+    - hangul: |-
+        지갑을 가지고 왔습니다.
+      english: |-
+        I brought my wallet.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 사진을 많이 가지고 올 거예요.
+      english: |-
+        I will bring many pictures tomorrow.
+    formal_polite:
+    - hangul: |-
+        다음 주에 선물을 가지고 오겠습니다.
+      english: |-
+        I will bring a gift next week.
+345dd719-7e46-4a05-9131-cf90aa49b187:
+  present:
+    casual_polite:
+    - hangul: |-
+        저는 가족을 사랑해요.
+      english: |-
+        I love my family.
+    formal_polite:
+    - hangul: |-
+        그는 친구를 사랑합니다.
+      english: |-
+        He loves his friend.
+  past:
+    casual_polite:
+    - hangul: |-
+        나는 어제 영화가 재미있어서 많이 사랑했어요.
+      english: |-
+        I loved the movie a lot yesterday because it was fun.
+    formal_polite:
+    - hangul: |-
+        그녀는 그를 사랑했습니다.
+      english: |-
+        She loved him.
+  future:
+    casual_polite:
+    - hangul: |-
+        저는 한국 문화가 재미있어서 계속 사랑할 거예요.
+      english: |-
+        I will continue to love Korean culture because it is fun.
+    formal_polite:
+    - hangul: |-
+        우리는 항상 서로를 사랑하겠습니다.
+      english: |-
+        We will always love each other.
+055823d5-04af-44ef-8441-39d6c53dcbe4:
+  default:
+  - hangul: |-
+      선생님, 한국어를 가르쳐 주세요.
+    english: |-
+      Teacher, please teach me Korean.
+af63be07-28fe-4f59-b13f-c3f5096ee04a:
+  default:
+  - hangul: |-
+      요리사 선생님이 맛있는 비빔밥을 만들어요.
+    english: |-
+      The chef teacher makes delicious bibimbap.
+d8536ebe-36f3-45dd-9d3b-63a0f9504b2b:
+  default:
+  - hangul: |-
+      의사 선생님이 저를 진료해 주셨어요.
+    english: |-
+      The doctor teacher examined me.
+dfed38fc-5453-4359-a05d-abe1a9a1d765:
+  default:
+  - hangul: |-
+      학생들은 도서관에서 책을 읽어요.
+    english: |-
+      The students read books in the library.
+e4646944-4f1e-480d-9934-2aed1ec05519:
+  default:
+  - hangul: |-
+      회사원 친구와 회사 근처 카페에서 만났어요.
+    english: |-
+      I met my office worker friend at a cafe near the company.
+e0ffaaf9-e212-44c8-a82e-8c8846358cf8:
+  default:
+  - hangul: |-
+      저는 오늘 숙제를 해야 해요.
+    english: |-
+      I have to do homework today.
+d9446c0a-91c3-48fd-a0a7-c4c78a0d1414:
+  default:
+  - hangul: |-
+      시계가 몇 시예요? 지금 시간을 알려 주세요.
+    english: |-
+      What time is it on the clock? Please tell me the current time.
+fd81e5bc-896d-4bf1-961b-6f836411022e:
+  default:
+  - hangul: |-
+      도서관에서 재미있는 책을 읽었어요.
+    english: |-
+      I read an interesting book at the library.
+322c6caa-8743-44c7-8e8f-e32538c7313a:
+  default:
+  - hangul: |-
+      이 단어를 모르겠어요. 사전에서 찾아볼게요.
+    english: |-
+      I don't know this word. I will look it up in the dictionary.
+889c6f45-c256-40ff-99b5-d7f5bc1fa502:
+  default:
+  - hangul: |-
+      날씨가 추우니까 모자를 써요.
+    english: |-
+      Because the weather is cold, I wear a hat.
+26274ddf-4663-4aad-ba32-94797b68421e:
+  default:
+  - hangul: |-
+      친구와 핸드폰으로 이야기했어요.
+    english: |-
+      I talked with my friend on the cell phone.
+3934b1a1-f39d-4780-8623-c6f30cb878b5:
+  default:
+  - hangul: |-
+      회사에 갈 때 구두를 신었어요.
+    english: |-
+      I wore dress shoes when I went to the company.
+a81204a1-7be4-4f02-a2ad-daa191859f36:
+  default:
+  - hangul: |-
+      교실에 의자가 많아요.
+    english: |-
+      There are many chairs in the classroom.
+3f340697-680b-4412-a319-1481c51b6fe2:
+  default:
+  - hangul: |-
+      가방에 책을 넣었어요.
+    english: |-
+      I put the book in my bag.
+aafb5994-17cf-41ee-abc7-d3c525a1745f:
+  default:
+  - hangul: |-
+      안경이 필요해요. 어디에 있어요?
+    english: |-
+      I need eye glasses. Where are they?
+274265b2-e5c2-4282-9ce9-12287d7dae55:
+  default:
+  - hangul: |-
+      연필로 숙제를 했어요.
+    english: |-
+      I did the homework with a pencil.
+94a8f85e-1df4-407f-a361-4820913cc30a:
+  default:
+  - hangul: |-
+      필통 안에 연필이 있어요.
+    english: |-
+      There is a pencil in the pencil case.
+29439003-4f54-4a57-98b5-d5588f9eeae2:
+  default:
+  - hangul: |-
+      볼펜으로 이름이 적혀 있어요.
+    english: |-
+      My name is written with a pen.
+b857423f-3b27-43bd-80c9-3ee9eb89f72a:
+  default:
+  - hangul: |-
+      지우개로 연필에 쓴 글씨를 지워요.
+    english: |-
+      I erase the writing on the pencil with an eraser.
+e706f9bb-e433-4e69-aaf7-27a0138ca71e:
+  default:
+  - hangul: |-
+      저는 책상에서 숙제해요.
+    english: |-
+      I do my homework at the desk.
+58869e68-1bf5-4681-be74-23706be97a4d:
+  default:
+  - hangul: |-
+      컴퓨터로 인터넷을 해요.
+    english: |-
+      I surf the internet with the computer.
+f6c272c0-f8ca-4004-91ef-15ecf61ccaab:
+  default:
+  - hangul: |-
+      도서관에서 복사기로 자료를 복사해요.
+    english: |-
+      I copy materials with the photocopier at the library.
+5f047b20-fbcb-4bca-b662-625dfbb4d34d:
+  default:
+  - hangul: |-
+      친구와 공원에서 카메라로 사진을 찍었어요.
+    english: |-
+      I took pictures with a camera in the park with my friend.
+f3706a1c-c94e-418e-9ffb-a1fc4252b405:
+  default:
+  - hangul: |-
+      저는 이어폰으로 음악을 들어요.
+    english: |-
+      I listen to music with earphones.
+b2b3e512-1e4d-4961-a7d6-cbf56ad113b3:
+  default:
+  - hangul: |-
+      저는 회사에서 노트북으로 숙제를 해요.
+    english: |-
+      I do my homework on the laptop at work.
+ffc2206f-55e5-4905-8931-3b08705c292e:
+  default:
+  - hangul: |-
+      커피를 컵에 담아 주세요.
+    english: |-
+      Please put the coffee in a cup.
+f140d921-252a-4b77-bf95-b560eb55234d:
+  default:
+  - hangul: |-
+      비가 오니까 우산을 가져왔어요.
+    english: |-
+      Since it is raining, I brought an umbrella.
+c84d4c4f-9700-4f44-a06b-316cf8c7a5cc:
+  default:
+  - hangul: |-
+      한국 친구와 공원에서 산책했어요.
+    english: |-
+      I took a walk in the park with my Korean friend.
+ef397cb3-28e5-4437-9e12-40197366bd16:
+  default:
+  - hangul: |-
+      공책에 한국어를 적었어요.
+    english: |-
+      I wrote Korean on the notepad.
+5be964ab-628c-46cc-bcb8-6531b21b810a:
+  default:
+  - hangul: |-
+      편지 쓸 때 봉투를 사용해요.
+    english: |-
+      I use an envelope when writing a letter.
+2657210a-bf81-442a-8c33-37bb787a352c:
+  default:
+  - hangul: |-
+      가위로 종이를 자르세요.
+    english: |-
+      Please cut the paper with scissors.
+e76ede9d-29e6-43dc-9850-299f828caf5c:
+  default:
+  - hangul: |-
+      저는 아침에 커피를 마시고 싶어요.
+    english: |-
+      I want to drink coffee in the morning.
+73c5abc4-8963-48be-9551-5e6ce79698c7:
+  default:
+  - hangul: |-
+      목이 마르니까 물을 좀 주세요.
+    english: |-
+      I'm thirsty, so please give me some water.
+6f0fb54d-606f-4433-bbaf-f291591fe6d1:
+  default:
+  - hangul: |-
+      저녁에 레몬차를 마시면서 이야기해요.
+    english: |-
+      Let's talk while drinking lemon tea in the evening.
+01a1be78-ca18-4e91-b772-ac0c1b38de69:
+  default:
+  - hangul: |-
+      할머니가 녹차를 마시며 책을 읽으세요.
+    english: |-
+      Grandmother reads a book while drinking green tea.
+df79e7f4-34a7-4a40-b257-1d5520edd5a4:
+  default:
+  - hangul: |-
+      배가 고파서 사이다를 마시고 싶어요.
+    english: |-
+      I'm hungry, so I want to drink soda.
+56a7849c-772b-4cc8-928b-5f055da69810:
+  default:
+  - hangul: |-
+      저는 콜라를 마시고 싶어요.
+    english: |-
+      I want to drink coke.
+01427e95-d5a9-43aa-ab71-d46b5e5a1fc3:
+  default:
+  - hangul: |-
+      오렌지주스를 마실까요?
+    english: |-
+      Shall we drink orange juice?
+dfaf7cdb-0f0c-4fe2-8762-015e93088866:
+  default:
+  - hangul: |-
+      저녁에 맥주를 마셔요.
+    english: |-
+      Let's drink beer in the evening.
+55019c3f-d57e-438d-8f96-c4f64193da5b:
+  default:
+  - hangul: |-
+      이 사과가 맛있어요.
+    english: |-
+      This apple is delicious.
+abb5995b-f72f-4efe-9bb1-67693db5668e:
+  default:
+  - hangul: |-
+      점심에 비빔밥을 먹었어요.
+    english: |-
+      I ate bibimbap for lunch.
+3a021251-e11f-4628-ae3d-c2485589af2d:
+  default:
+  - hangul: |-
+      불고기를 먹고 싶어요.
+    english: |-
+      I want to eat bulgogi.
+5da53010-25e5-49ad-86b3-8c4923896034:
+  default:
+  - hangul: |-
+      저는 식당에서 갈비를 먹고 싶어요.
+    english: |-
+      I want to eat kalbi at a restaurant.
+ffa51da8-c073-4c6c-a0d6-7fba412714ee:
+  default:
+  - hangul: |-
+      저는 초콜릿을 좋아해요.
+    english: |-
+      I like chocolate.
+2dfd5be0-8109-4bbb-a3c1-d9c1b71e8405:
+  default:
+  - hangul: |-
+      엄마가 우유를 사 왔어요.
+    english: |-
+      Mom brought milk.
+d1a995c9-0213-4fe8-8df0-5ab55cbbea9f:
+  default:
+  - hangul: |-
+      배고파요. 라면을 먹을까요?
+    english: |-
+      I'm hungry. Shall we eat ramen?
+397f9981-026a-4a51-b85d-6b8e8bd7106d:
+  default:
+  - hangul: |-
+      이 케이크는 정말 맛있어요.
+    english: |-
+      This cake is really delicious.
+eb01816c-5f16-433f-80f9-b55dff8ff7f3:
+  default:
+  - hangul: |-
+      생일 파티에서 생일 케이크를 먹어요.
+    english: |-
+      We eat the birthday cake at the birthday party.
+c2caf351-8f98-414e-8a25-3460a3211039:
+  default:
+  - hangul: |-
+      저는 김치찌개를 좋아해서 시장에서 사 왔어요.
+    english: |-
+      I like kimchi stew, so I bought it at the market.
+6a95f7ee-6645-4527-9e07-94476c1c40d1:
+  default:
+  - hangul: |-
+      오렌지 주스를 마시고 사과도 같이 먹어요.
+    english: |-
+      I drink orange juice and eat an apple together.
+afb0960a-2f74-4ec2-9b0a-35062b44a5e2:
+  default:
+  - hangul: |-
+      더운 날에 아이스크림을 먹으면 기분이 좋아요.
+    english: |-
+      When I eat ice cream on a hot day, I feel good.
+a8db037a-8595-4329-a799-f23321f1b1c9:
+  default:
+  - hangul: |-
+      학생들이 교실에서 한국어를 공부해요.
+    english: |-
+      Students study Korean in the classroom.
+d6754853-b8bb-4430-b5b3-4a8faa609669:
+  default:
+  - hangul: |-
+      우리 친구랑 영화관에서 재미있는 영화를 봤어요.
+    english: |-
+      My friend and I watched an interesting movie at the movie theater.
+fba7867a-6b3b-4549-82d6-67d6f977161b:
+  default:
+  - hangul: |-
+      저는 대사관에 가서 비자를 받아야 해요.
+    english: |-
+      I have to go to the embassy and receive a visa.
+d30a4ef6-8b4b-4b40-a737-4e252da6a904:
+  default:
+  - hangul: |-
+      도서관에서 책을 읽고 공부해요.
+    english: |-
+      I read books and study at the library.
+178da633-1157-4053-ad55-0de5ba9f6230:
+  default:
+  - hangul: |-
+      문구점에서 연필과 공책을 샀어요.
+    english: |-
+      I bought pencils and notebooks at the stationery store.
+d173c9b1-18de-4cdc-89c1-147c2c66768e:
+  default:
+  - hangul: |-
+      아파서 병원에 갔어요.
+    english: |-
+      I went to the hospital because I was sick.
+10fa7180-ff7b-4c36-a944-d49414d1d354:
+  default:
+  - hangul: |-
+      서점에서 재미있는 책을 골랐어요.
+    english: |-
+      I picked out an interesting book at the bookstore.
+4f8f7c7b-6e0c-486d-bae5-967c1fd4e752:
+  default:
+  - hangul: |-
+      오늘 수영장에서 수영을 할 거예요.
+    english: |-
+      I will swim at the swimming pool today.
+b640e3b8-bfdd-415b-ae9e-f394f1e5605b:
+  default:
+  - hangul: |-
+      식당에서 비빔밥을 먹었어요.
+    english: |-
+      I ate bibimbap at the restaurant.
+320b41a7-ec4b-4fd1-b2d1-6b4163bfa2ec:
+  default:
+  - hangul: |-
+      저는 은행에서 돈을 찾으려고 합니다.
+    english: |-
+      I am going to the bank to withdraw money.
+4c3a15d0-9dc7-4499-93a8-d37d89d88eea:
+  default:
+  - hangul: |-
+      저는 학교에서 한국어를 공부해요.
+    english: |-
+      I study Korean at school.
+060681a3-34fc-4e27-85e6-4ad7dd5dc7c3:
+  default:
+  - hangul: |-
+      화장실에 가야 해요. 시간이 없어요.
+    english: |-
+      I need to go to the restroom. I don't have time.
+13d0fc8b-3a1f-496b-82d0-40d180b68b50:
+  default:
+  - hangul: |-
+      동료와 회사에서 같이 일해요.
+    english: |-
+      I work with my colleague at the company.
+5fb6af75-6cf6-48e4-bc55-8f98c22fe0f7:
+  default:
+  - hangul: |-
+      공항에서 비자를 받으려고 기다려요.
+    english: |-
+      I wait at the airport to receive a visa.
+9f0a5d8e-8c0d-4ae0-9be3-430347d0849c:
+  default:
+  - hangul: |-
+      우체국에서 친구에게 편지를 보내요.
+    english: |-
+      I send a letter to my friend at the post office.
+287fb82f-056e-4ddc-89b8-8ddd7fe0fafd:
+  default:
+  - hangul: |-
+      내일 수업에 친구와 같이 갈 거예요.
+    english: |-
+      I will go to class with my friend tomorrow.
+2333dcc6-3086-4fdd-a905-5468e3e1cff5:
+  default:
+  - hangul: |-
+      기차를 타고 서울에 갈 거예요.
+    english: |-
+      I will go to Seoul by train.
+  - hangul: |-
+      서울에서 부산까지 기차로 가요.
+    english: |-
+      I go from Seoul to Busan by train.
+db6cd9b1-8a31-4085-ac0a-05df9586ac49:
+  default:
+  - hangul: |-
+      기차역에서 엄마를 만날 거예요.
+    english: |-
+      I will meet my mom at the train station.
+8d3f38c8-ec02-412b-a6ae-5ad207e7a6e0:
+  default:
+  - hangul: |-
+      지하철을 타고 학교에 갈 거예요.
+    english: |-
+      I will go to school by subway.
+  - hangul: |-
+      서울에서 지하철로 가요.
+    english: |-
+      I go by subway in Seoul.
+2082973f-e553-4000-a1e5-0fe578961a91:
+  default:
+  - hangul: |-
+      친구와 지하철역에서 만날 거예요.
+    english: |-
+      I will meet my friend at the subway station.
+48af1a28-117f-4eed-bfbf-75dbcd772c48:
+  default:
+  - hangul: |-
+      버스 터미널에서 서울로 가는 버스를 탈 거예요.
+    english: |-
+      I will take a bus to Seoul at the bus terminal.
+72899182-5014-4979-af60-1e44040bcdbc:
+  default:
+  - hangul: |-
+      내일 콘서트에 갈 거예요.
+    english: |-
+      I am going to the concert tomorrow.
+563100a7-0a8d-464c-aaf3-986b3a48de2f:
+  default:
+  - hangul: |-
+      오늘이 제 생일이에요.
+    english: |-
+      Today is my birthday.
+a1cb2f39-97ab-49cf-84b2-ddbb0f68cc76:
+  default:
+  - hangul: |-
+      친구와 함께 생일 파티를 할 거예요.
+    english: |-
+      I will have a birthday party with my friend.
+8a1a21a0-86da-4828-a418-ae1489dd64b2:
+  default:
+  - hangul: |-
+      백화점에서 옷을 사고 싶어요.
+    english: |-
+      I want to buy clothes at the department store.
+5eb2cf31-7fb9-421b-9244-2e7d3e2877e7:
+  default:
+  - hangul: |-
+      감기에 걸렸어요. 약국에 가야 해요.
+    english: |-
+      I caught a cold. I need to go to the pharmacy.
+e697c6d4-c8fe-428d-bc06-9560f97031da:
+  default:
+  - hangul: |-
+      카페에서 커피를 마시고 이야기해요.
+    english: |-
+      Let's drink coffee and talk at the cafe.
+1c737272-6890-4dae-bf31-aeac96c576f8:
+  default:
+  - hangul: |-
+      커피숍에서 친구와 만나서 이야기를 나눌 거예요.
+    english: |-
+      I will meet my friend and talk at the coffee shop.
+38a0e3d8-0922-41e2-b5fb-230179ef7986:
+  default:
+  - hangul: |-
+      우리 영화를 극장에서 볼까요?
+    english: |-
+      Shall we watch a movie at the theater?
+9fc5a459-7758-41ff-8434-fb92b9ce2835:
+  default:
+  - hangul: |-
+      저는 체육관에서 운동을 할 거예요.
+    english: |-
+      I will work out at the gymnasium.
+85613282-b3dc-47c8-81f8-b7c7450d6021:
+  default:
+  - hangul: |-
+      저녁에 헬스장에서 운동할 거예요.
+    english: |-
+      I will work out at the gym in the evening.
+ff1a449f-4e4d-4b7a-88b8-0021fd2f1cc5:
+  default:
+  - hangul: |-
+      주말에 테니스를 칠 거예요.
+    english: |-
+      I will play tennis on the weekend.
+bca13aa3-446b-4eee-9bcd-afb504895f62:
+  default:
+  - hangul: |-
+      친구와 테니스장에서 만날까요?
+    english: |-
+      Shall we meet at the tennis court with a friend?
+cb8db88a-0b8a-4a11-a540-79585e9b87aa:
+  default:
+  - hangul: |-
+      기차역에서 친구를 만났어요.
+    english: |-
+      I met my friend at the train station.
+  - hangul: |-
+      다음 역에서 내려요.
+    english: |-
+      I get off at the next station.
+d10d57b5-b0d7-4055-9268-2f593229901b:
+  default:
+  - hangul: |-
+      공원에서 산책을 했어요.
+    english: |-
+      I took a walk in the park.
+992e13e7-6f06-454f-83ba-27a7ff2275cb:
+  default:
+  - hangul: |-
+      지갑에 돈이 많이 있어요.
+    english: |-
+      There is a lot of money in my wallet.
+a3b48849-a1ff-409a-99a5-4511b5311ae3:
+  default:
+  - hangul: |-
+      편의점에서 물을 샀어요.
+    english: |-
+      I bought water at the convenience store.
+d1f3d055-4d8e-474b-92f6-6c735fcea9a1:
+  default:
+  - hangul: |-
+      이 길로 학교에 가요.
+    english: |-
+      I go to school on this road.
+114b5c05-a6ca-4ded-8500-651928fa7eda:
+  default:
+  - hangul: |-
+      목욕탕에서 씻었어요.
+    english: |-
+      I washed at the public bathhouse.
+7a7ed601-bdd1-4703-a89f-7124a053ade9:
+  default:
+  - hangul: |-
+      밖에서 친구와 산책했어요.
+    english: |-
+      I took a walk with my friend outside.
+0ee37907-8c8a-49d1-963f-eedc9e4c376a:
+  default:
+  - hangul: |-
+      제 방에서 책을 읽어요.
+    english: |-
+      I read a book in my room.
+a9b83a6f-d5d3-4695-9f30-824abcd797c5:
+  default:
+  - hangul: |-
+      아버지는 매일 자동차로 회사에 가요.
+    english: |-
+      My father goes to work by car every day.
+  - hangul: |-
+      주말에 가족과 자동차를 타고 공원에 가요.
+    english: |-
+      On weekends I go to the park with my family by car.
+dda92b53-9f92-4bec-b82b-29a40d39f7f3:
+  default:
+  - hangul: |-
+      아버지는 신문을 읽으세요.
+    english: |-
+      My father reads the newspaper.
+ec135fff-6bec-470d-8d88-5a8b063b7d70:
+  default:
+  - hangul: |-
+      오늘 온라인 뉴스를 봤어요.
+    english: |-
+      I saw online news today.
+237d404d-63b4-40c1-b19f-5dabeb7b2600:
+  default:
+  - hangul: |-
+      김밥을 먹고 학교에 갔어요.
+    english: |-
+      I ate kimbap and went to school.
+80698ca5-cc9c-4563-8a2c-2cfd311a3182:
+  default:
+  - hangul: |-
+      할머니와 삼계탕을 먹었어요.
+    english: |-
+      I ate samgyetang with my grandmother.
+f1ba5f35-2e8b-4ae3-9618-71d90f690462:
+  default:
+  - hangul: |-
+      배가 달콤해서 맛있어요.
+    english: |-
+      The pear is sweet and delicious.
+d4d1ace5-7859-453f-9983-1f7273183dc2:
+  default:
+  - hangul: |-
+      바나나는 아침에 먹으면 좋아요.
+    english: |-
+      It is good to eat a banana in the morning.
+c4246840-7df1-47b1-a19b-001f0a1f5494:
+  default:
+  - hangul: |-
+      한국 음식은 정말 맛있어요.
+    english: |-
+      Korean food is really delicious.
+7929ab83-e365-4d11-b094-b328949e1221:
+  default:
+  - hangul: |-
+      고양이가 창문에서 자요.
+    english: |-
+      The cat sleeps on the window.
+650b05d9-801b-48d3-b223-e2105e177b6f:
+  default:
+  - hangul: |-
+      공으로 축구를 했어요.
+    english: |-
+      I played soccer with a ball.
+fb2d86e1-e7b0-4baa-be3d-b60564c7dcfe:
+  default:
+  - hangul: |-
+      공원에서 친구와 축구를 했어요.
+    english: |-
+      I played soccer with my friend in the park.
+ed35ccd9-def3-4161-93ca-568bcd924424:
+  default:
+  - hangul: |-
+      축구공이 여기에 있어요. 같이 놀까요?
+    english: |-
+      The soccer ball is here. Shall we play together?
+34397423-a67b-4109-b47c-a65626021692:
+  default:
+  - hangul: |-
+      농구공으로 재미있는 게임을 했어요.
+    english: |-
+      We played a fun game with the basketball ball.
+2fa62023-3153-473d-b500-b794cecf636c:
+  default:
+  - hangul: |-
+      은행에서 돈을 찾았어요.
+    english: |-
+      I withdrew money at the bank.
+29998aea-188b-4fb9-bd74-9d368a1e9223:
+  default:
+  - hangul: |-
+      우리 약속 시간은 몇 시예요?
+    english: |-
+      What is our meeting time?
+fca2a518-3f71-4f6a-ad66-493111525879:
+  default:
+  - hangul: |-
+      우리 약속 장소는 학교 앞이에요.
+    english: |-
+      Our meeting place is in front of the school.
+  - hangul: |-
+      어제 친구와 약속 장소에서 만났어요.
+    english: |-
+      I met my friend at the meeting place yesterday.
+8dbc0ea8-663b-4a5b-8189-fdcda5092ecd:
+  default:
+  - hangul: |-
+      저 빌딩에서 일해요.
+    english: |-
+      I work in that building.
+636947c1-0511-4eb8-adb4-7ecf46da95e1:
+  default:
+  - hangul: |-
+      대학교에 가서 한국어를 공부하고 싶어요.
+    english: |-
+      I want to go to university and study Korean.
+230b441a-0c21-44b6-9289-039fc3169db1:
+  default:
+  - hangul: |-
+      우리 휴게실에서 커피를 마셔요.
+    english: |-
+      Let's drink coffee in our rest area.
+f1a2799d-b82e-4145-bd03-84f908654ddf:
+  default:
+  - hangul: |-
+      동료와 같이 점심을 먹었어요.
+    english: |-
+      I ate lunch with my colleague.
+333d7228-509e-404a-af54-527bee562e52:
+  default:
+  - hangul: |-
+      사무실에서 컴퓨터로 일해요.
+    english: |-
+      I work on the computer in the office.
+b7f1d0c9-82b3-4f67-8a69-d1272dab85cc:
+  default:
+  - hangul: |-
+      집 열쇠를 어디에 두었는지 모르겠어요.
+    english: |-
+      I don't know where I put the house key.
+74c769ff-777f-4d9e-a571-8c6c64e1b153:
+  default:
+  - hangul: |-
+      월요일에 학교에서 친구를 만났어요.
+    english: |-
+      I met a friend at school on Monday.
+a7d8e423-42b4-46fa-a812-e5c72212cce3:
+  default:
+  - hangul: |-
+      화요일에는 도서관에서 책을 읽어요.
+    english: |-
+      I read a book at the library on Tuesday.
+523215a4-69d7-4a3e-84a1-0a8ec866cfd0:
+  default:
+  - hangul: |-
+      수요일에 회사에서 친구와 이야기했어요.
+    english: |-
+      I talked with a friend at the company on Wednesday.
+4bffcc8b-74f4-42d3-bde0-3db71323789e:
+  default:
+  - hangul: |-
+      목요일에 영화관에서 영화를 봤어요.
+    english: |-
+      I watched a movie at the theater on Thursday.
+ef9fe650-cdd3-48a6-b2f6-a7035b4085e6:
+  default:
+  - hangul: |-
+      금요일에 친구 집에 가서 같이 춤추었어요.
+    english: |-
+      I went to my friend's house and danced together on Friday.
+0f662ad6-eba9-4dfe-a0de-e81210ad0976:
+  default:
+  - hangul: |-
+      토요일에 공원에서 산책했어요.
+    english: |-
+      I took a walk in the park on Saturday.
+85d84cff-45b0-4af2-bbc8-00bdb0337dd6:
+  default:
+  - hangul: |-
+      일요일에 친구와 공원에서 산책했어요.
+    english: |-
+      I took a walk in the park with my friend on Sunday.
+3e5550e5-972c-45dd-ba6c-6e16c28d180e:
+  default:
+  - hangul: |-
+      일월에 가족들과 함께 한국에 왔어요.
+    english: |-
+      We came to Korea with our family in January.
+39c434fa-3050-43fc-a7cb-57dbbca79807:
+  default:
+  - hangul: |-
+      이월에는 날씨가 추워서 외투를 입어요.
+    english: |-
+      The weather is cold in February, so I wear a coat.
+f63119d2-7815-4d82-8ad5-7c4c6704cf26:
+  default:
+  - hangul: |-
+      삼월에는 학교에 가서 공부를 시작해요.
+    english: |-
+      I go to school and start studying in March.
+0b19e1f0-9374-4bae-8666-4ad287a3da2b:
+  default:
+  - hangul: |-
+      사월에 친구와 함께 카페에서 커피를 마셨어요.
+    english: |-
+      I drank coffee at a cafe with my friend in April.
+ed9d3ec8-c357-446d-87c7-6bc12acb5241:
+  default:
+  - hangul: |-
+      오월에 가족들과 함께 여행을 갈 거예요.
+    english: |-
+      I am going to travel with my family in May.
+f1ec263b-8ca6-4565-a274-89a547417af1:
+  default:
+  - hangul: |-
+      유월에 친구와 공원에서 산책할 거예요.
+    english: |-
+      I will take a walk in the park with my friend in June.
+04659e0d-9c30-4505-9314-28e7049c954c:
+  default:
+  - hangul: |-
+      칠월에는 수영장에 가서 수영할 거예요.
+    english: |-
+      I will go to the swimming pool and swim in July.
+e8eece0d-d030-4906-8e95-5a43e1771f68:
+  default:
+  - hangul: |-
+      팔월에 가족들과 함께 바닷가로 여행을 갈 거예요.
+    english: |-
+      I will travel to the beach with my family in August.
+c1f0c5e4-4586-49bc-9f87-6e549bbe7e86:
+  default:
+  - hangul: |-
+      구월에는 학교에서 공부할 거예요.
+    english: |-
+      I will study at school in September.
+e2f4eda5-207b-44da-9524-fdbc56b88df5:
+  default:
+  - hangul: |-
+      시월에 친구와 영화관에서 영화를 볼 거예요.
+    english: |-
+      I will watch a movie at the theater with my friend in October.
+a89aef40-5566-4c1c-b838-d8abb44f097c:
+  default:
+  - hangul: |-
+      십일월에 아빠와 함께 등산할 거예요.
+    english: |-
+      I will hike with my dad in November.
+0bb478a7-f6e9-44ea-af27-7f438cdc7969:
+  default:
+  - hangul: |-
+      십이월에 가족들과 함께 한국에 돌아가요.
+    english: |-
+      In December, I return to Korea with my family.
+9c3a9adf-52ec-4c15-8518-1cd588648061:
+  default:
+  - hangul: |-
+      어제 도서관에서 친구를 만났어요.
+    english: |-
+      I met a friend at the library yesterday.
+35b1f61b-75fe-4f84-85f9-7043850e424a:
+  default:
+  - hangul: |-
+      오늘 학교에서 한국어를 공부해요.
+    english: |-
+      I study Korean at school today.
+c08970c2-17b3-4d5d-9692-9db737bc7c61:
+  default:
+  - hangul: |-
+      내일 친구 집에 가서 영화를 볼 거예요.
+    english: |-
+      I will go to my friend's house and watch a movie tomorrow.
+16de5ca4-b6b1-4d29-b59d-d110480e1c8b:
+  default:
+  - hangul: |-
+      이틀 전에 아픈 친구를 병원에서 만났어요.
+    english: |-
+      I met a sick friend at the hospital two days ago.
+ddf21ddd-318d-4f0b-9f7b-e4ce1e83374f:
+  default:
+  - hangul: |-
+      사흘 후에 같이 식당에서 저녁을 먹을 거예요.
+    english: |-
+      I will have dinner at the restaurant with you three days later.
+e176adf3-73de-44ba-b4a1-421c154c725f:
+  default:
+  - hangul: |-
+      지난달에 친구와 같이 영화관에 갔어요.
+    english: |-
+      Last month, I went to the movie theater with my friend.
+2a88a8ce-3cfa-427b-8593-8983ef296ff8:
+  default:
+  - hangul: |-
+      이번 달에 한국어를 더 많이 공부할 거예요.
+    english: |-
+      I will study Korean more this month.
+1c7a0597-aa03-4d04-b410-5550017db29a:
+  default:
+  - hangul: |-
+      다음 달에 가족과 함께 여행을 갈 거예요.
+    english: |-
+      I will travel with my family next month.
+f09f4b32-65af-483e-9730-9460458854c3:
+  default:
+  - hangul: |-
+      두 달 전에 은행에서 돈을 찾았어요.
+    english: |-
+      I withdrew money from the bank two months ago.
+408527fb-be38-4651-ba10-1b79c00e62b5:
+  default:
+  - hangul: |-
+      세 달 후에 저는 이 회사에서 일할 거예요.
+    english: |-
+      I will work at this company three months later.
+3a854f9a-df5b-4378-8bf9-8179fa1293fa:
+  default:
+  - hangul: |-
+      작년에 저는 미국에 여행을 갔어요.
+    english: |-
+      Last year, I traveled to the United States.
+6485694a-825f-44be-b178-42bd63f643da:
+  default:
+  - hangul: |-
+      올해는 한국에 여행을 갈 거예요.
+    english: |-
+      I will travel to Korea this year.
+8bde57dc-7438-4632-a15d-184359c1655c:
+  default:
+  - hangul: |-
+      내년에 친구 집에 갈 거예요.
+    english: |-
+      I will go to my friend's house next year.
+8c249aa5-6aee-48c6-9e73-c2edb50a7e19:
+  default:
+  - hangul: |-
+      이년 전에는 이 학교에 다녔어요.
+    english: |-
+      I attended this school two years ago.
+546daccc-a801-46e0-b4c8-f6507968a221:
+  default:
+  - hangul: |-
+      삼년 후에는 회사원이 될 거예요.
+    english: |-
+      I will become an office worker three years later.
+f38c61a9-e4a0-4ddf-bc24-0e65b2ac1b60:
+  default:
+  - hangul: |-
+      한 시간 전에 도서관에 갔어요.
+    english: |-
+      I went to the library an hour ago.
+b640dd41-c567-490b-97ad-b21392df91b0:
+  default:
+  - hangul: |-
+      한 시간 후에 같이 커피를 마실까요?
+    english: |-
+      Shall we drink coffee together in an hour?
+7608a136-bc43-4888-9d24-5024ff51c746:
+  default:
+  - hangul: |-
+      두 시간 전에 친구를 만나서 이야기했어요.
+    english: |-
+      I met and talked with my friend two hours ago.
+533dc7c5-a15f-458f-8696-e83ad985a003:
+  default:
+  - hangul: |-
+      세 시간 후에 도서관에 갈 거예요.
+    english: |-
+      I will go to the library three hours later.
+f112ffea-6d68-4873-992f-7861fcc796fe:
+  default:
+  - hangul: |-
+      어머니는 저녁에 요리하셨어요.
+    english: |-
+      My mother cooked dinner.
+9e055ca8-fd65-4ec6-85f4-a07bb5d5481b:
+  default:
+  - hangul: |-
+      엄마가 저에게 책을 사주셨어요.
+    english: |-
+      Mom bought me a book.
+29e60ff9-a779-4b80-bd25-35cefa4d22ec:
+  default:
+  - hangul: |-
+      아버지는 회사에서 일하십니다.
+    english: |-
+      My father works at the company.
+2b831bcf-f0de-4920-b8fb-1f286fb849b5:
+  default:
+  - hangul: |-
+      아빠가 저와 같이 공원에 산책했어요.
+    english: |-
+      Dad took me for a walk in the park.
+697ada42-4ef8-42d6-957d-a7e2895af2af:
+  default:
+  - hangul: |-
+      부모님과 함께 식당에서 저녁을 먹었어요.
+    english: |-
+      I had dinner at a restaurant with my parents.
+b22e9b7d-4b58-4a02-9970-49523767a269:
+  default:
+  - hangul: |-
+      형은 저와 함께 공원에서 산책했어요.
+    english: |-
+      My older brother took a walk in the park with me.
+1b055d9b-0a5a-48f4-a5b9-136f2e7e1858:
+  default:
+  - hangul: |-
+      오빠가 저에게 책을 사 주었어요.
+    english: |-
+      My older brother bought me a book.
+8873f9c1-73c7-417f-998f-938f23555108:
+  default:
+  - hangul: |-
+      누나가 저에게 커피를 마시라고 했어요.
+    english: |-
+      My older brother told me to drink coffee.
+75eaef4d-5847-46e4-9a54-6e96c8fd8aa0:
+  default:
+  - hangul: |-
+      언니와 같이 영화를 보고 싶어요.
+    english: |-
+      I want to watch a movie with my older sister.
+47995919-f769-4867-bfef-b7c704188421:
+  default:
+  - hangul: |-
+      동생은 학교에서 공부해요.
+    english: |-
+      My younger sibling studies at school.
+0f2a8357-1b9c-4328-ba96-f19835b05bea:
+  default:
+  - hangul: |-
+      남동생이 학교에 가서 친구와 놀아요.
+    english: |-
+      My younger brother goes to school and plays with a friend.
+3ab39f9f-6bd1-4e2e-9f1a-ab6bd4266b44:
+  default:
+  - hangul: |-
+      여동생이 공원에서 산책을 해요.
+    english: |-
+      My younger sister takes a walk in the park.
+6cf20fe1-b66a-494d-a804-5c31f24c8ddc:
+  default:
+  - hangul: |-
+      아들이 책을 읽는 것을 좋아해요.
+    english: |-
+      My son likes to read books.
+32b81c42-b72a-4ead-ad1e-0aec20f2b562:
+  default:
+  - hangul: |-
+      딸과 함께 영화를 보러 갈 거예요.
+    english: |-
+      I will go to see a movie with my daughter.
+eabcd488-7722-4768-8023-0edbddbb9fbc:
+  default:
+  - hangul: |-
+      아이가 공원에서 뛰어놀아요.
+    english: |-
+      The child plays outside in the park.
+9bc14e02-4b4e-4df1-b5f0-43968db97cc7:
+  default:
+  - hangul: |-
+      아기가 엄마 품에서 잠을 자요.
+    english: |-
+      The baby sleeps in mom's arms.
+389b13dc-c7b1-46a7-99ce-ff2a879b64f6:
+  default:
+  - hangul: |-
+      남편은 회사에서 일하고 집에 옵니다.
+    english: |-
+      My husband works at the company and comes home.
+e546d115-36db-4e5d-9720-5bf8a2037641:
+  default:
+  - hangul: |-
+      아내는 친구와 카페에서 커피를 마십니다.
+    english: |-
+      My wife drinks coffee at a cafe with her friend.
+c8149379-420a-46ed-8ccd-5797bc6c9670:
+  default:
+  - hangul: |-
+      가족은 주말에 공원에서 산책을 합니다.
+    english: |-
+      The family takes a walk in the park on the weekend.
+7bd70a37-ba8d-4c36-866c-fb562843bdfa:
+  default:
+  - hangul: |-
+      할아버지는 신문을 읽으시고 재미있어 하십니다.
+    english: |-
+      My grandfather reads the newspaper and finds it interesting.
+120290d6-54c8-4002-ac83-deb4cf81313e:
+  default:
+  - hangul: |-
+      할머니는 저녁 식사 후에 같이 차를 마십니다.
+    english: |-
+      My grandmother drinks tea with me after dinner.
+d93cddda-e47a-4b66-93cd-cc8bff0e84fc:
+  default:
+  - hangul: |-
+      삼촌은 회사에서 친구를 만납니다.
+    english: |-
+      My uncle meets a friend at the company.
+2ca41b95-82dd-41bc-8d22-5cd1d2250fec:
+  default:
+  - hangul: |-
+      이모와 같이 쇼핑하러 백화점에 갔어요.
+    english: |-
+      I went to the department store with my maternal aunt to shop.
+0605b9b4-d704-4fd5-a632-babf3fc68ed6:
+  default:
+  - hangul: |-
+      고모가 저에게 선물을 사 주었어요.
+    english: |-
+      My paternal aunt bought me a present.
+0d72534f-4d53-46fd-8c0c-ee8b7bca0b6e:
+  default:
+  - hangul: |-
+      사촌과 같이 공원에서 산책했어요.
+    english: |-
+      I took a walk in the park with my cousin.
+e4366dc3-3e4a-4cff-b29c-778b2ba7f4f5:
+  present:
+    casual_polite:
+    - hangul: |-
+        집에 가는 데 한 시간이 걸려요.
+      english: |-
+        It takes an hour to get home.
+    formal_polite:
+    - hangul: |-
+        버스가 오는 데 십 분이 걸립니다.
+      english: |-
+        It takes ten minutes for the bus to come.
+  past:
+    casual_polite:
+    - hangul: |-
+        서울에서 부산까지 다섯 시간이 걸렸어요.
+      english: |-
+        It took five hours from Seoul to Busan.
+    formal_polite:
+    - hangul: |-
+        학교에 가는 데 삼십 분이 걸렸습니다.
+      english: |-
+        It took thirty minutes to get to school.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일은 더 오래 걸릴 거예요.
+      english: |-
+        It will take longer tomorrow.
+    formal_polite:
+    - hangul: |-
+        기차로 가면 세 시간이 걸리겠습니다.
+      english: |-
+        It will take three hours by train.
+4da843db-1224-4915-8f1e-40fd42326a29:
+  present:
+    casual_polite:
+    - hangul: |-
+        칠판에 한국어로 써요.
+      english: |-
+        I write on the blackboard in Korean.
+    formal_polite:
+    - hangul: |-
+        이 펜을 씁니다.
+      english: |-
+        I use this pen.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 편지를 썼어요.
+      english: |-
+        I wrote a letter yesterday.
+    formal_polite:
+    - hangul: |-
+        수업에 컴퓨터를 썼습니다.
+      english: |-
+        I used a computer in class.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 일기를 쓸 거예요.
+      english: |-
+        I will write in my diary tomorrow.
+    formal_polite:
+    - hangul: |-
+        이 사전을 쓰겠습니다.
+      english: |-
+        I will use this dictionary.
+b8fead97-c8de-4563-9fa7-22a46fa9cfd7:
+  present:
+    casual_polite:
+    - hangul: |-
+        오분 동안 쉬어요.
+      english: |-
+        I rest for five minutes.
+    formal_polite:
+    - hangul: |-
+        주말에 집에서 쉽니다.
+      english: |-
+        I rest at home on the weekend.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 하루 종일 쉬었어요.
+      english: |-
+        I rested all day yesterday.
+    formal_polite:
+    - hangul: |-
+        점심시간에 조금 쉬었습니다.
+      english: |-
+        I rested a little during lunch.
+  future:
+    casual_polite:
+    - hangul: |-
+        오늘은 일찍 쉴 거예요.
+      english: |-
+        I will rest early today.
+    formal_polite:
+    - hangul: |-
+        내일은 집에서 쉬겠습니다.
+      english: |-
+        I will rest at home tomorrow.
+d9f60ae0-155a-422a-bab8-8eb0799df071:
+  present:
+    casual_polite:
+    - hangul: |-
+        창문을 열어요.
+      english: |-
+        I open the window.
+    formal_polite:
+    - hangul: |-
+        문을 엽니다.
+      english: |-
+        I open the door.
+  past:
+    casual_polite:
+    - hangul: |-
+        아침에 창문을 열었어요.
+      english: |-
+        I opened the window in the morning.
+    formal_polite:
+    - hangul: |-
+        가게를 열었습니다.
+      english: |-
+        I opened the store.
+  future:
+    casual_polite:
+    - hangul: |-
+        조금 있다가 문을 열 거예요.
+      english: |-
+        I will open the door in a little while.
+    formal_polite:
+    - hangul: |-
+        창문을 열겠습니다.
+      english: |-
+        I will open the window.
+d5e12bb4-ccbb-481d-8c15-999ff8291b16:
+  present:
+    casual_polite:
+    - hangul: |-
+        친구하고 빵을 만들어요.
+      english: |-
+        I make bread with a friend.
+    formal_polite:
+    - hangul: |-
+        집에서 케이크를 만듭니다.
+      english: |-
+        I make a cake at home.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 저녁을 만들었어요.
+      english: |-
+        I made dinner yesterday.
+    formal_polite:
+    - hangul: |-
+        카드를 만들었습니다.
+      english: |-
+        I made a card.
+  future:
+    casual_polite:
+    - hangul: |-
+        주말에 김치를 만들 거예요.
+      english: |-
+        I will make kimchi on the weekend.
+    formal_polite:
+    - hangul: |-
+        선물을 만들겠습니다.
+      english: |-
+        I will make a present.
+cb03ebd1-488d-4bdb-ae35-94ae14c3e9f4:
+  present:
+    casual_polite:
+    - hangul: |-
+        거기에서 버스를 타요.
+      english: |-
+        I take the bus from there.
+    formal_polite:
+    - hangul: |-
+        매일 지하철을 탑니다.
+      english: |-
+        I ride the subway every day.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 택시를 탔어요.
+      english: |-
+        I took a taxi yesterday.
+    formal_polite:
+    - hangul: |-
+        기차를 탔습니다.
+      english: |-
+        I rode the train.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 비행기를 탈 거예요.
+      english: |-
+        I will take an airplane tomorrow.
+    formal_polite:
+    - hangul: |-
+        버스를 타겠습니다.
+      english: |-
+        I will take the bus.
+54f8af42-9b0d-4b32-a531-f3047f210319:
+  present:
+    casual_polite:
+    - hangul: |-
+        시청에서 2호선으로 갈아타요.
+      english: |-
+        I transfer to Line 2 at City Hall.
+    formal_polite:
+    - hangul: |-
+        서울역에서 기차를 갈아탑니다.
+      english: |-
+        I transfer trains at Seoul Station.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 버스에서 지하철로 갈아탔어요.
+      english: |-
+        I transferred from the bus to the subway yesterday.
+    formal_polite:
+    - hangul: |-
+        부산에서 기차를 갈아탔습니다.
+      english: |-
+        I transferred trains in Busan.
+  future:
+    casual_polite:
+    - hangul: |-
+        다음 역에서 갈아탈 거예요.
+      english: |-
+        I will transfer at the next station.
+    formal_polite:
+    - hangul: |-
+        종로에서 갈아타겠습니다.
+      english: |-
+        I will transfer at Jongno.
+68130dd6-50b9-4915-9e9c-62017e68f571:
+  present:
+    casual_polite:
+    - hangul: |-
+        다음 정류장에서 내려요.
+      english: |-
+        I get off at the next bus stop.
+    formal_polite:
+    - hangul: |-
+        서울역에서 내립니다.
+      english: |-
+        I get off at Seoul Station.
+  past:
+    casual_polite:
+    - hangul: |-
+        학교에서 버스에서 내렸어요.
+      english: |-
+        I got off the bus at school.
+    formal_polite:
+    - hangul: |-
+        지하철에서 내렸습니다.
+      english: |-
+        I got off the subway.
+  future:
+    casual_polite:
+    - hangul: |-
+        세 정거장 다음에 내릴 거예요.
+      english: |-
+        I will get off after three stops.
+    formal_polite:
+    - hangul: |-
+        시청에서 내리겠습니다.
+      english: |-
+        I will get off at City Hall.
+ce14623b-4b7d-4fa2-8bf9-37a795b63fbc:
+  present:
+    casual_polite:
+    - hangul: |-
+        아이들이 공원에서 뛰어요.
+      english: |-
+        The children run in the park.
+    formal_polite:
+    - hangul: |-
+        매일 아침에 뜁니다.
+      english: |-
+        I run every morning.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 운동장에서 뛰었어요.
+      english: |-
+        I ran on the playground yesterday.
+    formal_polite:
+    - hangul: |-
+        빨리 뛰었습니다.
+      english: |-
+        I ran quickly.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 같이 뛸 거예요.
+      english: |-
+        I will run together tomorrow.
+    formal_polite:
+    - hangul: |-
+        운동장에서 뛰겠습니다.
+      english: |-
+        I will run on the playground.
+604ae239-3073-488d-988b-1e3a1a6747fc:
+  present:
+    casual_polite:
+    - hangul: |-
+        친구하고 사진을 찍어요.
+      english: |-
+        I take a picture with a friend.
+    formal_polite:
+    - hangul: |-
+        경치가 좋아서 사진을 찍습니다.
+      english: |-
+        The scenery is nice, so I take a photo.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 박물관에서 사진을 찍었어요.
+      english: |-
+        I took a photo at the museum yesterday.
+    formal_polite:
+    - hangul: |-
+        가족과 사진을 찍었습니다.
+      english: |-
+        I took a photo with my family.
+  future:
+    casual_polite:
+    - hangul: |-
+        주말에 사진을 많이 찍을 거예요.
+      english: |-
+        I will take many photos on the weekend.
+    formal_polite:
+    - hangul: |-
+        여기서 사진을 찍겠습니다.
+      english: |-
+        I will take a photo here.
+b19c0250-b301-4f88-bdf9-db7aae9c533e:
+  present:
+    casual_polite:
+    - hangul: |-
+        여행에서 사진을 찍어 와요.
+      english: |-
+        I take photos on the trip and bring them.
+    formal_polite:
+    - hangul: |-
+        학교에서 사진을 찍어 옵니다.
+      english: |-
+        I take photos at school and bring them.
+  past:
+    casual_polite:
+    - hangul: |-
+        주말에 사진을 찍어 왔어요.
+      english: |-
+        I took photos over the weekend and brought them.
+    formal_polite:
+    - hangul: |-
+        여행 사진을 찍어 왔습니다.
+      english: |-
+        I took travel photos and brought them.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 예쁜 사진을 찍어 올 거예요.
+      english: |-
+        I will take nice photos tomorrow and bring them.
+    formal_polite:
+    - hangul: |-
+        사진을 찍어 오겠습니다.
+      english: |-
+        I will take photos and bring them.
+21dca706-90ea-4e9b-89b5-148059eac22e:
+  present:
+    casual_polite:
+    - hangul: |-
+        밤 열 시에 자요.
+      english: |-
+        I sleep at 10 o'clock at night.
+    formal_polite:
+    - hangul: |-
+        일찍 잡니다.
+      english: |-
+        I sleep early.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 늦게 잤어요.
+      english: |-
+        I slept late yesterday.
+    formal_polite:
+    - hangul: |-
+        잘 잤습니다.
+      english: |-
+        I slept well.
+  future:
+    casual_polite:
+    - hangul: |-
+        오늘은 일찍 잘 거예요.
+      english: |-
+        I will sleep early today.
+    formal_polite:
+    - hangul: |-
+        열 시에 자겠습니다.
+      english: |-
+        I will sleep at 10 o'clock.
+9885e85e-5c84-4178-9abf-093ff060df69:
+  present:
+    casual_polite:
+    - hangul: |-
+        사전에서 단어를 찾아요.
+      english: |-
+        I look up a word in the dictionary.
+    formal_polite:
+    - hangul: |-
+        역을 찾습니다.
+      english: |-
+        I look for the station.
+  past:
+    casual_polite:
+    - hangul: |-
+        어제 친구를 찾았어요.
+      english: |-
+        I found my friend yesterday.
+    formal_polite:
+    - hangul: |-
+        사전에서 단어를 찾았습니다.
+      english: |-
+        I looked up a word in the dictionary.
+  future:
+    casual_polite:
+    - hangul: |-
+        내일 박물관을 찾을 거예요.
+      english: |-
+        I will look for the museum tomorrow.
+    formal_polite:
+    - hangul: |-
+        주소를 찾겠습니다.
+      english: |-
+        I will look up the address.
+9d1d82d7-17b3-48c6-95a0-fbde65173fd8:
+  default:
+  - hangul: |-
+      주말에 자전거를 타요.
+    english: |-
+      I ride a bicycle on the weekend.
+d705c138-bb51-4e98-aced-15c71b85f2c3:
+  default:
+  - hangul: |-
+      버스나 기차로 가요.
+    english: |-
+      I go by bus or train.
+75d7657d-e842-4983-834f-32ad7b7a2ba9:
+  default:
+  - hangul: |-
+      비가 와서 택시를 타요.
+    english: |-
+      It is raining, so I take a taxi.
+81846fb5-a3e6-45be-931e-ea25dcc65849:
+  default:
+  - hangul: |-
+      비행기를 타고 부산에 가요.
+    english: |-
+      I go to Busan by airplane.
+6d2ade0d-31bd-4a85-a0a0-cd0a74ca60a8:
+  default:
+  - hangul: |-
+      2호선을 타고 가요.
+    english: |-
+      I take Line 2.
+10d171f6-202f-4ddf-8ef9-eb10a4f5b5ed:
+  default:
+  - hangul: |-
+      선생님이 칠판에 써요.
+    english: |-
+      The teacher writes on the blackboard.
+7d7c5141-5dfa-4ad0-bbc0-6492b217a17f:
+  default:
+  - hangul: |-
+      큰 소리가 나요.
+    english: |-
+      There is a loud sound.
+34d40d7d-41a7-42e9-803c-2576d802b820:
+  default:
+  - hangul: |-
+      사전에서 단어를 찾아요.
+    english: |-
+      I look up a word in the dictionary.
+05d7ad1c-b8e5-402a-8f29-cc4c55cb1e6e:
+  default:
+  - hangul: |-
+      창문을 여세요.
+    english: |-
+      Please open the window.
+f12f4ee3-0ae9-4e36-a2a5-2c7924005ff0:
+  default:
+  - hangul: |-
+      문을 닫아요.
+    english: |-
+      I close the door.
+d8d2fdc9-5387-4ee8-9211-83a1555be88c:
+  default:
+  - hangul: |-
+      벽에 사진을 걸어요.
+    english: |-
+      I hang a photo on the wall.
+640ff935-41d6-4512-8bac-966e669db45c:
+  default:
+  - hangul: |-
+      바닥에 가방이 있어요.
+    english: |-
+      There is a bag on the floor.
+4f2ff63d-86be-445b-95bb-d5f2e4eb4e87:
+  default:
+  - hangul: |-
+      천장에 등이 있어요.
+    english: |-
+      There is a light on the ceiling.
+448b5180-de41-4f85-b1cc-75bb96aa6fcd:
+  default:
+  - hangul: |-
+      액자에 사진을 넣어요.
+    english: |-
+      I put a photo in the picture frame.
+f458a351-7809-407a-be3b-3d2ffadf7845:
+  default:
+  - hangul: |-
+      전등을 켜요.
+    english: |-
+      I turn on the lamp.
+b5d061f6-74c8-42aa-ab46-316a69b423d7:
+  default:
+  - hangul: |-
+      장스탠드가 방 모서리에 있어요.
+    english: |-
+      The floor lamp is in the corner of the room.
+74149550-4a47-4c51-b504-0c7c6b945246:
+  default:
+  - hangul: |-
+      아침에 빵을 먹어요.
+    english: |-
+      I eat bread in the morning.
+a022139e-7e7c-4692-a1d3-b65ba9268014:
+  default:
+  - hangul: |-
+      버스 정류장에서 기다려요.
+    english: |-
+      I wait at the bus stop.
+eac7dae7-0c9a-4873-a3d3-5bb69d38e744:
+  default:
+  - hangul: |-
+      새 옷을 입어요.
+    english: |-
+      I wear new clothes.
+963ca783-e1bc-4a8a-8b38-4ba70fe11044:
+  default:
+  - hangul: |-
+      사진을 찍어요.
+    english: |-
+      I take a photo.
+b94c3d10-8a88-43bc-843a-0c07b2842535:
+  default:
+  - hangul: |-
+      한국말을 공부해요.
+    english: |-
+      I study Korean.
+72f96317-b1fd-41c3-8989-cbe0470f7b57:
+  default:
+  - hangul: |-
+      주말에 박물관에 가요.
+    english: |-
+      I go to the museum on the weekend.
+40e037a2-45d9-40d3-99c6-cb74550e9965:
+  default:
+  - hangul: |-
+      시장에 사람이 많아요.
+    english: |-
+      There are many people at the market.
+e6cde32b-1f11-44cf-acc0-c46777f6a7e5:
+  default:
+  - hangul: |-
+      영화가 너무 재미없었어요.
+    english: |-
+      The movie was too boring.
+58b0bcc0-c04f-419d-899e-c5f686a89c04:
+  default:
+  - hangul: |-
+      경치가 참 좋아요.
+    english: |-
+      The view is really good.
+  - hangul: |-
+      좋아요. 같이 가요.
+    english: |-
+      Sounds good. Let's go together.
+f9965d5f-d420-484e-9b87-35f291bb3c20:
+  default:
+  - hangul: |-
+      시장이 아주 복잡해요.
+    english: |-
+      The market is very crowded/complicated.
+de23a829-453c-46ec-9adc-9f5880921f56:
+  default:
+  - hangul: |-
+      수업에 늦었어요.
+    english: |-
+      I was late to class.
+6f353127-fd21-4567-bcd1-bb9522dc4216:
+  default:
+  - hangul: |-
+      집이 학교에서 가까워요.
+    english: |-
+      Home is near the school.
+81c39c29-1f37-4c99-837e-9de717b7a66a:
+  default:
+  - hangul: |-
+      부산이 멀어요.
+    english: |-
+      Busan is far.
+7a50c91e-8702-4dfd-9c92-cfecce0b32d1:
+  default:
+  - hangul: |-
+      기차가 빨라요.
+    english: |-
+      The train is fast.
+c2ded703-208b-463e-a4a0-0d2c70c8d1f0:
+  default:
+  - hangul: |-
+      이 가방이 너무 비싸요.
+    english: |-
+      This bag is too expensive.
+32965245-5be6-4f83-a605-943771e0a0c4:
+  default:
+  - hangul: |-
+      수업이 재미있었어요.
+    english: |-
+      The class was fun.
+5d33e7dc-f5cb-414f-9386-45d4d2b2a331:
+  default:
+  - hangul: |-
+      사람들이 많아요.
+    english: |-
+      There are many people.
+c8155f1f-3f6d-40c9-bce5-4c8765769459:
+  default:
+  - hangul: |-
+      열심히 운동하세요.
+    english: |-
+      Please work out hard.
+2c9ecf90-9474-4e93-9ea0-5f0b7896c79f:
+  default:
+  - hangul: |-
+      아주 복잡해요.
+    english: |-
+      It is very complicated.
+7227a7d9-2349-4981-a246-11d4eb309d9c:
+  default:
+  - hangul: |-
+      친구들을 처음 만나요.
+    english: |-
+      I am meeting my friends for the first time.
+ebb9ab1e-e89e-46bf-8b2b-90dcc565ac22:
+  default:
+  - hangul: |-
+      이제 조금 알아요.
+    english: |-
+      Now I know a little bit.
+ce59dbf3-cc12-4911-8f92-ab8c349564a4:
+  default:
+  - hangul: |-
+      큰 소리로 읽어요.
+    english: |-
+      I read loudly.
+b0727056-d027-42a1-a180-394e94cc9b1d:
+  default:
+  - hangul: |-
+      너무 일찍 도착했어요.
+    english: |-
+      I arrived too early.
+edfb8684-15df-4c7d-bef2-e5a86b0a840b:
+  default:
+  - hangul: |-
+      너무 일찍 도착했어요.
+    english: |-
+      I arrived too early.
+4c3e7e9b-eb0c-47bd-8588-13697d460475:
+  default:
+  - hangul: |-
+      배를 타요.
+    english: |-
+      I ride a boat.
+0f621224-ac4e-4805-be77-5d573cc75e50:
+  default:
+  - hangul: |-
+      괜찮아요.
+    english: |-
+      I'm okay.
+41015758-4aeb-4f97-bc9d-d030a57ffad1:
+  default:
+  - hangul: |-
+      친구를 만나서 기뻐요.
+    english: |-
+      I'm glad to meet my friend.
+41580dc5-4ab8-45c4-bdfb-dd8b1d29e302:
+  default:
+  - hangul: |-
+      오늘은 너무 바빠요.
+    english: |-
+      I'm too busy today.
+b50f7409-ccff-49e9-b3cf-f5b4b5f8747e:
+  default:
+  - hangul: |-
+      시간이 없어요.
+    english: |-
+      I don't have time.
+b8605920-0a6b-41f5-9546-1eaee3887537:
+  default:
+  - hangul: |-
+      머리가 아파요.
+    english: |-
+      I have a headache.
+31c24773-8382-4c5d-8609-eb09384366a8:
+  default:
+  - hangul: |-
+      일이 많아요.
+    english: |-
+      I have a lot of work.
+24800ee0-f179-4998-a1e9-5a684710fa90:
+  default:
+  - hangul: |-
+      도서관이 조용해요.
+    english: |-
+      The library is quiet.
+dcd77b0f-8cbd-47b0-ad35-4251a89f57b9:
+  default:
+  - hangul: |-
+      너무 피곤해요.
+    english: |-
+      I'm too tired.
+5a68171f-e0b5-4b6e-9033-4bf6fea60798:
+  default:
+  - hangul: |-
+      혹시 시간 있어요?
+    english: |-
+      Do you have time, by any chance?
+  - hangul: |-
+      혹시 내일 시간 있어요?
+    english: |-
+      Do you have time tomorrow, by any chance?
+ec543411-975e-417e-8ed3-c6bef3bdf4bf:
+  default:
+  - hangul: |-
+      저기에 있어요.
+    english: |-
+      It's over there.
+5757bc03-056a-4c8b-9631-0813fe6ee9d4:
+  default:
+  - hangul: |-
+      저는 보통 아침을 먹어요.
+    english: |-
+      I usually eat breakfast.
+ee2fa0d7-e1ac-4d96-9975-bfdafbeafd59:
+  default:
+  - hangul: |-
+      다시 말해 주세요.
+    english: |-
+      Please say it again.
+7d818c4a-dc40-4c54-b923-1140865a8318:
+  default:
+  - hangul: |-
+      다 먹었어요.
+    english: |-
+      I ate it all.
+54514475-bade-4e25-8f79-70afc5dbf1c8:
+  default:
+  - hangul: |-
+      커피하고 빵
+    english: |-
+      coffee and bread
+7c77078a-fdf9-48a1-83dd-346b45278934:
+  default:
+  - hangul: |-
+      친구하고 가요
+    english: |-
+      I am going with a friend
+18197539-1796-4fdd-8503-fb15d3293da5:
+  default:
+  - hangul: |-
+      엄마하고 먹어요
+    english: |-
+      I am eating with my mom
+faa6cf0a-6611-4bf5-af38-98bfd216da53:
+  default:
+  - hangul: |-
+      친구들이 왔어요
+    english: |-
+      my friends came
+923933e2-68c8-42e9-98ce-d938d37a189f:
+  default:
+  - hangul: |-
+      책 세 권
+    english: |-
+      three books
+7f6e2df2-ed97-4eb9-aad1-9792ea895435:
+  default:
+  - hangul: |-
+      저도 학생이에요
+    english: |-
+      I am also a student
+bfa8aebf-d50e-4158-8867-77bd15d6650f:
+  default:
+  - hangul: |-
+      친구도 왔어요
+    english: |-
+      my friend came too
+997d9cdc-65da-4319-8951-9008e2585669:
+  default:
+  - hangul: |-
+      1분도 없어요
+    english: |-
+      I don't even have one minute
+6861d0dc-e15b-4056-815d-d5f2da3c8456:
+  default:
+  - hangul: |-
+      9시부터 6시까지
+    english: |-
+      from 9 o'clock until 6 o'clock
+7461df22-228a-4b75-8519-fed8468c5dae:
+  default:
+  - hangul: |-
+      월요일부터 금요일까지
+    english: |-
+      from Monday to Friday
+99a5390b-163e-4647-a0bb-0fa2c7791f7b:
+  default:
+  - hangul: |-
+      처음부터 끝까지
+    english: |-
+      from the beginning to the end
+718e45ed-9d43-4972-93ac-cea08a79854b:
+  default:
+  - hangul: |-
+      집에서 학교까지
+    english: |-
+      from home to school
+0170d3a0-0216-4fcc-9d5e-a58207116059:
+  default:
+  - hangul: |-
+      한 시간 동안
+    english: |-
+      for one hour
+1a720319-cbe3-4218-9aee-9b8324bbe0b5:
+  default:
+  - hangul: |-
+      방학 동안
+    english: |-
+      during vacation
+b639f845-bcd0-4453-8628-3eb5d9247f73:
+  default:
+  - hangul: |-
+      공부하는 동안
+    english: |-
+      while studying
+d9ea8a06-adfc-4f48-bbe2-2465c5dfe641:
+  default:
+  - hangul: |-
+      한국에서 일 년 동안 살았어요
+    english: |-
+      I lived in Korea for one year
+cc1e8cf1-5836-48b0-a0a1-a1758a34b399:
+  default:
+  - hangul: |-
+      공부하러 가요
+    english: |-
+      I go in order to study
+1b1e3919-b6db-418d-b538-2b32ea8742d6:
+  default:
+  - hangul: |-
+      운동하러 가요
+    english: |-
+      I go in order to work out
+c11d874b-9490-4394-9efb-3f8c15f0ae48:
+  default:
+  - hangul: |-
+      1시간 후
+    english: |-
+      after one hour
+0d53e3b8-ae40-473b-b5f4-c6608f4a5700:
+  default:
+  - hangul: |-
+      식사 후
+    english: |-
+      after the meal
+eae0a170-b8d3-4355-aa35-cb484152d146:
+  default:
+  - hangul: |-
+      수업 후에 집에 가요
+    english: |-
+      I go home after class
+3ec24304-69b6-449a-b112-23fffedf4419:
+  default:
+  - hangul: |-
+      삼 층이에요
+    english: |-
+      it's the 3rd floor
+e2e6f768-bed5-420b-9891-964f263a26dd:
+  default:
+  - hangul: |-
+      몇 층이에요
+    english: |-
+      which floor is it
+f89b9533-927f-4957-97dc-8f939530cb97:
+  default:
+  - hangul: |-
+      버스로 가요
+    english: |-
+      I go by bus
+4d52962d-41b1-491f-acd5-5e6892a2800c:
+  default:
+  - hangul: |-
+      한국어로 말해요
+    english: |-
+      I speak in Korean
+3530883f-81ef-4cdc-b713-269a08c237e1:
+  default:
+  - hangul: |-
+      버스나 지하철로 가요
+    english: |-
+      I go by bus or subway
+86852c5a-1e48-479a-96d1-d0a2a6c6cee4:
+  default:
+  - hangul: |-
+      배우고 싶어요
+    english: |-
+      I want to learn
+eff77196-957e-4985-bc82-0a868d8641c6:
+  default:
+  - hangul: |-
+      집에 가고 싶어요
+    english: |-
+      I want to go home
+86b984a4-10a2-4760-8cb0-5db749c25d51:
+  default:
+  - hangul: |-
+      사진을 찍고 싶어요
+    english: |-
+      I want to take a picture
+c96e844d-7700-4263-858a-6a96e2ecade7:
+  default:
+  - hangul: |-
+      창문을 여세요
+    english: |-
+      please open the window
+47c21099-0914-4378-b384-52588edbdb6c:
+  default:
+  - hangul: |-
+      책을 펴세요
+    english: |-
+      please open the book
+c340f242-0fbf-4537-ac7e-08836c9f9e22:
+  default:
+  - hangul: |-
+      담배를 피우지 마세요
+    english: |-
+      please do not smoke
+dde62520-d32e-4817-a08b-fe70e6b79441:
+  default:
+  - hangul: |-
+      전화하지 마세요
+    english: |-
+      please do not make a call
+a2062f25-5a5c-4386-abd7-70da927b5025:
+  default:
+  - hangul: |-
+      크게 말하지 마세요
+    english: |-
+      please do not speak loudly
+21033fbc-99ae-4f06-8430-cf76679cd189:
+  default:
+  - hangul: |-
+      사진을 찍지 마세요
+    english: |-
+      please do not take a picture
+78bf49ef-d461-45a9-a82b-7bbf21224889:
+  default:
+  - hangul: |-
+      영어를 말하지 마세요
+    english: |-
+      please do not speak English
+e7ea607e-dcca-4fd9-b69d-71bf4895f40e:
+  default:
+  - hangul: |-
+      친구한테서 들었어요
+    english: |-
+      I heard it from a friend
+b2f90de9-f33c-4a79-a47e-61818be18783:
+  default:
+  - hangul: |-
+      선생님한테서 받았어요
+    english: |-
+      I received it from the teacher
+7bc9d8dd-490b-4968-9d4f-49f71a6aefbf:
+  default:
+  - hangul: |-
+      친구한테 말해요
+    english: |-
+      I tell a friend
+c7eca61f-d868-4282-8559-d7d16ca64cc4:
+  default:
+  - hangul: |-
+      동생한테 줘요
+    english: |-
+      I give it to my younger sibling
+fb7e528d-f404-41ee-b7ea-29cfb7cb6290:
+  default:
+  - hangul: |-
+      커피나 차
+    english: |-
+      coffee or tea
+10964051-bcbd-4313-a604-3486cb882fc9:
+  default:
+  - hangul: |-
+      저녁까지 공부해요
+    english: |-
+      I study until evening
+6a6eb778-ba64-4ae8-ab8f-28904b6c69ba:
+  default:
+  - hangul: |-
+      서울역까지 가요
+    english: |-
+      I go as far as Seoul Station
+f026f0b2-fb01-436e-a219-cae6e5b17841:
+  default:
+  - hangul: |-
+      한국어를 공부해요
+    english: |-
+      i study Korean
+6a8391cf-463a-4b18-b116-e06b063366c5:
+  default:
+  - hangul: |-
+      주말에 운동해요
+    english: |-
+      i work out on the weekend
+390e608b-a015-4343-a892-4420a2e79f3c:
+  default:
+  - hangul: |-
+      무슨 요일이에요
+    english: |-
+      what day of the week is it
+cb9ed118-b124-4a8c-8258-67f4aea7b078:
+  default:
+  - hangul: |-
+      무슨 책을 읽어요
+    english: |-
+      what book are you reading
+e6649624-6192-4804-9da0-5b2c2d06364f:
+  default:
+  - hangul: |-
+      언제 와요
+    english: |-
+      when are you coming
+a4a9f53a-9733-4940-9fe5-9707dfd3fd98:
+  default:
+  - hangul: |-
+      생일이 언제예요
+    english: |-
+      when is your birthday
+91de6c29-6cee-4485-8e5e-bb5e51187b94:
+  default:
+  - hangul: |-
+      왜 늦었어요
+    english: |-
+      why were you late
+bbd0082a-bd1c-41e4-8223-fb4cf4fc540b:
+  default:
+  - hangul: |-
+      왜 한국어를 공부해요
+    english: |-
+      why do you study Korean
+a2fb03ce-937e-4f25-8863-874f02557b96:
+  default:
+  - hangul: |-
+      왜 안 와요
+    english: |-
+      why aren’t you coming
+077c9f24-d87f-4f20-bd04-a96800528776:
+  default:
+  - hangul: |-
+      왜 안 가요
+    english: |-
+      why aren’t you going
+2db21337-d1f0-4426-b039-380f1db085a3:
+  default:
+  - hangul: |-
+      어떻게 가요
+    english: |-
+      how do we go
+88cb9da1-698d-4eac-a6fc-8e252d520bc5:
+  default:
+  - hangul: |-
+      이름이 어떻게 돼요
+    english: |-
+      what is your name
+dad307e1-b846-42f6-9ed1-2b605aa12cf1:
+  default:
+  - hangul: |-
+      얼마나 걸려요
+    english: |-
+      how long does it take
+bf971565-2f69-4406-b32a-afd2c1f66e61:
+  default:
+  - hangul: |-
+      집에서 학교까지 얼마나 걸려요
+    english: |-
+      how long does it take from home to school
+29789853-d47a-415e-bd63-afc3c1af8950:
+  default:
+  - hangul: |-
+      그럼 같이 가요.
+    english: |-
+      Then let's go together.
+36938242-a234-4001-b5bd-bef94fc68e4a:
+  default:
+  - hangul: |-
+      커피를 마셔요. 그리고 빵을 먹어요.
+    english: |-
+      I drink coffee. And then I eat bread.
+005a0aef-17a0-4af1-aba4-9fc97c008c87:
+  default:
+  - hangul: |-
+      가고 싶어요. 그런데 시간이 없어요.
+    english: |-
+      I want to go. But I don't have time.
+492c3e5c-1c55-4900-b84d-e0dcc85e68ed:
+  default:
+  - hangul: |-
+      아, 그래요?
+    english: |-
+      Oh, is that so?
+de7a9481-283c-44c9-9db6-7756b50fa72d:
+  default:
+  - hangul: |-
+      친구하고 같이 공부해요.
+    english: |-
+      I study together with a friend.
+dd750129-9133-44da-a177-24079c66f085:
+  default:
+  - hangul: |-
+      피곤해요. 하지만 공부해요.
+    english: |-
+      I'm tired. But I study.
+a3f9346a-2354-43b6-9a17-98d16858c513:
+  default:
+  - hangul: |-
+      그럼 같이 가요
+    english: |-
+      then let’s go together
+6c97c1ed-1531-4562-8bca-25f7fda8399c:
+  default:
+  - hangul: |-
+      그럼 내일 만나요
+    english: |-
+      then let’s meet tomorrow
+dc0ed558-f360-4f6c-981f-9a0fcd3ac46c:
+  default:
+  - hangul: |-
+      그리고 운동해요
+    english: |-
+      and then i work out
+ab9da35d-519a-43fd-aa70-c22260bb3e13:
+  default:
+  - hangul: |-
+      그리고 학교에 가요
+    english: |-
+      and then i go to school
+4f4ebe6b-1d6e-46f6-91d7-170b59365acb:
+  default:
+  - hangul: |-
+      그런데 비가 와요
+    english: |-
+      but it is raining
+14d01e7d-93ee-4990-91f5-79b872505b66:
+  default:
+  - hangul: |-
+      그런데 어디서 만나요
+    english: |-
+      by the way, where shall we meet
+de440c09-442a-474e-bcf7-65c26473ff03:
+  default:
+  - hangul: |-
+      하지만 공부해요
+    english: |-
+      but i study
+d7b0afc9-e30e-4ac5-aae7-fff6a2091309:
+  default:
+  - hangul: |-
+      하지만 사고 싶어요
+    english: |-
+      but i want to buy it
+5e798c51-3936-4758-ab8b-13545a15bf97:
+  default:
+  - hangul: |-
+      이게 뭐예요?
+    english: |-
+      What is this?
+  - hangul: |-
+      저게 뭐예요?
+    english: |-
+      What is that?
+  - hangul: |-
+      이름이 뭐예요?
+    english: |-
+      What is your name?
+315997c9-0eec-4a95-be8e-d1dc547f034f:
+  default:
+  - hangul: |-
+      지금 뭐 해요?
+    english: |-
+      What are you doing now?
+  - hangul: |-
+      주말에 뭐 해요?
+    english: |-
+      What do you do on the weekend?
+  - hangul: |-
+      내일 뭐 해요?
+    english: |-
+      What are you doing tomorrow?
+7049357c-80ed-4a2b-86bb-feccaa6441f3:
+  default:
+  - hangul: |-
+      이게 뭐예요
+    english: |-
+      what is this
+5cf2246c-0bc0-456a-b238-4b4e609f2b74:
+  default:
+  - hangul: |-
+      지금 뭐 해요
+    english: |-
+      what are you doing now
+063a5ebd-5df3-4261-9d1e-7acf9c231779:
+  default:
+  - hangul: |-
+      이름이 뭐예요
+    english: |-
+      what is your name
+3c6f619f-3199-4e99-aad0-ac722a9afe26:
+  default:
+  - hangul: |-
+      주말에 뭐 해요
+    english: |-
+      what do you do on the weekend
+ab169702-1c45-4899-a737-4aba8de546c7:
+  default:
+  - hangul: |-
+      무슨 요일이에요?
+    english: |-
+      What day of the week is it?
+  - hangul: |-
+      무슨 책을 읽어요?
+    english: |-
+      What book are you reading?
+  - hangul: |-
+      무슨 음식을 좋아해요?
+    english: |-
+      What kind of food do you like?
+996f8141-3a2c-4005-b8a6-2b3ab7d3d7c5:
+  default:
+  - hangul: |-
+      언제 와요?
+    english: |-
+      When are you coming?
+  - hangul: |-
+      생일이 언제예요?
+    english: |-
+      When is your birthday?
+  - hangul: |-
+      언제부터 한국어를 공부해요?
+    english: |-
+      Since when have you been studying Korean?
+d815ffef-9096-4e41-9039-820e66fab8e9:
+  default:
+  - hangul: |-
+      왜 늦었어요?
+    english: |-
+      Why were you late?
+  - hangul: |-
+      왜 한국어를 공부해요?
+    english: |-
+      Why do you study Korean?
+ee31de3a-548b-4230-af70-8e16bd9c5c05:
+  default:
+  - hangul: |-
+      왜 안 와요?
+    english: |-
+      Why aren’t you coming?
+  - hangul: |-
+      왜 안 가요?
+    english: |-
+      Why aren’t you going?
+  - hangul: |-
+      왜 안 해요?
+    english: |-
+      Why don’t you do it?
+79cadc19-cc7b-4c95-8205-7545bc19552b:
+  default:
+  - hangul: |-
+      어떻게 가요?
+    english: |-
+      How do we go?
+  - hangul: |-
+      이름이 어떻게 돼요?
+    english: |-
+      What is your name?
+  - hangul: |-
+      어떻게 생각해요?
+    english: |-
+      What do you think?
+1083bebf-15ac-454c-853a-c566f5af9537:
+  default:
+  - hangul: |-
+      얼마나 걸려요?
+    english: |-
+      How long does it take?
+  - hangul: |-
+      집에서 학교까지 얼마나 걸려요?
+    english: |-
+      How long does it take from home to school?
+  - hangul: |-
+      한국어를 얼마나 공부해요?
+    english: |-
+      How much do you study Korean?
+c678da34-4cc0-4e00-b166-38af85ca3cea:
+  default:
+  - hangul: |-
+      이게 뭐예요?
+    english: |-
+      What is this?
+  - hangul: |-
+      지금 뭐 해요?
+    english: |-
+      What are you doing now?
+80c17482-3d17-47e9-858f-6c0e03f4bc39:
+  default:
+  - hangul: |-
+      무슨 음식을 좋아해요
+    english: |-
+      what kind of food do you like
+f3a64ca1-1999-4072-9759-62d7b3df77b5:
+  default:
+  - hangul: |-
+      언제부터 한국어를 공부해요
+    english: |-
+      since when have you been studying Korean
+ba2e8d9d-c0e1-402e-afcd-06319bc1a238:
+  default:
+  - hangul: |-
+      왜 안 먹어요
+    english: |-
+      why aren’t you eating
+98dae3dd-bf00-489f-aeb4-b34a2e2597bd:
+  default:
+  - hangul: |-
+      왜 안 해요
+    english: |-
+      why don’t you do it
+df382bd7-d29e-4df8-98c8-2a5a8c3dc859:
+  default:
+  - hangul: |-
+      어떻게 생각해요
+    english: |-
+      what do you think
+54c5a7ba-5dce-44e0-ac01-f2a5e1ee939f:
+  default:
+  - hangul: |-
+      얼마나예요
+    english: |-
+      how much is it
+6e8e06bc-866c-4a1c-9486-c9ef375346ed:
+  default:
+  - hangul: |-
+      한국어를 얼마나 공부해요
+    english: |-
+      how much do you study Korean
+8bfb0972-4c04-49b2-a13b-23e8c8123543:
+  default:
+  - hangul: |-
+      내일 뭐 해요
+    english: |-
+      what are you doing tomorrow
+e4bc4fac-8f3d-47fc-9786-65e1aedc3342:
+  default:
+  - hangul: |-
+      저게 뭐예요
+    english: |-
+      what is that

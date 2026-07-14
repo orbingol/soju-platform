@@ -1,0 +1,137 @@
+# Ollama model cache on the host (default: ~/.ollama). Override with OLLAMA_DATA_DIR.
+x-ollama-volume: &ollama-volume "${OLLAMA_DATA_DIR:-${HOME}/.ollama}:/root/.ollama"
+
+# Shared Soju web configuration (referenced by services below).
+x-soju-ai-model: &soju-ai-model gemma4:e4b
+
+# Browser-visible env vars for apps/web (PUBLIC_* are embedded at build / passed to Vite dev).
+x-soju-web-environment: &soju-web-environment
+  # Path to canonical YAML inside the container (bind-mounted from ./data)
+  DATA_DIR: /data
+  # Speech engine
+  #  * piper: local TTS Docker service
+  #  * browser: Web Speech API
+  PUBLIC_TTS_ENGINE: piper
+  # Browser-reachable local TTS root (Speak buttons fetch from the host browser).
+  PUBLIC_TTS_PIPER_BASE_URL: http://localhost:5500
+  # Edge neural voice id sent to /v1/audio/speech (e.g. ko-KR-SunHiNeural, ko-KR-InJoonNeural).
+  PUBLIC_TTS_PIPER_VOICE: ko-KR-SunHiNeural
+  # Enables Practice and Chat (AI features). Flashcards work when false (e.g. GitHub Pages).
+  PUBLIC_AI_ENABLED: "true"
+  # OpenAI-compatible API mode: chat-completions (default) or conversations.
+  PUBLIC_AI_API_MODE: chat-completions
+  # Browser-reachable URL (Practice/Chat fetch from the host browser, not the web container).
+  PUBLIC_AI_BASE_URL: http://localhost:11434
+  # Model id sent in requests (should match a pulled/served model).
+  PUBLIC_AI_MODEL: *soju-ai-model
+  # Chat context compaction: summarize when turn count exceeds this.
+  PUBLIC_AI_CHAT_SUMMARY_TRIGGER: "10"
+  # Chat context compaction: keep this many recent turns verbatim after the summary.
+  PUBLIC_AI_CHAT_KEEP_RECENT: "6"
+  # Chat tutor display name.
+  PUBLIC_AI_TUTOR_NAME: "Hee-jae (희재)"
+  # System prompt for the Chat tutor.
+  PUBLIC_AI_SYSTEM_PROMPT: |
+    You are {{tutor_name}}, a friendly Korean language teacher for beginners.
+
+    Teaching style:
+    - Keep replies short and clear (usually 2–4 short sentences).
+    - If the question is broad or vague, ask one brief clarifying question first. Do not give a full lesson yet.
+    - Once the topic is clear: a short explanation, then at most one example (Korean + English). Offer to go deeper.
+    - Be warm and patient, with light empathy—like a supportive teacher. A gentle emoji is welcome when it fits; keep encouragement brief, not excessive.
+    - Prefer vocabulary from the Soju database when helpful.
+    - If you are introducing a new word or a topic that is not included in the Soju database, try to explain it in a way that is easy to understand and remember.
+    - Mix Korean and English naturally.
+
+    Formatting:
+    - Plain text. You may use **bold** for Korean forms or key terms.
+    - Use simple "-" bullets only when listing a few short items.
+    - Do not use LaTeX, Markdown headings, horizontal rules (---), or code fences.
+    - For "becomes" / "conjugates to", write → (not $\rightarrow$).
+
+name: soju
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.web
+      target: dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./data:/data:rw
+      - ./apps/web:/app:rw
+      - web_node_modules:/app/node_modules
+    environment:
+      <<: *soju-web-environment
+    extra_hosts:
+      - host.docker.internal:host-gateway
+
+  web-build:
+    profiles: ["build"]
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.web
+      target: build
+
+  validate:
+    profiles: ["validate"]
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.validate
+    working_dir: /workspace
+    environment:
+      DATA_DIR: /workspace/data
+    volumes:
+      - ./data:/workspace/data:ro
+      - ./src:/workspace/src:ro
+      - ./pyproject.toml:/workspace/pyproject.toml:ro
+
+  piper:
+    build:
+      context: .
+      dockerfile: docker/piper/Dockerfile
+    ports:
+      - "5500:5000"
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama
+    profiles: ["ollama"]
+    environment:
+      OLLAMA_ORIGINS: "*"
+    ports:
+      - "11434:11434"
+    volumes:
+      - *ollama-volume
+
+  # Ensures the default model exists in the shared Ollama cache (pull is incremental).
+  ollama-pull:
+    image: ollama/ollama
+    profiles: ["ollama"]
+    depends_on:
+      ollama:
+        condition: service_started
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+      OLLAMA_MODEL: *soju-ai-model
+    volumes:
+      - *ollama-volume
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        for i in 1 2 3 4 5 6 7 8 9 10; do
+          if ollama show "$$OLLAMA_MODEL" >/dev/null 2>&1; then
+            echo "Model $$OLLAMA_MODEL already present"
+            exit 0
+          fi
+          ollama pull "$$OLLAMA_MODEL" && exit 0
+          sleep 3
+        done
+        echo "Failed to pull $$OLLAMA_MODEL" >&2
+        exit 1
+    restart: "no"
+
+volumes:
+  web_node_modules:

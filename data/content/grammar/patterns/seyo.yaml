@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: seyo
+form: -으세요 / -세요
+romanization: eu-se-yo / se-yo
+english: please do …
+category: verb_patterns
+summary: 'Polite request or soft command: verb stem + (으)세요.'
+sections:
+- id: please
+  label: Please do
+  examples:
+  - hangul: 창문을 여세요.
+    english: Please open the window.
+  - hangul: 다시 말해 주세요.
+    english: Please say it again.
+  - hangul: 여기 앉으세요.
+    english: Please sit here.
+conversations:
+- title: In the classroom
+  turns:
+  - speaker: Teacher
+    hangul: 책을 펴세요.
+    english: Please open your book.
+  - speaker: Student
+    hangul: 네.
+    english: Okay.
+  - speaker: Teacher
+    hangul: 크게 읽으세요.
+    english: Please read loudly.
+  - speaker: Student
+    hangul: 이 페이지를 읽어요?
+    english: Do I read this page?
+  - speaker: Teacher
+    hangul: 네. 그리고 창문을 조금 여세요.
+    english: Yes. And please open the window a little.
+  - speaker: Student
+    hangul: 알겠어요.
+    english: I understand.
+phrase_refs:
+- c96e844d-7700-4263-858a-6a96e2ecade7
+- 47c21099-0914-4378-b384-52588edbdb6c

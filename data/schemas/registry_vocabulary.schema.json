@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://soju.local/schemas/registry_vocabulary.schema.json",
+  "title": "Canonical vocabulary registry",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "hangul", "romanization", "english", "type"],
+    "properties": {
+      "id": { "$ref": "_defs.schema.json#/$defs/uuid" },
+      "hangul": { "type": "string", "minLength": 1 },
+      "romanization": { "type": "string", "minLength": 1 },
+      "english": { "type": "string", "minLength": 1 },
+      "type": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*$"
+      },
+      "level": {
+        "type": "string",
+        "description": "Korean course level id (e.g. 1A, 1B). Omitted entries belong to the default level."
+      },
+      "visibility": {
+        "type": "string",
+        "enum": ["visible", "hidden"],
+        "description": "hidden entries are omitted from Word types, Topics, and Flashcards but remain available to Practice and chat."
+      },
+      "grammar_pattern": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*$",
+        "description": "Optional grammar pattern id when this entry is a practice phrase for a Grammar lesson."
+      }
+    }
+  }
+}

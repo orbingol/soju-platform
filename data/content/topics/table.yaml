@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=../../schemas/topics_table.schema.json
+
+fields:
+  hangul:
+    label: Word
+  romanization:
+    label: Romanization
+  english:
+    label: English
+examples:
+  label: Examples

@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: cheung
+form: -층
+romanization: cheung
+english: floor / story
+category: time_place
+summary: Sino-Korean number + 층 names building floors.
+sections:
+- id: floors
+  label: Floors
+  examples:
+  - hangul: 삼 층이에요.
+    english: It's the 3rd floor.
+  - hangul: 몇 층이에요?
+    english: Which floor is it?
+conversations:
+- title: Which floor?
+  turns:
+  - speaker: A
+    hangul: 한국어 교실이 몇 층이에요?
+    english: Which floor is the Korean classroom on?
+  - speaker: B
+    hangul: 삼 층이에요.
+    english: It’s the third floor.
+  - speaker: A
+    hangul: 엘리베이터로 가요?
+    english: Shall we go by elevator?
+  - speaker: B
+    hangul: 네. 같이 가요.
+    english: Yes. Let’s go together.
+  - speaker: A
+    hangul: 삼 층에서 친구도 만나요.
+    english: I am also meeting a friend on the third floor.
+  - speaker: B
+    hangul: 좋아요.
+    english: Sounds good.
+phrase_refs:
+- 3ec24304-69b6-449a-b112-23fffedf4419
+- e2e6f768-bed5-420b-9891-964f263a26dd

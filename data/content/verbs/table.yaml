@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schemas/verb_table.schema.json
+
+fields:
+  hangul:
+    label: Dictionary form
+    subtitle: 사전형
+  romanization:
+    label: Romanization
+  english:
+    label: Meaning
+sections:
+- id: present
+  label: Present
+  css: pres
+  columns:
+  - variant: casual_polite
+    label: Casual Polite
+    subtitle: 해요
+  - variant: formal_polite
+    label: Formal Polite
+    subtitle: 합니다
+- id: past
+  label: Past
+  css: past
+  columns:
+  - variant: casual_polite
+    label: Casual Polite
+    subtitle: 했어요
+  - variant: formal_polite
+    label: Formal Polite
+    subtitle: 했습니다
+- id: future
+  label: Future
+  css: fut
+  columns:
+  - variant: casual_polite
+    label: Casual Polite
+    subtitle: 할 거예요
+  - variant: formal_polite
+    label: Formal Polite
+    subtitle: 하겠습니다

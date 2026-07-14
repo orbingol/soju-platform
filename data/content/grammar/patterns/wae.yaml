@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: wae
+form: 왜
+romanization: wae
+english: why
+category: question_words
+summary: Ask for a reason.
+sections:
+- id: basic
+  label: Asking why
+  examples:
+  - hangul: 왜 늦었어요?
+    english: Why were you late?
+  - hangul: 왜 한국어를 공부해요?
+    english: Why do you study Korean?
+conversations:
+- title: Why are you studying?
+  turns:
+  - speaker: A
+    hangul: 왜 한국어를 공부해요?
+    english: Why do you study Korean?
+  - speaker: B
+    hangul: 한국에 가고 싶어요.
+    english: I want to go to Korea.
+  - speaker: A
+    hangul: 언제 가고 싶어요?
+    english: When do you want to go?
+  - speaker: B
+    hangul: 내년에 가고 싶어요.
+    english: I want to go next year.
+  - speaker: A
+    hangul: 같이 공부해요.
+    english: Let’s study together.
+  - speaker: B
+    hangul: 좋아요.
+    english: Sounds good.
+phrase_refs:
+- 91de6c29-6cee-4485-8e5e-bb5e51187b94
+- bbd0082a-bd1c-41e4-8223-fb4cf4fc540b

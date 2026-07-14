@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://soju.local/schemas/staging_stories.schema.json",
+  "title": "Staging stories",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["staging", "date", "story"],
+  "properties": {
+    "staging": { "const": true },
+    "date": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "story": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sentences"],
+      "properties": {
+        "title": { "type": "string" },
+        "sentences": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["hangul", "english"],
+            "properties": {
+              "hangul": { "type": "string", "minLength": 1 },
+              "english": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        "sequel_of": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" }
+      }
+    }
+  }
+}

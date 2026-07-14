@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: eonje
+form: 언제
+romanization: eon-je
+english: when
+category: question_words
+summary: Ask when something happens.
+sections:
+- id: basic
+  label: Asking when
+  examples:
+  - hangul: 언제 와요?
+    english: When are you coming?
+  - hangul: 생일이 언제예요?
+    english: When is your birthday?
+  - hangul: 언제부터 한국어를 공부해요?
+    english: Since when have you been studying Korean?
+conversations:
+- title: When shall we meet?
+  turns:
+  - speaker: A
+    hangul: 언제 만나요?
+    english: When shall we meet?
+  - speaker: B
+    hangul: 토요일에 만나요.
+    english: Let’s meet on Saturday.
+  - speaker: A
+    hangul: 몇 시부터예요?
+    english: From what time?
+  - speaker: B
+    hangul: 두 시부터요.
+    english: From two o’clock.
+  - speaker: A
+    hangul: 어디서 만나요?
+    english: Where shall we meet?
+  - speaker: B
+    hangul: 역에서 만나요.
+    english: Let’s meet at the station.
+phrase_refs:
+- e6649624-6192-4804-9da0-5b2c2d06364f
+- a4a9f53a-9733-4940-9fe5-9707dfd3fd98
+- f3a64ca1-1999-4072-9759-62d7b3df77b5

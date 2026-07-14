@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: hada
+form: -하다
+romanization: ha-da
+english: verb maker
+category: verb_patterns
+summary: Attach 하다 to activity nouns to make verbs (공부하다, 운동하다). Works for activities,
+  not places.
+sections:
+- id: activities
+  label: Activity verbs
+  description: Noun + 하다 makes a verb for doing that activity.
+  examples:
+  - hangul: 한국어를 공부해요.
+    english: I study Korean.
+  - hangul: 주말에 운동해요.
+    english: I work out on the weekend.
+  - hangul: 친구하고 쇼핑해요.
+    english: I shop with a friend.
+notes:
+- 'Use with activity nouns: 공부, 운동, 쇼핑, 요리.'
+- Do not attach 하다 to place nouns (학교에 가다, not 학교하다).
+conversations:
+- title: What do you usually do?
+  turns:
+  - speaker: A
+    hangul: 평일에 뭐 해요?
+    english: What do you do on weekdays?
+  - speaker: B
+    hangul: 아침에 운동해요.
+    english: I work out in the morning.
+  - speaker: A
+    hangul: 저녁에는요?
+    english: What about in the evening?
+  - speaker: B
+    hangul: 한국어를 공부해요.
+    english: I study Korean.
+  - speaker: A
+    hangul: 주말에도 공부해요?
+    english: Do you study on the weekend too?
+  - speaker: B
+    hangul: 아니요. 주말에는 쇼핑해요.
+    english: No. On the weekend I shop.
+phrase_refs:
+- f026f0b2-fb01-436e-a219-cae6e5b17841
+- 6a8391cf-463a-4b18-b116-e06b063366c5

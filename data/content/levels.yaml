@@ -1,0 +1,27 @@
+# Korean course levels for AI example generation and translation prompts.
+# Vocabulary: registry entries with no `level` field belong to `default`.
+# Higher levels include vocabulary from `include_levels` plus their own tagged entries.
+
+default: "1A"
+
+levels:
+  1A:
+    label: Korean 1A
+    description: First-semester beginner Korean.
+    guidance: |
+      Target learner: first-semester beginner.
+      - Short, natural sentences (one main clause; avoid long chains).
+      - For verbs, write separate examples for present, past, and future using the exact conjugated forms provided.
+      - Add situational context from the vocabulary list: a place, object, person, or activity — not just a time word + verb.
+      - Use mostly vocabulary from the list below (places, time words, objects, people).
+      - casual_polite = 해요-style; formal_polite = 합니다-style.
+  1B:
+    label: Korean 1B
+    description: Second-semester high-beginner Korean.
+    include_levels: ["1A"]
+    guidance: |
+      Target learner: second-semester high beginner.
+      - Slightly richer sentences (two clauses or connectives like 그리고, 그런데 are OK).
+      - For verbs, write present, past, and future examples using the exact conjugated forms provided.
+      - Still rely primarily on vocabulary from the list below.
+      - casual_polite = 해요-style; formal_polite = 합니다-style.

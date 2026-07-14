@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: euro
+form: -으로 / -로
+romanization: eu-ro / ro
+english: by means of / toward
+category: particles
+summary: Mark means, method, or direction. Use -으로 after a consonant, -로 after a vowel
+  (and often after ㄹ).
+sections:
+- id: means
+  label: By means of
+  examples:
+  - hangul: 버스로 가요.
+    english: I go by bus.
+  - hangul: 한국어로 말해요.
+    english: I speak in Korean.
+  - hangul: 버스나 지하철로 가요.
+    english: I go by bus or subway.
+conversations:
+- title: How do we get there?
+  turns:
+  - speaker: A
+    hangul: 학교까지 어떻게 가요?
+    english: How do we get to school?
+  - speaker: B
+    hangul: 지하철로 가요.
+    english: We go by subway.
+  - speaker: A
+    hangul: 버스나 지하철로 갈 수 있어요?
+    english: Can we go by bus or subway?
+  - speaker: B
+    hangul: 네. 버스로도 가요.
+    english: Yes. We also go by bus.
+  - speaker: A
+    hangul: 한국어로 물어봐요.
+    english: Let’s ask in Korean.
+  - speaker: B
+    hangul: 좋아요.
+    english: Okay.
+phrase_refs:
+- f89b9533-927f-4957-97dc-8f939530cb97
+- 4d52962d-41b1-491f-acd5-5e6892a2800c
+- 3530883f-81ef-4cdc-b713-269a08c237e1

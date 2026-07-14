@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: hareo
+form: -하러
+romanization: ha-reo
+english: in order to
+category: verb_patterns
+summary: 'State the purpose of going somewhere: V-(으)러 가다/오다.'
+sections:
+- id: purpose
+  label: Purpose of going
+  examples:
+  - hangul: 공부하러 도서관에 가요.
+    english: I go to the library in order to study.
+  - hangul: 친구를 만나러 카페에 왔어요.
+    english: I came to the cafe to meet a friend.
+conversations:
+- title: Why are you going?
+  turns:
+  - speaker: A
+    hangul: 어디에 가요?
+    english: Where are you going?
+  - speaker: B
+    hangul: 도서관에 가요.
+    english: I’m going to the library.
+  - speaker: A
+    hangul: 왜요?
+    english: Why?
+  - speaker: B
+    hangul: 공부하러 가요.
+    english: I’m going in order to study.
+  - speaker: A
+    hangul: 저도 같이 가고 싶어요.
+    english: I want to go together too.
+  - speaker: B
+    hangul: 좋아요. 버스나 지하철로 가요.
+    english: Good. Let’s go by bus or subway.
+phrase_refs:
+- cc1e8cf1-5836-48b0-a0a1-a1758a34b399
+- 1b1e3919-b6db-418d-b538-2b32ea8742d6

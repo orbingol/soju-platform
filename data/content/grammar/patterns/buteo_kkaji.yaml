@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: buteo_kkaji
+form: -부터 … -까지
+romanization: bu-teo … kka-ji
+english: from … to …
+category: time_place
+summary: Mark a range in time or sequence. For locations, prefer -에서 … -까지.
+sections:
+- id: time
+  label: Time
+  description: Schedules, durations, and deadlines.
+  examples:
+  - hangul: 9시부터 6시까지
+    english: from 9 o'clock until 6 o'clock
+  - hangul: 월요일부터 금요일까지
+    english: from Monday to Friday
+- id: sequence
+  label: Sequence / abstracts
+  examples:
+  - hangul: 처음부터 끝까지
+    english: from the beginning to the end
+- id: location
+  label: Location
+  description: Use -에서 … -까지 for places.
+  examples:
+  - hangul: 집에서 학교까지
+    english: from home to school
+conversations:
+- title: From morning to evening
+  turns:
+  - speaker: A
+    hangul: 몇 시부터 몇 시까지 일해요?
+    english: From what time until what time do you work?
+  - speaker: B
+    hangul: 9시부터 6시까지 일해요.
+    english: I work from 9 until 6.
+  - speaker: A
+    hangul: 월요일부터 금요일까지예요?
+    english: Is it from Monday to Friday?
+  - speaker: B
+    hangul: 네. 주말에는 쉬어요.
+    english: Yes. I rest on the weekend.
+  - speaker: A
+    hangul: 집에서 회사까지 얼마나 걸려요?
+    english: How long does it take from home to the office?
+  - speaker: B
+    hangul: 지하철로 사십 분쯤 걸려요.
+    english: It takes about forty minutes by subway.
+phrase_refs:
+- 6861d0dc-e15b-4056-815d-d5f2da3c8456
+- 7461df22-228a-4b75-8519-fed8468c5dae
+- 99a5390b-163e-4647-a0bb-0fa2c7791f7b
+- 718e45ed-9d43-4972-93ac-cea08a79854b

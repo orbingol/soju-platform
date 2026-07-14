@@ -1,0 +1,4 @@
+# yaml-language-server: $schema=../schemas/staging_vocabulary.schema.json
+
+staging: true
+entries: []

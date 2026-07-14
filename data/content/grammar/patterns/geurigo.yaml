@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: geurigo
+form: 그리고
+romanization: geu-ri-go
+english: and / and then
+category: connectors
+summary: Add another action or idea after a full sentence (different from noun + 하고).
+sections:
+- id: basic
+  label: And / and then
+  examples:
+  - hangul: 공부해요. 그리고 운동해요.
+    english: I study. And then I work out.
+  - hangul: 빵을 먹어요. 그리고 우유를 마셔요.
+    english: I eat bread. And then I drink milk.
+conversations:
+- title: Morning routine
+  turns:
+  - speaker: A
+    hangul: 아침에 뭐 해요?
+    english: What do you do in the morning?
+  - speaker: B
+    hangul: 운동해요. 그리고 샤워해요.
+    english: I work out. And then I shower.
+  - speaker: A
+    hangul: 아침은 먹어요?
+    english: Do you eat breakfast?
+  - speaker: B
+    hangul: 네. 빵하고 우유를 먹어요. 그리고 학교에 가요.
+    english: Yes. I eat bread and milk. And then I go to school.
+  - speaker: A
+    hangul: 그래요. 바쁘겠네요.
+    english: I see. You must be busy.
+  - speaker: B
+    hangul: 조금 바빠요. 하지만 괜찮아요.
+    english: I’m a little busy. But I’m okay.
+phrase_refs:
+- dc0ed558-f360-4f6c-981f-9a0fcd3ac46c
+- ab9da35d-519a-43fd-aa70-c22260bb3e13
+notes:
+- 그리고 connects sentences or clauses.
+- '하고 connects nouns: 커피하고 빵.'

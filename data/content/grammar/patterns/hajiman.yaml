@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: hajiman
+form: 하지만
+romanization: ha-ji-man
+english: but / however
+category: connectors
+summary: A clearer “however” than 그런데 — good for written style and careful contrast.
+sections:
+- id: basic
+  label: But / however
+  examples:
+  - hangul: 피곤해요. 하지만 공부해요.
+    english: I’m tired. But I study.
+  - hangul: 비싸요. 하지만 사고 싶어요.
+    english: It’s expensive. But I want to buy it.
+conversations:
+- title: Tired but studying
+  turns:
+  - speaker: A
+    hangul: 오늘 공부해요?
+    english: Are you studying today?
+  - speaker: B
+    hangul: 네. 피곤해요. 하지만 공부하고 싶어요.
+    english: Yes. I’m tired. But I want to study.
+  - speaker: A
+    hangul: 도서관에서 같이 공부해요.
+    english: Let’s study together at the library.
+  - speaker: B
+    hangul: 좋아요. 그런데 얼마나 걸려요?
+    english: Sounds good. But how long does it take?
+  - speaker: A
+    hangul: 버스나 지하철로 이십 분쯤 걸려요.
+    english: It takes about twenty minutes by bus or subway.
+  - speaker: B
+    hangul: 그럼 같이 가요.
+    english: Then let’s go together.
+phrase_refs:
+- de440c09-442a-474e-bcf7-65c26473ff03
+- d7b0afc9-e30e-4ac5-aae7-fff6a2091309
+notes:
+- 그런데 is more common in casual speech.
+- 하지만 feels a bit more formal or deliberate.

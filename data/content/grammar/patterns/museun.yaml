@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: museun
+form: 무슨
+romanization: mu-seun
+english: what kind of / what
+category: question_words
+summary: Ask “what/which kind of” before a noun (무슨 요일, 무슨 책).
+sections:
+- id: basic
+  label: Asking what kind
+  examples:
+  - hangul: 무슨 요일이에요?
+    english: What day of the week is it?
+  - hangul: 무슨 책을 읽어요?
+    english: What book are you reading?
+  - hangul: 무슨 음식을 좋아해요?
+    english: What kind of food do you like?
+conversations:
+- title: What day is it?
+  turns:
+  - speaker: A
+    hangul: 오늘 무슨 요일이에요?
+    english: What day is today?
+  - speaker: B
+    hangul: 수요일이에요.
+    english: It’s Wednesday.
+  - speaker: A
+    hangul: 내일은 무슨 요일이에요?
+    english: What day is tomorrow?
+  - speaker: B
+    hangul: 목요일이에요.
+    english: It’s Thursday.
+  - speaker: A
+    hangul: 목요일에 무슨 수업 있어요?
+    english: What class do you have on Thursday?
+  - speaker: B
+    hangul: 한국어 수업이 있어요.
+    english: I have Korean class.
+phrase_refs:
+- 390e608b-a015-4343-a892-4420a2e79f3c
+- cb9ed118-b124-4a8c-8258-67f4aea7b078
+- 80c17482-3d17-47e9-858f-6c0e03f4bc39

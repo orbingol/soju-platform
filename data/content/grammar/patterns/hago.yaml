@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: hago
+form: -하고
+romanization: ha-go
+english: and / with
+category: particles
+summary: Connect nouns with “and”, or mark that you do something “with” someone.
+sections:
+- id: and
+  label: Connecting nouns
+  description: Link two or more nouns together.
+  examples:
+  - hangul: 커피하고 빵
+    english: coffee and bread
+  - hangul: 사과하고 바나나
+    english: apple and banana
+- id: with
+  label: Doing something with someone
+  description: Mark the person you do an action with.
+  examples:
+  - hangul: 친구하고 가요.
+    english: I am going with a friend.
+  - hangul: 엄마하고 먹어요.
+    english: I am eating with my mom.
+conversations:
+- title: Weekend plans with a friend
+  turns:
+  - speaker: A
+    hangul: 주말에 뭐 해요?
+    english: What are you doing on the weekend?
+  - speaker: B
+    hangul: 친구하고 카페에 가요.
+    english: I am going to a cafe with a friend.
+  - speaker: A
+    hangul: 뭐 먹을 거예요?
+    english: What will you eat?
+  - speaker: B
+    hangul: 커피하고 빵 먹을 거예요.
+    english: I will eat coffee and bread.
+  - speaker: A
+    hangul: 저도 가고 싶어요. 같이 가요.
+    english: I want to go too. Let’s go together.
+  - speaker: B
+    hangul: 좋아요. 그런데 몇 시에 만나요?
+    english: Sounds good. But what time shall we meet?
+  - speaker: A
+    hangul: 두 시에 만나요.
+    english: Let’s meet at two.
+  - speaker: B
+    hangul: 그래요. 그럼 토요일에 봐요.
+    english: Okay. Then see you on Saturday.
+phrase_refs:
+- 54514475-bade-4e25-8f79-70afc5dbf1c8
+- 7c77078a-fdf9-48a1-83dd-346b45278934
+- 18197539-1796-4fdd-8503-fb15d3293da5

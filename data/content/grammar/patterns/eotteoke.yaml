@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: eotteoke
+form: 어떻게
+romanization: eo-tteo-ke
+english: how
+category: question_words
+summary: Ask how something is done or how someone is.
+sections:
+- id: basic
+  label: Asking how
+  examples:
+  - hangul: 어떻게 가요?
+    english: How do we go?
+  - hangul: 이름이 어떻게 돼요?
+    english: What is your name?
+  - hangul: 어떻게 생각해요?
+    english: What do you think?
+conversations:
+- title: How do we go?
+  turns:
+  - speaker: A
+    hangul: 학교까지 어떻게 가요?
+    english: How do we get to school?
+  - speaker: B
+    hangul: 지하철로 가요.
+    english: We go by subway.
+  - speaker: A
+    hangul: 얼마나 걸려요?
+    english: How long does it take?
+  - speaker: B
+    hangul: 삼십 분쯤 걸려요.
+    english: It takes about thirty minutes.
+  - speaker: A
+    hangul: 버스나 지하철로 갈 수 있어요?
+    english: Can we go by bus or subway?
+  - speaker: B
+    hangul: 네. 둘 다 괜찮아요.
+    english: Yes. Both are fine.
+phrase_refs:
+- 2db21337-d1f0-4426-b039-380f1db085a3
+- 88cb9da1-698d-4eac-a6fc-8e252d520bc5
+- df382bd7-d29e-4df8-98c8-2a5a8c3dc859

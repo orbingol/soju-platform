@@ -1,0 +1,110 @@
+[build-system]
+requires = ["setuptools>=64", "setuptools-scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "soju"
+description = "Soju (소주) Platform Development Tools"
+readme = "README.md"
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+dependencies = [
+  "check-jsonschema>=0.34.0",
+  "poethepoet>=0.32.0",
+  "pyyaml>=6.0.2",
+]
+dynamic = ["version"]
+
+[project.scripts]
+soju-align = "soju.align:main"
+soju-registry = "soju.registry:main"
+soju-import = "soju.import_:main"
+soju-promote = "soju.promote:main"
+soju-validate-schemas = "soju.validate_schemas:main"
+soju-fill-verbs = "soju.fill_verbs:main"
+soju-translate-words = "soju.translate_words:main"
+soju-fill-examples = "soju.fill_examples:main"
+
+[dependency-groups]
+docs = [
+  "sphinx>=8.0",
+  "furo>=2024.8.6",
+  "sphinx-autobuild>=2024.10.3",
+  "sphinx-copybutton>=0.5.2",
+]
+dev = [
+  "pre-commit>=4.0.0",
+  "pytest>=8.0.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools_scm]
+write_to = "src/soju/_version.py"
+version_scheme = "guess-next-dev"
+local_scheme = "no-local-version"
+
+[tool.uv]
+default-groups = ["docs", "dev"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.doc8]
+max-line-length = 180
+
+[tool.ruff]
+line-length = 180
+
+[tool.poe.tasks]
+validate-schemas = "soju-validate-schemas"
+validate-align = "soju-align"
+validate-registry = "soju-registry"
+
+[tool.poe.tasks.validate]
+help = "Run JSON Schema checks, alignment, and registry validation."
+sequence = [
+  "validate-schemas",
+  "validate-align",
+  "validate-registry",
+]
+
+[tool.poe.tasks.import-words]
+help = "Import words from a text file into a topic (existing words: merge examples only)."
+cmd = "soju-import words --topic ${topic} --file ${file}"
+args = [{ name = "topic", default = "family" }, { name = "file", options = ["-f", "--file"], required = true }]
+
+[tool.poe.tasks.translate-words]
+help = "Translate a plain-text word list to JSON via Ollama (pipe to soju-import)."
+cmd = "soju-translate-words --file ${file}"
+args = [{ name = "file", options = ["-f", "--file"], required = true }]
+
+[tool.poe.tasks.import-verbs]
+help = "Import verbs from JSON on stdin (AI-assisted workflow)."
+cmd = "soju-import verbs --stdin-json"
+
+[tool.poe.tasks.validate-docker]
+help = "Run validation inside the validate Docker image."
+cmd = "docker compose --profile validate run --rm validate"
+
+[tool.poe.tasks.test]
+help = "Run Python unit tests."
+cmd = "pytest"
+
+[tool.poe.tasks.pre-commit]
+help = "Run pre-commit hooks on all files."
+cmd = "pre-commit run --all-files"
+
+[tool.poe.tasks.lint]
+help = "Alias for pre-commit (run hooks on all files)."
+ref = "pre-commit"
+
+[tool.poe.tasks.docs]
+help = "Build Sphinx HTML user guide into docs/_build/html."
+cmd = "sphinx-build -b html -c docs docs/soju docs/_build/html"
+
+[tool.poe.tasks.docs-serve]
+help = "Build and serve Sphinx docs with live reload."
+cmd = "sphinx-autobuild -c docs docs/soju docs/_build/html --open-browser"

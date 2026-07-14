@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../../schemas/grammar_pattern.schema.json
+
+id: geureonde
+form: 그런데
+romanization: geu-reon-de
+english: but / by the way
+category: connectors
+summary: Contrast what was just said, or change topic lightly (“but / by the way”).
+sections:
+- id: basic
+  label: But / by the way
+  examples:
+  - hangul: 가고 싶어요. 그런데 비가 와요.
+    english: I want to go. But it’s raining.
+  - hangul: 오늘 바빠요. 그런데 내일은요?
+    english: I’m busy today. By the way, what about tomorrow?
+conversations:
+- title: A small problem
+  turns:
+  - speaker: A
+    hangul: 주말에 영화 볼까요?
+    english: Shall we watch a movie on the weekend?
+  - speaker: B
+    hangul: 좋아요. 그런데 토요일에 일이 있어요.
+    english: Sounds good. But I have work on Saturday.
+  - speaker: A
+    hangul: 그럼 일요일에 가요.
+    english: Then let’s go on Sunday.
+  - speaker: B
+    hangul: 네. 그런데 어디서 만나요?
+    english: Okay. By the way, where shall we meet?
+  - speaker: A
+    hangul: 역에서 만나요.
+    english: Let’s meet at the station.
+  - speaker: B
+    hangul: 그래요. 같이 가요.
+    english: Okay. Let’s go together.
+phrase_refs:
+- 4f4ebe6b-1d6e-46f6-91d7-170b59365acb
+- 14d01e7d-93ee-4990-91f5-79b872505b66

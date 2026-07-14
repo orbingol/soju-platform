@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=../../schemas/verb_manifest.schema.json
+
+table: table.yaml
+forms:
+  present: forms/present.yaml
+  past: forms/past.yaml
+  future: forms/future.yaml
+constructions: {}

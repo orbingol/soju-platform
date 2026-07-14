@@ -1,0 +1,60 @@
+/* Breadcrumb trail (pairs with layouts/partials/breadcrumb/) */
+
+.site-breadcrumb {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0.55rem clamp(1rem, 3vw, 2.5rem);
+  border-bottom: 1px solid var(--soju-surface-crumb-border);
+  background-color: var(--soju-surface-crumb-bg);
+}
+
+.site-breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 0.2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.6875rem;
+  line-height: 0.95;
+  color: var(--soju-surface-crumb-fg);
+}
+
+.site-breadcrumb li {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+.site-breadcrumb li::before {
+  content: none;
+  float: none;
+}
+
+.site-breadcrumb li + li::before {
+  content: '/';
+  float: none;
+  margin-right: 0.15rem;
+  opacity: 0.45;
+  font-size: 0.625rem;
+  line-height: 1;
+}
+
+.site-breadcrumb a {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-breadcrumb a:hover {
+  color: var(--pico-primary);
+}
+
+.site-breadcrumb [aria-current='page'] {
+  color: var(--pico-color);
+  font-weight: 500;
+}
