@@ -24,6 +24,8 @@ data/staging/**/*.tmp.yaml
 
 # Local import scratch (examples in docs; keep out of git)
 /words*.txt
+/scratch/**
+!/scratch/README.md
 
 # OS junk
 .DS_Store

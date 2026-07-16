@@ -10,8 +10,9 @@ from soju import db
 
 def validate_registry(root=None) -> list[str]:
     errors: list[str] = []
-    type_ids = {entry["id"] for entry in db.load_types(root)}
-    type_slugs = {entry["slug"] for entry in db.load_types(root)}
+    types = db.load_types(root)
+    type_ids = {entry["id"] for entry in types}
+    type_slugs = {entry["slug"] for entry in types}
 
     vocab_ids: set[str] = set()
     sense_seen: set[tuple[str, str]] = set()

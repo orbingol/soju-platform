@@ -185,4 +185,10 @@ describe('loader', () => {
     expect(() => loadTopicPage('does-not-exist', DATA_DIR)).toThrow(/Unknown topic/);
     expect(() => loadTypePage('does-not-exist', DATA_DIR)).toThrow(/Unknown type/);
   });
+
+  it('rejects unsafe slugs and path traversal', () => {
+    expect(() => loadTopicPage('../etc', DATA_DIR)).toThrow(/Invalid topic id/);
+    expect(() => loadTypePage('Nouns', DATA_DIR)).toThrow(/Invalid type slug/);
+    expect(() => loadFlashcardDeck('family/../../etc', DATA_DIR)).toThrow(/Invalid/);
+  });
 });

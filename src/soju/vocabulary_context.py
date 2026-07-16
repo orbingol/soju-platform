@@ -3,19 +3,19 @@
 
 from __future__ import annotations
 
-from soju.korean_levels import KoreanLevel, vocabulary_for_level
+from soju.language_levels import LanguageLevel, vocabulary_for_level
 
 
 def build_vocabulary_context(
     root=None,
     *,
     compact: bool = False,
-    level: KoreanLevel | str | None = None,
+    level: LanguageLevel | str | None = None,
 ) -> str:
-    from soju.korean_levels import get_korean_level
+    from soju.language_levels import get_language_level
 
     if isinstance(level, str) or level is None:
-        level_obj = get_korean_level(level, root)
+        level_obj = get_language_level(level, root)
     else:
         level_obj = level
 

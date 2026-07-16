@@ -127,7 +127,8 @@ def import_word_record(
         report.skipped += 1
         return
 
-    assert session.topic is not None
+    if session.topic is None:
+        raise ValueError("Import session has no topic loaded.")
     try:
         section = resolve_topic_section(session.topic, section_id)
     except ValueError as exc:
@@ -290,10 +291,15 @@ def import_words_from_lines(
     section_id: str | None = None,
     dry_run: bool = False,
 ) -> None:
-    assert session.topic is not None
+    if session.topic is None:
+        raise ValueError("Import session has no topic loaded.")
     for line in lines:
         parsed = db.parse_import_line(line)
         if parsed is None:
+            stripped = line.strip()
+            if stripped and not stripped.startswith("#"):
+                report.errors.append(f"Skipped unparseable line: {stripped}")
+                report.skipped += 1
             continue
         entry, example = parsed
         if not db.has_hangul(entry) and db.has_hangul(example or ""):

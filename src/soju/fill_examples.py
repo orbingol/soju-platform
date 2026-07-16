@@ -9,11 +9,13 @@ import re
 import sys
 from typing import Any
 
-from soju.debug_log import debug_log
 from soju import db, ollama_client
-from soju.korean_levels import KoreanLevel, get_korean_level, list_level_ids
+from soju.language_levels import LanguageLevel, get_language_level, list_level_ids
+from soju.logutil import get_logger
 from soju.ollama_client import OllamaError
 from soju.vocabulary_context import build_vocabulary_context
+
+logger = get_logger(__name__)
 
 TENSES = ("present", "past", "future")
 VARIANTS = ("casual_polite", "formal_polite")
@@ -291,25 +293,6 @@ def clean_examples_store(examples_store: dict[str, Any]) -> int:
     return changed
 
 
-def load_verb_forms_cache(root=None) -> dict[str, dict]:
-    return {tense: db.load_verb_forms_file(tense, root) for tense in TENSES}
-
-
-def load_verb_forms(
-    verb_id: str,
-    root=None,
-    *,
-    cache: dict[str, dict] | None = None,
-) -> dict[str, dict[str, str]]:
-    forms_by_tense = cache if cache is not None else load_verb_forms_cache(root)
-    forms: dict[str, dict[str, str]] = {}
-    for tense in TENSES:
-        tense_forms = forms_by_tense.get(tense, {}).get(verb_id, {})
-        if isinstance(tense_forms, dict):
-            forms[tense] = {variant: str(tense_forms[variant]) for variant in VARIANTS if variant in tense_forms}
-    return forms
-
-
 def is_bad_english(english: str, tense: str | None = None) -> bool:
     if tense == "past" and BROKEN_PAST_ENGLISH.search(english):
         return True
@@ -469,7 +452,7 @@ def validate_noun_examples(examples: list[Any], hangul: str, *, examples_per: in
     return cleaned[:examples_per]
 
 
-def verb_batch_system_prompt(level: KoreanLevel, vocabulary_context: str, *, examples_per: int) -> str:
+def verb_batch_system_prompt(level: LanguageLevel, vocabulary_context: str, *, examples_per: int) -> str:
     return f"""You write Korean example sentences for a {level.label} learner app.
 
 Level guidance:
@@ -502,7 +485,7 @@ Other rules:
 {verb_batch_json_schema(examples_per)}"""
 
 
-def noun_batch_system_prompt(level: KoreanLevel, vocabulary_context: str, *, examples_per: int) -> str:
+def noun_batch_system_prompt(level: LanguageLevel, vocabulary_context: str, *, examples_per: int) -> str:
     return f"""You write Korean example sentences for a {level.label} learner app.
 
 Level guidance:
@@ -591,14 +574,12 @@ def _chat_json(
     temperature: float,
     verbose: bool,
 ) -> Any | None:
-    # #region agent log
-    debug_log(
-        "fill_examples.py:_chat_json:start",
-        "fill_examples calling Ollama",
-        {"model": model, "system_chars": len(system), "user_chars": len(user)},
-        hypothesis_id="C",
+    logger.debug(
+        "fill_examples calling Ollama model=%s system_chars=%s user_chars=%s",
+        model,
+        len(system),
+        len(user),
     )
-    # #endregion
     content = ollama_client.chat(
         [
             {"role": "system", "content": system},
@@ -615,29 +596,13 @@ def _chat_json(
     try:
         parsed = parse_json_content(content)
     except json.JSONDecodeError:
-        # #region agent log
-        debug_log(
-            "fill_examples.py:_chat_json:parse_fail",
-            "JSON parse failed",
-            {"model": model, "content_head": content[:300]},
-            hypothesis_id="D",
-        )
-        # #endregion
+        logger.debug("JSON parse failed model=%s content_head=%r", model, content[:300])
         print("  Ollama returned unparseable JSON.", file=sys.stderr)
         if verbose:
             print(content, file=sys.stderr)
         return None
-    # #region agent log
-    debug_log(
-        "fill_examples.py:_chat_json:parsed",
-        "JSON parsed",
-        {
-            "model": model,
-            "top_keys": list(parsed.keys()) if isinstance(parsed, dict) else type(parsed).__name__,
-        },
-        hypothesis_id="D",
-    )
-    # #endregion
+    top_keys = list(parsed.keys()) if isinstance(parsed, dict) else type(parsed).__name__
+    logger.debug("JSON parsed model=%s top_keys=%s", model, top_keys)
     return parsed
 
 
@@ -678,7 +643,7 @@ def parse_verb_batch_response(
 def generate_verb_batch(
     batch: list[tuple[dict[str, Any], dict[str, dict[str, str]]]],
     *,
-    level: KoreanLevel,
+    level: LanguageLevel,
     vocabulary_context: str,
     model: str,
     base_url: str,
@@ -753,47 +718,15 @@ def generate_verb_batch(
                         file=sys.stderr,
                     )
 
-    # #region agent log
-    debug_log(
-        "fill_examples.py:generate_verb_batch",
-        "Verb batch generation result",
-        {
-            "model": model,
-            "batch_size": len(batch),
-            "matched_verbs": len(results),
-            "verb_hangul": [verb["hangul"] for verb, _ in batch],
-        },
-        hypothesis_id="D",
+    logger.debug(
+        "Verb batch generation result model=%s batch_size=%s matched_verbs=%s verb_hangul=%s",
+        model,
+        len(batch),
+        len(results),
+        [verb["hangul"] for verb, _ in batch],
     )
-    # #endregion
     return results
 
-
-def generate_single_verb(
-    verb: dict[str, Any],
-    forms: dict[str, dict[str, str]],
-    *,
-    level: KoreanLevel,
-    vocabulary_context: str,
-    model: str,
-    base_url: str,
-    temperature: float,
-    verbose: bool,
-    examples_per: int = 1,
-    max_attempts: int = 3,
-) -> dict[str, dict[str, list[dict[str, str]]]] | None:
-    result = generate_verb_batch(
-        [(verb, forms)],
-        level=level,
-        vocabulary_context=vocabulary_context,
-        model=model,
-        base_url=base_url,
-        temperature=temperature,
-        verbose=verbose,
-        examples_per=examples_per,
-        max_attempts=max_attempts,
-    )
-    return result.get(verb["id"])
 
 
 def filter_verbs_for_fill_mode(
@@ -821,7 +754,7 @@ def filter_nouns_for_fill_mode(
 def generate_noun_batch(
     nouns: list[dict[str, Any]],
     *,
-    level: KoreanLevel,
+    level: LanguageLevel,
     vocabulary_context: str,
     model: str,
     base_url: str,
@@ -899,9 +832,9 @@ def fill_examples(
     if local:
         from soju.local_examples import generate_all_local
 
-        level = get_korean_level(level_id, root)
+        level = get_language_level(level_id, root)
         print(
-            f"Korean level: {level.label} ({level.id}) [local templates]",
+            f"Language level: {level.label} ({level.id}) [local templates]",
             file=sys.stderr,
         )
         print(f"Fill mode: {fill_mode}", file=sys.stderr)
@@ -917,9 +850,9 @@ def fill_examples(
             warnings.append(f"--limit is ignored with --local (generated {updated} entries).")
         return examples_store, warnings, updated
 
-    level = get_korean_level(level_id, root)
+    level = get_language_level(level_id, root)
     vocabulary_context = build_vocabulary_context(root, compact=True, level=level)
-    print(f"Korean level: {level.label} ({level.id})", file=sys.stderr)
+    print(f"Language level: {level.label} ({level.id})", file=sys.stderr)
     print(f"Examples per variant: {examples_per}", file=sys.stderr)
     print(f"Fill mode: {fill_mode}", file=sys.stderr)
     if verb_batch_size >= 10 and verbs:
@@ -933,10 +866,10 @@ def fill_examples(
         if limit is not None:
             verb_entries = verb_entries[:limit]
 
-        forms_cache = load_verb_forms_cache(root)
+        forms_cache = db.load_verb_forms_cache(root)
         prepared: list[tuple[dict[str, Any], dict[str, dict[str, str]]]] = []
         for verb in verb_entries:
-            forms = load_verb_forms(verb["id"], root, cache=forms_cache)
+            forms = db.load_verb_forms(verb["id"], root, cache=forms_cache)
             if not all(forms.get(tense, {}).get(variant) for tense in TENSES for variant in VARIANTS):
                 warnings.append(f"Skipped {verb['hangul']}: missing conjugated forms.")
                 continue
@@ -1038,7 +971,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--level",
         default=None,
-        help=f"Korean course level (default: SOJU_KOREAN_LEVEL or 1A). Known: {', '.join(list_level_ids())}",
+        help=f"Course level (default: SOJU_LANGUAGE_LEVEL or 1A). Known: {', '.join(list_level_ids())}",
     )
     parser.add_argument(
         "--examples",
@@ -1063,6 +996,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--verbose", action="store_true")
     parser.add_argument("--limit", type=int, help="Process only the first N entries (testing)")
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument(
+        "--strict",
+        action="store_true",
+        help="Exit non-zero when any generation warnings were produced",
+    )
     args = parser.parse_args(argv)
 
     if args.examples < 1:
@@ -1078,15 +1016,15 @@ def main(argv: list[str] | None = None) -> int:
         nouns = False
 
     if args.dry_run:
-        level = get_korean_level(args.level)
+        level = get_language_level(args.level)
         verb_count = len(db.vocabulary_by_type("verb"))
         noun_count = len(db.vocabulary_by_type("noun"))
         store = db.load_examples_store()
         if args.mode == "fill-empty" and verbs:
-            forms_cache = load_verb_forms_cache()
+            forms_cache = db.load_verb_forms_cache()
             verb_prepared = []
             for verb in db.vocabulary_by_type("verb"):
-                forms = load_verb_forms(verb["id"], cache=forms_cache)
+                forms = db.load_verb_forms(verb["id"], cache=forms_cache)
                 if all(forms.get(t, {}).get(v) for t in TENSES for v in VARIANTS):
                     verb_prepared.append((verb, forms))
             verb_count = len(
@@ -1100,7 +1038,7 @@ def main(argv: list[str] | None = None) -> int:
             noun_count = len(filter_nouns_for_fill_mode(db.vocabulary_by_type("noun"), store, fill_mode=args.mode))
         verb_batches = (verb_count + args.verb_batch_size - 1) // args.verb_batch_size if verb_count else 0
         noun_batches = (noun_count + args.noun_batch_size - 1) // args.noun_batch_size if noun_count else 0
-        print(f"Korean level: {level.label} ({level.id})", file=sys.stderr)
+        print(f"Language level: {level.label} ({level.id})", file=sys.stderr)
         print(f"Fill mode: {args.mode}", file=sys.stderr)
         print(
             f"Would generate {args.examples} example(s) per variant for "
@@ -1152,6 +1090,8 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Generated examples for {updated} vocabulary entries.", file=sys.stderr)
     if warnings:
         print(f"{len(warnings)} warning(s).", file=sys.stderr)
+    if args.strict and warnings:
+        return 1
     return 0
 
 

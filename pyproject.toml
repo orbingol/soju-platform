@@ -9,6 +9,19 @@ readme = "README.md"
 license = "BSD-3-Clause"
 license-files = ["LICENSE"]
 requires-python = ">=3.11"
+authors = [
+  { name = "Onur R. Bingol" },
+]
+keywords = ["korean", "language-learning", "vocabulary", "education"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Education",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Education",
+]
 dependencies = [
   "check-jsonschema>=0.34.0",
   "poethepoet>=0.32.0",
@@ -16,10 +29,15 @@ dependencies = [
 ]
 dynamic = ["version"]
 
+[project.urls]
+Homepage = "https://github.com/orbingol/soju-platform"
+Repository = "https://github.com/orbingol/soju-platform"
+Issues = "https://github.com/orbingol/soju-platform/issues"
+
 [project.scripts]
 soju-align = "soju.align:main"
 soju-registry = "soju.registry:main"
-soju-import = "soju.import_:main"
+soju-import = "soju.intake:main"
 soju-promote = "soju.promote:main"
 soju-validate-schemas = "soju.validate_schemas:main"
 soju-fill-verbs = "soju.fill_verbs:main"
@@ -36,6 +54,7 @@ docs = [
 dev = [
   "pre-commit>=4.0.0",
   "pytest>=8.0.0",
+  "python-dotenv>=1.0.0",
 ]
 
 [tool.setuptools.packages.find]

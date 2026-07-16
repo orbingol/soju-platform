@@ -7,7 +7,7 @@ import re
 from typing import Any
 
 from soju import db
-from soju.korean_levels import KoreanLevel, get_korean_level, vocabulary_for_level
+from soju.language_levels import LanguageLevel, get_language_level, vocabulary_for_level
 
 TENSES = ("present", "past", "future")
 VARIANTS = ("casual_polite", "formal_polite")
@@ -319,24 +319,6 @@ def build_verb_english(english: str, tense: str, hangul: str, *, level_id: str, 
     return base
 
 
-def load_verb_forms_cache(root=None) -> dict[str, dict]:
-    return {tense: db.load_verb_forms_file(tense, root) for tense in TENSES}
-
-
-def load_verb_forms(
-    verb_id: str,
-    root=None,
-    *,
-    cache: dict[str, dict] | None = None,
-) -> dict[str, dict[str, str]]:
-    forms_by_tense = cache if cache is not None else load_verb_forms_cache(root)
-    forms: dict[str, dict[str, str]] = {}
-    for tense in TENSES:
-        tense_forms = forms_by_tense.get(tense, {}).get(verb_id, {})
-        if isinstance(tense_forms, dict):
-            forms[tense] = {variant: str(tense_forms[variant]) for variant in VARIANTS if variant in tense_forms}
-    return forms
-
 
 def _has_batchim(syllable: str) -> bool:
     if not syllable:
@@ -369,7 +351,7 @@ def examples_for_verb(
     verb: dict[str, Any],
     forms: dict[str, dict[str, str]],
     *,
-    level: KoreanLevel,
+    level: LanguageLevel,
     index: int = 0,
     examples_per: int = 2,
 ) -> dict[str, dict[str, list[dict[str, str]]]]:
@@ -417,7 +399,7 @@ def examples_for_verb(
 def examples_for_noun(
     noun: dict[str, Any],
     *,
-    level: KoreanLevel,
+    level: LanguageLevel,
     index: int = 0,
     examples_per: int = 2,
 ) -> list[dict[str, str]]:
@@ -640,7 +622,7 @@ def generate_all_local(
     root=None,
 ) -> tuple[dict[str, Any], int]:
     """Fill examples store for verbs and/or nouns using local 1A+1B templates."""
-    level = get_korean_level(level_id, root)
+    level = get_language_level(level_id, root)
     examples_store = db.load_examples_store(root)
     updated = 0
 
@@ -648,9 +630,9 @@ def generate_all_local(
         verb_entries = [e for e in vocabulary_for_level(level.id, root) if e.get("type") == "verb"]
         if not verb_entries:
             verb_entries = db.vocabulary_by_type("verb", root)
-        forms_cache = load_verb_forms_cache(root)
+        forms_cache = db.load_verb_forms_cache(root)
         for index, verb in enumerate(verb_entries):
-            forms = load_verb_forms(verb["id"], root, cache=forms_cache)
+            forms = db.load_verb_forms(verb["id"], root, cache=forms_cache)
             if not all(forms.get(t, {}).get(v) for t in TENSES for v in VARIANTS):
                 continue
             if fill_mode == "fill-empty" and not db.verb_entry_needs_fill(forms, examples_store.get(verb["id"])):

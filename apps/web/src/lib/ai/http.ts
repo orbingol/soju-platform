@@ -1,23 +1,48 @@
 import { aiBaseUrl } from '$lib/config';
 
+/** Default timeout for AI complete/stream requests. */
+export const AI_FETCH_TIMEOUT_MS = 60_000;
+
+/** Short probe timeout used by health checks. */
+export const HEALTH_FETCH_TIMEOUT_MS = 4_000;
+
 export function apiUrl(path: string): string {
   return `${aiBaseUrl}${path.startsWith('/') ? path : `/${path}`}`;
 }
 
-export async function fetchWithTimeout(url: string, init: RequestInit = {}, timeoutMs = 4000): Promise<Response> {
+export async function fetchWithTimeout(
+  url: string,
+  init: RequestInit = {},
+  timeoutMs = HEALTH_FETCH_TIMEOUT_MS,
+): Promise<Response> {
   const controller = new AbortController();
-  const timeout = window.setTimeout(() => controller.abort(), timeoutMs);
+  const timeout = globalThis.setTimeout(() => controller.abort(), timeoutMs);
+  const external = init.signal;
+
+  const onExternalAbort = () => controller.abort();
+  if (external) {
+    if (external.aborted) {
+      globalThis.clearTimeout(timeout);
+      controller.abort();
+    } else {
+      external.addEventListener('abort', onExternalAbort, { once: true });
+    }
+  }
 
   try {
     return await fetch(url, { ...init, signal: controller.signal });
   } finally {
-    window.clearTimeout(timeout);
+    globalThis.clearTimeout(timeout);
+    external?.removeEventListener('abort', onExternalAbort);
   }
 }
 
 export async function readError(response: Response): Promise<string> {
   const detail = await response.text();
-  return `Request failed (${response.status}): ${detail}`;
+  if (import.meta.env.DEV && detail.trim()) {
+    return `Request failed (${response.status}): ${detail}`;
+  }
+  return `Request failed (${response.status})`;
 }
 
 const HEALTH_CHECK_PATHS = ['/v1/models', '/api/tags'] as const;

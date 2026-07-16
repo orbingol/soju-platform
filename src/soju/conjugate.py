@@ -1,5 +1,12 @@
 # SPDX-License-Identifier: BSD-3-Clause
-"""Heuristic Korean verb conjugation for polite present, past, and future."""
+"""Heuristic Korean verb conjugation for polite present, past, and future.
+
+English example glosses use a naive past-tense heuristic (``+ed`` / ``y→ied``)
+in ``_english_clause``. Irregular English verbs are only covered when the
+dictionary form is in ``_ROOT_FORMS`` or handled specially (e.g. ``be``);
+otherwise generated English may be wrong (e.g. ``goed``). Prefer curated
+examples or ``soju-fill-examples`` for learner-facing content.
+"""
 
 from __future__ import annotations
 
@@ -250,6 +257,11 @@ def conjugate_verb(hangul: str) -> TenseForms:
 
 
 def _english_clause(english: str, tense: str) -> str:
+    """Build a short English clause for an example.
+
+    Past tense uses a naive ``+ed`` / ``y→ied`` rule and is not a full English
+    conjugator — see module docstring.
+    """
     base = PAREN_ENGLISH.sub("", english.replace("to ", "")).strip().rstrip(".")
     if tense == "past":
         if base.startswith("be "):

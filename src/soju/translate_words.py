@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from soju import db, ollama_client
-from soju.korean_levels import KoreanLevel, get_korean_level, list_level_ids
+from soju.language_levels import LanguageLevel, get_language_level, list_level_ids
 from soju.ollama_client import OllamaError
 from soju.vocabulary_context import (
     build_vocabulary_context as _build_vocabulary_context,
@@ -86,7 +86,7 @@ def parse_word_list_lines(lines: list[str]) -> list[WordHint]:
     return hints
 
 
-def build_system_prompt(level: KoreanLevel, vocabulary_context: str) -> str:
+def build_system_prompt(level: LanguageLevel, vocabulary_context: str) -> str:
     return f"""You are a Korean language lexicographer helping build a {level.label} learner vocabulary database.
 
 Level guidance:
@@ -159,10 +159,31 @@ def normalize_record(record: dict[str, Any]) -> dict[str, Any] | None:
     return clean
 
 
+def parse_batch_records(batch: list[WordHint], payload: Any) -> list[dict[str, Any]]:
+    """Validate model JSON against the input batch. Raises ``ValueError`` on mismatch."""
+    records = payload.get("records") if isinstance(payload, dict) else payload
+    if not isinstance(records, list):
+        raise ValueError("Model JSON must contain a records array.")
+    if len(records) != len(batch):
+        raise ValueError(f"Expected {len(batch)} records, got {len(records)}.")
+
+    cleaned: list[dict[str, Any]] = []
+    for index, record in enumerate(records, start=1):
+        if not isinstance(record, dict):
+            raise ValueError(f"Record {index} is not an object.")
+        normalized = normalize_record(record)
+        if not normalized:
+            raise ValueError(
+                f"Record {index} is missing required fields (hangul, romanization, english)."
+            )
+        cleaned.append(normalized)
+    return cleaned
+
+
 def translate_batch(
     batch: list[WordHint],
     *,
-    level: KoreanLevel,
+    level: LanguageLevel,
     vocabulary_context: str,
     model: str,
     base_url: str,
@@ -187,18 +208,7 @@ def translate_batch(
     except json.JSONDecodeError as exc:
         raise ValueError(f"Model returned invalid JSON: {exc}") from exc
 
-    records = payload.get("records") if isinstance(payload, dict) else payload
-    if not isinstance(records, list):
-        raise ValueError("Model JSON must contain a records array.")
-
-    cleaned: list[dict[str, Any]] = []
-    for record in records:
-        if not isinstance(record, dict):
-            continue
-        normalized = normalize_record(record)
-        if normalized:
-            cleaned.append(normalized)
-    return cleaned
+    return parse_batch_records(batch, payload)
 
 
 def translate_words(
@@ -216,7 +226,7 @@ def translate_words(
     if not hints:
         return [], ["No translatable lines found in input."]
 
-    level = get_korean_level(level_id, root)
+    level = get_language_level(level_id, root)
     vocabulary_context = _build_vocabulary_context(root, compact=False, level=level)
     existing = db.vocabulary_by_sense(root) if skip_existing else {}
     records: list[dict[str, Any]] = []
@@ -225,19 +235,20 @@ def translate_words(
 
     for start in range(0, len(hints), batch_size):
         batch = hints[start : start + batch_size]
-        batch_records = translate_batch(
-            batch,
-            level=level,
-            vocabulary_context=vocabulary_context,
-            model=model,
-            base_url=base_url,
-            temperature=temperature,
-        )
+        batch_index = start // batch_size + 1
+        try:
+            batch_records = translate_batch(
+                batch,
+                level=level,
+                vocabulary_context=vocabulary_context,
+                model=model,
+                base_url=base_url,
+                temperature=temperature,
+            )
+        except ValueError as exc:
+            raise ValueError(f"Batch {batch_index}: {exc}") from exc
 
-        if len(batch_records) != len(batch):
-            warnings.append(f"Batch {start // batch_size + 1}: expected {len(batch)} records, got {len(batch_records)}.")
-
-        for hint, record in zip(batch, batch_records, strict=False):
+        for record in batch_records:
             key = db.sense_key(record["hangul"], record["english"])
             if skip_existing and key in existing:
                 warnings.append(f"Skipped existing registry entry: {record['hangul']} ({record['english']})")
@@ -267,7 +278,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--level",
         default=None,
-        help=f"Korean course level (default: SOJU_KOREAN_LEVEL or 1A). Known: {', '.join(list_level_ids())}",
+        help=f"Course level (default: SOJU_LANGUAGE_LEVEL or 1A). Known: {', '.join(list_level_ids())}",
     )
     parser.add_argument(
         "--dry-run",
@@ -285,8 +296,8 @@ def main(argv: list[str] | None = None) -> int:
     hints = parse_word_list_lines(lines)
 
     if args.dry_run:
-        level = get_korean_level(args.level)
-        print(f"Korean level: {level.label} ({level.id})", file=sys.stderr)
+        level = get_language_level(args.level)
+        print(f"Language level: {level.label} ({level.id})", file=sys.stderr)
         print(f"Parsed {len(hints)} translatable lines from {path}.", file=sys.stderr)
         for hint in hints:
             parts = [hint.entry]

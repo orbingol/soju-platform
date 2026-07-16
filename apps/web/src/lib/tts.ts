@@ -22,9 +22,6 @@ export const DEFAULT_VOLUME = 1;
 /** True when the browser Web Speech API is available. */
 export const hasBrowserTts = typeof window !== 'undefined' && !!window.speechSynthesis;
 
-/** @deprecated Prefer hasBrowserTts / isTtsAvailable — kept for older call sites. */
-export const hasTTS = hasBrowserTts;
-
 let activeBtn: HTMLButtonElement | null = null;
 let activeAudio: HTMLAudioElement | null = null;
 let activeObjectUrl: string | null = null;

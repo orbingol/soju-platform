@@ -3,22 +3,34 @@ export async function* readSseDataLines(body: ReadableStream<Uint8Array>): Async
   const decoder = new TextDecoder();
   let buffer = '';
 
+  const flushLine = function* (line: string): Generator<string, void, unknown> {
+    const trimmed = line.trim();
+    if (!trimmed.startsWith('data:')) return;
+
+    const data = trimmed.slice(5).trim();
+    if (!data || data === '[DONE]') return;
+    yield data;
+  };
+
   while (true) {
     const { done, value } = await reader.read();
-    if (done) break;
+    if (done) {
+      buffer += decoder.decode();
+      break;
+    }
 
     buffer += decoder.decode(value, { stream: true });
     const lines = buffer.split('\n');
     buffer = lines.pop() ?? '';
 
     for (const line of lines) {
-      const trimmed = line.trim();
-      if (!trimmed.startsWith('data:')) continue;
-
-      const data = trimmed.slice(5).trim();
-      if (!data || data === '[DONE]') continue;
-      yield data;
+      yield* flushLine(line);
     }
+  }
+
+  // Stream ended without a trailing newline — flush any leftover `data:` line.
+  if (buffer.length > 0) {
+    yield* flushLine(buffer);
   }
 }
 

@@ -1,7 +1,7 @@
 import { aiModel } from '$lib/config';
 
 import { clearConversationId, getConversationId, saveConversationId } from './conversation-store';
-import { apiUrl, checkServerAvailable, readError } from './http';
+import { AI_FETCH_TIMEOUT_MS, apiUrl, checkServerAvailable, fetchWithTimeout, readError } from './http';
 import { extractResponsesText, splitPrompt } from './messages';
 import { parseResponsesStreamDelta, readSseDataLines } from './sse';
 import type { AiClient, AiCompletionRequest } from './types';
@@ -47,12 +47,17 @@ function buildBody(request: AiCompletionRequest, conversationId?: string | null)
   return body;
 }
 
-async function createConversation(): Promise<string> {
-  const response = await fetch(apiUrl('/v1/conversations'), {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({}),
-  });
+async function createConversation(signal?: AbortSignal): Promise<string> {
+  const response = await fetchWithTimeout(
+    apiUrl('/v1/conversations'),
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({}),
+      ...(signal ? { signal } : {}),
+    },
+    AI_FETCH_TIMEOUT_MS,
+  );
 
   if (!response.ok) {
     throw new Error(await readError(response));
@@ -66,18 +71,18 @@ async function createConversation(): Promise<string> {
   return payload.id;
 }
 
-async function ensureConversation(sessionKey: string): Promise<string> {
+async function ensureConversation(sessionKey: string, signal?: AbortSignal): Promise<string> {
   const existing = await getConversationId(sessionKey);
   if (existing) return existing;
 
-  const conversationId = await createConversation();
+  const conversationId = await createConversation(signal);
   await saveConversationId(sessionKey, conversationId);
   return conversationId;
 }
 
 async function resolveConversationId(request: AiCompletionRequest): Promise<string | null> {
   if (!request.sessionKey) return null;
-  return ensureConversation(request.sessionKey);
+  return ensureConversation(request.sessionKey, request.signal);
 }
 
 export const conversationsClient: AiClient = {
@@ -85,11 +90,16 @@ export const conversationsClient: AiClient = {
 
   async complete(request) {
     const conversationId = await resolveConversationId(request);
-    const response = await fetch(apiUrl('/v1/responses'), {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...buildBody(request, conversationId), stream: false }),
-    });
+    const response = await fetchWithTimeout(
+      apiUrl('/v1/responses'),
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...buildBody(request, conversationId), stream: false }),
+        ...(request.signal ? { signal: request.signal } : {}),
+      },
+      AI_FETCH_TIMEOUT_MS,
+    );
 
     if (!response.ok) {
       if (conversationId && request.sessionKey) {
@@ -111,11 +121,16 @@ export const conversationsClient: AiClient = {
 
   async *stream(request) {
     const conversationId = await resolveConversationId(request);
-    const response = await fetch(apiUrl('/v1/responses'), {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...buildBody(request, conversationId), stream: true }),
-    });
+    const response = await fetchWithTimeout(
+      apiUrl('/v1/responses'),
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...buildBody(request, conversationId), stream: true }),
+        ...(request.signal ? { signal: request.signal } : {}),
+      },
+      AI_FETCH_TIMEOUT_MS,
+    );
 
     if (!response.ok) {
       if (conversationId && request.sessionKey) {

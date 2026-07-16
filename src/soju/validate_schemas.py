@@ -62,18 +62,30 @@ def validate_schemas(root: Path | None = None) -> list[str]:
         if not existing:
             continue
 
-        result = subprocess.run(
-            [
-                "check-jsonschema",
-                "--schemafile",
-                str(schema_path),
-                "--base-uri",
-                f"{schema_path.parent.as_uri()}/",
-                *existing,
-            ],
-            capture_output=True,
-            text=True,
-        )
+        try:
+            result = subprocess.run(
+                [
+                    "check-jsonschema",
+                    "--schemafile",
+                    str(schema_path),
+                    "--base-uri",
+                    f"{schema_path.parent.as_uri()}/",
+                    *existing,
+                ],
+                capture_output=True,
+                text=True,
+                timeout=120,
+            )
+        except FileNotFoundError:
+            errors.append(
+                f"{name}: check-jsonschema is not installed or not on PATH "
+                "(install project deps with `uv sync`)."
+            )
+            break
+        except subprocess.TimeoutExpired:
+            errors.append(f"{name}: check-jsonschema timed out after 120s")
+            continue
+
         if result.returncode != 0:
             detail = (result.stdout + result.stderr).strip() or f"exit {result.returncode}"
             errors.append(f"{name}:\n{detail}")
@@ -81,16 +93,17 @@ def validate_schemas(root: Path | None = None) -> list[str]:
     return errors
 
 
-def main() -> None:
+def main() -> int:
     errors = validate_schemas()
     if errors:
         print("Schema validation failed:", file=sys.stderr)
         for block in errors:
             print(block, file=sys.stderr)
             print(file=sys.stderr)
-        sys.exit(1)
+        return 1
     print("Schema validation passed.")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

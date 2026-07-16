@@ -97,7 +97,7 @@ All entry points are installed by `uv sync` and invoked as `uv run <name>`. Deta
 |------|-------------|---------|
 | **New words** | Full records with hangul, romanization, english | `cat records.json \| uv run soju-import words --topic <id> --stdin-json` |
 | **Preview** | Before writing | add `--dry-run` |
-| **Merge examples only** | Plain-text file; word **must already exist** | `uv run soju-import words --topic <id> --file words.txt` |
+| **Merge examples only** | Plain-text file; word **must already exist** | `uv run soju-import words --topic <id> --file scratch/words.txt` |
 | **From staging** | Reviewed staging YAML | `uv run soju-import words --from-staging data/staging/vocabulary-candidates.yaml --topic <id>` |
 
 - **`--topic`** — id from `data/content/topics/manifest.yaml` (e.g. `common`, `family`).

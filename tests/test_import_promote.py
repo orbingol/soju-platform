@@ -6,7 +6,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from soju import db
-from soju.import_ import ImportReport, ImportSession, import_verb_record, import_word_record
+from soju.intake import ImportReport, ImportSession, import_verb_record, import_word_record
 from soju.promote import promote_topic
 from tests.constants import WORD_ID
 
@@ -71,7 +71,7 @@ def test_import_missing_fields_errors(data_root: Path) -> None:
 
 
 def test_resolve_topic_section_requires_section(data_root: Path) -> None:
-    from soju.import_ import resolve_topic_section
+    from soju.intake import resolve_topic_section
 
     topic = {
         "sections": [

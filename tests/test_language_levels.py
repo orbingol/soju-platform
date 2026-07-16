@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: BSD-3-Clause
-"""Korean levels config loading under content/."""
+"""Language levels config loading under content/."""
 
 from __future__ import annotations
 
 from pathlib import Path
 
-from soju.korean_levels import default_level_id, load_levels_config, vocabulary_for_level
+from soju.language_levels import default_level_id, load_levels_config, vocabulary_for_level
 from tests.constants import WORD_ID
 
 
@@ -28,3 +28,24 @@ def test_vocabulary_for_level_filters(data_root: Path) -> None:
     entries = vocabulary_for_level("1A", data_root)
     ids = {e["id"] for e in entries}
     assert WORD_ID in ids
+
+
+def test_vocabulary_for_level_empty_when_no_matches(data_root: Path) -> None:
+    import yaml
+
+    levels = data_root / "content" / "levels.yaml"
+    levels.write_text(
+        yaml.safe_dump(
+            {
+                "default": "1A",
+                "levels": {
+                    "1A": {"label": "1A", "guidance": "x"},
+                    "2A": {"label": "2A", "guidance": "y"},
+                },
+            },
+            sort_keys=False,
+        ),
+        encoding="utf-8",
+    )
+    # All fixture vocabulary is untagged → belongs to default 1A only.
+    assert vocabulary_for_level("2A", data_root) == []

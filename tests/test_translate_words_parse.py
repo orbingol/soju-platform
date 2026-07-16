@@ -3,7 +3,14 @@
 
 from __future__ import annotations
 
-from soju.translate_words import normalize_record, parse_word_list_lines, strip_bullet
+import pytest
+
+from soju.translate_words import (
+    normalize_record,
+    parse_batch_records,
+    parse_word_list_lines,
+    strip_bullet,
+)
 
 
 def test_parse_word_list_arrow_and_bullet() -> None:
@@ -33,3 +40,39 @@ def test_normalize_record_requires_fields() -> None:
 def test_strip_bullet() -> None:
     assert strip_bullet("- foo") == "foo"
     assert strip_bullet("* bar") == "bar"
+
+
+def _valid_record(hangul: str, english: str) -> dict:
+    return {
+        "hangul": hangul,
+        "romanization": "x",
+        "english": english,
+        "type": "noun",
+    }
+
+
+def test_parse_batch_records_accepts_matching_count() -> None:
+    batch = parse_word_list_lines(["학교", "친구"])
+    records = parse_batch_records(
+        batch,
+        {"records": [_valid_record("학교", "school"), _valid_record("친구", "friend")]},
+    )
+    assert [r["hangul"] for r in records] == ["학교", "친구"]
+
+
+def test_parse_batch_records_rejects_count_mismatch() -> None:
+    batch = parse_word_list_lines(["학교", "친구"])
+    with pytest.raises(ValueError, match="Expected 2 records, got 1"):
+        parse_batch_records(batch, {"records": [_valid_record("학교", "school")]})
+
+
+def test_parse_batch_records_rejects_invalid_record() -> None:
+    batch = parse_word_list_lines(["학교"])
+    with pytest.raises(ValueError, match="Record 1 is missing required fields"):
+        parse_batch_records(batch, {"records": [{"hangul": "학교"}]})
+
+
+def test_parse_batch_records_rejects_non_object() -> None:
+    batch = parse_word_list_lines(["학교"])
+    with pytest.raises(ValueError, match="Record 1 is not an object"):
+        parse_batch_records(batch, {"records": ["학교"]})

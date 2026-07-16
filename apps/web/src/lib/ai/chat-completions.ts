@@ -1,6 +1,6 @@
 import { aiModel } from '$lib/config';
 
-import { apiUrl, checkServerAvailable, readError } from './http';
+import { AI_FETCH_TIMEOUT_MS, apiUrl, checkServerAvailable, fetchWithTimeout, readError } from './http';
 import { extractChatCompletionText } from './messages';
 import { parseChatCompletionDelta, readSseDataLines } from './sse';
 import type { AiClient, AiCompletionRequest } from './types';
@@ -15,15 +15,24 @@ function buildBody(request: AiCompletionRequest) {
   };
 }
 
+function requestInit(body: unknown, signal?: AbortSignal): RequestInit {
+  return {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+    ...(signal ? { signal } : {}),
+  };
+}
+
 export const chatCompletionsClient: AiClient = {
   checkAvailable: checkServerAvailable,
 
   async complete(request) {
-    const response = await fetch(apiUrl('/v1/chat/completions'), {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...buildBody(request), stream: false }),
-    });
+    const response = await fetchWithTimeout(
+      apiUrl('/v1/chat/completions'),
+      requestInit({ ...buildBody(request), stream: false }, request.signal),
+      AI_FETCH_TIMEOUT_MS,
+    );
 
     if (!response.ok) {
       throw new Error(await readError(response));
@@ -37,11 +46,11 @@ export const chatCompletionsClient: AiClient = {
   },
 
   async *stream(request) {
-    const response = await fetch(apiUrl('/v1/chat/completions'), {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...buildBody(request), stream: true }),
-    });
+    const response = await fetchWithTimeout(
+      apiUrl('/v1/chat/completions'),
+      requestInit({ ...buildBody(request), stream: true }, request.signal),
+      AI_FETCH_TIMEOUT_MS,
+    );
 
     if (!response.ok) {
       throw new Error(await readError(response));

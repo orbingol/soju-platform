@@ -31,18 +31,6 @@ def staging_root(root: Path | None = None) -> Path:
     return data_root(root) / "staging"
 
 
-def registry_dir(root: Path | None = None) -> Path:
-    return content_root(root) / "registry"
-
-
-def topics_dir(root: Path | None = None) -> Path:
-    return content_root(root) / "topics"
-
-
-def verbs_dir(root: Path | None = None) -> Path:
-    return content_root(root) / "verbs"
-
-
 def schema_rel_for(path: Path, schema_name: str, root: Path | None = None) -> str:
     """Relative ``$schema`` path from a YAML file under ``data/`` to ``data/schemas/``."""
     rel = path.resolve().relative_to(data_root(root).resolve())
@@ -60,18 +48,6 @@ IMPORT_LINE = re.compile(r"^(?P<entry>.*?)(?:\s*[\(（](?P<example>.*?)[\)）])?
 def load_yaml(path: Path) -> Any:
     with path.open(encoding="utf-8") as handle:
         return yaml.safe_load(handle)
-
-
-def dump_yaml(path: Path, data: Any) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as handle:
-        yaml.safe_dump(
-            data,
-            handle,
-            allow_unicode=True,
-            sort_keys=False,
-            default_flow_style=False,
-        )
 
 
 class _LiteralStr(str):
@@ -254,20 +230,6 @@ def load_types(root: Path | None = None) -> list[dict]:
     return types
 
 
-def type_by_id(type_id: str, root: Path | None = None) -> dict | None:
-    for entry in load_types(root):
-        if entry["id"] == type_id:
-            return entry
-    return None
-
-
-def type_by_slug(slug: str, root: Path | None = None) -> dict | None:
-    for entry in load_types(root):
-        if entry["slug"] == slug:
-            return entry
-    return None
-
-
 def load_vocabulary(root: Path | None = None) -> list[dict]:
     path = content_root(root) / "registry" / "vocabulary.yaml"
     data = load_yaml(path) if path.exists() else []
@@ -289,11 +251,6 @@ def save_vocabulary(entries: list[dict], root: Path | None = None) -> None:
 
 def vocabulary_by_id(root: Path | None = None) -> dict[str, dict]:
     return {entry["id"]: entry for entry in load_vocabulary(root)}
-
-
-def vocabulary_by_hangul(root: Path | None = None) -> dict[str, dict]:
-    """First registry entry per hangul (legacy lookup; not for dedup)."""
-    return {normalize_hangul(entry["hangul"]): entry for entry in load_vocabulary(root)}
 
 
 def build_sense_index(entries: list[dict]) -> dict[tuple[str, str], dict]:
@@ -354,25 +311,6 @@ def save_examples_store(data: dict, root: Path | None = None) -> None:
         schema_rel_for(path, "examples_vocabulary.schema.json", root),
         data,
     )
-
-
-def load_type_table(type_id: str, root: Path | None = None) -> dict:
-    base = content_root(root)
-    if type_id == "verb":
-        specialized = base / "verbs" / "table.yaml"
-    else:
-        specialized = base / type_id / "table.yaml"
-    if specialized.is_file():
-        return load_yaml(specialized)
-    return load_yaml(base / "words" / "table.yaml")
-
-
-def load_topic_table(topic_id: str, root: Path | None = None) -> dict:
-    base = content_root(root) / "topics"
-    override = base / topic_id / "table.yaml"
-    if override.is_file():
-        return load_yaml(override)
-    return load_yaml(base / "table.yaml")
 
 
 def load_topics_manifest(root: Path | None = None) -> dict:
@@ -473,7 +411,8 @@ def merge_default_examples(
     own_store = store is None
     if own_store:
         store = load_examples_store(root)
-    assert store is not None
+    if store is None:
+        raise ValueError("examples store is required")
     entry = store.setdefault(vocab_id, {})
     if "default" not in entry or not isinstance(entry["default"], list):
         entry["default"] = []
@@ -505,7 +444,8 @@ def merge_verb_examples(
     own_store = store is None
     if own_store:
         store = load_examples_store(root)
-    assert store is not None
+    if store is None:
+        raise ValueError("examples store is required")
     entry = store.setdefault(vocab_id, {})
     tense_map = entry.setdefault(tense, {})
     if not isinstance(tense_map, dict):
@@ -549,6 +489,31 @@ def load_all_verb_forms(root: Path | None = None) -> dict[str, dict]:
     return {tense: load_verb_forms_file(tense, root) for tense in manifest.get("forms", {})}
 
 
+def load_verb_forms_cache(root: Path | None = None) -> dict[str, dict]:
+    """Cache of tense → forms file contents (present/past/future)."""
+    return {tense: load_verb_forms_file(tense, root) for tense in EXAMPLE_TENSES}
+
+
+def load_verb_forms(
+    verb_id: str,
+    root: Path | None = None,
+    *,
+    cache: dict[str, dict] | None = None,
+) -> dict[str, dict[str, str]]:
+    """Return ``{tense: {variant: form}}`` for one verb id."""
+    forms_by_tense = cache if cache is not None else load_verb_forms_cache(root)
+    forms: dict[str, dict[str, str]] = {}
+    for tense in EXAMPLE_TENSES:
+        tense_forms = forms_by_tense.get(tense, {}).get(verb_id, {})
+        if isinstance(tense_forms, dict):
+            forms[tense] = {
+                variant: str(tense_forms[variant])
+                for variant in EXAMPLE_VARIANTS
+                if variant in tense_forms
+            }
+    return forms
+
+
 def save_verb_forms_file(tense: str, data: dict, root: Path | None = None) -> None:
     path = verb_forms_path(tense, root)
     write_yaml_with_schema_comment(
@@ -556,16 +521,6 @@ def save_verb_forms_file(tense: str, data: dict, root: Path | None = None) -> No
         schema_rel_for(path, "verbs_forms.schema.json", root),
         data,
     )
-
-
-def get_verb_examples(vocab_id: str, root: Path | None = None) -> dict:
-    store = load_examples_store(root)
-    entry = store.get(vocab_id, {})
-    if not isinstance(entry, dict):
-        return {}
-    if "default" in entry:
-        return {}
-    return entry
 
 
 def parse_import_line(line: str) -> tuple[str, str | None] | None:

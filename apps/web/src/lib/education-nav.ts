@@ -12,9 +12,6 @@ export const grammarHref = `${base}/education/grammar/`;
 export const flashcardsHref = `${base}/education/flashcards/registry/`;
 export const practiceHref = `${base}/education/practice/`;
 
-/** @deprecated use wordTypesHref */
-export const wordsHref = wordTypesHref;
-
 export function isVocabularyPath(pathname: string): boolean {
   return pathname.includes('/education/vocabulary') || pathname.includes('/education/words') || pathname.includes('/education/topics') || pathname.includes('/education/grammar');
 }

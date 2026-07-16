@@ -3,10 +3,13 @@ import path from 'node:path';
 import yaml from 'yaml';
 
 import {
+  assertSafeSlug,
   contentDir,
+  displayDataPath,
   getDataDir,
   grammarDir,
   registryDir,
+  resolveUnder,
   topicsDir,
   verbsDir
 } from './paths';
@@ -37,13 +40,31 @@ function isBrowsableVocabulary(entry: VocabularyEntry): boolean {
   return true;
 }
 
-function readYaml<T>(filePath: string): T {
-  const raw = fs.readFileSync(filePath, 'utf8');
-  return yaml.parse(raw) as T;
+function readYaml<T>(filePath: string, dataDir: string): T {
+  const label = displayDataPath(filePath, dataDir);
+  let raw: string;
+  try {
+    raw = fs.readFileSync(filePath, 'utf8');
+  } catch (err) {
+    const code = (err as NodeJS.ErrnoException).code;
+    if (code === 'ENOENT') {
+      throw new Error(`Missing data file: ${label}`);
+    }
+    throw new Error(`Failed to read data file: ${label}`);
+  }
+
+  try {
+    return yaml.parse(raw) as T;
+  } catch {
+    throw new Error(`Malformed YAML: ${label}`);
+  }
 }
 
 export function loadTypes(dataDir = getDataDir()): VocabularyType[] {
-  const data = readYaml<{ types: VocabularyType[] }>(path.join(registryDir(dataDir), 'types.yaml'));
+  const data = readYaml<{ types: VocabularyType[] }>(
+    path.join(registryDir(dataDir), 'types.yaml'),
+    dataDir,
+  );
   return data.types;
 }
 
@@ -52,11 +73,11 @@ export function resolveTypeBySlug(slug: string, dataDir = getDataDir()): Vocabul
 }
 
 export function loadVocabulary(dataDir = getDataDir()): VocabularyEntry[] {
-  return readYaml<VocabularyEntry[]>(path.join(registryDir(dataDir), 'vocabulary.yaml'));
+  return readYaml<VocabularyEntry[]>(path.join(registryDir(dataDir), 'vocabulary.yaml'), dataDir);
 }
 
 export function loadExamplesStore(dataDir = getDataDir()): Record<string, unknown> {
-  return readYaml<Record<string, unknown>>(path.join(registryDir(dataDir), 'examples.yaml'));
+  return readYaml<Record<string, unknown>>(path.join(registryDir(dataDir), 'examples.yaml'), dataDir);
 }
 
 function defaultExamplesFor(vocabId: string, store: Record<string, unknown>): Example[] {
@@ -108,36 +129,41 @@ function verbExamplesFor(
 }
 
 export function loadTypeTable(typeId: string, dataDir = getDataDir()): VerbTableLayout | DefaultTableLayout {
+  assertSafeSlug(typeId, 'type id');
   const content = contentDir(dataDir);
   const specialized =
     typeId === 'verb'
-      ? path.join(content, 'verbs', 'table.yaml')
-      : path.join(content, typeId, 'table.yaml');
+      ? resolveUnder(content, 'verbs', 'table.yaml')
+      : resolveUnder(content, typeId, 'table.yaml');
   if (fs.existsSync(specialized)) {
-    return readYaml<VerbTableLayout>(specialized);
+    return readYaml<VerbTableLayout>(specialized, dataDir);
   }
-  return readYaml<DefaultTableLayout>(path.join(content, 'words', 'table.yaml'));
+  return readYaml<DefaultTableLayout>(resolveUnder(content, 'words', 'table.yaml'), dataDir);
 }
 
 export function loadTopicTable(topicId: string, dataDir = getDataDir()): DefaultTableLayout {
+  assertSafeSlug(topicId, 'topic id');
   const topics = topicsDir(dataDir);
-  const override = path.join(topics, topicId, 'table.yaml');
+  const override = resolveUnder(topics, topicId, 'table.yaml');
   if (fs.existsSync(override)) {
-    return readYaml<DefaultTableLayout>(override);
+    return readYaml<DefaultTableLayout>(override, dataDir);
   }
-  return readYaml<DefaultTableLayout>(path.join(topics, 'table.yaml'));
+  return readYaml<DefaultTableLayout>(resolveUnder(topics, 'table.yaml'), dataDir);
 }
 
 function loadAllVerbForms(
   dataDir: string
 ): Record<string, Record<string, Record<string, string>>> {
+  const verbs = verbsDir(dataDir);
   const manifest = readYaml<{ forms: Record<string, string> }>(
-    path.join(verbsDir(dataDir), 'manifest.yaml')
+    path.join(verbs, 'manifest.yaml'),
+    dataDir,
   );
   const byTense: Record<string, Record<string, Record<string, string>>> = {};
   for (const [tense, rel] of Object.entries(manifest.forms)) {
     byTense[tense] = readYaml<Record<string, Record<string, string>>>(
-      path.join(verbsDir(dataDir), rel)
+      resolveUnder(verbs, rel),
+      dataDir,
     );
   }
   return byTense;
@@ -187,6 +213,7 @@ function resolveEntry(
 }
 
 export function loadTypePage(typeSlug: string, dataDir = getDataDir()) {
+  assertSafeSlug(typeSlug, 'type slug');
   const type = resolveTypeBySlug(typeSlug, dataDir);
   if (!type) {
     throw new Error(`Unknown type slug: ${typeSlug}`);
@@ -219,7 +246,7 @@ export function loadTypePage(typeSlug: string, dataDir = getDataDir()) {
 export function loadTopics(dataDir = getDataDir()): TopicMeta[] {
   const manifest = readYaml<{
     topics: Record<string, { label: string; description?: string }>;
-  }>(path.join(topicsDir(dataDir), 'manifest.yaml'));
+  }>(path.join(topicsDir(dataDir), 'manifest.yaml'), dataDir);
 
   return Object.entries(manifest.topics).map(([id, topic]) => ({
     id,
@@ -229,16 +256,18 @@ export function loadTopics(dataDir = getDataDir()): TopicMeta[] {
 }
 
 export function loadTopicPage(topicId: string, dataDir = getDataDir()) {
+  assertSafeSlug(topicId, 'topic id');
   const manifest = readYaml<{
     topics: Record<string, { label: string; description?: string }>;
-  }>(path.join(topicsDir(dataDir), 'manifest.yaml'));
+  }>(path.join(topicsDir(dataDir), 'manifest.yaml'), dataDir);
   const meta = manifest.topics[topicId];
   if (!meta) {
     throw new Error(`Unknown topic: ${topicId}`);
   }
 
   const topicData = readYaml<{ sections: Array<{ id: string; label: string; description?: string; entries: TopicEntry[] }> }>(
-    path.join(topicsDir(dataDir), topicId, 'topic.yaml')
+    resolveUnder(topicsDir(dataDir), topicId, 'topic.yaml'),
+    dataDir,
   );
   const vocabularyById = new Map(loadVocabulary(dataDir).map((v) => [v.id, v]));
   const examplesStore = loadExamplesStore(dataDir);
@@ -278,6 +307,7 @@ export function loadFlashcardDeck(
       }));
   }
 
+  assertSafeSlug(source, 'flashcard source');
   const { sections } = loadTopicPage(source, dataDir);
   const entries = sections.flatMap((s) => s.entries);
   return entries.map((entry) => ({
@@ -421,7 +451,7 @@ export function loadGrammarPatterns(dataDir = getDataDir()): GrammarPatternMeta[
         description?: string;
       }
     >;
-  }>(path.join(grammarDir(dataDir), 'manifest.yaml'));
+  }>(path.join(grammarDir(dataDir), 'manifest.yaml'), dataDir);
 
   return Object.entries(manifest.patterns).map(([id, pattern]) => ({
     id,
@@ -442,12 +472,13 @@ export function loadGrammarPatternsByCategory(
 }
 
 export function loadGrammarPatternPage(patternId: string, dataDir = getDataDir()): GrammarPatternPage {
+  assertSafeSlug(patternId, 'grammar pattern id');
   const patterns = loadGrammarPatterns(dataDir);
   const meta = patterns.find((p) => p.id === patternId);
   if (!meta) {
     throw new Error(`Unknown grammar pattern: ${patternId}`);
   }
-  return readYaml<GrammarPatternPage>(path.join(grammarDir(dataDir), meta.path));
+  return readYaml<GrammarPatternPage>(resolveUnder(grammarDir(dataDir), meta.path), dataDir);
 }
 
 export function buildVocabularySummary(dataDir = getDataDir()): {

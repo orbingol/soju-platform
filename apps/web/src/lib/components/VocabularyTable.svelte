@@ -4,6 +4,7 @@
 
   import type { ConjugationColumn, DefaultTableLayout, Example, ResolvedEntry, TopicSection, VerbEntry, VerbTableLayout } from '$lib/data/types';
   import { matchesVocabularySearch, resolveVerbCell } from '$lib/data/loader';
+  import { sanitizeHtml } from '$lib/sanitize-html';
   import ExampleCell from '$lib/components/ExampleCell.svelte';
   import RootCell from '$lib/components/RootCell.svelte';
   import SpeakButton from '$lib/components/SpeakButton.svelte';
@@ -244,7 +245,7 @@
         <section class="table-section">
           <h2>{section.label}</h2>
           {#if section.description}
-            <div class="section-description">{@html section.description}</div>
+            <div class="section-description">{@html sanitizeHtml(section.description)}</div>
           {/if}
           {#if section.entries.length > 0}
             <div class="table-wrap">

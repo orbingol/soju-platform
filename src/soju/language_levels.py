@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: BSD-3-Clause
-"""Korean course level config for AI prompts and vocabulary scoping."""
+"""Course level config for AI prompts and vocabulary scoping."""
 
 from __future__ import annotations
 
@@ -11,12 +11,20 @@ from typing import Any
 
 from soju import db
 
-DEFAULT_LEVEL = os.environ.get("SOJU_KOREAN_LEVEL", "1A")
+ENV_LANGUAGE_LEVEL = "SOJU_LANGUAGE_LEVEL"
+
 LEVELS_PATH = Path("content") / "levels.yaml"
 
 
+def _env_level() -> str | None:
+    return os.environ.get(ENV_LANGUAGE_LEVEL)
+
+
+DEFAULT_LEVEL = _env_level() or "1A"
+
+
 @dataclass(frozen=True)
-class KoreanLevel:
+class LanguageLevel:
     id: str
     label: str
     description: str
@@ -59,17 +67,17 @@ def list_level_ids(root=None) -> list[str]:
 def resolve_level_id(level_id: str | None, root=None) -> str:
     config = load_levels_config(root)
     levels = config.get("levels", {})
-    chosen = (level_id or os.environ.get("SOJU_KOREAN_LEVEL") or config.get("default", "1A")).strip()
+    chosen = (level_id or _env_level() or config.get("default", "1A")).strip()
     if chosen not in levels:
         known = ", ".join(sorted(levels))
-        raise ValueError(f"Unknown Korean level {chosen!r}. Known levels: {known}")
+        raise ValueError(f"Unknown language level {chosen!r}. Known levels: {known}")
     return chosen
 
 
 def _expand_level_ids(level_id: str, config: dict[str, Any]) -> list[str]:
     levels = config.get("levels", {})
     if level_id not in levels:
-        raise ValueError(f"Unknown Korean level: {level_id}")
+        raise ValueError(f"Unknown language level: {level_id}")
 
     seen: set[str] = set()
     order: list[str] = []
@@ -87,11 +95,11 @@ def _expand_level_ids(level_id: str, config: dict[str, Any]) -> list[str]:
     return order
 
 
-def get_korean_level(level_id: str | None = None, root=None) -> KoreanLevel:
+def get_language_level(level_id: str | None = None, root=None) -> LanguageLevel:
     config = load_levels_config(root)
     chosen = resolve_level_id(level_id, root)
     entry = config["levels"][chosen]
-    return KoreanLevel(
+    return LanguageLevel(
         id=chosen,
         label=str(entry.get("label", chosen)),
         description=str(entry.get("description", "")),
@@ -111,4 +119,4 @@ def vocabulary_for_level(level_id: str | None = None, root=None) -> list[dict]:
         entry_level = str(entry.get("level", fallback))
         if entry_level in included_ids:
             filtered.append(entry)
-    return filtered or vocabulary
+    return filtered

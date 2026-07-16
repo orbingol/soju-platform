@@ -214,7 +214,7 @@ English gloss, optional examples). Pipe stdout into ``soju-import``, or write wi
    uv run soju-translate-words --file words.txt --dry-run
    uv run soju-translate-words --file words.txt --skip-existing -o records.json
 
-Requires a reachable Ollama (or compatible) server unless ``--dry-run``. Level defaults to ``SOJU_KOREAN_LEVEL`` or ``1A``.
+Requires a reachable Ollama (or compatible) server unless ``--dry-run``. Level defaults to ``SOJU_LANGUAGE_LEVEL`` or ``1A``.
 
 ``soju-fill-examples``
 ----------------------

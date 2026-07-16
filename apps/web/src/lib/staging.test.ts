@@ -31,4 +31,11 @@ describe('staging', () => {
     const parsed = parsePracticeJson('```json\n{"sentences":[]}\n```');
     expect(parsed.sentences).toEqual([]);
   });
+
+  it('rejects malformed practice JSON', () => {
+    expect(() => parsePracticeJson('{"sentences":[{"hangul":"안녕"}]}')).toThrow(
+      /sentences\[0\]\.english/,
+    );
+    expect(() => parsePracticeJson('[]')).toThrow(/root must be an object/);
+  });
 });

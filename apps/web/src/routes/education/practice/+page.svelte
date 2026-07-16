@@ -1,6 +1,8 @@
 <script lang="ts">
   import yaml from 'yaml';
 
+  import { base } from '$app/paths';
+
   import AiServiceGate from '$lib/components/AiServiceGate.svelte';
   import { generatePracticeSession } from '$lib/practice';
   import { downloadTextFile, normalizePracticeSession, todayIsoDate, type PracticeSessionJson } from '$lib/staging';
@@ -52,8 +54,9 @@
     const date = todayIsoDate();
     status = 'Saving to data/staging…';
 
+    const stagingUrl = `${base}/api/staging`;
     const requests = [
-      fetch('/api/staging', {
+      fetch(stagingUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ kind: 'exercises', payload: docs.exercises, date }),
@@ -62,7 +65,7 @@
 
     if (docs.stories) {
       requests.push(
-        fetch('/api/staging', {
+        fetch(stagingUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ kind: 'stories', payload: docs.stories, date }),
@@ -72,7 +75,7 @@
 
     if (docs.vocabulary) {
       requests.push(
-        fetch('/api/staging', {
+        fetch(stagingUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ kind: 'vocabulary', payload: docs.vocabulary }),
@@ -121,14 +124,51 @@
     {/if}
 
     {#if session}
-      <div class="practice-tabs" role="tablist">
-        <button type="button" role="tab" aria-current={tab === 'sentences' ? 'page' : undefined} onclick={() => (tab = 'sentences')}>Sentences</button>
-        <button type="button" role="tab" aria-current={tab === 'questions' ? 'page' : undefined} onclick={() => (tab = 'questions')}>Questions</button>
-        <button type="button" role="tab" aria-current={tab === 'fill_in_blank' ? 'page' : undefined} onclick={() => (tab = 'fill_in_blank')}>Fill-in-blank</button>
-        <button type="button" role="tab" aria-current={tab === 'story' ? 'page' : undefined} onclick={() => (tab = 'story')}>Story</button>
+      <div class="practice-tabs" role="tablist" aria-label="Practice sections">
+        <button
+          type="button"
+          role="tab"
+          id="practice-tab-sentences"
+          aria-selected={tab === 'sentences'}
+          aria-controls="practice-panel-sentences"
+          tabindex={tab === 'sentences' ? 0 : -1}
+          onclick={() => (tab = 'sentences')}
+        >Sentences</button>
+        <button
+          type="button"
+          role="tab"
+          id="practice-tab-questions"
+          aria-selected={tab === 'questions'}
+          aria-controls="practice-panel-questions"
+          tabindex={tab === 'questions' ? 0 : -1}
+          onclick={() => (tab = 'questions')}
+        >Questions</button>
+        <button
+          type="button"
+          role="tab"
+          id="practice-tab-fill_in_blank"
+          aria-selected={tab === 'fill_in_blank'}
+          aria-controls="practice-panel-fill_in_blank"
+          tabindex={tab === 'fill_in_blank' ? 0 : -1}
+          onclick={() => (tab = 'fill_in_blank')}
+        >Fill-in-blank</button>
+        <button
+          type="button"
+          role="tab"
+          id="practice-tab-story"
+          aria-selected={tab === 'story'}
+          aria-controls="practice-panel-story"
+          tabindex={tab === 'story' ? 0 : -1}
+          onclick={() => (tab = 'story')}
+        >Story</button>
       </div>
 
-      <div class="practice-panel">
+      <div
+        class="practice-panel"
+        role="tabpanel"
+        id="practice-panel-{tab}"
+        aria-labelledby="practice-tab-{tab}"
+      >
         {#if tab === 'sentences'}
           <ol class="practice-list">
             {#each session.sentences ?? [] as sentence}

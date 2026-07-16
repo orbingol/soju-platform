@@ -1,4 +1,4 @@
-# Korean course levels for AI example generation and translation prompts.
+# Course levels for AI example generation and translation prompts.
 # Vocabulary: registry entries with no `level` field belong to `default`.
 # Higher levels include vocabulary from `include_levels` plus their own tagged entries.
 

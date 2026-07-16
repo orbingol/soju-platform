@@ -18,7 +18,7 @@
       },
       "level": {
         "type": "string",
-        "description": "Korean course level id (e.g. 1A, 1B). Omitted entries belong to the default level."
+        "description": "Course level id (e.g. 1A, 1B). Omitted entries belong to the default level."
       },
       "visibility": {
         "type": "string",
