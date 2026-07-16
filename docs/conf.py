@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import os
 import sys
 from datetime import date
 from importlib.metadata import PackageNotFoundError, version as pkg_version
@@ -13,6 +14,9 @@ from pathlib import Path
 DOCS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = DOCS_DIR.parent
 sys.path.insert(0, str(REPO_ROOT / "src"))
+
+# CLI option help (e.g. ``--level``) reads ``levels.yaml`` at import time.
+os.environ.setdefault("DATA_DIR", str(REPO_ROOT / "data"))
 
 # -- Project information -----------------------------------------------------
 project = "Soju"
@@ -32,6 +36,7 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx.ext.todo",
     "sphinx_copybutton",
+    "sphinxcontrib.typer",
 ]
 
 templates_path = ["_templates"]
@@ -76,18 +81,21 @@ copybutton_prompt_is_regexp = True
 copybutton_line_continuation_character = "\\"
 
 # -- Options for HTML output -------------------------------------------------
-html_theme = "furo"
+# Override with ``make html SPHINX_THEME=alabaster`` (theme package must be installed).
+html_theme = os.environ.get("SPHINX_THEME", "furo")
 html_title = "Soju Platform"
 html_short_title = "Soju"
 html_static_path = ["_static"]
 
-html_theme_options = {
-    "sidebar_hide_name": False,
-    "top_of_page_button": "edit",
-    "source_repository": "https://github.com/orbingol/soju-platform",
-    "source_branch": "main",
-    "source_directory": "docs/soju/",
-}
+html_theme_options: dict = {}
+if html_theme == "furo":
+    html_theme_options = {
+        "sidebar_hide_name": False,
+        "top_of_page_button": "edit",
+        "source_repository": "https://github.com/orbingol/soju-platform",
+        "source_branch": "main",
+        "source_directory": "docs/soju/",
+    }
 
 html_copy_source = True
 html_show_sourcelink = True

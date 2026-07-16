@@ -36,13 +36,15 @@ Assume Python commands run as `uv run …` or `uv run poe …` unless the venv i
 | Import verbs (JSON) | `cat verbs.json \| uv run soju-import verbs --stdin-json` |
 | Promote local words | `uv run soju-promote --topic <id>` |
 | CLI help | `uv run soju-import --help` (same pattern for other `soju-*`) |
+| Python tests | `uv run poe test` (unit + offline system; skips LLM) |
+| System / LLM / coverage | `uv run poe test-system` · `uv run poe test-llm` · `uv run poe test-all` · `uv run poe coverage` |
 | Build / serve docs | `uv run poe docs` · `uv run poe docs-serve` |
 
 Docker Compose **project name:** `soju` (`name: soju` in `docker-compose.yml`). Containers use the `soju-` prefix; named volumes use `soju_`.
 
 ## Python CLI catalog
 
-All entry points are installed by `uv sync` and invoked as `uv run <name>`. Details: `docs/soju/cli.rst` (Sphinx: `uv run poe docs-serve`).
+All entry points are installed by `uv sync` and invoked as `uv run <name>`. Details: `docs/soju/cli/` (Sphinx: `uv run poe docs-serve`).
 
 | Tool | Role |
 |------|------|
@@ -60,7 +62,7 @@ All entry points are installed by `uv sync` and invoked as `uv run <name>`. Deta
 ## Documentation
 
 - [README.md](README.md) — project overview (non-technical)
-- `docs/soju/` — Sphinx user guide (Furo, `.rst`): development + CLI; `uv run poe docs` / `docs-serve`
+- `docs/soju/` — Sphinx user guide (Furo, `.rst`): `development/` + `cli/`; `uv run poe docs` / `docs-serve`
 - `.ai/commands/` — slash-command workflows that parse input and call `soju-import` / `soju-promote`
 
 ## Default workflow
@@ -78,7 +80,7 @@ All entry points are installed by `uv sync` and invoked as `uv run <name>`. Deta
 1. **Environment:** `uv sync` before running Python CLIs or validation.
 2. **Vocabulary changes:** follow [Vocabulary writes](#vocabulary-writes)—always end with `uv run poe validate` (or Docker validate).
 3. **Web UI:** place app code under `apps/web/`; data from `DATA_DIR` (`./data` on host, `/data` in Docker).
-4. **Python tooling:** place CLI code under `src/soju/`.
+4. **Python tooling:** place CLI code under `src/soju/cli/`; services under `src/soju/services/`.
 5. **Before finishing:** `uv run poe validate` after any `data/` change; run web tests in Docker when touching `apps/web/src/lib/`.
 
 ## Vocabulary writes
@@ -147,4 +149,4 @@ Read the matching `.ai/commands/*.md` file before running.
 - Run `uv run poe validate` after any change under `data/`.
 - Web unit tests: `apps/web/src/lib/` (`*.test.ts`); run in Docker: `docker compose exec web npm test` (or `docker compose run --rm web npm test`).
 - Python unit tests: `uv run poe test`.
-- Prefer the catalog above; expand flags/options from `docs/soju/cli.rst` or `uv run <tool> --help`.
+- Prefer the catalog above; expand flags/options from `docs/soju/cli/` or `uv run <tool> --help`.

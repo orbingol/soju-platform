@@ -19,17 +19,36 @@ Soju Platform is a personal study project: curated word and verb lists, example 
 - **Practice** — generated exercises from your vocabulary (when AI features are enabled locally)
 - **Chat** — ask questions and practice with an AI tutor (when enabled locally)
 
+## For Users
+
+You only need [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed.
+
+1. Open a terminal in this project folder.
+2. Start Soju:
+
+   ```bash
+   docker compose up
+   ```
+
+3. In your browser, open [http://localhost:5173](http://localhost:5173).
+
+To stop, press `Ctrl+C` in the terminal (or quit Docker Desktop).
+
+Browsing words, grammar, and flashcards works out of the box. Practice and Chat need a local AI model (optional) — see the docs under **For Developers** if you want those.
+
 ## For Developers
 
-Technical setup, Docker, validation, and CLI tools:
+Requires [uv](https://docs.astral.sh/uv/). From the repo root:
 
 ```bash
 uv sync
-uv run poe docs-serve
+uv run poe docs-serve   # Documentation
+uv run poe validate     # Data checks
+uv run poe test         # Python tests
 ```
 
-- Sphinx user guide (Furo): `docs/soju/` — build with `uv run poe docs`, preview with `uv run poe docs-serve`
-- [AGENTS.md](AGENTS.md) — notes for AI coding agents working in this repo
+* Web app still runs via Docker: `docker compose up`
+* Agent rules: `AGENTS.md`
 
 ## License
 

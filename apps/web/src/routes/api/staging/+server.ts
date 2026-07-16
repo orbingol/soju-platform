@@ -25,14 +25,11 @@ const KIND_FILES: Record<StagingKind, (date: string) => string> = {
 };
 
 function isLoopbackAddress(address: string): boolean {
-  const host = address.trim().toLowerCase().replace(/^\[|\]$/g, '');
-  return (
-    host === '127.0.0.1' ||
-    host === '::1' ||
-    host === 'localhost' ||
-    host === '::ffff:127.0.0.1' ||
-    host.startsWith('127.')
-  );
+  const host = address
+    .trim()
+    .toLowerCase()
+    .replace(/^\[|\]$/g, '');
+  return host === '127.0.0.1' || host === '::1' || host === 'localhost' || host === '::ffff:127.0.0.1' || host.startsWith('127.');
 }
 
 /** True when the browser is talking to a localhost-bound Vite/dev server (incl. Docker publish). */

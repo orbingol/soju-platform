@@ -1,37 +1,43 @@
 @ECHO OFF
 
-pushd %~dp0
+REM SPDX-License-Identifier: BSD-3-Clause
+REM Sphinx documentation (run from docs\ or via ``uv run poe docs`` / ``docs-serve``).
 
-REM Command file for Sphinx documentation
+pushd %~dp0
 
 if "%SPHINXBUILD%" == "" (
     set SPHINXBUILD=sphinx-build
+)
+if "%SPHINXAUTOBUILD%" == "" (
+    set SPHINXAUTOBUILD=sphinx-autobuild
+)
+if "%SPHINX_THEME%" == "" (
+    set SPHINX_THEME=furo
 )
 set SOURCEDIR=soju
 set BUILDDIR=_build
 REM conf.py lives in docs\ (this directory), not under SOURCEDIR
 set SPHINXOPTS=-c . %SPHINXOPTS%
 
-%SPHINXBUILD% >NUL 2>NUL
-if errorlevel 9009 (
-    echo.
-    echo.The 'sphinx-build' command was not found. Make sure you have Sphinx
-    echo.installed ^(uv sync^), then set the SPHINXBUILD environment variable
-    echo.to point to the full path of the 'sphinx-build' executable.
-    echo.Alternatively you may add the Sphinx directory to PATH.
-    echo.
-    echo.If you don't have Sphinx installed, grab it from
-    echo.https://www.sphinx-doc.org/
-    exit /b 1
-)
+if "%1" == "html" goto html
+if "%1" == "clean" goto clean
+if "%1" == "serve" goto serve
 
-if "%1" == "" goto help
+echo Usage: make.bat [html^|clean^|serve]
+echo Theme: set SPHINX_THEME=alabaster (default: furo)
+exit /b 1
 
-%SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
+:html
+%SPHINXBUILD% -b html %SOURCEDIR% %BUILDDIR%/html %SPHINXOPTS% %O%
 goto end
 
-:help
-%SPHINXBUILD% -M help %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
+:clean
+if exist %BUILDDIR% rmdir /s /q %BUILDDIR%
+goto end
+
+:serve
+%SPHINXAUTOBUILD% %SOURCEDIR% %BUILDDIR%/html %SPHINXOPTS% %O% --open-browser
+goto end
 
 :end
 popd

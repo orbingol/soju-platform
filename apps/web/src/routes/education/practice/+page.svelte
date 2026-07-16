@@ -132,8 +132,8 @@
           aria-selected={tab === 'sentences'}
           aria-controls="practice-panel-sentences"
           tabindex={tab === 'sentences' ? 0 : -1}
-          onclick={() => (tab = 'sentences')}
-        >Sentences</button>
+          onclick={() => (tab = 'sentences')}>Sentences</button
+        >
         <button
           type="button"
           role="tab"
@@ -141,8 +141,8 @@
           aria-selected={tab === 'questions'}
           aria-controls="practice-panel-questions"
           tabindex={tab === 'questions' ? 0 : -1}
-          onclick={() => (tab = 'questions')}
-        >Questions</button>
+          onclick={() => (tab = 'questions')}>Questions</button
+        >
         <button
           type="button"
           role="tab"
@@ -150,8 +150,8 @@
           aria-selected={tab === 'fill_in_blank'}
           aria-controls="practice-panel-fill_in_blank"
           tabindex={tab === 'fill_in_blank' ? 0 : -1}
-          onclick={() => (tab = 'fill_in_blank')}
-        >Fill-in-blank</button>
+          onclick={() => (tab = 'fill_in_blank')}>Fill-in-blank</button
+        >
         <button
           type="button"
           role="tab"
@@ -159,16 +159,11 @@
           aria-selected={tab === 'story'}
           aria-controls="practice-panel-story"
           tabindex={tab === 'story' ? 0 : -1}
-          onclick={() => (tab = 'story')}
-        >Story</button>
+          onclick={() => (tab = 'story')}>Story</button
+        >
       </div>
 
-      <div
-        class="practice-panel"
-        role="tabpanel"
-        id="practice-panel-{tab}"
-        aria-labelledby="practice-tab-{tab}"
-      >
+      <div class="practice-panel" role="tabpanel" id="practice-panel-{tab}" aria-labelledby="practice-tab-{tab}">
         {#if tab === 'sentences'}
           <ol class="practice-list">
             {#each session.sentences ?? [] as sentence}

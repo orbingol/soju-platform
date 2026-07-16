@@ -28,11 +28,7 @@ export const chatCompletionsClient: AiClient = {
   checkAvailable: checkServerAvailable,
 
   async complete(request) {
-    const response = await fetchWithTimeout(
-      apiUrl('/v1/chat/completions'),
-      requestInit({ ...buildBody(request), stream: false }, request.signal),
-      AI_FETCH_TIMEOUT_MS,
-    );
+    const response = await fetchWithTimeout(apiUrl('/v1/chat/completions'), requestInit({ ...buildBody(request), stream: false }, request.signal), AI_FETCH_TIMEOUT_MS);
 
     if (!response.ok) {
       throw new Error(await readError(response));
@@ -46,11 +42,7 @@ export const chatCompletionsClient: AiClient = {
   },
 
   async *stream(request) {
-    const response = await fetchWithTimeout(
-      apiUrl('/v1/chat/completions'),
-      requestInit({ ...buildBody(request), stream: true }, request.signal),
-      AI_FETCH_TIMEOUT_MS,
-    );
+    const response = await fetchWithTimeout(apiUrl('/v1/chat/completions'), requestInit({ ...buildBody(request), stream: true }, request.signal), AI_FETCH_TIMEOUT_MS);
 
     if (!response.ok) {
       throw new Error(await readError(response));

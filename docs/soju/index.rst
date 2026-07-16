@@ -1,25 +1,60 @@
-Soju (소주) Platform docs
-===========================
+Soju (소주) Platform
+====================
 
-User guide for running the site, validating data, and using the Python CLIs.
-This is a command-oriented guide — there is no Python API / class reference.
+An **experimental** Korean language learning platform: vocabulary, grammar, and light
+practice in one place. This guide covers running the site, validating data, and using
+the Python CLIs — there is no Python API / class reference.
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Guide
+Getting started
+----------------
 
-   development
-   cli
-
-Quick start
------------
+You only need `Docker Desktop <https://www.docker.com/products/docker-desktop/>`_ installed.
 
 .. code-block:: bash
 
-   uv sync
-   uv run poe docs-serve
+   docker compose up
 
-Build HTML once with ``uv run poe docs`` (output: ``docs/_build/html/``).
+Then open http://localhost:5173 in your browser. Browsing words, grammar, and
+flashcards works out of the box; Practice and Chat need a local AI model — see
+:doc:`development/ai` if you want those.
 
-For a non-technical overview, see ``README.md`` at the repository root.
-Agent-oriented rules live in ``AGENTS.md`` at the repo root.
+For a non-technical overview of features, see ``README.md`` at the repository root.
+
+For contributors
+-----------------
+
+Setting up the Python tooling, running validation and tests, and building these docs
+is covered under **Development** below. Agent-oriented rules live in ``AGENTS.md`` at
+the repo root.
+
+.. toctree::
+   :maxdepth: 1
+   :caption: CLI reference
+
+   cli/validate-schemas
+   cli/align
+   cli/registry
+   cli/import
+   cli/promote
+   cli/translate-words
+   cli/fill-examples
+   cli/fill-verbs
+   cli/soju
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Development
+
+   development/site
+   development/ai
+   development/tts
+   development/static-build
+   development/validate
+   development/import
+   development/python
+   development/docs
+   development/editor
+   development/agents
+   development/data-layout
+   development/poe
+   development/docker

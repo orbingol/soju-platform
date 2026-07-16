@@ -10,11 +10,7 @@ export function apiUrl(path: string): string {
   return `${aiBaseUrl}${path.startsWith('/') ? path : `/${path}`}`;
 }
 
-export async function fetchWithTimeout(
-  url: string,
-  init: RequestInit = {},
-  timeoutMs = HEALTH_FETCH_TIMEOUT_MS,
-): Promise<Response> {
+export async function fetchWithTimeout(url: string, init: RequestInit = {}, timeoutMs = HEALTH_FETCH_TIMEOUT_MS): Promise<Response> {
   const controller = new AbortController();
   const timeout = globalThis.setTimeout(() => controller.abort(), timeoutMs);
   const external = init.signal;

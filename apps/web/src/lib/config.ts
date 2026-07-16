@@ -35,7 +35,7 @@ export const aiEnabled = firstDefined(PUBLIC_AI_ENABLED, dynamicPublicEnv.PUBLIC
 
 export const aiBaseUrl = (firstDefined(PUBLIC_AI_BASE_URL, dynamicPublicEnv.PUBLIC_OLLAMA_BASE_URL) ?? 'http://localhost:11434').replace(/\/$/, '');
 
-export const aiModel = firstDefined(PUBLIC_AI_MODEL, dynamicPublicEnv.PUBLIC_OLLAMA_MODEL) ?? 'gemma4:31b-mlx';
+export const aiModel = firstDefined(PUBLIC_AI_MODEL, dynamicPublicEnv.PUBLIC_OLLAMA_MODEL) ?? 'gemma4:e4b';
 
 export const aiApiMode: AiApiMode = firstDefined(PUBLIC_AI_API_MODE) === 'conversations' ? 'conversations' : 'chat-completions';
 

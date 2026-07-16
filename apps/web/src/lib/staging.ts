@@ -187,9 +187,7 @@ export function validatePracticeSessionJson(raw: unknown): PracticeSessionJson {
     if (!Array.isArray(raw.fill_in_blank)) {
       throw new Error('Invalid practice JSON: fill_in_blank must be an array');
     }
-    session.fill_in_blank = raw.fill_in_blank.map((item, index) =>
-      parseFillBlank(item, `fill_in_blank[${index}]`),
-    );
+    session.fill_in_blank = raw.fill_in_blank.map((item, index) => parseFillBlank(item, `fill_in_blank[${index}]`));
   }
 
   if (raw.story !== undefined) {
@@ -200,9 +198,7 @@ export function validatePracticeSessionJson(raw: unknown): PracticeSessionJson {
     if (!Array.isArray(raw.vocabulary_candidates)) {
       throw new Error('Invalid practice JSON: vocabulary_candidates must be an array');
     }
-    session.vocabulary_candidates = raw.vocabulary_candidates.map((item, index) =>
-      parseVocabularyCandidate(item, `vocabulary_candidates[${index}]`),
-    );
+    session.vocabulary_candidates = raw.vocabulary_candidates.map((item, index) => parseVocabularyCandidate(item, `vocabulary_candidates[${index}]`));
   }
 
   return session;

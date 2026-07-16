@@ -33,9 +33,7 @@ describe('staging', () => {
   });
 
   it('rejects malformed practice JSON', () => {
-    expect(() => parsePracticeJson('{"sentences":[{"hangul":"안녕"}]}')).toThrow(
-      /sentences\[0\]\.english/,
-    );
+    expect(() => parsePracticeJson('{"sentences":[{"hangul":"안녕"}]}')).toThrow(/sentences\[0\]\.english/);
     expect(() => parsePracticeJson('[]')).toThrow(/root must be an object/);
   });
 });

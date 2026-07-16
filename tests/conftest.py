@@ -3,12 +3,45 @@
 
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 import pytest
 import yaml
 
 from tests.constants import VERB_ID, WORD_ID
+
+
+def pytest_addoption(parser: pytest.Parser) -> None:
+    """Register optional flags used by system / LLM tests."""
+    parser.addoption(
+        "--llm",
+        action="store_true",
+        default=False,
+        help="Run @pytest.mark.llm tests (requires a reachable Ollama).",
+    )
+
+
+def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item]) -> None:
+    """Skip LLM tests unless ``--llm`` or ``SOJU_RUN_LLM_TESTS=1`` is set."""
+    run_llm = config.getoption("--llm") or os.environ.get("SOJU_RUN_LLM_TESTS", "").strip() in {
+        "1",
+        "true",
+        "yes",
+    }
+    if run_llm:
+        return
+    skip_llm = pytest.mark.skip(reason="needs --llm or SOJU_RUN_LLM_TESTS=1")
+    for item in items:
+        if item.get_closest_marker("llm") is not None:
+            item.add_marker(skip_llm)
+
+
+@pytest.fixture
+def data_env(data_root: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
+    """Point ``DATA_DIR`` at the fixture tree for in-process CLI / service calls."""
+    monkeypatch.setenv("DATA_DIR", str(data_root))
+    return data_root
 
 
 def _dump(path: Path, data) -> None:
@@ -204,13 +237,49 @@ def data_root(tmp_path: Path) -> Path:
                     "label": "Korean 1A",
                     "description": "Beginner",
                     "guidance": "Keep it simple.",
-                }
+                },
+                "1B": {
+                    "label": "Korean 1B",
+                    "description": "High beginner",
+                    "guidance": "Slightly richer sentences.",
+                },
             },
         },
     )
     _dump(
         content / "grammar" / "manifest.yaml",
-        {"patterns": {}},
+        {
+            "patterns": {
+                "do": {
+                    "path": "patterns/do.yaml",
+                    "label": "도",
+                    "form": "-도",
+                    "english": "also / even",
+                    "category": "particles",
+                    "description": "Additive particle.",
+                }
+            }
+        },
+    )
+    _dump(
+        content / "grammar" / "patterns" / "do.yaml",
+        {
+            "id": "do",
+            "form": "-도",
+            "romanization": "do",
+            "english": "also / even",
+            "category": "particles",
+            "summary": "Additive particle: also/too, or even.",
+            "sections": [
+                {
+                    "id": "also",
+                    "label": "Also / too",
+                    "examples": [
+                        {"hangul": "저도 학생이에요.", "english": "I am also a student."},
+                    ],
+                }
+            ],
+        },
     )
     _dump(staging / "vocabulary-candidates.yaml", {"staging": True, "entries": []})
     (staging / "exercises").mkdir(parents=True, exist_ok=True)

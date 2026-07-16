@@ -1,22 +1,24 @@
-# Minimal makefile for Sphinx documentation
-#
+# SPDX-License-Identifier: BSD-3-Clause
+# Sphinx documentation (run from docs/ or via ``uv run poe docs`` / ``docs-serve``).
 
-# You can set these variables from the command line, and also
-# from the environment for the first two.
-SPHINXOPTS    ?=
-SPHINXBUILD   ?= sphinx-build
-SOURCEDIR     = soju
-BUILDDIR      = _build
+SPHINXOPTS      ?=
+SPHINXBUILD     ?= sphinx-build
+SPHINXAUTOBUILD ?= sphinx-autobuild
+SPHINX_THEME    ?= furo
+SOURCEDIR       = soju
+BUILDDIR        = _build
 # conf.py lives in docs/ (this directory), not under SOURCEDIR
-SPHINXOPTS    := -c . $(SPHINXOPTS)
+SPHINXOPTS      := -c . $(SPHINXOPTS)
 
-# Put it first so that "make" without argument is like "make help".
-help:
-	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+export SPHINX_THEME
 
-.PHONY: help Makefile
+.PHONY: html clean serve
 
-# Catch-all target: route all unknown targets to Sphinx using the new
-# "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
-%: Makefile
-	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+html:
+	@$(SPHINXBUILD) -b html "$(SOURCEDIR)" "$(BUILDDIR)/html" $(SPHINXOPTS) $(O)
+
+clean:
+	@rm -rf "$(BUILDDIR)"
+
+serve:
+	@$(SPHINXAUTOBUILD) "$(SOURCEDIR)" "$(BUILDDIR)/html" $(SPHINXOPTS) $(O) --open-browser

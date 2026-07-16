@@ -1,0 +1,69 @@
+Poe tasks (shortcuts)
+=====================
+
+`poethepoet <https://poethepoet.natn.io/>`_ tasks, defined in ``pyproject.toml``, wrap the
+CLIs under :doc:`/cli/index` for common workflows. Run any of them with ``uv run poe <task>``.
+
+Validate
+--------
+
+.. list-table::
+   :header-rows: 1
+   :widths: 35 65
+
+   * - Task
+     - Command
+   * - Full validate
+     - ``uv run poe validate``
+   * - Schema / align / registry only
+     - ``uv run poe validate-schemas`` · ``validate-align`` · ``validate-registry``
+   * - Validate in Docker
+     - ``uv run poe validate-docker``
+
+Import & translate
+-------------------
+
+.. list-table::
+   :header-rows: 1
+   :widths: 35 65
+
+   * - Task
+     - Command
+   * - Import words (file, merge-only)
+     - ``uv run poe import-words --file words.txt --topic common``
+   * - Import verbs (stdin JSON)
+     - ``uv run poe import-verbs``
+   * - Translate words → JSON
+     - ``uv run poe translate-words --file words.txt``
+
+Test & docs
+-----------
+
+.. list-table::
+   :header-rows: 1
+   :widths: 35 65
+
+   * - Task
+     - Command
+   * - Python tests (unit + offline system)
+     - ``uv run poe test``
+   * - System / LLM / all / coverage
+     - ``uv run poe test-system`` · ``test-llm`` · ``test-all`` · ``coverage``
+   * - Build docs
+     - ``uv run poe docs``
+   * - Serve docs (live reload)
+     - ``uv run poe docs-serve``
+
+Lint & pre-commit
+-----------------
+
+.. list-table::
+   :header-rows: 1
+   :widths: 35 65
+
+   * - Task
+     - Command
+   * - Lint
+     - ``uv run poe lint``
+   * - Pre-commit (all hooks)
+     - ``uv run poe pre-commit``

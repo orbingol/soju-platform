@@ -14,18 +14,21 @@ authors = [
 ]
 keywords = ["korean", "language-learning", "vocabulary", "education"]
 classifiers = [
-  "Development Status :: 3 - Alpha",
+  "Development Status :: 4 - Beta",
   "Intended Audience :: Education",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Programming Language :: Python :: 3.15",
   "Topic :: Education",
 ]
 dependencies = [
   "check-jsonschema>=0.34.0",
   "poethepoet>=0.32.0",
   "pyyaml>=6.0.2",
+  "typer>=0.16.0",
 ]
 dynamic = ["version"]
 
@@ -35,14 +38,15 @@ Repository = "https://github.com/orbingol/soju-platform"
 Issues = "https://github.com/orbingol/soju-platform/issues"
 
 [project.scripts]
-soju-align = "soju.align:main"
-soju-registry = "soju.registry:main"
-soju-import = "soju.intake:main"
-soju-promote = "soju.promote:main"
-soju-validate-schemas = "soju.validate_schemas:main"
-soju-fill-verbs = "soju.fill_verbs:main"
-soju-translate-words = "soju.translate_words:main"
-soju-fill-examples = "soju.fill_examples:main"
+soju-align = "soju.cli.validate:align_main"
+soju-registry = "soju.cli.validate:registry_main"
+soju-validate-schemas = "soju.cli.validate:schemas_main"
+soju-import = "soju.cli.words:main"
+soju-promote = "soju.cli.promote:main"
+soju-fill-verbs = "soju.cli.verbs:fill_main"
+soju-translate-words = "soju.cli.translate:main"
+soju-fill-examples = "soju.cli.examples:main"
+soju = "soju.cli.app:main"
 
 [dependency-groups]
 docs = [
@@ -50,10 +54,12 @@ docs = [
   "furo>=2024.8.6",
   "sphinx-autobuild>=2024.10.3",
   "sphinx-copybutton>=0.5.2",
+  "sphinxcontrib-typer>=0.9.0",
 ]
 dev = [
   "pre-commit>=4.0.0",
   "pytest>=8.0.0",
+  "pytest-cov>=7.1.0",
   "python-dotenv>=1.0.0",
 ]
 
@@ -70,6 +76,24 @@ default-groups = ["docs", "dev"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+markers = [
+  "system: end-to-end CLI / data-pipeline tests on a temp data tree",
+  "llm: requires a reachable Ollama (skipped unless --llm or SOJU_RUN_LLM_TESTS=1)",
+]
+
+[tool.coverage.run]
+source = ["soju"]
+branch = false
+omit = ["src/soju/_version.py"]
+
+[tool.coverage.report]
+show_missing = true
+skip_empty = true
+exclude_lines = [
+  "pragma: no cover",
+  "if TYPE_CHECKING:",
+  "raise NotImplementedError",
+]
 
 [tool.doc8]
 max-line-length = 180
@@ -108,10 +132,6 @@ cmd = "soju-import verbs --stdin-json"
 help = "Run validation inside the validate Docker image."
 cmd = "docker compose --profile validate run --rm validate"
 
-[tool.poe.tasks.test]
-help = "Run Python unit tests."
-cmd = "pytest"
-
 [tool.poe.tasks.pre-commit]
 help = "Run pre-commit hooks on all files."
 cmd = "pre-commit run --all-files"
@@ -120,10 +140,36 @@ cmd = "pre-commit run --all-files"
 help = "Alias for pre-commit (run hooks on all files)."
 ref = "pre-commit"
 
+[tool.poe.tasks.test]
+help = "Run Python unit + offline system tests (skips @pytest.mark.llm)."
+cmd = "pytest -m \"not llm\""
+
+[tool.poe.tasks.test-unit]
+help = "Run Python unit tests only (exclude system and llm)."
+cmd = "pytest -m \"not system and not llm\""
+
+[tool.poe.tasks.test-system]
+help = "Run offline system tests (CLI pipelines on temp data; skips llm)."
+cmd = "pytest -m \"system and not llm\""
+
+[tool.poe.tasks.test-llm]
+help = "Run optional LLM system tests (needs Ollama; pass --llm)."
+cmd = "pytest -m llm --llm"
+
+[tool.poe.tasks.test-all]
+help = "Run unit, offline system, and LLM tests (needs Ollama for @pytest.mark.llm)."
+cmd = "pytest --llm"
+
+[tool.poe.tasks.coverage]
+help = "Run unit + offline system tests with line coverage for soju."
+cmd = "pytest -m \"not llm\" --cov=soju --cov-report=term-missing"
+
 [tool.poe.tasks.docs]
 help = "Build Sphinx HTML user guide into docs/_build/html."
-cmd = "sphinx-build -b html -c docs docs/soju docs/_build/html"
+cmd = "make clean html"
+cwd = "docs"
 
 [tool.poe.tasks.docs-serve]
 help = "Build and serve Sphinx docs with live reload."
-cmd = "sphinx-autobuild -c docs docs/soju docs/_build/html --open-browser"
+cmd = "make clean html serve"
+cwd = "docs"
