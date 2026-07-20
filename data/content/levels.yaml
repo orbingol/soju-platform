@@ -15,6 +15,16 @@ levels:
       - Add situational context from the vocabulary list: a place, object, person, or activity — not just a time word + verb.
       - Use mostly vocabulary from the list below (places, time words, objects, people).
       - casual_polite = 해요-style; formal_polite = 합니다-style.
+    grammar_summary: |
+      Core grammar for this level:
+      - Subject/topic particles -이/가, -은/는; object particle -을/를.
+      - Location/time particles -에 (at/to/in a time or place) and -에서 (at/from, action location).
+      - Sentence enders: -이에요/예요 (be); -이/가 있어요/없어요 (have/exist); casual_polite
+        (-아요/-어요/-여요) and formal_polite (-습니다/-ㅂ니다) verb endings.
+      - Simple negation with 안 + verb; 못 + verb for inability.
+      - Basic connectors: -하고 (and/with), -도 (also/even).
+      - Question words: 뭐, 누구, 어디, 언제, 왜, 어떻게, 얼마나.
+      - Numbers (Sino-Korean and native) with common counters (개, 명, 살, 시).
   1B:
     label: Korean 1B
     description: Second-semester high-beginner Korean.

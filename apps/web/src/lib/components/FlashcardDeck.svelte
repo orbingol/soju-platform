@@ -15,13 +15,13 @@
     type Flashcard,
     type FlashcardProgress,
   } from '$lib/flashcards';
-  import type { WordTopicMeta } from '$lib/data/types';
+  import type { TopicMeta } from '$lib/data/types';
   import SpeakButton from '$lib/components/SpeakButton.svelte';
 
   interface Props {
     cards: Flashcard[];
     source: string;
-    topics: WordTopicMeta[];
+    topics: TopicMeta[];
   }
 
   let { cards, source, topics }: Props = $props();

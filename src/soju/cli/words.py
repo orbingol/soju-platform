@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: BSD-3-Clause
-"""``soju-import`` words / verbs subcommands."""
+"""``soju import`` words / verbs subcommands."""
 
 from __future__ import annotations
 
@@ -121,8 +121,3 @@ def verbs(
         print(f"  error: {error}", file=sys.stderr)
     if report.errors and report.added == 0:
         raise typer.Exit(1)
-
-
-def main() -> None:
-    """Console-script entry for ``soju-import``."""
-    app(prog_name="soju-import")

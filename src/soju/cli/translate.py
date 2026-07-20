@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: BSD-3-Clause
-"""``soju-translate-words`` console script."""
+"""``soju translate-words`` command."""
 
 from __future__ import annotations
 
@@ -46,7 +46,7 @@ def translate(
         flag("--dry-run", help="Parse input and print summary without calling Ollama"),
     ] = False,
 ) -> None:
-    """Translate a plain-text word list into soju-import JSON via Ollama."""
+    """Translate a plain-text word list into soju import JSON via Ollama."""
     if not file.is_file():
         print(f"Error: file not found: {file}", file=sys.stderr)
         raise typer.Exit(2)
@@ -99,8 +99,3 @@ def translate(
         print(f"Wrote {len(records)} records to {output}.", file=sys.stderr)
     else:
         print(rendered)
-
-
-def main() -> None:
-    """Console-script entry for ``soju-translate-words``."""
-    app(prog_name="soju-translate-words")

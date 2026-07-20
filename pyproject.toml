@@ -38,14 +38,6 @@ Repository = "https://github.com/orbingol/soju-platform"
 Issues = "https://github.com/orbingol/soju-platform/issues"
 
 [project.scripts]
-soju-align = "soju.cli.validate:align_main"
-soju-registry = "soju.cli.validate:registry_main"
-soju-validate-schemas = "soju.cli.validate:schemas_main"
-soju-import = "soju.cli.words:main"
-soju-promote = "soju.cli.promote:main"
-soju-fill-verbs = "soju.cli.verbs:fill_main"
-soju-translate-words = "soju.cli.translate:main"
-soju-fill-examples = "soju.cli.examples:main"
 soju = "soju.cli.app:main"
 
 [dependency-groups]
@@ -102,9 +94,9 @@ max-line-length = 180
 line-length = 180
 
 [tool.poe.tasks]
-validate-schemas = "soju-validate-schemas"
-validate-align = "soju-align"
-validate-registry = "soju-registry"
+validate-schemas = "soju validate-schemas"
+validate-align = "soju align"
+validate-registry = "soju registry"
 
 [tool.poe.tasks.validate]
 help = "Run JSON Schema checks, alignment, and registry validation."
@@ -116,17 +108,21 @@ sequence = [
 
 [tool.poe.tasks.import-words]
 help = "Import words from a text file into a topic (existing words: merge examples only)."
-cmd = "soju-import words --topic ${topic} --file ${file}"
+cmd = "soju import words --topic ${topic} --file ${file}"
 args = [{ name = "topic", default = "family" }, { name = "file", options = ["-f", "--file"], required = true }]
 
 [tool.poe.tasks.translate-words]
-help = "Translate a plain-text word list to JSON via Ollama (pipe to soju-import)."
-cmd = "soju-translate-words --file ${file}"
+help = "Translate a plain-text word list to JSON via Ollama (pipe to soju import)."
+cmd = "soju translate-words --file ${file}"
 args = [{ name = "file", options = ["-f", "--file"], required = true }]
 
 [tool.poe.tasks.import-verbs]
 help = "Import verbs from JSON on stdin (AI-assisted workflow)."
-cmd = "soju-import verbs --stdin-json"
+cmd = "soju import verbs --stdin-json"
+
+[tool.poe.tasks.embed-index]
+help = "Build the Ollama embedding cache for Practice retrieval (data/cache/embeddings/)."
+cmd = "soju embed-index"
 
 [tool.poe.tasks.validate-docker]
 help = "Run validation inside the validate Docker image."

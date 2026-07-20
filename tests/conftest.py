@@ -281,6 +281,14 @@ def data_root(tmp_path: Path) -> Path:
             ],
         },
     )
+    _dump(
+        content / "practice" / "themes.yaml",
+        {
+            "themes": [
+                {"id": "cafe", "label": "Café", "description": "Ordering food and drinks."},
+            ]
+        },
+    )
     _dump(staging / "vocabulary-candidates.yaml", {"staging": True, "entries": []})
     (staging / "exercises").mkdir(parents=True, exist_ok=True)
     (staging / "stories").mkdir(parents=True, exist_ok=True)

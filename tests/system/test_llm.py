@@ -26,7 +26,7 @@ def ollama_ready() -> OllamaClient:
 
 
 def test_translate_words_via_cli(data_env: Path, tmp_path: Path, ollama_ready: OllamaClient) -> None:
-    """``soju-translate-words`` produces importable JSON for a single hangul line."""
+    """``soju translate-words`` produces importable JSON for a single hangul line."""
     word_list = tmp_path / "words.txt"
     word_list.write_text("사과\n", encoding="utf-8")
     out = tmp_path / "out.json"
@@ -53,7 +53,7 @@ def test_translate_words_via_cli(data_env: Path, tmp_path: Path, ollama_ready: O
 
 
 def test_fill_examples_via_cli_limit(data_env: Path, ollama_ready: OllamaClient) -> None:
-    """``soju-fill-examples`` with ``--limit 1`` talks to Ollama for one entry."""
+    """``soju fill-examples`` with ``--limit 1`` talks to Ollama for one entry."""
     result = runner.invoke(
         examples_cli.app,
         [

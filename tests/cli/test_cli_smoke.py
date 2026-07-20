@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: BSD-3-Clause
-"""Characterization tests for the public ``soju-*`` CLI surface.
+"""Characterization tests for the public ``soju`` CLI surface.
 
 Pins ``--help`` text / exit codes and cheap dry-runs so CLI flag/defaults
-regressions are caught (baselines are Typer help after Phase 8).
+regressions are caught.
 """
 
 from __future__ import annotations
@@ -13,12 +13,12 @@ from pathlib import Path
 
 import pytest
 
-# Exact Typer help baselines (Phase 8). Capture with OLLAMA_* unset for stable defaults.
+# Exact Typer help baselines. Capture with OLLAMA_* unset for stable defaults.
 HELP_CASES: list[tuple[list[str], str]] = [
     (
-        ["soju-import", "--help"],
+        ["soju", "import", "--help"],
         """\
-Usage: soju-import [OPTIONS] COMMAND [ARGS]...
+Usage: soju import [OPTIONS] COMMAND [ARGS]...
 
   Import vocabulary into Soju data files.
 
@@ -31,9 +31,9 @@ Commands:
 """,
     ),
     (
-        ["soju-import", "words", "--help"],
+        ["soju", "import", "words", "--help"],
         """\
-Usage: soju-import words [OPTIONS]
+Usage: soju import words [OPTIONS]
 
   Import words into a topic.
 
@@ -48,9 +48,9 @@ Options:
 """,
     ),
     (
-        ["soju-import", "verbs", "--help"],
+        ["soju", "import", "verbs", "--help"],
         """\
-Usage: soju-import verbs [OPTIONS]
+Usage: soju import verbs [OPTIONS]
 
   Import verbs.
 
@@ -62,9 +62,9 @@ Options:
 """,
     ),
     (
-        ["soju-promote", "--help"],
+        ["soju", "promote", "--help"],
         """\
-Usage: soju-promote [OPTIONS]
+Usage: soju promote [OPTIONS]
 
   Promote local topic entries to registry.
 
@@ -75,9 +75,9 @@ Options:
 """,
     ),
     (
-        ["soju-fill-verbs", "--help"],
+        ["soju", "fill-verbs", "--help"],
         """\
-Usage: soju-fill-verbs [OPTIONS]
+Usage: soju fill-verbs [OPTIONS]
 
   Generate verb forms and examples for registry verbs.
 
@@ -91,9 +91,9 @@ Options:
 """,
     ),
     (
-        ["soju-fill-examples", "--help"],
+        ["soju", "fill-examples", "--help"],
         """\
-Usage: soju-fill-examples [OPTIONS]
+Usage: soju fill-examples [OPTIONS]
 
   Generate noun and verb example sentences via Ollama.
 
@@ -128,11 +128,11 @@ Options:
 """,
     ),
     (
-        ["soju-translate-words", "--help"],
+        ["soju", "translate-words", "--help"],
         """\
-Usage: soju-translate-words [OPTIONS]
+Usage: soju translate-words [OPTIONS]
 
-  Translate a plain-text word list into soju-import JSON via Ollama.
+  Translate a plain-text word list into soju import JSON via Ollama.
 
 Options:
   -f, --file <path>      Plain-text word list file  [required]
@@ -148,6 +148,24 @@ Options:
   -h, --help             Show this message and exit.
 """,
     ),
+    (
+        ["soju", "embed-index", "--help"],
+        """\
+Usage: soju embed-index [OPTIONS]
+
+  Build the Ollama embedding cache for Practice retrieval
+  (data/cache/embeddings/).
+
+Options:
+  --base-url <str>     Ollama base URL  [default: http://localhost:11434]
+  --embed-model <str>  Ollama embedding model (default: SOJU_EMBED_MODEL or
+                       nomic-embed-text)  [default: nomic-embed-text]
+  --batch-size <int>   Documents per Ollama /api/embed batch request
+                       [default: 32]
+  --dry-run            Count documents to embed without calling Ollama
+  -h, --help           Show this message and exit.
+""",
+    ),
 ]
 
 
@@ -157,7 +175,7 @@ def _run_script(
     env: dict[str, str] | None = None,
     stdin: str | None = None,
 ) -> subprocess.CompletedProcess[str]:
-    """Invoke an installed ``soju-*`` console script by name."""
+    """Invoke the installed ``soju`` console script."""
     full_env = os.environ.copy()
     if env:
         full_env.update(env)
@@ -177,7 +195,7 @@ def _run_script(
     ids=[" ".join(args) for args, _ in HELP_CASES],
 )
 def test_cli_help_baseline(args: list[str], expected_stdout: str) -> None:
-    """Each CLI ``--help`` matches the Phase-8 Typer baseline byte-for-byte."""
+    """Each CLI ``--help`` matches the Typer baseline byte-for-byte."""
     full_env = os.environ.copy()
     full_env.pop("OLLAMA_MODEL", None)
     full_env.pop("OLLAMA_HOST", None)
@@ -190,11 +208,11 @@ def test_cli_help_baseline(args: list[str], expected_stdout: str) -> None:
 @pytest.mark.parametrize(
     ("args", "expected_stdout"),
     [
-        (["soju-align"], "Verb data alignment OK.\n"),
-        (["soju-registry"], "Registry validation OK.\n"),
-        (["soju-validate-schemas"], "Schema validation passed.\n"),
+        (["soju", "align"], "Verb data alignment OK.\n"),
+        (["soju", "registry"], "Registry validation OK.\n"),
+        (["soju", "validate-schemas"], "Schema validation passed.\n"),
     ],
-    ids=["soju-align", "soju-registry", "soju-validate-schemas"],
+    ids=["soju align", "soju registry", "soju validate-schemas"],
 )
 def test_validator_cli_ok_on_repo_data(args: list[str], expected_stdout: str) -> None:
     """No-arg validator CLIs succeed against the checked-in ``data/`` tree.
@@ -210,7 +228,7 @@ def test_validator_cli_ok_on_repo_data(args: list[str], expected_stdout: str) ->
 
 def test_promote_dry_run(data_root: Path) -> None:
     result = _run_script(
-        ["soju-promote", "--topic", "family", "--dry-run"],
+        ["soju", "promote", "--topic", "family", "--dry-run"],
         env={"DATA_DIR": str(data_root)},
     )
     assert result.returncode == 0, result.stderr
@@ -220,7 +238,7 @@ def test_promote_dry_run(data_root: Path) -> None:
 
 def test_fill_verbs_dry_run(data_root: Path) -> None:
     result = _run_script(
-        ["soju-fill-verbs", "--dry-run"],
+        ["soju", "fill-verbs", "--dry-run"],
         env={"DATA_DIR": str(data_root)},
     )
     assert result.returncode == 0, result.stderr
@@ -230,7 +248,7 @@ def test_fill_verbs_dry_run(data_root: Path) -> None:
 
 def test_fill_examples_dry_run_local(data_root: Path) -> None:
     result = _run_script(
-        ["soju-fill-examples", "--dry-run", "--local", "--limit", "1"],
+        ["soju", "fill-examples", "--dry-run", "--local", "--limit", "1"],
         env={"DATA_DIR": str(data_root)},
     )
     assert result.returncode == 0, result.stderr
@@ -243,7 +261,7 @@ def test_translate_words_dry_run(data_root: Path, tmp_path: Path) -> None:
     word_list = tmp_path / "words.txt"
     word_list.write_text("사과\n", encoding="utf-8")
     result = _run_script(
-        ["soju-translate-words", "--file", str(word_list), "--dry-run"],
+        ["soju", "translate-words", "--file", str(word_list), "--dry-run"],
         env={"DATA_DIR": str(data_root)},
     )
     assert result.returncode == 0, result.stderr
@@ -256,7 +274,8 @@ def test_import_words_dry_run(data_root: Path) -> None:
     payload = '[{"hangul":"책","romanization":"chaek","english":"book"}]'
     result = _run_script(
         [
-            "soju-import",
+            "soju",
+            "import",
             "words",
             "--topic",
             "family",
@@ -281,10 +300,21 @@ def test_import_verbs_dry_run(data_root: Path) -> None:
         '"future":{"casual_polite":"갈 거예요","formal_polite":"가겠습니다"}}}]'
     )
     result = _run_script(
-        ["soju-import", "verbs", "--stdin-json", "--dry-run"],
+        ["soju", "import", "verbs", "--stdin-json", "--dry-run"],
         env={"DATA_DIR": str(data_root)},
         stdin=payload,
     )
     assert result.returncode == 0, result.stderr
     assert result.stdout == "[dry-run] added=1 merged_examples=0 add_ref=0 skipped=0 errors=0\n"
     assert result.stderr == ""
+
+
+def test_embed_index_dry_run(data_root: Path) -> None:
+    result = _run_script(
+        ["soju", "embed-index", "--dry-run"],
+        env={"DATA_DIR": str(data_root)},
+    )
+    assert result.returncode == 0, result.stderr
+    assert result.stdout == ""
+    assert "Would embed" in result.stderr
+    assert "vocabulary entries" in result.stderr

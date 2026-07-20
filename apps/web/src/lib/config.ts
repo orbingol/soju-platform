@@ -1,5 +1,13 @@
 import { env as dynamicPublicEnv } from '$env/dynamic/public';
-import { PUBLIC_AI_API_MODE, PUBLIC_AI_BASE_URL, PUBLIC_AI_ENABLED, PUBLIC_AI_MODEL, PUBLIC_AI_SYSTEM_PROMPT, PUBLIC_AI_TUTOR_NAME } from '$env/static/public';
+import {
+  PUBLIC_AI_API_MODE,
+  PUBLIC_AI_BASE_URL,
+  PUBLIC_AI_EMBED_MODEL,
+  PUBLIC_AI_ENABLED,
+  PUBLIC_AI_MODEL,
+  PUBLIC_AI_SYSTEM_PROMPT,
+  PUBLIC_AI_TUTOR_NAME,
+} from '$env/static/public';
 
 export type AiApiMode = 'chat-completions' | 'conversations';
 export type TtsEngine = 'piper' | 'browser';
@@ -36,6 +44,9 @@ export const aiEnabled = firstDefined(PUBLIC_AI_ENABLED, dynamicPublicEnv.PUBLIC
 export const aiBaseUrl = (firstDefined(PUBLIC_AI_BASE_URL, dynamicPublicEnv.PUBLIC_OLLAMA_BASE_URL) ?? 'http://localhost:11434').replace(/\/$/, '');
 
 export const aiModel = firstDefined(PUBLIC_AI_MODEL, dynamicPublicEnv.PUBLIC_OLLAMA_MODEL) ?? 'gemma4:e4b';
+
+/** Ollama embedding model for Practice's browser-side theme embedding (must match `soju embed-index`). */
+export const aiEmbedModel = firstDefined(PUBLIC_AI_EMBED_MODEL, dynamicPublicEnv.PUBLIC_OLLAMA_EMBED_MODEL) ?? 'nomic-embed-text';
 
 export const aiApiMode: AiApiMode = firstDefined(PUBLIC_AI_API_MODE) === 'conversations' ? 'conversations' : 'chat-completions';
 

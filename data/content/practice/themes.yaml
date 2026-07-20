@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../../schemas/practice_themes.schema.json
+
+themes:
+  - id: cafe
+    label: Café
+    description: Ordering drinks and food, asking about menu items, small talk with staff.
+  - id: directions
+    label: Directions
+    description: Asking for and giving directions, locations, and transportation.
+  - id: family
+    label: Family
+    description: Talking about family members, introductions, and relationships.
+  - id: daily_routine
+    label: Daily routine
+    description: Describing a typical day, habits, and schedules.
+  - id: shopping
+    label: Shopping
+    description: Buying clothes or groceries, asking prices and sizes, comparing items.

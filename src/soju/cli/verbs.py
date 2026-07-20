@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: BSD-3-Clause
-"""``soju-fill-verbs`` console script."""
+"""``soju fill-verbs`` command."""
 
 from __future__ import annotations
 
@@ -44,8 +44,3 @@ def fill_verbs_cmd(
     if strict and counts["filled_forms"] == 0 and counts["verbs"] > 0:
         print("Error: --strict and nothing was filled.", file=sys.stderr)
         raise typer.Exit(1)
-
-
-def fill_main() -> None:
-    """Console-script entry for ``soju-fill-verbs``."""
-    app(prog_name="soju-fill-verbs")

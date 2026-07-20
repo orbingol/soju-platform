@@ -84,6 +84,7 @@ export interface ResolvedEntry {
   romanization: string;
   english: string;
   type: string;
+  visibility?: 'visible' | 'hidden';
   examples?: Example[];
 }
 
@@ -161,4 +162,24 @@ export interface GrammarPatternPage {
   sections: GrammarSection[];
   conversations?: GrammarConversation[];
   phrase_refs?: string[];
+}
+
+export interface PracticeTheme {
+  id: string;
+  label: string;
+  description: string;
+}
+
+export interface LevelConfig {
+  id: string;
+  label: string;
+  description: string;
+  guidance: string;
+  grammarSummary?: string;
+  includeLevels?: string[];
+}
+
+export interface LevelsConfig {
+  default: string;
+  levels: LevelConfig[];
 }

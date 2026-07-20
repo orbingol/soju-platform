@@ -92,3 +92,43 @@ def test_chat_propagates_request_error() -> None:
     with patch("soju.llm.ollama._request", side_effect=OllamaError("fail")):
         with pytest.raises(OllamaError, match="fail"):
             client.chat([{"role": "user", "content": "hi"}])
+
+
+def test_embed_returns_vector() -> None:
+    client = OllamaClient(base_url="http://localhost:11434", model="nomic-embed-text")
+    with patch("soju.llm.ollama._request", return_value={"embedding": [0.1, 0.2, 0.3]}) as req:
+        vector = client.embed("hello")
+        assert vector == [0.1, 0.2, 0.3]
+        assert req.call_args.args[1] == "/api/embeddings"
+        assert req.call_args.args[2] == {"model": "nomic-embed-text", "prompt": "hello"}
+
+
+def test_embed_empty_response_raises() -> None:
+    client = OllamaClient(base_url="http://localhost:11434", model="nomic-embed-text")
+    with patch("soju.llm.ollama._request", return_value={"embedding": []}):
+        with pytest.raises(OllamaError, match="empty or invalid embedding"):
+            client.embed("hello")
+
+
+def test_embed_batch_returns_vectors_in_order() -> None:
+    client = OllamaClient(base_url="http://localhost:11434", model="nomic-embed-text")
+    payload = {"embeddings": [[0.1, 0.2], [0.3, 0.4]]}
+    with patch("soju.llm.ollama._request", return_value=payload) as req:
+        vectors = client.embed_batch(["a", "b"])
+        assert vectors == [[0.1, 0.2], [0.3, 0.4]]
+        assert req.call_args.args[1] == "/api/embed"
+        assert req.call_args.args[2] == {"model": "nomic-embed-text", "input": ["a", "b"]}
+
+
+def test_embed_batch_empty_input_short_circuits() -> None:
+    client = OllamaClient(base_url="http://localhost:11434", model="nomic-embed-text")
+    with patch("soju.llm.ollama._request") as req:
+        assert client.embed_batch([]) == []
+        req.assert_not_called()
+
+
+def test_embed_batch_count_mismatch_raises() -> None:
+    client = OllamaClient(base_url="http://localhost:11434", model="nomic-embed-text")
+    with patch("soju.llm.ollama._request", return_value={"embeddings": [[0.1, 0.2]]}):
+        with pytest.raises(OllamaError, match="unexpected number of embeddings"):
+            client.embed_batch(["a", "b"])

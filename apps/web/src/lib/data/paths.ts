@@ -29,6 +29,10 @@ export function grammarDir(root: string): string {
   return path.join(contentDir(root), 'grammar');
 }
 
+export function practiceDir(root: string): string {
+  return path.join(contentDir(root), 'practice');
+}
+
 export function stagingDir(root: string): string {
   return path.join(root, 'staging');
 }

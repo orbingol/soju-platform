@@ -27,11 +27,11 @@ Or in the canonical Docker image (no local Python setup needed):
      - Malformed/missing fields against ``data/schemas/`` (see :doc:`editor`)
    * - Verb alignment
      - ``uv run poe validate-align``
-     - Verb forms out of sync with the registry (``soju-align``)
+     - Verb forms out of sync with the registry (``soju align``)
    * - Registry
      - ``uv run poe validate-registry``
      - UUID/ref integrity and sense uniqueness — hangul + English meaning; homonyms are
-       allowed (``soju-registry``)
+       allowed (``soju registry``)
 
 ``uv run poe pre-commit`` (alias: ``lint``) runs these plus the rest of the pre-commit
 hooks on all files.

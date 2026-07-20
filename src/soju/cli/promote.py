@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: BSD-3-Clause
-"""``soju-promote`` console script."""
+"""``soju promote`` command."""
 
 from __future__ import annotations
 
@@ -28,8 +28,3 @@ def promote(
 
     mode = "would promote" if dry_run else "promoted"
     print(f"{mode} {counts['promoted']} entries; skipped {counts['skipped']}.")
-
-
-def main() -> None:
-    """Console-script entry for ``soju-promote``."""
-    app(prog_name="soju-promote")

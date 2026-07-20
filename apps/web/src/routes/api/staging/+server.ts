@@ -4,9 +4,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import yaml from 'yaml';
 
-import { dev } from '$app/environment';
-
 import { getDataDir, stagingDir } from '$lib/data/paths';
+import { devLocalOnlyGuard } from '$lib/server/dev-only';
 
 export const prerender = false;
 
@@ -24,36 +23,9 @@ const KIND_FILES: Record<StagingKind, (date: string) => string> = {
   vocabulary: () => 'vocabulary-candidates.yaml',
 };
 
-function isLoopbackAddress(address: string): boolean {
-  const host = address
-    .trim()
-    .toLowerCase()
-    .replace(/^\[|\]$/g, '');
-  return host === '127.0.0.1' || host === '::1' || host === 'localhost' || host === '::ffff:127.0.0.1' || host.startsWith('127.');
-}
-
-/** True when the browser is talking to a localhost-bound Vite/dev server (incl. Docker publish). */
-function isLocalhostHostHeader(request: Request): boolean {
-  const host = (request.headers.get('host') ?? '').split(',')[0]?.trim().toLowerCase() ?? '';
-  const hostname = host.replace(/^\[|\]$/g, '').split(':')[0] ?? '';
-  return hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '::1';
-}
-
 export const POST: RequestHandler = async ({ request, getClientAddress }) => {
-  if (!dev) {
-    return json({ error: 'Staging API is dev-only' }, { status: 403 });
-  }
-
-  let clientAddress = '';
-  try {
-    clientAddress = getClientAddress();
-  } catch {
-    clientAddress = '';
-  }
-
-  if (!isLoopbackAddress(clientAddress) && !isLocalhostHostHeader(request)) {
-    return json({ error: 'Staging API is localhost-only' }, { status: 403 });
-  }
+  const guardResponse = devLocalOnlyGuard(request, getClientAddress, 'Staging API');
+  if (guardResponse) return guardResponse;
 
   let body: { kind?: StagingKind; payload?: unknown; date?: string };
   try {

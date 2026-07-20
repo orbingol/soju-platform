@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: BSD-3-Clause
-"""Translate a plain-text word list into soju-import JSON (no CLI).
+"""Translate a plain-text word list into soju import JSON (no CLI).
 
 Depends on an injected :class:`~soju.llm.base.LlmClient` and the active
 language's :class:`~soju.languages.contracts.PromptProvider` for system prompts.
@@ -202,7 +202,7 @@ def translate_words(
     prompts: PromptProvider | None = None,
     root=None,
 ) -> tuple[list[dict[str, Any]], list[str]]:
-    """Translate word-list lines into soju-import records.
+    """Translate word-list lines into soju import records.
 
     Args:
         lines: Raw input lines from a plain-text word list.

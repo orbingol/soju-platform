@@ -12,6 +12,7 @@ function buildBody(request: AiCompletionRequest) {
     stream: request.stream ?? false,
     ...(request.jsonMode ? { format: 'json' } : {}),
     temperature: request.temperature ?? 0.7,
+    ...(request.maxTokens ? { max_tokens: request.maxTokens } : {}),
   };
 }
 
@@ -28,7 +29,11 @@ export const chatCompletionsClient: AiClient = {
   checkAvailable: checkServerAvailable,
 
   async complete(request) {
-    const response = await fetchWithTimeout(apiUrl('/v1/chat/completions'), requestInit({ ...buildBody(request), stream: false }, request.signal), AI_FETCH_TIMEOUT_MS);
+    const response = await fetchWithTimeout(
+      apiUrl('/v1/chat/completions'),
+      requestInit({ ...buildBody(request), stream: false }, request.signal),
+      request.timeoutMs ?? AI_FETCH_TIMEOUT_MS,
+    );
 
     if (!response.ok) {
       throw new Error(await readError(response));
@@ -42,7 +47,11 @@ export const chatCompletionsClient: AiClient = {
   },
 
   async *stream(request) {
-    const response = await fetchWithTimeout(apiUrl('/v1/chat/completions'), requestInit({ ...buildBody(request), stream: true }, request.signal), AI_FETCH_TIMEOUT_MS);
+    const response = await fetchWithTimeout(
+      apiUrl('/v1/chat/completions'),
+      requestInit({ ...buildBody(request), stream: true }, request.signal),
+      request.timeoutMs ?? AI_FETCH_TIMEOUT_MS,
+    );
 
     if (!response.ok) {
       throw new Error(await readError(response));

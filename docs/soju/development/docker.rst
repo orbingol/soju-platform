@@ -40,7 +40,7 @@ See :doc:`ai` for the Ollama/TTS environment variables that control Practice and
 Python CLIs on Docker
 ----------------------
 
-Python CLIs (``soju-import``, etc.) normally run on the host via ``uv run`` with
+Python CLIs (``soju import``, etc.) normally run on the host via ``uv run`` with
 ``./data`` bind-mounted paths — see :doc:`/cli/index`. They also work inside any
 container with the repo mounted at ``/workspace`` and ``uv sync`` run once.
 

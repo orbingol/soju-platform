@@ -1,11 +1,11 @@
 ---
-description: Import verbs via soju-import (JSON with conjugations)
+description: Import verbs via soju import (JSON with conjugations)
 mode: subagent
 ---
 
 # Import verbs
 
-Parse a plain-text verb list, build JSON with **full conjugations**, and import via **`soju-import verbs --stdin-json`**. Do **not** hand-edit `data/content/registry/vocabulary.yaml`, `data/content/verbs/forms/`, or `data/content/registry/examples.yaml`.
+Parse a plain-text verb list, build JSON with **full conjugations**, and import via **`soju import verbs --stdin-json`**. Do **not** hand-edit `data/content/registry/vocabulary.yaml`, `data/content/verbs/forms/`, or `data/content/registry/examples.yaml`.
 
 ## Input
 
@@ -25,7 +25,7 @@ One dictionary-form verb per line; optional example in parentheses. Ignore blank
 
 Read `data/content/verbs/table.yaml` for required tense groups and variants (`present` / `past`, `casual_polite` / `formal_polite`).
 
-## JSON for soju-import
+## JSON for soju import
 
 ```json
 [
@@ -65,13 +65,13 @@ Read `data/content/verbs/table.yaml` for required tense groups and variants (`pr
 3. Dry run:
 
    ```bash
-   cat records.json | uv run soju-import verbs --stdin-json --dry-run
+   cat records.json | uv run soju import verbs --stdin-json --dry-run
    ```
 
 4. Write:
 
    ```bash
-   cat records.json | uv run soju-import verbs --stdin-json
+   cat records.json | uv run soju import verbs --stdin-json
    ```
 
 5. Validate:
@@ -85,7 +85,7 @@ Read `data/content/verbs/table.yaml` for required tense groups and variants (`pr
 ## Output summary
 
 - Per line: added / duplicate / skipped
-- `soju-import` report
+- `soju import` report
 - Validation and alignment result
 
 Verb file import (`--file`) is **not** supported for new verbs — use **`--stdin-json`** only.

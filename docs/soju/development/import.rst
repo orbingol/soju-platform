@@ -1,15 +1,15 @@
 Import vocabulary
 ==================
 
-``soju-import`` is the **only** supported write path for canonical vocabulary — it
+``soju import`` is the **only** supported write path for canonical vocabulary — it
 updates the registry, the examples store, and topic/verb files atomically. **Never
 hand-edit** ``data/content/registry/``, topic entry lists, verb forms, or examples
 directly; see :doc:`data-layout` for what lives where.
 
 .. code-block:: bash
 
-   cat records.json | uv run soju-import words --topic common --stdin-json
-   cat verbs.json   | uv run soju-import verbs --stdin-json
+   cat records.json | uv run soju import words --topic common --stdin-json
+   cat verbs.json   | uv run soju import verbs --stdin-json
    uv run poe validate
 
 Always finish with ``uv run poe validate`` (or the Docker validate profile) after an
@@ -24,23 +24,23 @@ instead of straight into the registry:
 1. Draft candidates in ``data/staging/vocabulary-candidates.yaml`` (schema-checked, see
    :doc:`editor`).
 2. Review and edit as needed.
-3. Import the reviewed staging file: ``soju-import words --from-staging
+3. Import the reviewed staging file: ``soju import words --from-staging
    data/staging/vocabulary-candidates.yaml --topic <id>``.
 4. Or, for entries already marked ``local: true`` on a topic, promote them into the
-   registry with ``soju-promote --topic <id>`` (``--dry-run`` first is recommended).
+   registry with ``soju promote --topic <id>`` (``--dry-run`` first is recommended).
 
 AI-assisted workflow
 ----------------------
 
 The slash commands under ``.ai/commands/`` (``import-words``, ``import-words-to``,
 ``import-verbs``, ``import-staging``, ``promote-local``) parse free-form input, call
-the matching ``soju-import``/``soju-promote`` command, and run validation — read the
+the matching ``soju import``/``soju promote`` command, and run validation — read the
 matching ``.ai/commands/*.md`` file before invoking one.
 
 Grammar lessons
 -----------------
 
 Grammar lesson YAML under ``data/content/grammar/`` is authored directly (schemas still
-apply, see :doc:`editor`) — only vocabulary and verbs go through ``soju-import``.
+apply, see :doc:`editor`) — only vocabulary and verbs go through ``soju import``.
 
 See :doc:`/cli/import` and :doc:`/cli/promote` for flags and record shapes.

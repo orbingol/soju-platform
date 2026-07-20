@@ -1,4 +1,4 @@
-``soju-validate-schemas``
+``soju validate-schemas``
 =========================
 
 **Purpose:** Run ``check-jsonschema`` over all canonical YAML files (paths discovered
@@ -16,14 +16,14 @@ present on disk.
      - ``0`` pass · ``1`` validation failure
 
 .. typer:: soju.cli.validate.schemas_app
-   :prog: soju-validate-schemas
+   :prog: soju validate-schemas
    :preferred: text
    :markup-mode: markdown
    :width: 78
 
 .. code-block:: bash
 
-   uv run soju-validate-schemas
+   uv run soju validate-schemas
    uv run poe validate-schemas
 
 Included in ``uv run poe validate``.

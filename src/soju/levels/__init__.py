@@ -55,7 +55,7 @@ def _load_levels_raw(root_key: str) -> dict[str, Any]:
 
 def load_levels_config(root=None) -> dict[str, Any]:
     """Load the levels configuration mapping from ``content/levels.yaml``."""
-    return _load_levels_raw(str(_data_root(root)))
+    return _load_levels_raw(_data_root(root).as_posix())
 
 
 def default_level_id(root=None) -> str:

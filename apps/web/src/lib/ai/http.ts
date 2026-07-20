@@ -12,7 +12,11 @@ export function apiUrl(path: string): string {
 
 export async function fetchWithTimeout(url: string, init: RequestInit = {}, timeoutMs = HEALTH_FETCH_TIMEOUT_MS): Promise<Response> {
   const controller = new AbortController();
-  const timeout = globalThis.setTimeout(() => controller.abort(), timeoutMs);
+  let timedOut = false;
+  const timeout = globalThis.setTimeout(() => {
+    timedOut = true;
+    controller.abort();
+  }, timeoutMs);
   const external = init.signal;
 
   const onExternalAbort = () => controller.abort();
@@ -27,6 +31,11 @@ export async function fetchWithTimeout(url: string, init: RequestInit = {}, time
 
   try {
     return await fetch(url, { ...init, signal: controller.signal });
+  } catch (err) {
+    if (timedOut) {
+      throw new Error(`Request timed out after ${timeoutMs}ms: ${url}`);
+    }
+    throw err;
   } finally {
     globalThis.clearTimeout(timeout);
     external?.removeEventListener('abort', onExternalAbort);

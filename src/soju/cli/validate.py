@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: BSD-3-Clause
-"""Validation console scripts: align, registry, validate-schemas."""
+"""Validation commands: ``soju align``, ``soju registry``, ``soju validate-schemas``."""
 
 from __future__ import annotations
 
@@ -64,18 +64,3 @@ def schemas() -> None:
             print(file=sys.stderr)
         raise typer.Exit(1)
     print("Schema validation passed.")
-
-
-def align_main() -> None:
-    """Console-script entry for ``soju-align``."""
-    align_app(prog_name="soju-align")
-
-
-def registry_main() -> None:
-    """Console-script entry for ``soju-registry``."""
-    registry_app(prog_name="soju-registry")
-
-
-def schemas_main() -> None:
-    """Console-script entry for ``soju-validate-schemas``."""
-    schemas_app(prog_name="soju-validate-schemas")

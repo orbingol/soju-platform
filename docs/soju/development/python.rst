@@ -15,7 +15,7 @@ Sphinx are ready right after). Run anything with ``uv run``, no activation neede
 .. code-block:: bash
 
    uv run poe validate
-   uv run soju-import --help
+   uv run soju import --help
 
 Re-run ``uv sync`` after pulling changes that touch ``pyproject.toml`` or ``uv.lock``.
 
@@ -29,7 +29,7 @@ Project layout
    * - Path
      - Contents
    * - ``src/soju/cli/``
-     - Typer apps behind each console script (entry points in ``pyproject.toml``)
+     - Typer apps for the unified ``soju`` console entry (``pyproject.toml`` ``[project.scripts]``)
    * - ``src/soju/services/``
      - Import, promote, translate, and fill logic used by the CLIs
    * - ``src/soju/core/``

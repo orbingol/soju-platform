@@ -1,4 +1,4 @@
-``soju-align``
+``soju align``
 ==============
 
 **Purpose:** Verify verb vocabulary entries appear in every forms file required by
@@ -17,14 +17,14 @@ tense must be present; **examples are optional** (verbs may be forms-only).
      - ``0`` OK · ``1`` alignment errors
 
 .. typer:: soju.cli.validate.align_app
-   :prog: soju-align
+   :prog: soju align
    :preferred: text
    :markup-mode: markdown
    :width: 78
 
 .. code-block:: bash
 
-   uv run soju-align
+   uv run soju align
    uv run poe validate-align
 
 **AI commands:** none (automatic in ``poe validate``).

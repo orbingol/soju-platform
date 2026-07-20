@@ -1,4 +1,4 @@
-``soju-import``
+``soju import``
 ===============
 
 **Purpose:** **Only supported write path** for canonical vocabulary. Merges words (vocabulary + examples + topic refs) and verbs (vocabulary + forms + examples store).
@@ -14,7 +14,7 @@
      - ``0`` success · ``1`` errors / nothing imported · ``2`` usage error
 
 .. typer:: soju.cli.words.app
-   :prog: soju-import
+   :prog: soju import
    :show-nested:
    :make-sections:
    :preferred: text
@@ -27,16 +27,16 @@ Words
 .. code-block:: bash
 
    # New words (AI workflow) — full records required
-   cat records.json | uv run soju-import words --topic common --stdin-json
+   cat records.json | uv run soju import words --topic common --stdin-json
 
    # Preview
-   uv run soju-import words --topic family --stdin-json --dry-run < records.json
+   uv run soju import words --topic family --stdin-json --dry-run < records.json
 
    # Merge examples only for existing registry words
-   uv run soju-import words --topic common --file words.txt
+   uv run soju import words --topic common --file words.txt
 
    # From staging
-   uv run soju-import words --from-staging data/staging/vocabulary-candidates.yaml --topic common
+   uv run soju import words --from-staging data/staging/vocabulary-candidates.yaml --topic common
 
 **Uniqueness:** registry entries are keyed by **hangul + English meaning**. Same hangul with
 a different English gloss (e.g. 배 “pear” vs 배 “ship / boat”) is a separate entry (homonym).
@@ -56,13 +56,13 @@ Verbs
 
 .. code-block:: bash
 
-   cat verbs.json | uv run soju-import verbs --stdin-json
+   cat verbs.json | uv run soju import verbs --stdin-json
 
 Requires ``hangul``, ``romanization``, ``english``, ``forms`` (and optional ``examples``) per record. ``--file`` without JSON is not supported for new verbs.
 
 **Limitation:** Re-importing an existing verb with the same hangul **and** English meaning is
 not supported — the CLI returns an error. Same hangul with a different English gloss is allowed
-as a homonym. Update existing verb senses by editing split files or extend ``soju-import`` when
+as a homonym. Update existing verb senses by editing split files or extend ``soju import`` when
 merge is needed.
 
 **AI commands:** ``import-words``, ``import-words-to``, ``import-verbs``, ``import-staging``

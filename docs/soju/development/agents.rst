@@ -7,7 +7,7 @@ covers, among other things:
 
 - Required tools (``uv``, ``poe``) and the quick-command table.
 - Write-path boundaries: canonical vocabulary, topic entry lists, verb forms, and
-  examples must go through ``soju-import``/``soju-promote`` (see :doc:`import`), never
+  examples must go through ``soju import``/``soju promote`` (see :doc:`import`), never
   hand-edited.
 - Where app code, CLI code, and services live (``apps/web/``, ``src/soju/cli/``,
   ``src/soju/services/``).

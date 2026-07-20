@@ -36,4 +36,14 @@ describe('staging', () => {
     expect(() => parsePracticeJson('{"sentences":[{"hangul":"안녕"}]}')).toThrow(/sentences\[0\]\.english/);
     expect(() => parsePracticeJson('[]')).toThrow(/root must be an object/);
   });
+
+  it('gives a friendlier message when the JSON output looks truncated', () => {
+    const truncated = '{"sentences": [{"hangul": "안녕하세요", "english": "Hello"';
+    expect(() => parsePracticeJson(truncated)).toThrow(/truncated/i);
+  });
+
+  it('keeps the generic invalid-JSON message for non-truncated malformed JSON', () => {
+    expect(() => parsePracticeJson('{not valid json}')).toThrow(/Invalid practice JSON/);
+    expect(() => parsePracticeJson('{not valid json}')).not.toThrow(/truncated/i);
+  });
 });

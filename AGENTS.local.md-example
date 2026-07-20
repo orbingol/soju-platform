@@ -44,7 +44,7 @@ Brief context for the task you are currently working on, so an agent picking up 
 Personal task list. Agents may consult this to align on priorities, but should still defer to explicit user requests.
 
 * [ ] …
-* [ ] … *(soju-specific: e.g. import vocabulary via `soju-import`, then `uv run poe validate`)*
+* [ ] … *(soju-specific: e.g. import vocabulary via `soju import`, then `uv run poe validate`)*
 
 ## Notes
 

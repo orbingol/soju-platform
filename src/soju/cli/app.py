@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: BSD-3-Clause
-"""Root Typer app mounting all Soju subcommands (optional unified ``soju`` entry)."""
+"""Root Typer app for the unified ``soju`` console entry."""
 
 from __future__ import annotations
 
@@ -8,6 +8,7 @@ from typing import Annotated, Optional
 
 import typer
 
+from soju.cli import embed as embed_cli
 from soju.cli import examples as examples_cli
 from soju.cli import promote as promote_cli
 from soju.cli import translate as translate_cli
@@ -37,7 +38,7 @@ def _root(
     ] = None,
     verbose: Annotated[bool, flag("--verbose", help="Enable verbose logging")] = False,
 ) -> None:
-    """Global options shared by the unified ``soju`` entry point."""
+    """Global options shared by all ``soju`` subcommands."""
     if language:
         os.environ[ENV_LANGUAGE] = language
     if verbose:
@@ -53,13 +54,9 @@ app.command("validate-schemas")(validate_cli.schemas)
 app.command("fill-verbs")(verbs_cli.fill_verbs_cmd)
 app.command("fill-examples")(examples_cli.fill_examples_cmd)
 app.command("translate-words")(translate_cli.translate)
-
-
-def import_main() -> None:
-    """Console-script entry for ``soju-import`` (words/verbs subgroup)."""
-    words_cli.main()
+app.command("embed-index")(embed_cli.build)
 
 
 def main() -> None:
-    """Optional unified ``soju`` console-script entry."""
+    """Console-script entry for ``soju``."""
     app(prog_name="soju")

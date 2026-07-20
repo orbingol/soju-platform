@@ -35,6 +35,7 @@ SCHEMA_FILES: dict[str, str] = {
     "staging-vocabulary": "staging_vocabulary.schema.json",
     "staging-exercises": "staging_exercises.schema.json",
     "staging-stories": "staging_stories.schema.json",
+    "practice-themes": "practice_themes.schema.json",
 }
 
 
@@ -67,7 +68,7 @@ def validate_schemas(root: Path | None = None) -> list[str]:
                 [
                     "check-jsonschema",
                     "--schemafile",
-                    str(schema_path),
+                    schema_path.as_posix(),
                     "--base-uri",
                     f"{schema_path.parent.as_uri()}/",
                     *existing,

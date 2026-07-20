@@ -19,11 +19,17 @@ lives at ``data/staging/``. Both are read via the ``DATA_DIR`` environment varia
      - ``data/content/verbs/forms/`` (manifest + table in ``data/content/verbs/``)
    * - Grammar lessons
      - ``data/content/grammar/`` (``manifest.yaml`` + ``patterns/``)
+   * - Course levels
+     - ``data/content/levels.yaml``
+   * - Practice themes
+     - ``data/content/practice/themes.yaml``
+   * - Embedding cache (local)
+     - ``data/cache/embeddings/`` (gitignored; built by ``soju embed-index``)
    * - Staging (review before import)
      - ``data/staging/`` (``vocabulary-candidates.yaml``, ``exercises/``, ``stories/``)
 
 JSON Schemas for every file above live in ``data/schemas/`` and are checked by
-``soju-validate-schemas`` (see :doc:`validate`) — the same schemas power inline
+``soju validate-schemas`` (see :doc:`validate`) — the same schemas power inline
 validation in editors (see :doc:`editor`). The web app reads this tree read-only via
 ``DATA_DIR``; it never writes back to it.
 
@@ -31,6 +37,6 @@ Writing data
 ------------
 
 **Never hand-edit** the registry, topic entry lists, verb forms, or examples —
-``soju-import`` is the only supported write path, and ``soju-promote`` moves reviewed
+``soju import`` is the only supported write path, and ``soju promote`` moves reviewed
 staging entries into the registry. See :doc:`import` for the full workflow, and
 ``AGENTS.md`` at the repo root for the complete list of boundaries.

@@ -44,6 +44,10 @@ function buildBody(request: AiCompletionRequest, conversationId?: string | null)
     body.text = { format: { type: 'json_object' } };
   }
 
+  if (request.maxTokens) {
+    body.max_output_tokens = request.maxTokens;
+  }
+
   return body;
 }
 
@@ -98,7 +102,7 @@ export const conversationsClient: AiClient = {
         body: JSON.stringify({ ...buildBody(request, conversationId), stream: false }),
         ...(request.signal ? { signal: request.signal } : {}),
       },
-      AI_FETCH_TIMEOUT_MS,
+      request.timeoutMs ?? AI_FETCH_TIMEOUT_MS,
     );
 
     if (!response.ok) {
@@ -129,7 +133,7 @@ export const conversationsClient: AiClient = {
         body: JSON.stringify({ ...buildBody(request, conversationId), stream: true }),
         ...(request.signal ? { signal: request.signal } : {}),
       },
-      AI_FETCH_TIMEOUT_MS,
+      request.timeoutMs ?? AI_FETCH_TIMEOUT_MS,
     );
 
     if (!response.ok) {

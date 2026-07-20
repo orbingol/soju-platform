@@ -3,7 +3,7 @@
 
 English example glosses come from the active base language
 (:meth:`soju.base.BaseLanguage.clause_for_tense`). Prefer curated
-examples or ``soju-fill-examples`` for learner-facing content.
+examples or ``soju fill-examples`` for learner-facing content.
 """
 
 from __future__ import annotations

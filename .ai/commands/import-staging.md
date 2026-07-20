@@ -1,11 +1,11 @@
 ---
-description: Promote reviewed staging vocabulary into a topic via soju-import
+description: Promote reviewed staging vocabulary into a topic via soju import
 mode: subagent
 ---
 
 # Import from staging
 
-Merge reviewed vocabulary from **`data/staging/`** into canonical data using **`soju-import`**. Do not hand-edit registry or topic YAML.
+Merge reviewed vocabulary from **`data/staging/`** into canonical data using **`soju import`**. Do not hand-edit registry or topic YAML.
 
 ## Input
 
@@ -32,13 +32,13 @@ entries:
 2. Dry run:
 
    ```bash
-   uv run soju-import words --from-staging data/staging/vocabulary-candidates.yaml --topic <topic> --dry-run
+   uv run soju import words --from-staging data/staging/vocabulary-candidates.yaml --topic <topic> --dry-run
    ```
 
 3. Write:
 
    ```bash
-   uv run soju-import words --from-staging data/staging/vocabulary-candidates.yaml --topic <topic>
+   uv run soju import words --from-staging data/staging/vocabulary-candidates.yaml --topic <topic>
    ```
 
 4. Validate:
@@ -52,11 +52,11 @@ entries:
 ## Notes
 
 - Staging entries with UUIDs are merged into `data/content/registry/vocabulary.yaml` and referenced from the topic.
-- Duplicate `hangul` in registry merges examples or adds a ref, per `soju-import` rules.
+- Duplicate `hangul` in registry merges examples or adds a ref, per `soju import` rules.
 - Exercise/story staging files (`data/staging/exercises/`, `data/staging/stories/`) are not imported by this command — only vocabulary staging.
 
 ## Output summary
 
 - Staging path and topic id
-- `soju-import` report
+- `soju import` report
 - Validation result

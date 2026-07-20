@@ -1,11 +1,11 @@
 ---
-description: Promote local topic entries into the word registry via soju-promote
+description: Promote local topic entries into the word registry via soju promote
 mode: subagent
 ---
 
 # Promote local topic entries
 
-Move **`local: true`** word entries from a topic file into **`data/content/registry/vocabulary.yaml`**, replacing locals with registry refs. Use **`soju-promote`** — do not hand-edit YAML.
+Move **`local: true`** word entries from a topic file into **`data/content/registry/vocabulary.yaml`**, replacing locals with registry refs. Use **`soju promote`** — do not hand-edit YAML.
 
 ## When to use
 
@@ -21,13 +21,13 @@ User provides a **topic id** (e.g. `family`).
 2. Dry run:
 
    ```bash
-   uv run soju-promote --topic <topic> --dry-run
+   uv run soju promote --topic <topic> --dry-run
    ```
 
 3. Promote:
 
    ```bash
-   uv run soju-promote --topic <topic>
+   uv run soju promote --topic <topic>
    ```
 
 4. Validate:

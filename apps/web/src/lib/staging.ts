@@ -258,6 +258,16 @@ export function normalizePracticeSession(
   return { exercises, stories, vocabulary };
 }
 
+/** Rough heuristic: does `text` look like it was cut off mid-object/array (unclosed brace/bracket)? */
+function looksTruncated(text: string): boolean {
+  const trimmed = text.trimEnd();
+  if (!trimmed) return false;
+  if (!trimmed.endsWith('}') && !trimmed.endsWith(']')) return true;
+  const opens = (trimmed.match(/[{[]/g) ?? []).length;
+  const closes = (trimmed.match(/[}\]]/g) ?? []).length;
+  return opens !== closes;
+}
+
 export function parsePracticeJson(text: string): PracticeSessionJson {
   const trimmed = text.trim();
   const fenced = trimmed.match(/```(?:json)?\s*([\s\S]*?)```/);
@@ -266,6 +276,9 @@ export function parsePracticeJson(text: string): PracticeSessionJson {
   try {
     parsed = JSON.parse(jsonText);
   } catch (err) {
+    if (looksTruncated(jsonText)) {
+      throw new Error('The model response looks truncated (JSON did not finish). Try a smaller count, or retry — generation may have hit a length or time limit.');
+    }
     const detail = err instanceof Error ? err.message : String(err);
     throw new Error(`Invalid practice JSON: ${detail}`);
   }

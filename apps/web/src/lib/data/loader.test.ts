@@ -9,6 +9,8 @@ import {
   loadGrammarCategories,
   loadGrammarPatternPage,
   loadGrammarPatterns,
+  loadLevelsConfig,
+  loadPracticeThemes,
   loadTopicPage,
   loadTopics,
   loadTopicTable,
@@ -184,6 +186,27 @@ describe('loader', () => {
   it('throws on unknown topic and type', () => {
     expect(() => loadTopicPage('does-not-exist', DATA_DIR)).toThrow(/Unknown topic/);
     expect(() => loadTypePage('does-not-exist', DATA_DIR)).toThrow(/Unknown type/);
+  });
+
+  it('loads practice themes with id/label/description', () => {
+    const themes = loadPracticeThemes(DATA_DIR);
+    expect(themes.length).toBe(5);
+    expect(themes.every((t) => t.id && t.label && t.description)).toBe(true);
+    expect(themes.map((t) => t.id)).toEqual(
+      expect.arrayContaining(['cafe', 'directions', 'family', 'daily_routine', 'shopping'])
+    );
+  });
+
+  it('loads levels config with default and grammar summary', () => {
+    const config = loadLevelsConfig(DATA_DIR);
+    expect(config.default).toBe('1A');
+    expect(config.levels.length).toBeGreaterThanOrEqual(2);
+    const level1a = config.levels.find((l) => l.id === '1A');
+    expect(level1a).toBeDefined();
+    expect(level1a?.guidance.length).toBeGreaterThan(0);
+    expect(level1a?.grammarSummary?.length).toBeGreaterThan(0);
+    const level1b = config.levels.find((l) => l.id === '1B');
+    expect(level1b?.includeLevels).toEqual(['1A']);
   });
 
   it('rejects unsafe slugs and path traversal', () => {

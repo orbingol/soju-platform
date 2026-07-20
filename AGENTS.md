@@ -32,45 +32,47 @@ Assume Python commands run as `uv run …` or `uv run poe …` unless the venv i
 | Web format (Docker) | `docker compose run --rm --no-deps web npm run format` |
 | Validate in Docker | `docker compose --profile validate run --rm validate` / `uv run poe validate-docker` |
 | Web dev | `docker compose up` → http://localhost:5173 |
-| Import words (JSON) | `cat records.json \| uv run soju-import words --topic <id> --stdin-json` |
-| Import verbs (JSON) | `cat verbs.json \| uv run soju-import verbs --stdin-json` |
-| Promote local words | `uv run soju-promote --topic <id>` |
-| CLI help | `uv run soju-import --help` (same pattern for other `soju-*`) |
+| Import words (JSON) | `cat records.json \| uv run soju import words --topic <id> --stdin-json` |
+| Import verbs (JSON) | `cat verbs.json \| uv run soju import verbs --stdin-json` |
+| Promote local words | `uv run soju promote --topic <id>` |
+| CLI help | `uv run soju --help` · `uv run soju <subcommand> --help` |
 | Python tests | `uv run poe test` (unit + offline system; skips LLM) |
 | System / LLM / coverage | `uv run poe test-system` · `uv run poe test-llm` · `uv run poe test-all` · `uv run poe coverage` |
+| Build embedding cache | `uv run poe embed-index` (requires Ollama + embed model) |
 | Build / serve docs | `uv run poe docs` · `uv run poe docs-serve` |
 
 Docker Compose **project name:** `soju` (`name: soju` in `docker-compose.yml`). Containers use the `soju-` prefix; named volumes use `soju_`.
 
-## Python CLI catalog
+## Python CLI
 
-All entry points are installed by `uv sync` and invoked as `uv run <name>`. Details: `docs/soju/cli/` (Sphinx: `uv run poe docs-serve`).
+One console entry is installed by `uv sync`: **`soju`**. Invoke as `uv run soju <subcommand> …`. Details: `docs/soju/cli/` (Sphinx: `uv run poe docs-serve`).
 
-| Tool | Role |
-|------|------|
-| **`soju-import`** | **Only write path** for registry words/verbs (examples, topic refs, verb forms) |
-| **`soju-promote`** | Promote `local: true` topic entries into the registry |
-| **`soju-validate-schemas`** | JSON Schema check over data files (in `poe validate`) |
-| **`soju-align`** | Verb forms ↔ registry alignment (in `poe validate`) |
-| **`soju-registry`** | UUID / refs / **sense uniqueness** (hangul+english; homonyms OK) (in `poe validate`) |
-| **`soju-translate-words`** | Plain-text list → import JSON via Ollama (`poe translate-words`) |
-| **`soju-fill-examples`** | Generate missing noun/verb examples (Ollama or `--local`) |
-| **`soju-fill-verbs`** | Fill missing verb conjugation forms |
+| Subcommand | Role |
+|------------|------|
+| **`import words` / `import verbs`** | **Only write path** for registry words/verbs (examples, topic refs, verb forms) |
+| **`promote`** | Promote `local: true` topic entries into the registry |
+| **`validate-schemas`** | JSON Schema check over data files (in `poe validate`) |
+| **`align`** | Verb forms ↔ registry alignment (in `poe validate`) |
+| **`registry`** | UUID / refs / **sense uniqueness** (hangul+english; homonyms OK) (in `poe validate`) |
+| **`translate-words`** | Plain-text list → import JSON via Ollama (`poe translate-words`) |
+| **`fill-examples`** | Generate missing noun/verb examples (Ollama or `--local`) |
+| **`fill-verbs`** | Fill missing verb conjugation forms |
+| **`embed-index`** | Build Ollama embedding cache for Practice retrieval (`data/cache/embeddings/`) |
 
-**Poe shortcuts:** `validate`, `validate-schemas`, `validate-align`, `validate-registry`, `validate-docker`, `test`, `pre-commit`, `lint`, `import-words`, `import-verbs`, `translate-words`, `docs`, `docs-serve`.
+**Poe shortcuts:** `validate`, `validate-schemas`, `validate-align`, `validate-registry`, `validate-docker`, `test`, `pre-commit`, `lint`, `import-words`, `import-verbs`, `translate-words`, `embed-index`, `docs`, `docs-serve`.
 
 ## Documentation
 
 - [README.md](README.md) — project overview (non-technical)
 - `docs/soju/` — Sphinx user guide (Furo, `.rst`): `development/` + `cli/`; `uv run poe docs` / `docs-serve`
-- `.ai/commands/` — slash-command workflows that parse input and call `soju-import` / `soju-promote`
+- `.ai/commands/` — slash-command workflows that parse input and call `soju import` / `soju promote`
 
 ## Default workflow
 
 ### Boundaries
 
 - Keep diffs focused: change only what the task requires; match existing patterns in the touched area.
-- **Never hand-edit** canonical vocabulary under `data/content/registry/`, `data/content/topics/*/topic.yaml` (entry lists), `data/content/verbs/forms/`, or examples. Use **`soju-import`** (and **`soju-promote`** when promoting locals) instead.
+- **Never hand-edit** canonical vocabulary under `data/content/registry/`, `data/content/topics/*/topic.yaml` (entry lists), `data/content/verbs/forms/`, or examples. Use **`soju import`** (and **`soju promote`** when promoting locals) instead.
 - Topics: `data/content/topics/manifest.yaml` (files at `topics/<id>/topic.yaml`). Grammar: `data/content/grammar/` (manifest + `patterns/`). Web app: `apps/web/`.
 - Registry uniqueness is **hangul + English meaning** (homonyms allowed). Optional `visibility: hidden` + `type: phrase` hides practice sentences from Word types/Flashcards; Practice/chat still see them.
 - If a request is ambiguous or would require broad refactors, **stop and ask** rather than guessing.
@@ -85,7 +87,7 @@ All entry points are installed by `uv sync` and invoked as `uv run <name>`. Deta
 
 ## Vocabulary writes
 
-**`soju-import` is the only supported write path** for canonical vocabulary. It updates the registry, examples store, and topic/verb files atomically.
+**`soju import` is the only supported write path** for canonical vocabulary. It updates the registry, examples store, and topic/verb files atomically.
 
 ### What agents must not do
 
@@ -93,14 +95,14 @@ All entry points are installed by `uv sync` and invoked as `uv run <name>`. Deta
 - Change `data/content/topics/manifest.yaml` or `data/content/grammar/manifest.yaml` unless the user asks (or the task clearly requires a new topic/pattern).
 - Skip validation after an import.
 
-### Words (`soju-import words`)
+### Words (`soju import words`)
 
 | Mode | When to use | Command |
 |------|-------------|---------|
-| **New words** | Full records with hangul, romanization, english | `cat records.json \| uv run soju-import words --topic <id> --stdin-json` |
+| **New words** | Full records with hangul, romanization, english | `cat records.json \| uv run soju import words --topic <id> --stdin-json` |
 | **Preview** | Before writing | add `--dry-run` |
-| **Merge examples only** | Plain-text file; word **must already exist** | `uv run soju-import words --topic <id> --file scratch/words.txt` |
-| **From staging** | Reviewed staging YAML | `uv run soju-import words --from-staging data/staging/vocabulary-candidates.yaml --topic <id>` |
+| **Merge examples only** | Plain-text file; word **must already exist** | `uv run soju import words --topic <id> --file scratch/words.txt` |
+| **From staging** | Reviewed staging YAML | `uv run soju import words --from-staging data/staging/vocabulary-candidates.yaml --topic <id>` |
 
 - **`--topic`** — id from `data/content/topics/manifest.yaml` (e.g. `common`, `family`).
 - **`--section`** — required when the topic has multiple sections.
@@ -109,19 +111,19 @@ All entry points are installed by `uv sync` and invoked as `uv run <name>`. Deta
 
 **Record shape:** `hangul`, `romanization`, `english`; optional `examples` as `[{ "hangul", "english" }]`. Romanization: Revised Romanization, lowercase, hyphenated (`hak-gyo`).
 
-### Verbs (`soju-import verbs`)
+### Verbs (`soju import verbs`)
 
 ```bash
-cat verbs.json | uv run soju-import verbs --stdin-json
+cat verbs.json | uv run soju import verbs --stdin-json
 ```
 
 Each record needs `hangul`, `romanization`, `english`, `forms` (present/past/future × casual_polite/formal_polite); optional nested `examples`. Always use **`--stdin-json`**.
 
-### Promote local entries (`soju-promote`)
+### Promote local entries (`soju promote`)
 
 ```bash
-uv run soju-promote --topic <id>
-uv run soju-promote --topic <id> --dry-run
+uv run soju promote --topic <id>
+uv run soju promote --topic <id> --dry-run
 ```
 
 ### Required follow-up
@@ -136,11 +138,11 @@ Or: `docker compose --profile validate run --rm validate`
 
 | Command | CLI |
 |---------|-----|
-| `import-words` | `soju-import words --topic family --stdin-json` |
-| `import-words-to` | `soju-import words --topic <id> --stdin-json` |
-| `import-verbs` | `soju-import verbs --stdin-json` |
-| `import-staging` | `soju-import words --from-staging …` |
-| `promote-local` | `soju-promote --topic <id>` |
+| `import-words` | `soju import words --topic family --stdin-json` |
+| `import-words-to` | `soju import words --topic <id> --stdin-json` |
+| `import-verbs` | `soju import verbs --stdin-json` |
+| `import-staging` | `soju import words --from-staging …` |
+| `promote-local` | `soju promote --topic <id>` |
 
 Read the matching `.ai/commands/*.md` file before running.
 
@@ -149,4 +151,4 @@ Read the matching `.ai/commands/*.md` file before running.
 - Run `uv run poe validate` after any change under `data/`.
 - Web unit tests: `apps/web/src/lib/` (`*.test.ts`); run in Docker: `docker compose exec web npm test` (or `docker compose run --rm web npm test`).
 - Python unit tests: `uv run poe test`.
-- Prefer the catalog above; expand flags/options from `docs/soju/cli/` or `uv run <tool> --help`.
+- Prefer the catalog above; expand flags/options from `docs/soju/cli/` or `uv run soju <subcommand> --help`.

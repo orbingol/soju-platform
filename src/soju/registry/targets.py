@@ -12,7 +12,7 @@ from soju.registry.verbs import load_verb_manifest
 
 
 def glob_validate_targets(root: Path | None = None) -> dict[str, list[str]]:
-    """Return schema-name → data-file paths for ``soju-validate-schemas``.
+    """Return schema-name → data-file paths for ``soju validate-schemas``.
 
     Args:
         root: Optional data-root override.
@@ -25,19 +25,19 @@ def glob_validate_targets(root: Path | None = None) -> dict[str, list[str]]:
     verb_manifest = load_verb_manifest(root)
     topics_manifest = load_topics_manifest(root)
 
-    topic_files = [str(topic_path(topic_id, root)) for topic_id in sorted(topics_manifest.get("topics", {}))]
+    topic_files = [topic_path(topic_id, root).as_posix() for topic_id in sorted(topics_manifest.get("topics", {}))]
 
-    topic_table_files = [str(base / "topics" / "table.yaml")]
+    topic_table_files = [(base / "topics" / "table.yaml").as_posix()]
     for topic_id in sorted(topics_manifest.get("topics", {})):
         override = base / "topics" / topic_id / "table.yaml"
         if override.is_file():
-            topic_table_files.append(str(override))
+            topic_table_files.append(override.as_posix())
 
-    form_files = [str(base / "verbs" / rel) for rel in sorted(verb_manifest.get("forms", {}).values())]
-    construction_files = [str(base / "verbs" / rel) for rel in sorted(verb_manifest.get("constructions", {}).values())]
+    form_files = [(base / "verbs" / rel).as_posix() for rel in sorted(verb_manifest.get("forms", {}).values())]
+    construction_files = [(base / "verbs" / rel).as_posix() for rel in sorted(verb_manifest.get("constructions", {}).values())]
 
-    staging_exercises = sorted(str(p) for p in (data / "staging" / "exercises").glob("*.yaml"))
-    staging_stories = sorted(str(p) for p in (data / "staging" / "stories").glob("*.yaml"))
+    staging_exercises = sorted(p.as_posix() for p in (data / "staging" / "exercises").glob("*.yaml"))
+    staging_stories = sorted(p.as_posix() for p in (data / "staging" / "stories").glob("*.yaml"))
 
     grammar_manifest_path = base / "grammar" / "manifest.yaml"
     grammar_pattern_files: list[str] = []
@@ -46,23 +46,24 @@ def glob_validate_targets(root: Path | None = None) -> dict[str, list[str]]:
         if isinstance(grammar_manifest, dict):
             for meta in grammar_manifest.get("patterns", {}).values():
                 if isinstance(meta, dict) and meta.get("path"):
-                    grammar_pattern_files.append(str(base / "grammar" / meta["path"]))
+                    grammar_pattern_files.append((base / "grammar" / meta["path"]).as_posix())
 
     return {
-        "registry-types": [str(base / "registry" / "types.yaml")],
-        "registry-vocabulary": [str(base / "registry" / "vocabulary.yaml")],
-        "examples-vocabulary": [str(base / "registry" / "examples.yaml")],
-        "words-table": [str(base / "words" / "table.yaml")],
-        "topics-manifest": [str(base / "topics" / "manifest.yaml")],
+        "registry-types": [(base / "registry" / "types.yaml").as_posix()],
+        "registry-vocabulary": [(base / "registry" / "vocabulary.yaml").as_posix()],
+        "examples-vocabulary": [(base / "registry" / "examples.yaml").as_posix()],
+        "words-table": [(base / "words" / "table.yaml").as_posix()],
+        "topics-manifest": [(base / "topics" / "manifest.yaml").as_posix()],
         "topics-table": topic_table_files,
         "topics-topics": topic_files,
-        "verb-manifest": [str(base / "verbs" / "manifest.yaml")],
-        "verb-table": [str(base / "verbs" / "table.yaml")],
+        "verb-manifest": [(base / "verbs" / "manifest.yaml").as_posix()],
+        "verb-table": [(base / "verbs" / "table.yaml").as_posix()],
         "verb-forms": form_files,
         "verb-constructions": construction_files,
-        "grammar-manifest": [str(grammar_manifest_path)],
+        "grammar-manifest": [grammar_manifest_path.as_posix()],
         "grammar-patterns": grammar_pattern_files,
-        "staging-vocabulary": [str(data / "staging" / "vocabulary-candidates.yaml")],
+        "staging-vocabulary": [(data / "staging" / "vocabulary-candidates.yaml").as_posix()],
         "staging-exercises": staging_exercises,
         "staging-stories": staging_stories,
+        "practice-themes": [(base / "practice" / "themes.yaml").as_posix()],
     }

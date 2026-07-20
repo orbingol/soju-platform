@@ -45,10 +45,10 @@ while hand-authoring YAML. ``.vscode/settings.json`` maps each JSON Schema under
    * - ``data/staging/stories/*.yaml``
      - ``staging_stories``
 
-These are the same schemas ``soju-validate-schemas`` runs at commit/CI time (see
+These are the same schemas ``soju validate-schemas`` runs at commit/CI time (see
 :doc:`validate`) — the editor just surfaces the same errors earlier, inline.
 
 ``yaml.format.enable`` is set to ``false`` in the workspace so the extension does not
 reformat hand-authored YAML (grammar patterns, manifests) on save; canonical vocabulary
-files are written exclusively by ``soju-import`` anyway (see :doc:`import`), so they are
+files are written exclusively by ``soju import`` anyway (see :doc:`import`), so they are
 never hand-formatted.

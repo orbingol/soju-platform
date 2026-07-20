@@ -20,8 +20,8 @@ Validate
    * - Validate in Docker
      - ``uv run poe validate-docker``
 
-Import & translate
--------------------
+Import, translate & embed
+-------------------------
 
 .. list-table::
    :header-rows: 1
@@ -35,6 +35,8 @@ Import & translate
      - ``uv run poe import-verbs``
    * - Translate words → JSON
      - ``uv run poe translate-words --file words.txt``
+   * - Build Practice embedding cache
+     - ``uv run poe embed-index``
 
 Test & docs
 -----------

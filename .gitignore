@@ -22,6 +22,9 @@ apps/web/vite.config.ts.timestamp-*
 data/staging/**/*.draft.yaml
 data/staging/**/*.tmp.yaml
 
+# Local caches (e.g. embedding indexes built by soju embed-index)
+data/cache/
+
 # Local import scratch (examples in docs; keep out of git)
 /words*.txt
 /scratch/**

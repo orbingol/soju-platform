@@ -19,7 +19,7 @@ Soju Platform is a personal study project: curated word and verb lists, example 
 - **Practice** — generated exercises from your vocabulary (when AI features are enabled locally)
 - **Chat** — ask questions and practice with an AI tutor (when enabled locally)
 
-## For Users
+## For Regular Users
 
 You only need [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed.
 
@@ -34,9 +34,19 @@ You only need [Docker Desktop](https://www.docker.com/products/docker-desktop/) 
 
 To stop, press `Ctrl+C` in the terminal (or quit Docker Desktop).
 
-Browsing words, grammar, and flashcards works out of the box. Practice and Chat need a local AI model (optional) — see the docs under **For Developers** if you want those.
+Browsing words, grammar, and flashcards works out of the box. Practice and Chat need a local AI model (optional):
 
-## For Developers
+1. Install [Ollama](https://ollama.com/download).
+2. Pull the default models:
+
+   ```bash
+   ollama pull gemma4:e4b
+   ollama pull nomic-embed-text
+   ```
+
+3. With Ollama running, restart Soju to use Practice and Chat in the browser.
+
+## For Power Users and Developers
 
 Requires [uv](https://docs.astral.sh/uv/). From the repo root:
 

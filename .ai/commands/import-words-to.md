@@ -1,5 +1,5 @@
 ---
-description: Import a word list into a named words topic via soju-import
+description: Import a word list into a named words topic via soju import
 mode: subagent
 ---
 
@@ -40,13 +40,13 @@ Do not edit `data/content/topics/manifest.yaml` unless the user asks — topics 
 3. Dry run:
 
    ```bash
-   cat records.json | uv run soju-import words --topic <topic> --stdin-json --dry-run
+   cat records.json | uv run soju import words --topic <topic> --stdin-json --dry-run
    ```
 
 4. Write:
 
    ```bash
-   cat records.json | uv run soju-import words --topic <topic> --stdin-json
+   cat records.json | uv run soju import words --topic <topic> --stdin-json
    ```
 
 5. `uv run poe validate` (or Docker validate profile).

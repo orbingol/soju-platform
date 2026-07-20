@@ -1,4 +1,4 @@
-``soju-promote``
+``soju promote``
 ================
 
 **Purpose:** Promote ``local: true`` entries in a topic to ``data/content/registry/vocabulary.yaml``.
@@ -14,14 +14,14 @@
      - ``0`` success · ``1`` error
 
 .. typer:: soju.cli.promote.app
-   :prog: soju-promote
+   :prog: soju promote
    :preferred: text
    :markup-mode: markdown
    :width: 78
 
 .. code-block:: bash
 
-   uv run soju-promote --topic family
-   uv run soju-promote --topic family --dry-run
+   uv run soju promote --topic family
+   uv run soju promote --topic family --dry-run
 
 **AI commands:** ``promote-local``

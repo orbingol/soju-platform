@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: BSD-3-Clause
-"""``soju-fill-examples`` console script."""
+"""``soju fill-examples`` command."""
 
 from __future__ import annotations
 
@@ -185,8 +185,3 @@ def fill_examples_cmd(
         print(f"{len(warnings)} warning(s).", file=sys.stderr)
     if strict and warnings:
         raise typer.Exit(1)
-
-
-def main() -> None:
-    """Console-script entry for ``soju-fill-examples``."""
-    app(prog_name="soju-fill-examples")

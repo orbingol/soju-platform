@@ -8,6 +8,7 @@ import {
   displayDataPath,
   getDataDir,
   grammarDir,
+  practiceDir,
   registryDir,
   resolveUnder,
   topicsDir,
@@ -21,6 +22,9 @@ import type {
   GrammarCategoryInfo,
   GrammarPatternMeta,
   GrammarPatternPage,
+  LevelConfig,
+  LevelsConfig,
+  PracticeTheme,
   ResolvedEntry,
   TopicEntry,
   TopicEntryLocal,
@@ -479,6 +483,41 @@ export function loadGrammarPatternPage(patternId: string, dataDir = getDataDir()
     throw new Error(`Unknown grammar pattern: ${patternId}`);
   }
   return readYaml<GrammarPatternPage>(resolveUnder(grammarDir(dataDir), meta.path), dataDir);
+}
+
+export function loadPracticeThemes(dataDir = getDataDir()): PracticeTheme[] {
+  const data = readYaml<{ themes: PracticeTheme[] }>(
+    path.join(practiceDir(dataDir), 'themes.yaml'),
+    dataDir
+  );
+  return data.themes;
+}
+
+export function loadLevelsConfig(dataDir = getDataDir()): LevelsConfig {
+  const raw = readYaml<{
+    default: string;
+    levels: Record<
+      string,
+      {
+        label: string;
+        description: string;
+        guidance: string;
+        grammar_summary?: string;
+        include_levels?: string[];
+      }
+    >;
+  }>(path.join(contentDir(dataDir), 'levels.yaml'), dataDir);
+
+  const levels: LevelConfig[] = Object.entries(raw.levels).map(([id, level]) => ({
+    id,
+    label: level.label,
+    description: level.description,
+    guidance: level.guidance,
+    grammarSummary: level.grammar_summary,
+    includeLevels: level.include_levels
+  }));
+
+  return { default: raw.default, levels };
 }
 
 export function buildVocabularySummary(dataDir = getDataDir()): {

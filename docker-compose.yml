@@ -2,7 +2,11 @@
 x-ollama-volume: &ollama-volume "${OLLAMA_DATA_DIR:-${HOME}/.ollama}:/root/.ollama"
 
 # Shared Soju web configuration (referenced by services below).
-x-soju-ai-model: &soju-ai-model gemma4:e4b
+x-soju-ai-chat-model: &soju-ai-chat-model gemma4:e4b
+
+# Embedding model for Practice retrieval (soju embed-index / SOJU_EMBED_MODEL).
+# Pulled by ollama-pull alongside the chat model above.
+x-soju-ai-embed-model: &soju-ai-embed-model nomic-embed-text
 
 # Browser-visible env vars for apps/web (PUBLIC_* are embedded at build / passed to Vite dev).
 x-soju-web-environment: &soju-web-environment
@@ -23,7 +27,9 @@ x-soju-web-environment: &soju-web-environment
   # Browser-reachable URL (Practice/Chat fetch from the host browser, not the web container).
   PUBLIC_AI_BASE_URL: http://localhost:11434
   # Model id sent in requests (should match a pulled/served model).
-  PUBLIC_AI_MODEL: *soju-ai-model
+  PUBLIC_AI_MODEL: *soju-ai-chat-model
+  # Embedding model for Practice's browser-side theme embedding (must match soju embed-index).
+  PUBLIC_AI_EMBED_MODEL: *soju-ai-embed-model
   # Chat context compaction: summarize when turn count exceeds this.
   PUBLIC_AI_CHAT_SUMMARY_TRIGGER: "10"
   # Chat context compaction: keep this many recent turns verbatim after the summary.
@@ -106,7 +112,7 @@ services:
     volumes:
       - *ollama-volume
 
-  # Ensures the default model exists in the shared Ollama cache (pull is incremental).
+  # Ensures the chat + embedding models exist in the shared Ollama cache (pull is incremental).
   ollama-pull:
     image: ollama/ollama
     profiles: ["ollama"]
@@ -115,22 +121,30 @@ services:
         condition: service_started
     environment:
       OLLAMA_HOST: http://ollama:11434
-      OLLAMA_MODEL: *soju-ai-model
+      OLLAMA_MODEL: *soju-ai-chat-model
+      OLLAMA_EMBED_MODEL: *soju-ai-embed-model
     volumes:
       - *ollama-volume
     entrypoint: ["/bin/sh", "-c"]
     command:
       - |
-        for i in 1 2 3 4 5 6 7 8 9 10; do
-          if ollama show "$$OLLAMA_MODEL" >/dev/null 2>&1; then
-            echo "Model $$OLLAMA_MODEL already present"
-            exit 0
-          fi
-          ollama pull "$$OLLAMA_MODEL" && exit 0
-          sleep 3
-        done
-        echo "Failed to pull $$OLLAMA_MODEL" >&2
-        exit 1
+        pull_with_retry() {
+          model="$$1"
+          for i in 1 2 3 4 5 6 7 8 9 10; do
+            if ollama show "$$model" >/dev/null 2>&1; then
+              echo "Model $$model already present"
+              return 0
+            fi
+            ollama pull "$$model" && return 0
+            sleep 3
+          done
+          echo "Failed to pull $$model" >&2
+          return 1
+        }
+        status=0
+        pull_with_retry "$$OLLAMA_MODEL" || status=1
+        pull_with_retry "$$OLLAMA_EMBED_MODEL" || status=1
+        exit "$$status"
     restart: "no"
 
 volumes:

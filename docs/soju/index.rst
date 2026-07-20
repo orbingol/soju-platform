@@ -31,15 +31,16 @@ the repo root.
    :maxdepth: 1
    :caption: CLI reference
 
+   cli/soju
+   cli/import
+   cli/promote
    cli/validate-schemas
    cli/align
    cli/registry
-   cli/import
-   cli/promote
    cli/translate-words
    cli/fill-examples
    cli/fill-verbs
-   cli/soju
+   cli/embed-index
 
 .. toctree::
    :maxdepth: 1

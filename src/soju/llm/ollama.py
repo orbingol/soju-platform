@@ -177,3 +177,61 @@ class OllamaClient:
         if not isinstance(content, str) or not content.strip():
             raise OllamaError("Ollama returned an empty response.")
         return content.strip()
+
+    def embed(
+        self,
+        text: str,
+        *,
+        model: str | None = None,
+        base_url: str | None = None,
+    ) -> list[float]:
+        """Return an embedding vector for ``text`` via ``/api/embeddings``.
+
+        Args:
+            text: Text to embed.
+            model: Optional per-call embedding model override.
+            base_url: Optional per-call base URL override.
+
+        Returns:
+            The embedding vector.
+
+        Raises:
+            OllamaError: On transport failures or a missing/invalid embedding.
+        """
+        use_model = model if model is not None else self.model
+        use_base = base_url if base_url is not None else self.base_url
+        result = _request(use_base, "/api/embeddings", {"model": use_model, "prompt": text})
+        embedding = result.get("embedding")
+        if not isinstance(embedding, list) or not embedding:
+            raise OllamaError("Ollama returned an empty or invalid embedding.")
+        return [float(value) for value in embedding]
+
+    def embed_batch(
+        self,
+        texts: list[str],
+        *,
+        model: str | None = None,
+        base_url: str | None = None,
+    ) -> list[list[float]]:
+        """Return embedding vectors for ``texts`` via the batch ``/api/embed`` endpoint.
+
+        Args:
+            texts: Texts to embed, in order.
+            model: Optional per-call embedding model override.
+            base_url: Optional per-call base URL override.
+
+        Returns:
+            Embedding vectors in the same order as ``texts``.
+
+        Raises:
+            OllamaError: On transport failures, or if the response shape/count is invalid.
+        """
+        if not texts:
+            return []
+        use_model = model if model is not None else self.model
+        use_base = base_url if base_url is not None else self.base_url
+        result = _request(use_base, "/api/embed", {"model": use_model, "input": texts})
+        embeddings = result.get("embeddings")
+        if not isinstance(embeddings, list) or len(embeddings) != len(texts):
+            raise OllamaError("Ollama returned an unexpected number of embeddings.")
+        return [[float(value) for value in vector] for vector in embeddings]
