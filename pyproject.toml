@@ -8,7 +8,7 @@ description = "Soju (소주) Platform Development Tools"
 readme = "README.md"
 license = "BSD-3-Clause"
 license-files = ["LICENSE"]
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 authors = [
   { name = "Onur R. Bingol" },
 ]
@@ -17,7 +17,6 @@ classifiers = [
   "Development Status :: 4 - Beta",
   "Intended Audience :: Education",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
@@ -25,10 +24,10 @@ classifiers = [
   "Topic :: Education",
 ]
 dependencies = [
-  "check-jsonschema>=0.34.0",
-  "poethepoet>=0.32.0",
-  "pyyaml>=6.0.2",
-  "typer>=0.16.0",
+  "check-jsonschema>=0.37.0",
+  "poethepoet>=0.48.0",
+  "pyyaml>=6.0.3",
+  "typer>=0.27.0",
 ]
 dynamic = ["version"]
 
@@ -42,17 +41,17 @@ soju = "soju.cli.app:main"
 
 [dependency-groups]
 docs = [
-  "sphinx>=8.0",
-  "furo>=2024.8.6",
-  "sphinx-autobuild>=2024.10.3",
+  "sphinx>=9.1",
+  "furo>=2025.12.19",
+  "sphinx-autobuild>=2025.8.25",
   "sphinx-copybutton>=0.5.2",
-  "sphinxcontrib-typer>=0.9.0",
+  "sphinxcontrib-typer>=0.9.1",
 ]
 dev = [
-  "pre-commit>=4.0.0",
-  "pytest>=8.0.0",
+  "pre-commit>=4.6.0",
+  "pytest>=9.1.0",
   "pytest-cov>=7.1.0",
-  "python-dotenv>=1.0.0",
+  "python-dotenv>=1.2.0",
 ]
 
 [tool.setuptools.packages.find]
