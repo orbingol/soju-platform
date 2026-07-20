@@ -27,28 +27,22 @@ function setUpFixture(): void {
           label: 'Korean 1B',
           description: 'High beginner',
           guidance: 'Slightly richer.',
-          include_levels: ['1A']
-        }
-      }
+          include_levels: ['1A'],
+        },
+      },
     }),
-    'utf8'
+    'utf8',
   );
 
   const cacheDir = path.join(dataDir, 'cache', 'embeddings');
   fs.mkdirSync(cacheDir, { recursive: true });
-  fs.writeFileSync(
-    path.join(cacheDir, 'meta.json'),
-    JSON.stringify({ embed_model: 'mock-model', dimension: 2, vocab_count: 3, grammar_count: 1 }),
-    'utf8'
-  );
+  fs.writeFileSync(path.join(cacheDir, 'meta.json'), JSON.stringify({ embed_model: 'mock-model', dimension: 2, vocab_count: 3, grammar_count: 1 }), 'utf8');
   writeJsonl(path.join(cacheDir, 'vocab.jsonl'), [
     { id: 'v1', hangul: '학교', romanization: 'hak-gyo', english: 'school', type: 'noun', level: null, embedding: [1, 0] },
     { id: 'v2', hangul: '사과', romanization: 'sa-gwa', english: 'apple', type: 'noun', level: '1B', embedding: [0, 1] },
-    { id: 'v3', hangul: '물', romanization: 'mul', english: 'water', type: 'noun', level: '1A', embedding: [0.6, 0.8] }
+    { id: 'v3', hangul: '물', romanization: 'mul', english: 'water', type: 'noun', level: '1A', embedding: [0.6, 0.8] },
   ]);
-  writeJsonl(path.join(cacheDir, 'grammar.jsonl'), [
-    { id: 'do', form: '-도', english: 'also / even', category: 'particles', summary: 'Additive particle.', embedding: [1, 0] }
-  ]);
+  writeJsonl(path.join(cacheDir, 'grammar.jsonl'), [{ id: 'do', form: '-도', english: 'also / even', category: 'particles', summary: 'Additive particle.', embedding: [1, 0] }]);
 }
 
 beforeEach(() => {

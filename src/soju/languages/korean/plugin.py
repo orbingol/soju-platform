@@ -6,7 +6,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from soju.core.models import Example, TenseForms
-from soju.languages.korean import conjugation, example_rules, local_examples, prompts, text
+from soju.languages.korean import conjugation, example_rules, local_examples, prompts, romanize, text
 from soju.languages.plugins import register
 from soju.levels import get_language_level
 
@@ -27,6 +27,10 @@ class KoreanLanguage:
     def is_target_script(self, value: str) -> bool:
         """Return True if ``value`` contains hangul."""
         return text.has_hangul(value)
+
+    def romanize(self, value: str) -> str:
+        """Return Revised Romanization for hangul (lowercase, hyphenated syllables)."""
+        return romanize.romanize_hangul(value)
 
     def conjugate(self, dictionary_form: str) -> TenseForms:
         """Return polite tense/variant forms for ``dictionary_form``."""

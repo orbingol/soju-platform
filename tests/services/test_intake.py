@@ -180,6 +180,40 @@ def test_import_words_from_staging(data_root: Path, tmp_path: Path) -> None:
     assert any(e["hangul"] == "물" for e in load_vocabulary(data_root))
 
 
+def test_import_words_from_staging_generates_romanization(data_root: Path, tmp_path: Path) -> None:
+    from soju.services.intake import import_words_from_staging
+
+    staging = tmp_path / "candidates.yaml"
+    # Practice / staging candidates are hangul + english only.
+    staging.write_text(
+        "staging: true\nentries:\n  - id: ffffffff-ffff-ffff-ffff-ffffffffffff\n    hangul: 메뉴\n    english: menu\n    type: noun\n",
+        encoding="utf-8",
+    )
+    session = ImportSession.open_words("family", data_root)
+    report = ImportReport()
+    import_words_from_staging(staging, session, report, section_id="general")
+    session.commit(dry_run=False)
+    assert report.added == 1
+    entry = next(e for e in load_vocabulary(data_root) if e["hangul"] == "메뉴")
+    assert entry["romanization"] == "me-nyu"
+    assert entry["english"] == "menu"
+
+
+def test_import_word_record_autofills_romanization(data_root: Path) -> None:
+    session = ImportSession.open_words("family", data_root)
+    report = ImportReport()
+    import_word_record(
+        {"hangul": "학교", "english": "academy building"},
+        session,
+        report,
+        section_id="general",
+    )
+    session.commit(dry_run=False)
+    assert report.added == 1
+    entry = next(e for e in load_vocabulary(data_root) if e["english"] == "academy building")
+    assert entry["romanization"] == "hak-gyo"
+
+
 def test_load_records_json_variants(tmp_path: Path, monkeypatch) -> None:
     from soju.services.intake import load_records_json
 

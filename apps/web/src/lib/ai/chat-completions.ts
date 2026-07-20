@@ -13,6 +13,7 @@ function buildBody(request: AiCompletionRequest) {
     ...(request.jsonMode ? { format: 'json' } : {}),
     temperature: request.temperature ?? 0.7,
     ...(request.maxTokens ? { max_tokens: request.maxTokens } : {}),
+    ...(request.reasoningEffort ? { reasoning_effort: request.reasoningEffort } : {}),
   };
 }
 

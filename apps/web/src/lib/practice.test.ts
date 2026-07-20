@@ -75,11 +75,20 @@ describe('buildPracticeSystemPrompt', () => {
   it('emits only vocabulary_candidates as the primary payload for the candidates type, with no optional-candidates line', () => {
     const prompt = buildPracticeSystemPrompt({ ...baseOptions, exerciseType: 'vocabulary_candidates', count: 8 });
     expect(prompt).toContain('Exactly 8 vocabulary candidate(s) in "vocabulary_candidates"');
+    expect(prompt).toContain('hangul and english required');
+    expect(prompt).toContain('do not include romanization');
     expect(prompt).not.toContain('is optional');
     expect(prompt).not.toContain('"sentences"');
     expect(prompt).not.toContain('"questions"');
     expect(prompt).not.toContain('"fill_in_blank"');
     expect(prompt).not.toContain('"story"');
+  });
+
+  it('never asks for romanization in practice JSON shapes', () => {
+    for (const exerciseType of ['sentences', 'questions', 'fill_in_blank', 'story', 'vocabulary_candidates'] as const) {
+      const prompt = buildPracticeSystemPrompt({ ...baseOptions, exerciseType, count: 3 });
+      expect(prompt).not.toMatch(/"romanization"/);
+    }
   });
 
   it('clamps non-positive counts to at least 1', () => {

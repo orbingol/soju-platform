@@ -33,22 +33,22 @@ interface ResponseSpec {
 const PRACTICE_TIMEOUT_MS = 120_000;
 
 /** Rough output budget so a larger `count` doesn't get cut off, without an unbounded generation. */
-const PRACTICE_BASE_MAX_TOKENS = 300;
-const PRACTICE_TOKENS_PER_ITEM = 150;
-const PRACTICE_MAX_TOKENS_CAP = 2000;
+const PRACTICE_BASE_MAX_TOKENS = 600;
+const PRACTICE_TOKENS_PER_ITEM = 180;
+const PRACTICE_MAX_TOKENS_CAP = 4000;
 
 function estimateMaxTokens(count: number): number {
   return Math.min(PRACTICE_MAX_TOKENS_CAP, PRACTICE_BASE_MAX_TOKENS + count * PRACTICE_TOKENS_PER_ITEM);
 }
 
 const CANDIDATES_OPTIONAL_REQUIREMENT =
-  '"vocabulary_candidates" is optional: at most 3 new words related to the theme (hangul + english required); omit the field entirely if none fit.';
+  '"vocabulary_candidates" is optional: at most 3 new words related to the theme (hangul + english only; no romanization); omit the field entirely if none fit.';
 
 function buildResponseSpec(exerciseType: PracticeExerciseType, count: number): ResponseSpec {
   switch (exerciseType) {
     case 'sentences':
       return {
-        shape: '{\n  "sentences": [{"hangul": "...", "romanization": "...", "english": "..."}],\n  "vocabulary_candidates": [{"hangul": "...", "english": "..."}]\n}',
+        shape: '{\n  "sentences": [{"hangul": "...", "english": "..."}],\n  "vocabulary_candidates": [{"hangul": "...", "english": "..."}]\n}',
         requirements: [`Exactly ${count} beginner sentence(s) in "sentences".`, CANDIDATES_OPTIONAL_REQUIREMENT],
       };
     case 'questions':
@@ -69,8 +69,8 @@ function buildResponseSpec(exerciseType: PracticeExerciseType, count: number): R
       };
     case 'vocabulary_candidates':
       return {
-        shape: '{\n  "vocabulary_candidates": [{"hangul": "...", "romanization": "...", "english": "..."}]\n}',
-        requirements: [`Exactly ${count} vocabulary candidate(s) in "vocabulary_candidates" (hangul, romanization, and english all required).`],
+        shape: '{\n  "vocabulary_candidates": [{"hangul": "...", "english": "..."}]\n}',
+        requirements: [`Exactly ${count} vocabulary candidate(s) in "vocabulary_candidates" (hangul and english required; do not include romanization).`],
       };
   }
 }
@@ -107,7 +107,8 @@ ${spec.shape}
 
 Requirements:
 ${spec.requirements.map((requirement) => `- ${requirement}`).join('\n')}
-- Keep hangul natural and beginner-friendly.`;
+- Keep hangul natural and beginner-friendly.
+- Do not include romanization fields anywhere in the JSON.`;
 }
 
 export async function generatePracticeSession(options: PracticeGenerateOptions): Promise<PracticeSessionJson> {
@@ -121,7 +122,16 @@ export async function generatePracticeSession(options: PracticeGenerateOptions):
     temperature: 0.6,
     timeoutMs: PRACTICE_TIMEOUT_MS,
     maxTokens: estimateMaxTokens(count),
+    // Reasoning models (gemma4, etc.) otherwise fill max_tokens with a reasoning
+    // trace and return empty content → "unexpected end of data" in JSON.parse.
+    reasoningEffort: 'none',
   });
+
+  if (!content.trim()) {
+    throw new Error(
+      'The model returned an empty response. If you use a thinking model (e.g. gemma4), retry — Practice disables thinking for JSON generation. Otherwise try a smaller count.',
+    );
+  }
 
   return parsePracticeJson(content);
 }

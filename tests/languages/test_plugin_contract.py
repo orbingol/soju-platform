@@ -40,6 +40,10 @@ def test_normalize_and_script_detection() -> None:
     assert not lang.is_target_script("hello")
 
 
+def test_romanize_via_plugin() -> None:
+    assert get_language("ko").romanize("학교") == "hak-gyo"
+
+
 def test_conjugate_via_plugin() -> None:
     forms = get_language("ko").conjugate("먹다")
     assert forms["present"]["casual_polite"] == "먹어요"

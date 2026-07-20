@@ -15,7 +15,7 @@ describe('staging', () => {
           { hangul: '학교에 가요', english: 'I go to school' },
         ],
       },
-      vocabulary_candidates: [{ hangul: '학교', romanization: 'hak-gyo', english: 'school' }],
+      vocabulary_candidates: [{ hangul: '학교', english: 'school' }],
     };
 
     const docs = normalizePracticeSession(raw, '2026-07-08');
@@ -24,6 +24,8 @@ describe('staging', () => {
     expect(docs.exercises.exercises.sentences).toHaveLength(1);
     expect(docs.stories?.story.sentences).toHaveLength(2);
     expect(docs.vocabulary?.entries).toHaveLength(1);
+    expect(docs.vocabulary?.entries[0]).toMatchObject({ hangul: '학교', english: 'school' });
+    expect(docs.vocabulary?.entries[0]).not.toHaveProperty('romanization');
     expect(docs.vocabulary?.entries[0].id).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i);
   });
 
@@ -45,5 +47,26 @@ describe('staging', () => {
   it('keeps the generic invalid-JSON message for non-truncated malformed JSON', () => {
     expect(() => parsePracticeJson('{not valid json}')).toThrow(/Invalid practice JSON/);
     expect(() => parsePracticeJson('{not valid json}')).not.toThrow(/truncated/i);
+  });
+
+  it('rejects an empty model body with a clear message', () => {
+    expect(() => parsePracticeJson('')).toThrow(/empty body/i);
+    expect(() => parsePracticeJson('   ')).toThrow(/empty body/i);
+  });
+
+  it('parses JSON from an unclosed markdown fence', () => {
+    const parsed = parsePracticeJson('```json\n{"sentences":[]}\n');
+    expect(parsed.sentences).toEqual([]);
+  });
+
+  it('ignores romanization on practice sentences and vocabulary candidates', () => {
+    const parsed = parsePracticeJson(
+      JSON.stringify({
+        sentences: [{ hangul: '커피 주세요', romanization: 'keopi juseyo', english: 'Please give me coffee' }],
+        vocabulary_candidates: [{ hangul: '메뉴', romanization: 'me-nyu', english: 'menu' }],
+      }),
+    );
+    expect(parsed.sentences).toEqual([{ hangul: '커피 주세요', english: 'Please give me coffee' }]);
+    expect(parsed.vocabulary_candidates).toEqual([{ hangul: '메뉴', english: 'menu' }]);
   });
 });

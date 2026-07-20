@@ -15,9 +15,9 @@ export async function embedQueryText(text: string): Promise<number[]> {
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: aiEmbedModel, prompt: text })
+      body: JSON.stringify({ model: aiEmbedModel, prompt: text }),
     },
-    AI_FETCH_TIMEOUT_MS
+    AI_FETCH_TIMEOUT_MS,
   );
 
   if (!response.ok) {

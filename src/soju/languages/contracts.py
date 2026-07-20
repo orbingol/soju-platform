@@ -33,6 +33,9 @@ class ScriptNormalizer(Protocol):
     def is_target_script(self, text: str) -> bool:
         """Return ``True`` if ``text`` contains the target script (e.g. hangul)."""
 
+    def romanize(self, text: str) -> str:
+        """Return romanization for ``text`` (e.g. Revised Romanization for hangul)."""
+
 
 @runtime_checkable
 class Conjugator(Protocol):

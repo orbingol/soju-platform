@@ -48,6 +48,10 @@ function buildBody(request: AiCompletionRequest, conversationId?: string | null)
     body.max_output_tokens = request.maxTokens;
   }
 
+  if (request.reasoningEffort) {
+    body.reasoning_effort = request.reasoningEffort;
+  }
+
   return body;
 }
 

@@ -47,8 +47,7 @@ def build(
         vocab_docs = load_vocab_docs()
         grammar_docs = load_grammar_docs()
         print(
-            f"Would embed {len(vocab_docs)} vocabulary entries and {len(grammar_docs)} grammar "
-            f"patterns using model {embed_model!r} at {base_url}.",
+            f"Would embed {len(vocab_docs)} vocabulary entries and {len(grammar_docs)} grammar patterns using model {embed_model!r} at {base_url}.",
             file=sys.stderr,
         )
         return
@@ -56,8 +55,7 @@ def build(
     client = OllamaClient(model=embed_model, base_url=base_url)
     if not client.check_available():
         print(
-            f"Error: Ollama is not reachable at {base_url}. Start Ollama or run: "
-            "docker compose --profile ollama up ollama ollama-pull",
+            f"Error: Ollama is not reachable at {base_url}. Start Ollama or run: docker compose --profile ollama up ollama ollama-pull",
             file=sys.stderr,
         )
         raise typer.Exit(1)
@@ -74,8 +72,6 @@ def build(
         raise typer.Exit(1) from exc
 
     print(
-        f"Embedded {result.vocab_count} vocabulary entries and {result.grammar_count} grammar "
-        f"patterns (dimension={result.dimension}) into data/cache/embeddings/.",
+        f"Embedded {result.vocab_count} vocabulary entries and {result.grammar_count} grammar patterns (dimension={result.dimension}) into data/cache/embeddings/.",
         file=sys.stderr,
     )
-

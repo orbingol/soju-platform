@@ -1,7 +1,6 @@
 export interface PracticeSentence {
   hangul: string;
   english: string;
-  romanization?: string;
 }
 
 export interface PracticeQuestion {
@@ -26,7 +25,6 @@ export interface PracticeStory {
 
 export interface PracticeVocabularyCandidate {
   hangul: string;
-  romanization: string;
   english: string;
   examples?: Array<{ hangul: string; english: string }>;
 }
@@ -60,7 +58,6 @@ export interface StagingVocabularyDoc {
   entries: Array<{
     id: string;
     hangul: string;
-    romanization: string;
     english: string;
     examples?: Array<{ id: string; hangul: string; english: string }>;
   }>;
@@ -96,7 +93,6 @@ function parseSentence(value: unknown, path: string): PracticeSentence {
   return {
     hangul: requireString(value.hangul, `${path}.hangul`),
     english: requireString(value.english, `${path}.english`),
-    romanization: optionalString(value.romanization, `${path}.romanization`),
   };
 }
 
@@ -145,7 +141,6 @@ function parseVocabularyCandidate(value: unknown, path: string): PracticeVocabul
   const examples = value.examples;
   return {
     hangul: requireString(value.hangul, `${path}.hangul`),
-    romanization: requireString(value.romanization, `${path}.romanization`),
     english: requireString(value.english, `${path}.english`),
     examples: Array.isArray(examples)
       ? examples.map((item, index) => {
@@ -244,7 +239,6 @@ export function normalizePracticeSession(
           entries: candidates.map((entry) => ({
             id: crypto.randomUUID(),
             hangul: entry.hangul,
-            romanization: entry.romanization,
             english: entry.english,
             examples: entry.examples?.map((example) => ({
               id: crypto.randomUUID(),
@@ -268,10 +262,26 @@ function looksTruncated(text: string): boolean {
   return opens !== closes;
 }
 
-export function parsePracticeJson(text: string): PracticeSessionJson {
+/** Strip optional markdown fences; tolerate an unclosed opening ```json fence. */
+function extractJsonText(text: string): string {
   const trimmed = text.trim();
-  const fenced = trimmed.match(/```(?:json)?\s*([\s\S]*?)```/);
-  const jsonText = fenced ? fenced[1].trim() : trimmed;
+  if (!trimmed) return '';
+
+  const closed = trimmed.match(/```(?:json)?\s*([\s\S]*?)```/);
+  if (closed) return closed[1].trim();
+
+  const openFence = trimmed.match(/^```(?:json)?\s*([\s\S]*)$/i);
+  if (openFence) return openFence[1].trim();
+
+  return trimmed;
+}
+
+export function parsePracticeJson(text: string): PracticeSessionJson {
+  const jsonText = extractJsonText(text);
+  if (!jsonText) {
+    throw new Error('Invalid practice JSON: the model returned an empty body. Retry, or try a smaller count — thinking models can exhaust the output budget before emitting JSON.');
+  }
+
   let parsed: unknown;
   try {
     parsed = JSON.parse(jsonText);

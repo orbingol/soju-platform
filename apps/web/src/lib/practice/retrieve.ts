@@ -106,7 +106,7 @@ export function loadEmbeddingsCache(dataDir = getDataDir()): EmbeddingsCache {
     return {
       meta: readJsonFile<EmbeddingsMeta>(metaPath),
       vocab: readJsonl<CachedVocabRecord>(vocabPath),
-      grammar: readJsonl<CachedGrammarRecord>(grammarPath)
+      grammar: readJsonl<CachedGrammarRecord>(grammarPath),
     };
   } catch {
     throw new PracticeRetrieveError(`Embedding cache is corrupt. Rebuild it: ${EMBED_INDEX_HINT}`, 503);
@@ -156,7 +156,7 @@ export function retrievePractice(request: PracticeRetrieveRequest, dataDir = get
     throw new PracticeRetrieveError(
       `Query embedding has dimension ${queryVector.length}, but the cached index has dimension ${cache.meta.dimension} ` +
         `(embed model ${cache.meta.embed_model}). Re-embed the theme with that model, or rebuild the index: ${EMBED_INDEX_HINT}`,
-      400
+      400,
     );
   }
 
@@ -188,7 +188,7 @@ export function retrievePractice(request: PracticeRetrieveRequest, dataDir = get
       id: entry.id,
       form: entry.form,
       english: entry.english,
-      ...(entry.summary ? { summary: entry.summary } : {})
-    }))
+      ...(entry.summary ? { summary: entry.summary } : {}),
+    })),
   };
 }

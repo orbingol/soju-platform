@@ -17,6 +17,12 @@ export interface AiCompletionRequest {
   timeoutMs?: number;
   /** Caps generated output length (`max_tokens` / `max_output_tokens` depending on API mode). */
   maxTokens?: number;
+  /**
+   * Ollama OpenAI-compat thinking control (`reasoning_effort`).
+   * Use `"none"` for JSON tasks so reasoning models (e.g. gemma4) don't spend the whole
+   * `max_tokens` budget on a `reasoning` trace and return empty `content`.
+   */
+  reasoningEffort?: 'none' | 'low' | 'medium' | 'high';
 }
 
 export interface AiClient {

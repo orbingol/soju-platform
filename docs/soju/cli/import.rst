@@ -35,8 +35,11 @@ Words
    # Merge examples only for existing registry words
    uv run soju import words --topic common --file words.txt
 
-   # From staging
+   # From staging (hangul + english required; romanization optional — autofilled from hangul)
    uv run soju import words --from-staging data/staging/vocabulary-candidates.yaml --topic common
+
+Word records need ``hangul`` and ``english``. If ``romanization`` is omitted or blank, import
+fills it with Revised Romanization derived from the hangul (lowercase, hyphenated syllables).
 
 **Uniqueness:** registry entries are keyed by **hangul + English meaning**. Same hangul with
 a different English gloss (e.g. 배 “pear” vs 배 “ship / boat”) is a separate entry (homonym).

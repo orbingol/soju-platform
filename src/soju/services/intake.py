@@ -119,6 +119,24 @@ def resolve_topic_section(topic: dict, section_id: str | None) -> dict:
     raise ValueError("Topic has multiple sections; pass --section <id>.")
 
 
+def _resolve_word_romanization(record: dict) -> str | None:
+    """Return an explicit or auto-generated romanization for a word record.
+
+    Staging / Practice candidates often omit romanization; fill it from hangul
+    via the active language plugin when missing or blank.
+    """
+    raw = record.get("romanization")
+    if isinstance(raw, str) and raw.strip():
+        return raw.strip().lower()
+
+    hangul = record.get("hangul")
+    if not isinstance(hangul, str) or not hangul.strip():
+        return None
+
+    generated = get_language().romanize(hangul).strip().lower()
+    return generated or None
+
+
 def import_word_record(
     record: dict,
     session: ImportSession,
@@ -127,9 +145,15 @@ def import_word_record(
     section_id: str | None = None,
     dry_run: bool = False,
 ) -> None:
-    required = {"hangul", "romanization", "english"}
+    required = {"hangul", "english"}
     if not required.issubset(record):
         report.errors.append(f"Word record missing fields: {sorted(required - set(record))}")
+        report.skipped += 1
+        return
+
+    romanization = _resolve_word_romanization(record)
+    if not romanization:
+        report.errors.append(f"Word record missing romanization and could not generate one from hangul {record.get('hangul')!r}")
         report.skipped += 1
         return
 
@@ -191,7 +215,7 @@ def import_word_record(
     registry_entry = {
         "id": vocab_id,
         "hangul": record["hangul"],
-        "romanization": record["romanization"],
+        "romanization": romanization,
         "english": english,
         "type": word_type,
     }

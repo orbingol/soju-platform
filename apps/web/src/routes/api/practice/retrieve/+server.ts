@@ -35,9 +35,9 @@ export const POST: RequestHandler = async ({ request, getClientAddress }) => {
         level: body.level,
         queryVector: body.queryVector as number[],
         vocabK: body.vocabK,
-        grammarM: body.grammarM
+        grammarM: body.grammarM,
       },
-      getDataDir()
+      getDataDir(),
     );
     return json(result);
   } catch (err) {

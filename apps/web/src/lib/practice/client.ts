@@ -14,7 +14,7 @@ export async function fetchRetrieval(level: string, queryVector: number[]): Prom
   const response = await fetch(`${base}/api/practice/retrieve`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ level, queryVector })
+    body: JSON.stringify({ level, queryVector }),
   });
 
   const body = await response.json().catch(() => ({}));

@@ -21,9 +21,9 @@ staging: true
 entries:
   - id: <uuid>
     hangul: ...
-    romanization: ...
     english: ...
     examples: [...]  # optional
+    # romanization: optional — generated from hangul on import when omitted
 ```
 
 ## Workflow
@@ -52,6 +52,7 @@ entries:
 ## Notes
 
 - Staging entries with UUIDs are merged into `data/content/registry/vocabulary.yaml` and referenced from the topic.
+- Missing romanization is filled automatically (Revised Romanization from hangul) during import.
 - Duplicate `hangul` in registry merges examples or adds a ref, per `soju import` rules.
 - Exercise/story staging files (`data/staging/exercises/`, `data/staging/stories/`) are not imported by this command — only vocabulary staging.
 
