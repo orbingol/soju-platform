@@ -22,6 +22,8 @@ export interface PracticeGenerateOptions {
   hangul: string[];
   /** Retrieved grammar patterns for the level (from `/api/practice/retrieve`). */
   grammar: RetrievedGrammar[];
+  /** Required by the UI when exerciseType is story; included in the system prompt. */
+  storyTopic?: string;
 }
 
 interface ResponseSpec {
@@ -49,28 +51,50 @@ function buildResponseSpec(exerciseType: PracticeExerciseType, count: number): R
     case 'sentences':
       return {
         shape: '{\n  "sentences": [{"hangul": "...", "english": "..."}],\n  "vocabulary_candidates": [{"hangul": "...", "english": "..."}]\n}',
-        requirements: [`Exactly ${count} beginner sentence(s) in "sentences".`, CANDIDATES_OPTIONAL_REQUIREMENT],
+        requirements: [
+          `Exactly ${count} beginner sentence(s) in "sentences".`,
+          'Each hangul value must be exactly one simple sentence (no multi-sentence stories, no clause chains).',
+          CANDIDATES_OPTIONAL_REQUIREMENT,
+        ],
       };
     case 'questions':
       return {
-        shape: '{\n  "questions": [{"question": "...", "answer": "...", "hangul": "...", "english": "..."}],\n  "vocabulary_candidates": [{"hangul": "...", "english": "..."}]\n}',
-        requirements: [`Exactly ${count} beginner question(s) in "questions".`, CANDIDATES_OPTIONAL_REQUIREMENT],
+        shape: '{\n  "questions": [{"prompt": "...", "answer": "...", "english": "..."}],\n  "vocabulary_candidates": [{"hangul": "...", "english": "..."}]\n}',
+        requirements: [
+          `Exactly ${count} beginner question(s) in "questions".`,
+          'Each item needs "prompt" (a direct question in Korean hangul only), "answer" (what the learner should produce in Korean), and "english" (English gloss of the prompt for a Translate button).',
+          'Do NOT put English inside "prompt" (no parentheses glosses). Do NOT use speaker labels like "A:" or "B:", and do not write A–B dialogues.',
+          CANDIDATES_OPTIONAL_REQUIREMENT,
+        ],
       };
     case 'fill_in_blank':
       return {
         shape:
-          '{\n  "fill_in_blank": [{"sentence": "...", "blank": "...", "answer": "...", "english": "..."}],\n  "vocabulary_candidates": [{"hangul": "...", "english": "..."}]\n}',
-        requirements: [`Exactly ${count} fill-in-the-blank item(s) in "fill_in_blank".`, CANDIDATES_OPTIONAL_REQUIREMENT],
+          '{\n  "fill_in_blank": [{"prompt": "카페에서 ___ 주세요", "answer": "커피", "english": "Please give me coffee at the café"}],\n  "vocabulary_candidates": [{"hangul": "...", "english": "..."}]\n}',
+        requirements: [
+          `Exactly ${count} fill-in-the-blank item(s) in "fill_in_blank".`,
+          'Every "prompt" MUST contain the exact blank marker ___ (three underscores) exactly once — this is mandatory.',
+          'Write 1–2 natural Korean sentences in hangul only; leave the missing word/phrase as ___; put the missing text in "answer"; put an English gloss of the full prompt in "english".',
+          'Do NOT fill the blank with the answer in "prompt". Do NOT put English inside "prompt". Do NOT use speaker labels like "A:" or "B:".',
+          CANDIDATES_OPTIONAL_REQUIREMENT,
+        ],
       };
     case 'story':
       return {
         shape: '{\n  "story": {"title": "...", "sentences": [{"hangul": "...", "english": "..."}]},\n  "vocabulary_candidates": [{"hangul": "...", "english": "..."}]\n}',
-        requirements: [`One short story in "story" with at most ${count} sentence(s).`, CANDIDATES_OPTIONAL_REQUIREMENT],
+        requirements: [
+          `One short first-person story in "story" with about ${count} sentence(s) (aim for a paragraph of roughly 4–7 linked sentences; stay near ${count}).`,
+          'The story prompt is a personal question the learner will answer (e.g. "What did you do last weekend?"). Write a model answer as a continuous narrative paragraph, not a list of unrelated lines.',
+          'Do NOT write a dialogue, A–B conversation, interview, or Q&A. No speaker labels. No questions inside the story unless natural speech within one sentence.',
+          'Each "sentences" item MUST be an object {"hangul":"...","english":"..."} — never a bare string.',
+          'Stay at the learner level: simple connected ideas (who/where/what/why), like a short personal reply.',
+          CANDIDATES_OPTIONAL_REQUIREMENT,
+        ],
       };
     case 'vocabulary_candidates':
       return {
         shape: '{\n  "vocabulary_candidates": [{"hangul": "...", "english": "..."}]\n}',
-        requirements: [`Exactly ${count} vocabulary candidate(s) in "vocabulary_candidates" (hangul and english required; do not include romanization).`],
+        requirements: [`Exactly ${count} vocabulary item(s) in "vocabulary_candidates" (hangul and english required; do not include romanization).`],
       };
   }
 }
@@ -85,16 +109,21 @@ function formatGrammarList(grammar: RetrievedGrammar[]): string {
 }
 
 export function buildPracticeSystemPrompt(options: PracticeGenerateOptions): string {
-  const { level, themeText, exerciseType, hangul, grammar } = options;
+  const { level, themeText, exerciseType, hangul, grammar, storyTopic } = options;
   const count = Math.max(1, Math.floor(options.count));
   const spec = buildResponseSpec(exerciseType, count);
+
+  const storyTopicLine =
+    exerciseType === 'story' && storyTopic?.trim()
+      ? `\n\nStory prompt (personal question to answer in first person):\n${storyTopic.trim()}`
+      : '';
 
   return `You are a Korean language tutor creating a beginner practice session.
 
 Learner level: ${level.label}
 ${level.guidance}${level.grammarSummary ? `\n\n${level.grammarSummary}` : ''}
 
-Theme: ${themeText}
+Theme: ${themeText}${storyTopicLine}
 
 Prefer this vocabulary when it fits the theme (hangul only; do not invent unrelated words):
 ${formatHangulList(hangul)}
@@ -135,3 +164,10 @@ export async function generatePracticeSession(options: PracticeGenerateOptions):
 
   return parsePracticeJson(content);
 }
+
+export {
+  buildStoryEvaluatePrompt,
+  evaluatePracticeStory,
+  type PracticeStoryEvaluateOptions,
+  type PracticeStoryEvaluateResult,
+} from '$lib/practice/evaluate';

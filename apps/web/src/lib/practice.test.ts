@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { buildPracticeSystemPrompt, type PracticeGenerateOptions } from './practice';
+import { buildStoryEvaluatePrompt } from './practice/evaluate';
 
 const baseOptions: PracticeGenerateOptions = {
   level: {
@@ -47,34 +48,55 @@ describe('buildPracticeSystemPrompt', () => {
     expect(prompt).toContain('none retrieved');
   });
 
-  it('requires the exact count for sentences and allows optional candidates', () => {
+  it('requires the exact count for sentences, single-sentence rule, and allows optional candidates', () => {
     const prompt = buildPracticeSystemPrompt({ ...baseOptions, exerciseType: 'sentences', count: 7 });
     expect(prompt).toContain('Exactly 7 beginner sentence(s) in "sentences".');
+    expect(prompt).toContain('exactly one simple sentence');
     expect(prompt).toContain('"sentences":');
     expect(prompt).toContain('vocabulary_candidates" is optional');
   });
 
-  it('requires the exact count for questions', () => {
+  it('requires the exact count for questions with prompt/answer shape', () => {
     const prompt = buildPracticeSystemPrompt({ ...baseOptions, exerciseType: 'questions', count: 3 });
     expect(prompt).toContain('Exactly 3 beginner question(s) in "questions".');
-    expect(prompt).toContain('"questions":');
+    expect(prompt).toContain('"prompt"');
+    expect(prompt).toContain('"answer"');
+    expect(prompt).toContain('Do NOT use speaker labels');
+    expect(prompt).toContain('Do NOT put English inside "prompt"');
+    expect(prompt).not.toContain('"question":');
   });
 
-  it('requires the exact count for fill_in_blank', () => {
+  it('requires the exact count for fill_in_blank with prompt/answer shape', () => {
     const prompt = buildPracticeSystemPrompt({ ...baseOptions, exerciseType: 'fill_in_blank', count: 4 });
     expect(prompt).toContain('Exactly 4 fill-in-the-blank item(s) in "fill_in_blank".');
-    expect(prompt).toContain('"fill_in_blank":');
+    expect(prompt).toContain('"prompt"');
+    expect(prompt).toContain('"answer"');
+    expect(prompt).toContain('Do NOT use speaker labels');
+    expect(prompt).toContain('Do NOT put English inside "prompt"');
+    expect(prompt).toContain('___');
+    expect(prompt).toContain('exactly once');
+    expect(prompt).not.toContain('"sentence"');
+    expect(prompt).not.toContain('"blank"');
   });
 
-  it('caps the story sentence count instead of requiring an exact count', () => {
-    const prompt = buildPracticeSystemPrompt({ ...baseOptions, exerciseType: 'story', count: 6 });
-    expect(prompt).toContain('at most 6 sentence(s)');
+  it('asks for a first-person narrative paragraph and embeds the story prompt', () => {
+    const prompt = buildPracticeSystemPrompt({
+      ...baseOptions,
+      exerciseType: 'story',
+      count: 6,
+      storyTopic: 'What did you do last weekend?',
+    });
+    expect(prompt).toContain('about 6 sentence(s)');
+    expect(prompt).toContain('first-person');
+    expect(prompt).toContain('Do NOT write a dialogue');
     expect(prompt).toContain('"story":');
+    expect(prompt).toContain('Story prompt (personal question to answer in first person):');
+    expect(prompt).toContain('What did you do last weekend?');
   });
 
-  it('emits only vocabulary_candidates as the primary payload for the candidates type, with no optional-candidates line', () => {
+  it('emits only vocabulary_candidates as the primary payload for the vocabulary type', () => {
     const prompt = buildPracticeSystemPrompt({ ...baseOptions, exerciseType: 'vocabulary_candidates', count: 8 });
-    expect(prompt).toContain('Exactly 8 vocabulary candidate(s) in "vocabulary_candidates"');
+    expect(prompt).toContain('Exactly 8 vocabulary item(s) in "vocabulary_candidates"');
     expect(prompt).toContain('hangul and english required');
     expect(prompt).toContain('do not include romanization');
     expect(prompt).not.toContain('is optional');
@@ -100,5 +122,28 @@ describe('buildPracticeSystemPrompt', () => {
     const prompt = buildPracticeSystemPrompt({ ...baseOptions, level: { label: 'Korean 1A', guidance: 'Keep it simple.' } });
     expect(prompt).toContain('Keep it simple.');
     expect(prompt).toContain('valid JSON');
+  });
+});
+
+describe('buildStoryEvaluatePrompt', () => {
+  it('asks for English feedback JSON comparing learner and model stories', () => {
+    const prompt = buildStoryEvaluatePrompt({
+      level: {
+        label: 'Korean 1A',
+        guidance: 'Keep sentences short.',
+        grammarSummary: 'Use casual polite endings.',
+      },
+      topic: 'Café morning',
+      userStory: '카페에 가요.',
+      modelStory: 'Morning\n카페에 가요.\n커피를 마셔요.',
+    });
+    expect(prompt).toContain('Korean 1A');
+    expect(prompt).toContain('Story prompt (personal question the learner answered):');
+    expect(prompt).toContain('Café morning');
+    expect(prompt).toContain('카페에 가요.');
+    expect(prompt).toContain('커피를 마셔요.');
+    expect(prompt).toContain('"feedback"');
+    expect(prompt).toContain('English feedback only');
+    expect(prompt).toContain('first-person narrative');
   });
 });

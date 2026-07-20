@@ -159,6 +159,12 @@
   display: grid;
   gap: 1.25rem;
   max-width: 48rem;
+  width: 100%;
+}
+
+.practice-app:has(.practice-list--interactive),
+.practice-app:has(.practice-story-panels) {
+  max-width: min(64rem, 100%);
 }
 
 .practice-toolbar,
@@ -167,6 +173,21 @@
   flex-wrap: wrap;
   gap: 0.75rem;
   align-items: center;
+}
+
+.practice-toolbar--staging {
+  margin-top: 0.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--pico-muted-border-color);
+}
+
+.practice-btn-sm {
+  font-size: 0.75rem;
+  line-height: 1.2;
+  padding: 0.25rem 0.55rem;
+  height: auto;
+  min-height: 0;
+  border-width: 1px;
 }
 
 .practice-status {
@@ -208,6 +229,23 @@
   width: 100%;
 }
 
+.practice-story-topic {
+  display: grid;
+  gap: 0.75rem;
+  align-items: end;
+}
+
+@media (min-width: 40rem) {
+  .practice-story-topic {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+
+.practice-story-topic__random {
+  margin: 0;
+  white-space: nowrap;
+}
+
 .practice-candidates {
   margin: 0;
   padding-left: 1.25rem;
@@ -233,6 +271,9 @@
   border: 1px solid var(--pico-muted-border-color);
   border-radius: 0.75rem;
   background: var(--pico-card-background-color);
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .practice-list {
@@ -242,6 +283,205 @@
 
 .practice-list li + li {
   margin-top: 0.75rem;
+}
+
+.practice-list--interactive {
+  list-style: none;
+  padding-left: 0;
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+}
+
+.practice-list--interactive > .practice-item + .practice-item {
+  margin-top: 0;
+}
+
+.practice-item {
+  display: grid;
+  gap: 0.65rem;
+  width: 100%;
+  min-width: 0;
+}
+
+.practice-item-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+}
+
+.practice-item-prompt-row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.5rem 0.65rem;
+  align-items: flex-start;
+  width: 100%;
+  min-width: 0;
+}
+
+.practice-item-prompt-row > .spk {
+  flex: 0 0 auto;
+  margin: 0;
+  /* Match first text line (line-height 2rem) so the icon sits level with Hangul. */
+  height: 2rem;
+  width: 2rem;
+  min-width: 2rem;
+}
+
+.practice-item-prompt-row .practice-item-prompt {
+  flex: 1 1 auto;
+  margin: 0;
+  padding: 0;
+  line-height: 2rem;
+}
+
+.practice-item-prompt-row .practice-btn-sm {
+  flex: 0 0 auto;
+  margin: 0;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0;
+  padding-bottom: 0;
+  line-height: 1;
+}
+
+.practice-item-prompt {
+  margin: 0;
+  min-width: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  line-height: 1.5;
+}
+
+.practice-item-prompt-translation {
+  margin: 0;
+  color: var(--pico-muted-color);
+  font-size: var(--kr-font-body-sm);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.practice-item-input {
+  margin: 0;
+  flex: 1 1 12rem;
+  min-width: 0;
+  width: auto;
+}
+
+.practice-item-row > .secondary,
+.practice-item-row > .spk {
+  flex: 0 0 auto;
+}
+
+.practice-item-reveal {
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.5rem;
+  background: color-mix(in srgb, var(--pico-muted-border-color) 35%, transparent);
+  color: var(--pico-muted-color);
+  font-size: var(--kr-font-body-sm);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.practice-item-english {
+  color: var(--pico-muted-color);
+  font-weight: 400;
+}
+
+.practice-vocab {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.practice-vocab-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.practice-vocab-text {
+  font-size: var(--kr-font-body);
+}
+
+.practice-story-panels {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 52rem) {
+  .practice-story-panels {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.practice-story-panel h3 {
+  margin: 0 0 0.75rem;
+  font-size: var(--kr-font-body);
+}
+
+.practice-story-panel__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.practice-story-panel__header h3 {
+  margin: 0;
+}
+
+.practice-story-hint {
+  margin: -0.25rem 0 0.75rem;
+  color: var(--pico-muted-color);
+  font-size: var(--kr-font-body-sm);
+}
+
+.practice-story-model-title {
+  margin: 0 0 0.5rem;
+  font-size: var(--kr-font-body-sm);
+  color: var(--pico-muted-color);
+  font-weight: 600;
+}
+
+.practice-story-paragraph {
+  margin: 0;
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+
+.practice-story-paragraph--translation {
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--pico-muted-border-color);
+  color: var(--pico-muted-color);
+  font-size: var(--kr-font-body-sm);
+}
+
+.practice-story-textarea {
+  margin: 0 0 0.75rem;
+  width: 100%;
+  min-height: 10rem;
+  resize: vertical;
+}
+
+.practice-story-feedback {
+  margin: 0;
+  white-space: pre-wrap;
+  line-height: 1.45;
+  color: var(--pico-color);
 }
 
 .chat-log {

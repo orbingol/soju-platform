@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
 
-import { normalizePracticeSession, parsePracticeJson } from './staging';
+import { normalizeFillBlankPrompt, normalizePracticeSession, parsePracticeJson } from './staging';
 
 describe('staging', () => {
   it('normalizes practice JSON into staging documents', () => {
     const raw = {
       sentences: [{ hangul: '안녕하세요', english: 'Hello' }],
-      questions: [{ question: 'How do you say hello?', answer: '안녕하세요' }],
-      fill_in_blank: [{ sentence: '___ 하세요', blank: '안녕', answer: '안녕', english: 'Hello' }],
+      questions: [{ prompt: 'How do you say hello?', answer: '안녕하세요', english: 'Hello' }],
+      fill_in_blank: [{ prompt: 'A: 뭐 드실래요?\nB: ___ 주세요', answer: '커피', english: 'Coffee please' }],
       story: {
         title: 'Morning',
         sentences: [
@@ -59,6 +59,26 @@ describe('staging', () => {
     expect(parsed.sentences).toEqual([]);
   });
 
+  it('parses questions and fill-in-blank with prompt/answer shapes', () => {
+    const parsed = parsePracticeJson(
+      JSON.stringify({
+        questions: [{ prompt: 'A: 뭐 드릴까요?\nB: …', answer: '커피 주세요', english: 'Coffee please' }],
+        fill_in_blank: [{ prompt: '커피 ___ 주세요', answer: '한 잔', english: 'one cup' }],
+      }),
+    );
+    expect(parsed.questions).toEqual([
+      { prompt: 'A: 뭐 드릴까요?\nB: …', answer: '커피 주세요', english: 'Coffee please' },
+    ]);
+    expect(parsed.fill_in_blank).toEqual([{ prompt: '커피 ___ 주세요', answer: '한 잔', english: 'one cup' }]);
+  });
+
+  it('rejects questions and fill-in-blank missing prompt', () => {
+    expect(() => parsePracticeJson(JSON.stringify({ questions: [{ answer: '네' }] }))).toThrow(/questions\[0\]\.prompt/);
+    expect(() => parsePracticeJson(JSON.stringify({ fill_in_blank: [{ answer: '커피' }] }))).toThrow(
+      /fill_in_blank\[0\]\.prompt/,
+    );
+  });
+
   it('ignores romanization on practice sentences and vocabulary candidates', () => {
     const parsed = parsePracticeJson(
       JSON.stringify({
@@ -68,5 +88,45 @@ describe('staging', () => {
     );
     expect(parsed.sentences).toEqual([{ hangul: '커피 주세요', english: 'Please give me coffee' }]);
     expect(parsed.vocabulary_candidates).toEqual([{ hangul: '메뉴', english: 'menu' }]);
+  });
+
+  it('coerces story sentences that are bare hangul strings', () => {
+    const parsed = parsePracticeJson(
+      JSON.stringify({
+        story: {
+          title: 'Weekend',
+          sentences: ['지난 주말에 집에 있었어요.', 'TV를 봤어요.'],
+        },
+      }),
+    );
+    expect(parsed.story?.sentences).toEqual([
+      { hangul: '지난 주말에 집에 있었어요.', english: '' },
+      { hangul: 'TV를 봤어요.', english: '' },
+    ]);
+  });
+
+  it('splits a story paragraph string into sentences', () => {
+    const parsed = parsePracticeJson(
+      JSON.stringify({
+        story: {
+          sentences: '집에 있었어요. TV를 봤어요.',
+        },
+      }),
+    );
+    expect(parsed.story?.sentences.map((s) => s.hangul)).toEqual(['집에 있었어요.', 'TV를 봤어요.']);
+  });
+
+  it('normalizes fill-in-blank prompts so a ___ blank is always present', () => {
+    expect(normalizeFillBlankPrompt('카페에서 커피 주세요', '커피')).toBe('카페에서 ___ 주세요');
+    expect(normalizeFillBlankPrompt('카페에서 ______ 주세요', '커피')).toBe('카페에서 ___ 주세요');
+    expect(normalizeFillBlankPrompt('카페에서 ___ 주세요', '커피')).toBe('카페에서 ___ 주세요');
+
+    const parsed = parsePracticeJson(
+      JSON.stringify({
+        fill_in_blank: [{ prompt: '친구하고 영화를 봐요', answer: '영화를', english: 'I watch a movie with a friend' }],
+      }),
+    );
+    expect(parsed.fill_in_blank?.[0]?.prompt).toContain('___');
+    expect(parsed.fill_in_blank?.[0]?.prompt).not.toContain('영화를');
   });
 });
