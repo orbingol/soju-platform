@@ -33,9 +33,10 @@ AI-assisted workflow
 ----------------------
 
 The slash commands under ``.ai/commands/`` (``import-words``, ``import-words-to``,
-``import-verbs``, ``import-staging``, ``promote-local``) parse free-form input, call
-the matching ``soju import``/``soju promote`` command, and run validation — read the
-matching ``.ai/commands/*.md`` file before invoking one.
+``import-verbs``, ``import-staging``, ``promote-local``, ``translate-words``,
+``embed-index``) parse free-form input, call the matching ``soju`` CLI, and run
+validation where appropriate — read the matching ``.ai/commands/*.md`` file before
+invoking one.
 
 Grammar lessons
 -----------------

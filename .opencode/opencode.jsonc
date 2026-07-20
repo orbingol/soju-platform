@@ -16,6 +16,12 @@
     },
     "promote-local": {
       "prompt": "{file:../.ai/commands/promote-local.md}"
+    },
+    "embed-index": {
+      "prompt": "{file:../.ai/commands/embed-index.md}"
+    },
+    "translate-words": {
+      "prompt": "{file:../.ai/commands/translate-words.md}"
     }
   },
   "command": {
@@ -47,6 +53,18 @@
       "description": "Promote local topic entries via soju promote",
       "agent": "promote-local",
       "template": "Topic id (e.g. family): $1",
+      "subtask": true
+    },
+    "embed-index": {
+      "description": "Rebuild Practice embedding cache via soju embed-index",
+      "agent": "embed-index",
+      "template": "Optional notes (model, why rebuilding):\n\n$ARGUMENTS",
+      "subtask": true
+    },
+    "translate-words": {
+      "description": "Translate a word list to JSON via soju translate-words, then soju import",
+      "agent": "translate-words",
+      "template": "Word list file path: $1\n\nTopic id for import (default common): $2",
       "subtask": true
     }
   }

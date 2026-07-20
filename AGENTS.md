@@ -65,7 +65,7 @@ One console entry is installed by `uv sync`: **`soju`**. Invoke as `uv run soju 
 
 - [README.md](README.md) — project overview (non-technical)
 - `docs/soju/` — Sphinx user guide (Furo, `.rst`): `development/` + `cli/`; `uv run poe docs` / `docs-serve`
-- `.ai/commands/` — slash-command workflows that parse input and call `soju import` / `soju promote`
+- `.ai/commands/` — slash-command workflows that parse input and call `soju import` / `soju promote` / `soju embed-index` / `soju translate-words`
 
 ## Default workflow
 
@@ -138,11 +138,13 @@ Or: `docker compose --profile validate run --rm validate`
 
 | Command | CLI |
 |---------|-----|
-| `import-words` | `soju import words --topic family --stdin-json` |
+| `import-words` | `soju import words --topic common --stdin-json` |
 | `import-words-to` | `soju import words --topic <id> --stdin-json` |
 | `import-verbs` | `soju import verbs --stdin-json` |
 | `import-staging` | `soju import words --from-staging …` |
 | `promote-local` | `soju promote --topic <id>` |
+| `translate-words` | `soju translate-words --file …` → `soju import words … --stdin-json` |
+| `embed-index` | `soju embed-index` |
 
 Read the matching `.ai/commands/*.md` file before running.
 

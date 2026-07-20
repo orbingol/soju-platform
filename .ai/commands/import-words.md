@@ -52,7 +52,7 @@ Omit `examples` when the line has no parenthesized example.
 
 ## Workflow
 
-1. Parse all lines into JSON records (skip duplicates by **hangul + English meaning** against the registry when possible — query `data/content/registry/vocabulary.yaml` or run `soju import --dry-run` first). Same hangul with a different English gloss is a new homonym entry.
+1. Parse all lines into JSON records (skip duplicates by **hangul + English meaning** against the registry when possible — query `data/content/registry/vocabulary.yaml` or run `soju import words --topic common --stdin-json --dry-run` first). Same hangul with a different English gloss is a new homonym entry.
 2. Import (preview):
 
    ```bash
