@@ -4,8 +4,9 @@ name: Build docs
 
 on:
   push:
-    tags-ignore:
+    branches:
       - "**"
+  workflow_dispatch:
 
 permissions:
   contents: read

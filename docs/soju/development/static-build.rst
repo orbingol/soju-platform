@@ -51,8 +51,9 @@ Four workflows under ``.github/workflows/``:
 * **Publish to GitHub Pages** (``publish.yml``) — Docker web build + Sphinx + deploy on
   **published GitHub Releases** (and manual ``workflow_dispatch``)
 
-Branch-push workflows ignore tag pushes so a release does not re-run CI. The Pages
-workflow sets ``PUBLIC_BASE_PATH`` to ``/<repository name>`` (e.g. ``/soju-platform``)
+Branch-push workflows use a ``branches`` filter (not ``tags-ignore`` alone) so they
+run on every branch push and skip tag pushes. The Pages workflow sets
+``PUBLIC_BASE_PATH`` to ``/<repository name>`` (e.g. ``/soju-platform``)
 and publishes:
 
 * **App** at ``/soju-platform/`` (SvelteKit static export; artifact root + ``paths.base``)

@@ -4,7 +4,7 @@ name: Build web app
 
 on:
   push:
-    tags-ignore:
+    branches:
       - "**"
   workflow_dispatch:
 
