@@ -1,9 +1,8 @@
 Docker
 ======
 
-Compose services run the web app, validate data, and build static exports. The Compose
-**project name** is ``soju``: containers use the ``soju-`` prefix, named volumes use
-``soju_``.
+Compose services run the web app and validate data. The Compose **project name** is
+``soju``: containers use the ``soju-`` prefix, named volumes use ``soju_``.
 
 Core services
 -------------
@@ -20,8 +19,8 @@ Core services
      - ``docker compose exec web npm test``
    * - Validate (canonical image)
      - ``docker compose --profile validate run --rm validate``
-   * - Static build
-     - ``docker compose --profile build build web-build``
+   * - Static web build
+     - ``scripts/docker-build-web.sh`` (see :doc:`static-build`)
 
 Optional profiles
 ------------------

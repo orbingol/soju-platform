@@ -8,18 +8,22 @@ x-soju-ai-chat-model: &soju-ai-chat-model gemma4:e4b
 # Pulled by ollama-pull alongside the chat model above.
 x-soju-ai-embed-model: &soju-ai-embed-model nomic-embed-text
 
+# Speech engine for Speak buttons (web runtime via x-soju-web-environment).
+#  * piper: local TTS Docker service
+#  * browser: Web Speech API
+x-soju-tts-engine: &soju-tts-engine piper
+# Browser-reachable Piper HTTP root (Speak fetches from the host browser).
+x-soju-tts-piper-base-url: &soju-tts-piper-base-url http://localhost:5500
+# Edge neural voice id sent to /v1/audio/speech (e.g. ko-KR-InJoonNeural).
+x-soju-tts-piper-voice: &soju-tts-piper-voice ko-KR-SunHiNeural
+
 # Browser-visible env vars for apps/web (PUBLIC_* are embedded at build / passed to Vite dev).
 x-soju-web-environment: &soju-web-environment
   # Path to canonical YAML inside the container (bind-mounted from ./data)
   DATA_DIR: /data
-  # Speech engine
-  #  * piper: local TTS Docker service
-  #  * browser: Web Speech API
-  PUBLIC_TTS_ENGINE: piper
-  # Browser-reachable local TTS root (Speak buttons fetch from the host browser).
-  PUBLIC_TTS_PIPER_BASE_URL: http://localhost:5500
-  # Edge neural voice id sent to /v1/audio/speech (e.g. ko-KR-SunHiNeural, ko-KR-InJoonNeural).
-  PUBLIC_TTS_PIPER_VOICE: ko-KR-SunHiNeural
+  PUBLIC_TTS_ENGINE: *soju-tts-engine
+  PUBLIC_TTS_PIPER_BASE_URL: *soju-tts-piper-base-url
+  PUBLIC_TTS_PIPER_VOICE: *soju-tts-piper-voice
   # Enables Practice and Chat (AI features). Flashcards work when false (e.g. GitHub Pages).
   PUBLIC_AI_ENABLED: "true"
   # OpenAI-compatible API mode: chat-completions (default) or conversations.
@@ -74,13 +78,6 @@ services:
     extra_hosts:
       - host.docker.internal:host-gateway
 
-  web-build:
-    profiles: ["build"]
-    build:
-      context: .
-      dockerfile: docker/Dockerfile.web
-      target: build
-
   validate:
     profiles: ["validate"]
     build:
@@ -97,7 +94,7 @@ services:
   piper:
     build:
       context: .
-      dockerfile: docker/piper/Dockerfile
+      dockerfile: docker/piper/Dockerfile.piper
     ports:
       - "5500:5000"
     restart: unless-stopped

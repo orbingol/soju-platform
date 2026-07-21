@@ -1,0 +1,77 @@
+# Deploy the static Svelte app (/) and Sphinx docs (/docs) to GitHub Pages.
+
+name: Publish to GitHub Pages
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          enable-cache: true
+
+      - name: Install Python package (docs deps)
+        run: uv sync --frozen
+
+      - name: Build and extract static web
+        env:
+          PUBLIC_BASE_PATH: ${{ env.PUBLIC_BASE_PATH }}
+          # Explicit Pages-safe TTS (also the Dockerfile default).
+          PUBLIC_TTS_ENGINE: browser
+        run: scripts/docker-build-web.sh site-app
+
+      - name: Build Sphinx docs
+        run: uv run poe docs
+
+      - name: Stage Pages site (app / + docs /docs)
+        run: |
+          set -euo pipefail
+          mkdir -p site
+          cp -R site-app/. site/
+          rm -rf site/docs
+          mkdir -p site/docs
+          cp -R docs/_build/html/. site/docs/
+          # Jekyll would ignore folders starting with _; adapter-static uses _app.
+          touch site/.nojekyll
+          echo "PUBLIC_BASE_PATH='${PUBLIC_BASE_PATH}'"
+          echo "Staged site tree (top level):"
+          ls -la site
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: site
+          # Keep .nojekyll (v5 excludes dotfiles by default).
+          include-hidden-files: true
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0

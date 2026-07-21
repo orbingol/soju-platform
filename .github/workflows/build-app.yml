@@ -1,0 +1,27 @@
+# Build the SvelteKit static app via Docker.
+
+name: Build web app
+
+on:
+  push:
+    tags-ignore:
+      - "**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: app-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  web:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Build static web image
+        # Dockerfile defaults: empty PUBLIC_BASE_PATH, PUBLIC_TTS_ENGINE=browser, AI off.
+        run: scripts/docker-build-web.sh
