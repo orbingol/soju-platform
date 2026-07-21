@@ -17,8 +17,10 @@ Equivalent ``docker build``:
    docker build -f docker/Dockerfile.web --target build -t soju-web:static .
 
 Defaults bake a Pages-safe site: empty ``PUBLIC_BASE_PATH`` (site at ``/``),
-``PUBLIC_AI_ENABLED=false``, ``PUBLIC_TTS_ENGINE=browser``. Override any knob with
-``--build-arg`` or by exporting the same name before the script:
+``PUBLIC_AI_ENABLED=false``, ``PUBLIC_TTS_ENGINE=browser``. The static app uses
+``trailingSlash: 'always'`` and a ``404.html`` fallback so project Pages URLs like
+``/<repo>/`` resolve on first load (GitHub serves a trailing slash). Override any
+knob with ``--build-arg`` or by exporting the same name before the script:
 
 .. code-block:: bash
 
