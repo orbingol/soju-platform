@@ -66,17 +66,13 @@ describe('staging', () => {
         fill_in_blank: [{ prompt: '커피 ___ 주세요', answer: '한 잔', english: 'one cup' }],
       }),
     );
-    expect(parsed.questions).toEqual([
-      { prompt: 'A: 뭐 드릴까요?\nB: …', answer: '커피 주세요', english: 'Coffee please' },
-    ]);
+    expect(parsed.questions).toEqual([{ prompt: 'A: 뭐 드릴까요?\nB: …', answer: '커피 주세요', english: 'Coffee please' }]);
     expect(parsed.fill_in_blank).toEqual([{ prompt: '커피 ___ 주세요', answer: '한 잔', english: 'one cup' }]);
   });
 
   it('rejects questions and fill-in-blank missing prompt', () => {
     expect(() => parsePracticeJson(JSON.stringify({ questions: [{ answer: '네' }] }))).toThrow(/questions\[0\]\.prompt/);
-    expect(() => parsePracticeJson(JSON.stringify({ fill_in_blank: [{ answer: '커피' }] }))).toThrow(
-      /fill_in_blank\[0\]\.prompt/,
-    );
+    expect(() => parsePracticeJson(JSON.stringify({ fill_in_blank: [{ answer: '커피' }] }))).toThrow(/fill_in_blank\[0\]\.prompt/);
   });
 
   it('ignores romanization on practice sentences and vocabulary candidates', () => {

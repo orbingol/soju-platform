@@ -106,17 +106,11 @@ function parseStorySentence(value: unknown, path: string): PracticeSentence {
   if (!isRecord(value)) {
     throw new Error(`Invalid practice JSON: ${path} must be an object`);
   }
-  const hangul =
-    optionalString(value.hangul, `${path}.hangul`) ??
-    optionalString(value.korean, `${path}.korean`) ??
-    optionalString(value.text, `${path}.text`);
+  const hangul = optionalString(value.hangul, `${path}.hangul`) ?? optionalString(value.korean, `${path}.korean`) ?? optionalString(value.text, `${path}.text`);
   if (!hangul?.trim()) {
     throw new Error(`Invalid practice JSON: ${path}.hangul must be a non-empty string`);
   }
-  const english =
-    optionalString(value.english, `${path}.english`) ??
-    optionalString(value.en, `${path}.en`) ??
-    '';
+  const english = optionalString(value.english, `${path}.english`) ?? optionalString(value.en, `${path}.en`) ?? '';
   return { hangul: hangul.trim(), english: english.trim() };
 }
 

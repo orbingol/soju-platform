@@ -113,10 +113,7 @@ export function buildPracticeSystemPrompt(options: PracticeGenerateOptions): str
   const count = Math.max(1, Math.floor(options.count));
   const spec = buildResponseSpec(exerciseType, count);
 
-  const storyTopicLine =
-    exerciseType === 'story' && storyTopic?.trim()
-      ? `\n\nStory prompt (personal question to answer in first person):\n${storyTopic.trim()}`
-      : '';
+  const storyTopicLine = exerciseType === 'story' && storyTopic?.trim() ? `\n\nStory prompt (personal question to answer in first person):\n${storyTopic.trim()}` : '';
 
   return `You are a Korean language tutor creating a beginner practice session.
 
@@ -165,9 +162,4 @@ export async function generatePracticeSession(options: PracticeGenerateOptions):
   return parsePracticeJson(content);
 }
 
-export {
-  buildStoryEvaluatePrompt,
-  evaluatePracticeStory,
-  type PracticeStoryEvaluateOptions,
-  type PracticeStoryEvaluateResult,
-} from '$lib/practice/evaluate';
+export { buildStoryEvaluatePrompt, evaluatePracticeStory, type PracticeStoryEvaluateOptions, type PracticeStoryEvaluateResult } from '$lib/practice/evaluate';

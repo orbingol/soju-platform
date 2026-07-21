@@ -6,11 +6,7 @@
 
   import AiServiceGate from '$lib/components/AiServiceGate.svelte';
   import SpeakButton from '$lib/components/SpeakButton.svelte';
-  import {
-    evaluatePracticeStory,
-    generatePracticeSession,
-    type PracticeExerciseType,
-  } from '$lib/practice';
+  import { evaluatePracticeStory, generatePracticeSession, type PracticeExerciseType } from '$lib/practice';
   import { fetchRetrieval } from '$lib/practice/client';
   import { embedQueryText } from '$lib/practice/embed-query';
   import { downloadTextFile, normalizePracticeSession, todayIsoDate, type PracticeSessionJson } from '$lib/staging';
@@ -72,7 +68,7 @@
     if (match?.[1] && match[2]) {
       return {
         text: match[1].trim(),
-        translation: (english?.trim() || match[2].trim()),
+        translation: english?.trim() || match[2].trim(),
       };
     }
     return { text: prompt, translation: english?.trim() ?? '' };
@@ -136,8 +132,7 @@
     loading = true;
     try {
       status = 'Embedding theme…';
-      const embedText =
-        exerciseType === 'story' ? `${themeText}\n${storyTopic.trim()}` : themeText;
+      const embedText = exerciseType === 'story' ? `${themeText}\n${storyTopic.trim()}` : themeText;
       const queryVector = await embedQueryText(embedText);
 
       status = 'Retrieving vocabulary and grammar…';
@@ -326,15 +321,9 @@
       <div class="practice-story-topic">
         <label class="practice-control practice-control--custom-theme">
           <span class="practice-control__label">Story topic</span>
-          <input
-            type="text"
-            placeholder="e.g. What did you do last weekend?"
-            bind:value={storyTopic}
-          />
+          <input type="text" placeholder="e.g. What did you do last weekend?" bind:value={storyTopic} />
         </label>
-        <button type="button" class="secondary practice-story-topic__random" onclick={pickRandomStoryTopic}>
-          Generate random story topic
-        </button>
+        <button type="button" class="secondary practice-story-topic__random" onclick={pickRandomStoryTopic}> Generate random story topic </button>
       </div>
     {/if}
 
@@ -361,9 +350,7 @@
       <div class="practice-story-panels">
         <div class="practice-panel practice-story-panel">
           <h3>Your story</h3>
-          <p class="practice-story-hint">
-            Answer the prompt in first person as a short paragraph.
-          </p>
+          <p class="practice-story-hint">Answer the prompt in first person as a short paragraph.</p>
           <textarea
             class="practice-story-textarea"
             rows="8"
@@ -371,11 +358,7 @@
             bind:value={userStory}
           ></textarea>
           <div class="practice-toolbar">
-            <button
-              type="button"
-              onclick={evaluateStory}
-              disabled={storyEvaluating || !session?.story || !userStory.trim()}
-            >
+            <button type="button" onclick={evaluateStory} disabled={storyEvaluating || !session?.story || !userStory.trim()}>
               {storyEvaluating ? 'Evaluating…' : 'Evaluate'}
             </button>
           </div>
@@ -416,9 +399,7 @@
                   {translation}
                 </p>
               {:else}
-                <p class="practice-story-paragraph practice-story-paragraph--translation">
-                  No English translation was returned for this story. Try generating again.
-                </p>
+                <p class="practice-story-paragraph practice-story-paragraph--translation">No English translation was returned for this story. Try generating again.</p>
               {/if}
             {/if}
           </div>
@@ -461,11 +442,7 @@
                   <SpeakButton text={promptParts.text} label={`Pronounce question ${index + 1}`} />
                   <p class="practice-item-prompt">{promptParts.text}</p>
                   {#if promptParts.translation}
-                    <button
-                      type="button"
-                      class="secondary practice-btn-sm"
-                      onclick={() => togglePromptTranslation(index)}
-                    >
+                    <button type="button" class="secondary practice-btn-sm" onclick={() => togglePromptTranslation(index)}>
                       {promptTranslated[index] ? 'Hide' : 'Translate'}
                     </button>
                   {/if}
@@ -502,11 +479,7 @@
                   <SpeakButton text={promptParts.text} label={`Pronounce item ${index + 1}`} />
                   <p class="practice-item-prompt">{promptParts.text}</p>
                   {#if promptParts.translation}
-                    <button
-                      type="button"
-                      class="secondary practice-btn-sm"
-                      onclick={() => togglePromptTranslation(index)}
-                    >
+                    <button type="button" class="secondary practice-btn-sm" onclick={() => togglePromptTranslation(index)}>
                       {promptTranslated[index] ? 'Hide' : 'Translate'}
                     </button>
                   {/if}
@@ -539,9 +512,7 @@
             {#each session.vocabulary_candidates ?? [] as candidate}
               <li class="practice-vocab-row">
                 <SpeakButton text={candidate.hangul} label={`Pronounce ${candidate.hangul}`} />
-                <span class="practice-vocab-text"
-                  >{candidate.hangul} <span class="practice-item-english">({candidate.english})</span></span
-                >
+                <span class="practice-vocab-text">{candidate.hangul} <span class="practice-item-english">({candidate.english})</span></span>
               </li>
             {/each}
           </ul>
@@ -556,9 +527,7 @@
           {#each session.vocabulary_candidates as candidate}
             <li class="practice-vocab-row">
               <SpeakButton text={candidate.hangul} label={`Pronounce ${candidate.hangul}`} />
-              <span class="practice-vocab-text"
-                >{candidate.hangul} <span class="practice-item-english">({candidate.english})</span></span
-              >
+              <span class="practice-vocab-text">{candidate.hangul} <span class="practice-item-english">({candidate.english})</span></span>
             </li>
           {/each}
         </ul>
