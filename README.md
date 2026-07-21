@@ -2,12 +2,9 @@
 
 ## Introduction
 
-An **experimental** Korean language learning platform: vocabulary, grammar, and light practice in one place.
+An **experimental** Korean language learning platform: vocabulary, grammar, and practice in one place.
 
-### Important Note
-
-Soju Platform is a personal study project: curated word and verb lists, example sentences, and simple tools to review and practice.
-**It is not a finished product**; features and content change as the project evolves.
+![Education](/docs/_static/soju-education.png?raw=true "Soju Education")
 
 ## Features
 
@@ -68,3 +65,12 @@ uv run poe test         # Python tests
 ## Author(s)
 
 - Onur R. Bingol, Ph.D. ([@orbingol](https://github.com/orbingol))
+
+---
+
+### Note from the Author
+
+Hi there! 👋 This is a small experimental project
+
+Soju Platform is a personal study project: curated word and verb lists, example sentences, and simple tools to review and practice.
+**It is not a finished product**; features and content change as the project evolves.

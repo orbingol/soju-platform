@@ -1,9 +1,13 @@
 Soju (소주) Platform
 ====================
 
-An **experimental** Korean language learning platform: vocabulary, grammar, and light
-practice in one place. This guide covers running the site, validating data, and using
-the Python CLIs — there is no Python API / class reference.
+An **experimental** Korean language learning platform: vocabulary, grammar, and practice
+in one place. This guide covers running the site, validating data, and using the Python CLIs.
+There is no Python API / class reference.
+
+.. image:: ../_static/soju-education.png
+   :alt: Soju Education home with Vocabulary, Flashcards, and Practice
+   :align: center
 
 Getting started
 ----------------
@@ -26,6 +30,9 @@ For contributors
 Setting up the Python tooling, running validation and tests, and building these docs
 is covered under **Development** below. Agent-oriented rules live in ``AGENTS.md`` at
 the repo root.
+
+Documentation
+-------------
 
 .. toctree::
    :maxdepth: 1
