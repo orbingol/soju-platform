@@ -448,3 +448,89 @@ body {
   opacity: 1;
   pointer-events: auto;
 }
+
+/* Home — platform section cards */
+
+.platform-sections {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 22rem));
+}
+
+.platform-section-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 1.25rem 1.35rem;
+  border: 1.5px solid var(--pico-muted-border-color);
+  border-radius: 1rem;
+  text-decoration: none;
+  color: inherit;
+  background: color-mix(in srgb, var(--soju-surface-content-bg) 92%, var(--pico-primary) 8%);
+  box-shadow: 0 10px 32px rgba(15, 23, 42, 0.08);
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.platform-section-card:hover {
+  border-color: var(--pico-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .platform-section-card {
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
+  }
+
+  :root:not([data-theme='light']) .platform-section-card:hover {
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  }
+}
+
+:root[data-theme='dark'] .platform-section-card {
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
+}
+
+:root[data-theme='dark'] .platform-section-card:hover {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+}
+
+.platform-section-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  color: var(--pico-primary);
+  background: color-mix(in srgb, var(--pico-primary) 14%, transparent);
+}
+
+.platform-section-card__icon svg {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+.platform-section-card h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.platform-section-card p {
+  margin: 0;
+  color: var(--pico-muted-color);
+  font-size: var(--kr-font-body-sm, 0.95rem);
+  line-height: 1.55;
+}
+
+.platform-section-card__cta {
+  margin-top: auto;
+  font-weight: 600;
+  color: var(--pico-primary);
+}
