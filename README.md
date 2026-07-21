@@ -66,11 +66,15 @@ uv run poe test         # Python tests
 
 - Onur R. Bingol, Ph.D. ([@orbingol](https://github.com/orbingol))
 
----
-
 ### Note from the Author
 
-Hi there! 👋 This is a small experimental project
+Hi there! 👋
 
-Soju Platform is a personal study project: curated word and verb lists, example sentences, and simple tools to review and practice.
-**It is not a finished product**; features and content change as the project evolves.
+I built Soju Platform as a personal practice companion while taking Korean classes.
+It helps me review vocabulary, grammar, and small exercises between lessons.
+It is **not** a full e-learning course, and it is not trying to be one.
+
+Things are still experimental: content and features come and go as my studies do.
+Please keep expectations light and enjoy poking around if anything here is useful to you too.
+
+Have fun! ✨🍶
