@@ -14,9 +14,6 @@ const config = {
     paths: {
       base,
     },
-    // Required for project Pages (/<repo>/): GH serves the site root with a trailing
-    // slash; default 'never' 404s on first load while in-app links (…/) still work.
-    trailingSlash: 'always',
     prerender: {
       entries: ['*'],
     },
