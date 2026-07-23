@@ -21,8 +21,8 @@ def create_app(settings: BackendSettings | None = None) -> FastAPI:
     """Build the Soju backend FastAPI app.
 
     Args:
-        settings: Optional preloaded settings; when omitted, loads package defaults
-            (and ``$SOJU_BACKEND_CONFIG`` if set).
+        settings: Optional preloaded settings; when omitted, loads via :func:`~soju.backend.config.load_settings`
+            (``~/.config/soju/backend.yaml`` if present, else packaged defaults).
     """
     resolved = settings if settings is not None else load_settings()
 

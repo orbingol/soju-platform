@@ -8,19 +8,8 @@ from typing import Annotated, Optional
 
 import typer
 
-from soju.backend.config import ENV_CONFIG_PATH, load_settings, resolve_config_path
+from soju.backend.config import load_settings, user_config_path
 from soju.backend.models.settings import BackendSettings
-
-
-def _default_override_path() -> Path | None:
-    """Resolve config path: explicit env, else ``./config/backend.yaml`` when present."""
-    env_path = resolve_config_path(None)
-    if env_path is not None:
-        return env_path
-    candidate = Path.cwd() / "config" / "backend.yaml"
-    if candidate.is_file():
-        return candidate
-    return None
 
 
 def _apply_server_overrides(
@@ -46,7 +35,7 @@ def backend(
         typer.Option(
             "--config",
             "-c",
-            help=f"YAML override path (default: ${ENV_CONFIG_PATH} or ./config/backend.yaml if present)",
+            help=f"YAML override path (default: {user_config_path()} if present, else packaged defaults)",
             exists=False,
             dir_okay=False,
             readable=True,
@@ -80,9 +69,8 @@ def backend(
         )
         raise typer.Exit(code=1) from exc
 
-    override = config if config is not None else _default_override_path()
     try:
-        settings = load_settings(override)
+        settings = load_settings(config)
     except FileNotFoundError as exc:
         typer.echo(f"Error: {exc}", err=True)
         raise typer.Exit(code=1) from exc

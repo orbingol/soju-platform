@@ -1,5 +1,6 @@
-# Compose-oriented overrides merged over soju.backend.default_config.yaml.
-# Mounted read-only into the backend container as /config/backend.yaml.
+# Compose / local override example (not auto-loaded).
+# Prefer: soju backend --config config/backend.yaml
+# Or copy keys into ~/.config/soju/backend.yaml
 
 llm:
   # Reach host (or compose-profile) Ollama from the backend container.

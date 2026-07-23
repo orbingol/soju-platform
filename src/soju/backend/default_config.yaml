@@ -1,5 +1,5 @@
-# Shipped defaults for the Soju FastAPI backend.
-# Override with config/backend.yaml (Compose) or SOJU_BACKEND_CONFIG / --config.
+# Shipped defaults for the Soju FastAPI backend (packaged with soju.backend).
+# Override with --config PATH, or place a file at ~/.config/soju/backend.yaml.
 
 server:
   host: "0.0.0.0"

@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-import os
 from importlib.resources import as_file, files
 from pathlib import Path
 from typing import Any
@@ -12,7 +11,12 @@ import yaml
 
 from soju.backend.models.settings import BackendSettings
 
-ENV_CONFIG_PATH = "SOJU_BACKEND_CONFIG"
+DEFAULT_CONFIG_RESOURCE = "default_config.yaml"
+
+
+def user_config_path() -> Path:
+    """Return the standard user config path (``~/.config/soju/backend.yaml``)."""
+    return Path.home() / ".config" / "soju" / "backend.yaml"
 
 
 def _read_yaml_mapping(path: Path) -> dict[str, Any]:
@@ -28,7 +32,7 @@ def _read_yaml_mapping(path: Path) -> dict[str, Any]:
 
 def _read_default_yaml() -> dict[str, Any]:
     """Load shipped defaults from package data."""
-    with as_file(files("soju.backend").joinpath("default_config.yaml")) as resolved:
+    with as_file(files("soju.backend").joinpath(DEFAULT_CONFIG_RESOURCE)) as resolved:
         return _read_yaml_mapping(Path(resolved))
 
 
@@ -45,27 +49,33 @@ def deep_merge(base: dict[str, Any], override: dict[str, Any]) -> dict[str, Any]
 
 
 def resolve_config_path(path: Path | str | None = None) -> Path | None:
-    """Resolve an explicit config path or ``SOJU_BACKEND_CONFIG``; otherwise ``None`` (defaults only)."""
+    """Resolve the YAML override path.
+
+    Search order:
+    1. Explicit ``path`` (``--config``) when provided
+    2. ``~/.config/soju/backend.yaml`` when that file exists
+    3. ``None`` — caller uses packaged defaults only
+    """
     if path is not None:
-        return Path(path)
-    env = os.environ.get(ENV_CONFIG_PATH)
-    if env and env.strip():
-        return Path(env.strip())
+        return Path(path).expanduser()
+    candidate = user_config_path()
+    if candidate.is_file():
+        return candidate
     return None
 
 
 def load_settings(path: Path | str | None = None) -> BackendSettings:
-    """Load :class:`BackendSettings` from shipped defaults merged with an optional override file.
+    """Load :class:`BackendSettings` from packaged defaults merged with an optional override.
 
     Args:
-        path: Optional YAML override path. When omitted, uses ``$SOJU_BACKEND_CONFIG`` if set;
-            otherwise package defaults only.
+        path: Explicit YAML override (``--config``). When omitted, uses
+            ``~/.config/soju/backend.yaml`` if present; otherwise packaged defaults only.
 
     Returns:
         Validated backend settings.
 
     Raises:
-        FileNotFoundError: If an explicit or env config path does not exist.
+        FileNotFoundError: If an explicit ``path`` does not exist.
         ValueError: If a YAML file is not a mapping.
         ValidationError: If merged data fails pydantic validation.
     """

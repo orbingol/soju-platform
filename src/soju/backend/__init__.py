@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from soju.backend.config import load_settings
+from soju.backend.config import load_settings, user_config_path
 from soju.backend.models.settings import BackendSettings
 
-__all__ = ["BackendSettings", "load_settings"]
+__all__ = ["BackendSettings", "load_settings", "user_config_path"]
