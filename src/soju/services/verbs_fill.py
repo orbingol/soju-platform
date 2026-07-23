@@ -31,12 +31,7 @@ def fill_verbs(*, dry_run: bool = False, fill_empty: bool = False, root=None) ->
     for verb in verbs:
         vid = verb["id"]
         forms = lang.conjugate(verb["hangul"])
-        # Prefer language-specific conjugation examples when the plugin exposes them
-        # (Korean: matches historical conjugate.examples_for_verb behaviour).
-        fill_examples = getattr(lang, "conjugation_examples", None)
-        if fill_examples is None:
-            raise TypeError(f"Language {lang.code!r} does not support conjugation_examples")
-        generated_examples = fill_examples(verb["hangul"], verb["english"], forms)
+        generated_examples = lang.conjugation_examples(verb["hangul"], verb["english"], forms)
 
         if fill_empty:
             changed = False

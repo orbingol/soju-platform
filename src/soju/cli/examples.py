@@ -9,19 +9,11 @@ from typing import Annotated, Literal, Optional
 import typer
 
 from soju.cli._common import flag, make_app
-from soju.core.models import EXAMPLE_TENSES as TENSES
-from soju.core.models import EXAMPLE_VARIANTS as VARIANTS
-from soju.levels import get_language_level
-from soju.llm import LlmError, OllamaClient
+from soju.cli._ollama import require_ollama_client
+from soju.llm import LlmError
 from soju.llm.ollama import DEFAULT_BASE_URL, DEFAULT_MODEL
-from soju.registry.examples import load_examples_store, save_examples_store
-from soju.registry.verbs import load_verb_forms, load_verb_forms_cache
-from soju.registry.vocabulary import vocabulary_by_type
-from soju.services.examples_fill import (
-    fill_examples,
-    filter_nouns_for_fill_mode,
-    filter_verbs_for_fill_mode,
-)
+from soju.registry.examples import save_examples_store
+from soju.services.examples_fill.service import dry_run_examples_preview, fill_examples
 
 app = make_app()
 
@@ -107,46 +99,23 @@ def fill_examples_cmd(
         nouns = False
 
     if dry_run:
-        course_level = get_language_level(level)
-        verb_count = len(vocabulary_by_type("verb"))
-        noun_count = len(vocabulary_by_type("noun"))
-        store = load_examples_store()
-        if mode == "fill-empty" and verbs:
-            forms_cache = load_verb_forms_cache()
-            verb_prepared = []
-            for verb in vocabulary_by_type("verb"):
-                forms = load_verb_forms(verb["id"], cache=forms_cache)
-                if all(forms.get(t, {}).get(v) for t in TENSES for v in VARIANTS):
-                    verb_prepared.append((verb, forms))
-            verb_count = len(
-                filter_verbs_for_fill_mode(
-                    verb_prepared,
-                    store,
-                    fill_mode=mode,
-                )
-            )
-        if mode == "fill-empty" and nouns:
-            noun_count = len(filter_nouns_for_fill_mode(vocabulary_by_type("noun"), store, fill_mode=mode))
-        verb_batches = (verb_count + verb_batch_size - 1) // verb_batch_size if verb_count else 0
-        noun_batches = (noun_count + noun_batch_size - 1) // noun_batch_size if noun_count else 0
-        print(f"Language level: {course_level.label} ({course_level.id})", file=sys.stderr)
-        print(f"Fill mode: {mode}", file=sys.stderr)
         print(
-            f"Would generate {examples} example(s) per variant for "
-            f"{verb_count if verbs else 0} verbs "
-            f"({verb_batches} batch(es) of up to {verb_batch_size}) and "
-            f"{noun_count if nouns else 0} nouns "
-            f"({noun_batches} batch(es) of up to {noun_batch_size}).",
+            dry_run_examples_preview(
+                verbs=verbs,
+                nouns=nouns,
+                fill_mode=mode,
+                verb_batch_size=verb_batch_size,
+                noun_batch_size=noun_batch_size,
+                examples_per=examples,
+                level_id=level,
+            ),
             file=sys.stderr,
         )
         return
 
     llm = None
     if not clean_only and not local:
-        llm = OllamaClient(model=model, base_url=base_url)
-        if not llm.check_available():
-            print(f"Error: Ollama is not reachable at {base_url}.", file=sys.stderr)
-            raise typer.Exit(1)
+        llm = require_ollama_client(model=model, base_url=base_url)
 
     try:
         examples_store, warnings, updated = fill_examples(
@@ -165,6 +134,7 @@ def fill_examples_cmd(
             max_attempts=max_attempts,
             fill_mode=mode,
             root=None,
+            progress=lambda msg: print(msg, file=sys.stderr),
         )
     except (LlmError, ValueError) as exc:
         print(f"Error: {exc}", file=sys.stderr)

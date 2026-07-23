@@ -75,6 +75,15 @@ class DeterministicExampleGenerator(Protocol):
         level_id: str,
     ) -> dict[str, dict[str, list[Example]]]: ...
 
+    def conjugation_examples(
+        self,
+        hangul: str,
+        english: str,
+        forms: TenseForms,
+    ) -> dict[str, dict[str, list[Example]]]:
+        """Short examples paired with :meth:`~Conjugator.conjugate` (fill-verbs)."""
+        ...
+
 
 @runtime_checkable
 class ExampleValidator(Protocol):

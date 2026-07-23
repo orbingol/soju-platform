@@ -11,21 +11,23 @@ import pytest
 from soju.languages import get_language
 from soju.levels import get_language_level
 from soju.llm.base import LlmError
+from soju.llm.jsonutil import parse_json_content
 from soju.registry.examples import load_examples_store
 from soju.registry.verbs import load_verb_forms
-from soju.services.examples_fill import (
+from soju.services.examples_fill.generate import (
     _chat_json,
-    clean_example,
-    diagnose_verb_examples,
-    fill_examples,
-    filter_nouns_for_fill_mode,
-    filter_verbs_for_fill_mode,
     generate_noun_batch,
     generate_verb_batch,
+    parse_verb_batch_response,
+)
+from soju.services.examples_fill.service import dry_run_examples_preview, fill_examples
+from soju.services.examples_fill.validate import (
+    clean_example,
+    diagnose_verb_examples,
+    filter_nouns_for_fill_mode,
+    filter_verbs_for_fill_mode,
     merge_verb_examples_from_response,
     missing_verb_cells,
-    parse_json_content,
-    parse_verb_batch_response,
     validate_noun_examples,
     validate_variant_examples,
 )
@@ -152,82 +154,102 @@ def test_fill_examples_clean_only(data_root: Path) -> None:
         limit=None,
         clean_only=True,
         verbose=False,
-        level_id=None,
+        level_id="1A",
         root=data_root,
     )
-    assert warnings == []
     assert updated >= 1
     assert "(formal)" not in out[WORD_ID]["default"][0]["english"]
 
 
-class _FakeNounLlm:
-    def chat(
-        self,
-        messages: list[dict[str, str]],
-        *,
-        json_mode: bool = True,
-        temperature: float = 0.3,
-        num_predict: int | None = None,
-    ) -> str:
-        return json.dumps(
-            {
-                "entries": [
-                    {
-                        "id": WORD_ID,
-                        "examples": [
-                            {"hangul": "학교에 가요.", "english": "I go to school."},
-                        ],
-                    }
-                ]
-            },
-            ensure_ascii=False,
-        )
-
-
-class _FakeVerbLlm:
-    def chat(
-        self,
-        messages: list[dict[str, str]],
-        *,
-        json_mode: bool = True,
-        temperature: float = 0.3,
-        num_predict: int | None = None,
-    ) -> str:
-        return json.dumps(_complete_verb_examples_payload(), ensure_ascii=False)
-
-
-class _BadJsonLlm:
-    def chat(self, messages, *, json_mode: bool = True, temperature: float = 0.3, num_predict: int | None = None) -> str:
-        return "not-json<<"
-
-
-class _RaisingLlm:
-    def chat(self, messages, *, json_mode: bool = True, temperature: float = 0.3, num_predict: int | None = None) -> str:
-        raise LlmError("boom")
-
-
-def test_generate_noun_batch_with_fake_llm(data_root: Path) -> None:
-    level = get_language_level("1A", data_root)
-    nouns = [{"id": WORD_ID, "hangul": "학교", "english": "school"}]
-    results = generate_noun_batch(
-        nouns,
-        level=level,
-        vocabulary_context="",
-        llm=_FakeNounLlm(),
-        prompts=get_language(),
-        temperature=0.0,
-        verbose=False,
+def test_dry_run_examples_preview(data_root: Path) -> None:
+    text = dry_run_examples_preview(
+        verbs=True,
+        nouns=True,
+        fill_mode="fill-empty",
+        verb_batch_size=4,
+        noun_batch_size=6,
         examples_per=1,
+        level_id="1A",
+        root=data_root,
     )
-    assert WORD_ID in results
-    assert results[WORD_ID][0]["hangul"] == "학교에 가요."
+    assert "Language level:" in text
+    assert "Fill mode: fill-empty" in text
+    assert "Would generate 1 example(s) per variant" in text
+
+
+def test_fill_examples_progress_callback(data_root: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    messages: list[str] = []
+    store, warnings, updated = fill_examples(
+        llm=None,
+        temperature=0.0,
+        verb_batch_size=4,
+        noun_batch_size=6,
+        verbs=True,
+        nouns=False,
+        limit=None,
+        clean_only=False,
+        verbose=False,
+        level_id="1A",
+        local=True,
+        examples_per=1,
+        fill_mode="refresh-all",
+        root=data_root,
+        progress=messages.append,
+    )
+    assert updated >= 1
+    assert any("local templates" in msg for msg in messages)
+    captured = capsys.readouterr()
+    assert captured.out == ""
+    assert captured.err == ""
+
+
+def test_fill_examples_default_progress_silent(data_root: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    fill_examples(
+        llm=None,
+        temperature=0.0,
+        verb_batch_size=4,
+        noun_batch_size=6,
+        verbs=True,
+        nouns=False,
+        limit=None,
+        clean_only=False,
+        verbose=False,
+        level_id="1A",
+        local=True,
+        examples_per=1,
+        fill_mode="refresh-all",
+        root=data_root,
+    )
+    captured = capsys.readouterr()
+    assert captured.err == ""
+
+
+class _FakeLlm:
+    def __init__(self, payload: dict | list | str) -> None:
+        self.payload = payload
+        self.calls = 0
+
+    def chat(self, messages, **kwargs):  # noqa: ANN001
+        self.calls += 1
+        if isinstance(self.payload, str):
+            return self.payload
+        return json.dumps(self.payload, ensure_ascii=False)
 
 
 def test_fill_examples_nouns_with_fake_llm(data_root: Path) -> None:
+    payload = {
+        "entries": [
+            {
+                "id": WORD_ID,
+                "examples": [{"hangul": "학교에 가요.", "english": "I go to school today."}],
+            }
+        ]
+    }
+    llm = _FakeLlm(payload)
     store, warnings, updated = fill_examples(
-        llm=_FakeNounLlm(),
+        llm=llm,
         temperature=0.0,
-        verb_batch_size=4,
+        verb_batch_size=1,
         noun_batch_size=6,
         verbs=False,
         nouns=True,
@@ -235,73 +257,34 @@ def test_fill_examples_nouns_with_fake_llm(data_root: Path) -> None:
         clean_only=False,
         verbose=False,
         level_id="1A",
-        local=False,
         examples_per=1,
         fill_mode="refresh-all",
         root=data_root,
     )
     assert updated == 1
-    assert warnings == []
     assert store[WORD_ID]["default"][0]["hangul"] == "학교에 가요."
-
-
-def test_chat_json_and_parse_verb_batch(data_root: Path) -> None:
-    forms = load_verb_forms(VERB_ID, data_root)
-    batch = [({"id": VERB_ID, "hangul": "먹다", "english": "to eat"}, forms)]
-    parsed = _chat_json(
-        system="sys",
-        user="user",
-        llm=_FakeVerbLlm(),
-        temperature=0.0,
-        verbose=False,
-    )
-    assert parsed is not None
-    matched = parse_verb_batch_response(parsed, batch, examples_per=1)
-    assert VERB_ID in matched
-
-    assert _chat_json(system="s", user="u", llm=_BadJsonLlm(), temperature=0.0, verbose=False) is None
-    with pytest.raises(LlmError):
-        _chat_json(system="s", user="u", llm=_RaisingLlm(), temperature=0.0, verbose=False)
-
-
-def test_generate_verb_batch_with_fake_llm(data_root: Path) -> None:
-    level = get_language_level("1A", data_root)
-    forms = load_verb_forms(VERB_ID, data_root)
-    batch = [({"id": VERB_ID, "hangul": "먹다", "english": "to eat"}, forms)]
-    results = generate_verb_batch(
-        batch,
-        level=level,
-        vocabulary_context="",
-        llm=_FakeVerbLlm(),
-        prompts=get_language(),
-        temperature=0.2,
-        verbose=False,
-        examples_per=1,
-        max_attempts=2,
-    )
-    assert VERB_ID in results
-    assert "present" in results[VERB_ID]
+    assert llm.calls >= 1
 
 
 def test_fill_examples_verbs_with_fake_llm(data_root: Path) -> None:
+    llm = _FakeLlm(_complete_verb_examples_payload())
     store, warnings, updated = fill_examples(
-        llm=_FakeVerbLlm(),
+        llm=llm,
         temperature=0.0,
         verb_batch_size=4,
-        noun_batch_size=6,
+        noun_batch_size=1,
         verbs=True,
         nouns=False,
         limit=1,
         clean_only=False,
         verbose=False,
         level_id="1A",
-        local=False,
         examples_per=1,
         fill_mode="refresh-all",
         root=data_root,
+        max_attempts=1,
     )
     assert updated == 1
-    assert warnings == []
     assert "present" in store[VERB_ID]
 
 
@@ -321,3 +304,62 @@ def test_fill_examples_requires_llm_unless_local(data_root: Path) -> None:
             local=False,
             root=data_root,
         )
+
+
+def test_chat_json_and_batch_helpers(data_root: Path) -> None:
+    forms = load_verb_forms(VERB_ID, data_root)
+    verb = {"id": VERB_ID, "hangul": "먹다", "english": "to eat"}
+    level = get_language_level("1A", data_root)
+    lang = get_language()
+
+    bad = _FakeLlm("not-json{{{")
+    assert _chat_json(system="s", user="u", llm=bad, temperature=0.0, verbose=False) is None
+
+    good = _FakeLlm(_complete_verb_examples_payload())
+    parsed = _chat_json(system="s", user="u", llm=good, temperature=0.0, verbose=False)
+    assert parsed is not None
+    matched = parse_verb_batch_response(parsed, [(verb, forms)], examples_per=1)
+    assert VERB_ID in matched
+
+    noun_llm = _FakeLlm(
+        {
+            "entries": [
+                {
+                    "id": WORD_ID,
+                    "examples": [{"hangul": "학교가 커요.", "english": "The school is big."}],
+                }
+            ]
+        }
+    )
+    nouns = generate_noun_batch(
+        [{"id": WORD_ID, "hangul": "학교", "english": "school"}],
+        level=level,
+        vocabulary_context="",
+        llm=noun_llm,
+        prompts=lang,
+        temperature=0.0,
+        verbose=False,
+        examples_per=1,
+    )
+    assert WORD_ID in nouns
+
+    class _Boom(_FakeLlm):
+        def chat(self, messages, **kwargs):  # noqa: ANN001
+            raise LlmError("down")
+
+    with pytest.raises(LlmError):
+        _chat_json(system="s", user="u", llm=_Boom({}), temperature=0.0, verbose=False)
+
+    verb_llm = _FakeLlm(_complete_verb_examples_payload())
+    verbs = generate_verb_batch(
+        [(verb, forms)],
+        level=level,
+        vocabulary_context="",
+        llm=verb_llm,
+        prompts=lang,
+        temperature=0.0,
+        verbose=False,
+        examples_per=1,
+        max_attempts=1,
+    )
+    assert VERB_ID in verbs

@@ -1,0 +1,67 @@
+# SPDX-License-Identifier: BSD-3-Clause
+"""Deterministic (non-LLM) example fill via the language plugin."""
+
+from __future__ import annotations
+
+from typing import Any
+
+from soju.core.models import EXAMPLE_TENSES as TENSES
+from soju.core.models import EXAMPLE_VARIANTS as VARIANTS
+from soju.languages import get_language
+from soju.levels import vocabulary_for_level
+from soju.registry.examples import load_examples_store, noun_entry_needs_fill, verb_entry_needs_fill
+from soju.registry.verbs import load_verb_forms, load_verb_forms_cache
+from soju.registry.vocabulary import vocabulary_by_type
+
+
+def fill_examples_local(
+    *,
+    level_id: str,
+    verbs: bool,
+    nouns: bool,
+    examples_per: int,
+    fill_mode: str,
+    root=None,
+) -> tuple[dict[str, Any], int]:
+    """Fill examples using the active language plugin's deterministic generators."""
+    lang = get_language()
+    examples_store = load_examples_store(root)
+    updated = 0
+
+    if verbs:
+        verb_entries = [e for e in vocabulary_for_level(level_id, root) if e.get("type") == "verb"]
+        if not verb_entries:
+            verb_entries = vocabulary_by_type("verb", root)
+        forms_cache = load_verb_forms_cache(root)
+        for verb in verb_entries:
+            forms = load_verb_forms(verb["id"], root, cache=forms_cache)
+            if not all(forms.get(t, {}).get(v) for t in TENSES for v in VARIANTS):
+                continue
+            if fill_mode == "fill-empty" and not verb_entry_needs_fill(forms, examples_store.get(verb["id"])):
+                continue
+            examples_store[verb["id"]] = lang.examples_for_verb(
+                verb["hangul"],
+                verb["english"],
+                forms,
+                level_id=level_id,
+            )
+            updated += 1
+
+    if nouns:
+        noun_entries = [e for e in vocabulary_for_level(level_id, root) if e.get("type") == "noun"]
+        if not noun_entries:
+            noun_entries = vocabulary_by_type("noun", root)
+        for noun in noun_entries:
+            if fill_mode == "fill-empty" and not noun_entry_needs_fill(examples_store.get(noun["id"])):
+                continue
+            examples_store[noun["id"]] = {
+                "default": lang.examples_for_noun(
+                    noun["hangul"],
+                    noun["english"],
+                    level_id=level_id,
+                    examples_per=examples_per,
+                )
+            }
+            updated += 1
+
+    return examples_store, updated

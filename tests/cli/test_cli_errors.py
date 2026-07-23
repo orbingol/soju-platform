@@ -61,14 +61,14 @@ def test_translate_ollama_unreachable(data_env: Path, tmp_path: Path, monkeypatc
         def check_available(self) -> bool:
             return False
 
-    monkeypatch.setattr(translate_cli, "OllamaClient", _Down)
+    monkeypatch.setattr("soju.cli._ollama.OllamaClient", _Down)
     result = runner.invoke(
         translate_cli.app,
         ["--file", str(word_list)],
         catch_exceptions=False,
     )
     assert result.exit_code == 1
-    assert "Ollama" in result.output or "Ollama" in result.stderr
+    assert "Ollama is not reachable" in (result.output + result.stderr)
 
 
 def test_fill_examples_rejects_bad_examples_count(data_env: Path) -> None:
@@ -89,14 +89,14 @@ def test_fill_examples_ollama_unreachable(data_env: Path, monkeypatch) -> None:
         def check_available(self) -> bool:
             return False
 
-    monkeypatch.setattr(examples_cli, "OllamaClient", _Down)
+    monkeypatch.setattr("soju.cli._ollama.OllamaClient", _Down)
     result = runner.invoke(
         examples_cli.app,
         ["--nouns-only", "--limit", "1"],
         catch_exceptions=False,
     )
     assert result.exit_code == 1
-    assert "Ollama" in result.output or "Ollama" in result.stderr
+    assert "Ollama is not reachable" in (result.output + result.stderr)
 
 
 def test_registry_validation_failure(data_env: Path) -> None:

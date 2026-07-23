@@ -11,8 +11,9 @@ from typing import Annotated, Optional
 import typer
 
 from soju.cli._common import flag, make_app
+from soju.cli._ollama import require_ollama_client
 from soju.levels import get_language_level
-from soju.llm import LlmError, OllamaClient
+from soju.llm import LlmError
 from soju.llm.ollama import DEFAULT_BASE_URL, DEFAULT_MODEL
 from soju.services.translate import parse_word_list_lines, translate_words
 
@@ -67,13 +68,7 @@ def translate(
             print("  " + " | ".join(parts), file=sys.stderr)
         return
 
-    llm = OllamaClient(model=model, base_url=base_url)
-    if not llm.check_available():
-        print(
-            f"Error: Ollama is not reachable at {base_url}. Start Ollama or run: docker compose --profile ollama up ollama ollama-pull",
-            file=sys.stderr,
-        )
-        raise typer.Exit(1)
+    llm = require_ollama_client(model=model, base_url=base_url)
 
     try:
         records, warnings = translate_words(

@@ -110,7 +110,7 @@ Options:
   --local                         Generate examples with local Korean 1A/1B
                                   templates (no Ollama)
   --level <str>                   Course level (default: SOJU_LANGUAGE_LEVEL
-                                  or 1A). Known: 1A, 1B
+                                  or 1A; see data/content/levels.yaml)
   --examples N                    Example sentences per verb tense/variant and
                                   per noun (default: 1)  [default: 1]
   --max-attempts N                Ollama attempts per verb batch before giving
@@ -142,8 +142,8 @@ Options:
   --batch-size <int>     Lines per Ollama request  [default: 8]
   --temperature <float>  Sampling temperature  [default: 0.3]
   --skip-existing        Omit entries already in the registry
-  --level <str>          Course level (default: SOJU_LANGUAGE_LEVEL or 1A).
-                         Known: 1A, 1B
+  --level <str>          Course level (default: SOJU_LANGUAGE_LEVEL or 1A; see
+                         data/content/levels.yaml)
   --dry-run              Parse input and print summary without calling Ollama
   -h, --help             Show this message and exit.
 """,
