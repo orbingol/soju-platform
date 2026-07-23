@@ -11,6 +11,7 @@ import typer
 from soju.backend.cli import backend as backend_cli
 from soju.cli import embed as embed_cli
 from soju.cli import examples as examples_cli
+from soju.cli import levels as levels_cli
 from soju.cli import promote as promote_cli
 from soju.cli import translate as translate_cli
 from soju.cli import validate as validate_cli
@@ -48,6 +49,7 @@ def _root(
 
 
 app.add_typer(words_cli.app, name="import")
+app.add_typer(levels_cli.app, name="levels")
 app.command("promote")(promote_cli.promote)
 app.command("align")(validate_cli.align)
 app.command("registry")(validate_cli.registry)

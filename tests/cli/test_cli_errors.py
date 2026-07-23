@@ -9,11 +9,13 @@ import yaml
 from typer.testing import CliRunner
 
 from soju.cli import examples as examples_cli
+from soju.cli import levels as levels_cli
 from soju.cli import promote as promote_cli
 from soju.cli import translate as translate_cli
 from soju.cli import validate as validate_cli
 from soju.cli import words as words_cli
 from soju.registry.vocabulary import load_vocabulary, save_vocabulary
+from tests.constants import WORD_ID
 
 runner = CliRunner()
 
@@ -124,3 +126,23 @@ def test_schemas_validation_failure(data_env: Path) -> None:
     result = runner.invoke(validate_cli.schemas_app, [], catch_exceptions=False)
     assert result.exit_code == 1
     assert "Schema" in result.output or "Schema" in result.stderr or "failed" in (result.output + result.stderr).lower()
+
+
+def test_levels_set_mixed_selection_fails(data_env: Path) -> None:
+    result = runner.invoke(
+        levels_cli.app,
+        ["set", "--level", "1A", "--all-unassigned", "--id", WORD_ID],
+        catch_exceptions=False,
+    )
+    assert result.exit_code == 1
+    assert "exactly one selection mode" in (result.output + result.stderr)
+
+
+def test_levels_set_already_tagged_without_force(data_env: Path) -> None:
+    result = runner.invoke(
+        levels_cli.app,
+        ["set", "--level", "1B", "--id", WORD_ID],
+        catch_exceptions=False,
+    )
+    assert result.exit_code == 1
+    assert "Already tagged" in (result.output + result.stderr)

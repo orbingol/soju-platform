@@ -166,6 +166,51 @@ Options:
   -h, --help           Show this message and exit.
 """,
     ),
+    (
+        ["soju", "levels", "--help"],
+        """\
+Usage: soju levels [OPTIONS] COMMAND [ARGS]...
+
+  List and assign vocabulary course levels.
+
+Options:
+  -h, --help  Show this message and exit.
+
+Commands:
+  list-unassigned  List registry entries with no course level tag.
+  set              Assign a course level to selected vocabulary entries.
+""",
+    ),
+    (
+        ["soju", "levels", "list-unassigned", "--help"],
+        """\
+Usage: soju levels list-unassigned [OPTIONS]
+
+  List registry entries with no course level tag.
+
+Options:
+  --format <str>  Output format: table (default) or ids  [default: table]
+  --type <str>    Filter by vocabulary type id (e.g. noun, verb)
+  -h, --help      Show this message and exit.
+""",
+    ),
+    (
+        ["soju", "levels", "set", "--help"],
+        """\
+Usage: soju levels set [OPTIONS]
+
+  Assign a course level to selected vocabulary entries.
+
+Options:
+  --level <str>      Course level id from levels.yaml  [required]
+  --all-unassigned   Assign every unassigned vocabulary entry
+  --id <str>         Vocabulary UUID (repeatable)
+  --ids-file <path>  File of UUIDs (one per line); use - for stdin
+  --dry-run
+  --force            Allow overwriting an existing level tag
+  -h, --help         Show this message and exit.
+""",
+    ),
 ]
 
 
@@ -318,6 +363,24 @@ def test_embed_index_dry_run(data_root: Path) -> None:
     assert result.stdout == ""
     assert "Would embed" in result.stderr
     assert "vocabulary entries" in result.stderr
+
+
+def test_levels_set_all_unassigned_dry_run(data_root: Path) -> None:
+    from soju.registry.vocabulary import load_vocabulary, save_vocabulary
+
+    vocab = load_vocabulary(data_root)
+    for entry in vocab:
+        entry.pop("level", None)
+    save_vocabulary(vocab, data_root)
+
+    result = _run_script(
+        ["soju", "levels", "set", "--level", "1A", "--all-unassigned", "--dry-run"],
+        env={"DATA_DIR": str(data_root)},
+    )
+    assert result.returncode == 0, result.stderr
+    assert result.stdout == "would set level=1A on 2 entries.\n"
+    assert result.stderr == ""
+    assert all("level" not in e for e in load_vocabulary(data_root))
 
 
 def test_backend_help_smoke() -> None:
