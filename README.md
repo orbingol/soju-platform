@@ -14,7 +14,7 @@ An **experimental** Korean language learning platform: vocabulary, grammar, and 
 - **Flashcards** — flip cards to review vocabulary; mark what you know and what to revisit
 - **Listen** — text-to-speech for Korean on supported browsers
 - **Practice** — generated exercises from your vocabulary (when AI features are enabled locally)
-- **Chat** — ask questions and practice with an AI tutor (when enabled locally)
+- **Chat** — ask questions and practice with an AI tutor (when AI features are enabled locally)
 
 ## For Regular Users
 
