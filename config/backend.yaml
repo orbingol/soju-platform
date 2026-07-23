@@ -1,0 +1,6 @@
+# Compose-oriented overrides merged over soju.backend.default_config.yaml.
+# Mounted read-only into the backend container as /config/backend.yaml.
+
+llm:
+  # Reach host (or compose-profile) Ollama from the backend container.
+  base_url: "http://host.docker.internal:11434"
