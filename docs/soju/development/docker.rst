@@ -13,7 +13,7 @@ Core services
 
    * - Goal
      - Command
-   * - Web dev
+   * - Web + Soju API (nginx :8080)
      - ``docker compose up``
    * - Web unit tests
      - ``docker compose exec web npm test``
@@ -21,6 +21,10 @@ Core services
      - ``docker compose --profile validate run --rm validate``
    * - Static web build
      - ``scripts/docker-build-web.sh`` (see :doc:`static-build`)
+
+``docker compose up`` starts ``web`` (:5173), ``backend`` (FastAPI), and ``nginx``
+(:8080 → backend). Do not revive the old ``docker/piper`` TTS image — speech is
+served by the Soju backend.
 
 Optional profiles
 ------------------
@@ -34,7 +38,7 @@ Optional profiles
    * - Ollama (AI features, containerized)
      - ``docker compose --profile ollama up ollama ollama-pull web``
 
-See :doc:`ai` for the Ollama/TTS environment variables that control Practice and Chat.
+See :doc:`ai` for Practice/Chat setup and :doc:`tts` for local speech.
 
 Python CLIs on Docker
 ----------------------

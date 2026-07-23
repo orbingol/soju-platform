@@ -41,7 +41,7 @@ Browsing words, grammar, and flashcards works out of the box. Practice and Chat 
    ollama pull nomic-embed-text
    ```
 
-3. With Ollama running, restart Soju to use Practice and Chat in the browser.
+3. Start Soju with `docker compose up` (web + backend API on [http://localhost:8080](http://localhost:8080) + nginx). With Ollama running on the host, Practice and Chat work in the browser.
 
 ## For Power Users and Developers
 
@@ -49,12 +49,13 @@ Requires [uv](https://docs.astral.sh/uv/). From the repo root:
 
 ```bash
 uv sync
+uv sync --group backend   # optional: soju backend / FastAPI
 uv run poe docs-serve   # Documentation
 uv run poe validate     # Data checks
 uv run poe test         # Python tests
 ```
 
-* Web app still runs via Docker: `docker compose up`
+* Web + API via Docker: `docker compose up` (app http://localhost:5173, API http://localhost:8080)
 * Agent rules: `AGENTS.md`
 
 ## License

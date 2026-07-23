@@ -8,7 +8,10 @@ from typing import Annotated, Optional
 
 import typer
 
+from soju.cli._common import make_app
 from soju.backend.config import BackendSettings, load_settings, user_config_path
+
+app = make_app()
 
 
 def _apply_server_overrides(
@@ -78,5 +81,8 @@ def backend(
         raise typer.Exit(code=1) from exc
 
     settings = _apply_server_overrides(settings, host=host, port=port)
-    app = create_app(settings)
-    uvicorn.run(app, host=settings.server.host, port=settings.server.port)
+    fastapi_app = create_app(settings)
+    uvicorn.run(fastapi_app, host=settings.server.host, port=settings.server.port)
+
+
+app.command()(backend)

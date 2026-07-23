@@ -25,6 +25,7 @@ the live Typer apps (``sphinxcontrib-typer``).
 - :doc:`fill-examples`
 - :doc:`fill-verbs`
 - :doc:`embed-index`
+- :doc:`backend`
 
 See :doc:`/development/poe` for shortcut tasks and :doc:`/development/docker` for
 Compose services that wrap these tools.

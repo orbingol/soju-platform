@@ -1,25 +1,26 @@
 AI practice & chat
 ==================
 
-Requires a local OpenAI-compatible language model service and ``PUBLIC_AI_ENABLED=true`` in ``docker-compose.yml``.
+Practice and Chat talk to the **Soju backend** (OpenAI-compatible API behind nginx),
+not directly to Ollama. ``docker compose up`` starts ``web``, ``backend``, and ``nginx``.
+Set ``PUBLIC_AI_ENABLED=true`` (default in Compose).
 
-**Host Ollama (desktop app)** — default setup:
-
-.. code-block:: bash
-
-   docker compose up web
-
-Set ``PUBLIC_AI_BASE_URL`` to ``http://localhost:11434`` (the **browser** calls the API, not the web container). Allow CORS from the dev site — restart Ollama after setting:
+**Host Ollama (desktop app)** — usual setup:
 
 .. code-block:: bash
 
-   OLLAMA_ORIGINS=http://localhost:5173 ollama serve
+   docker compose up
 
-On macOS with the Ollama app, quit Ollama and relaunch from a terminal:
+Pull models on the host (defaults match backend YAML / ``ollama-pull``):
 
 .. code-block:: bash
 
-   OLLAMA_ORIGINS="http://localhost:5173" open -a Ollama
+   ollama pull gemma4:e4b
+   ollama pull nomic-embed-text
+
+The backend reaches host Ollama at ``http://host.docker.internal:11434``
+(see ``config/backend.yaml``). The **browser** calls ``PUBLIC_AI_BASE_URL``
+(default ``http://localhost:8080``).
 
 **Ollama in Docker Compose:**
 
@@ -27,16 +28,11 @@ On macOS with the Ollama app, quit Ollama and relaunch from a terminal:
 
    docker compose --profile ollama up ollama ollama-pull web
 
-The ``ollama`` services mount your host Ollama cache (default ``~/.ollama``) into the container. Downloads persist across restarts; ``ollama pull`` only fetches missing layers or updates. Override the path with ``OLLAMA_DATA_DIR`` if needed. The browser still uses ``http://localhost:11434`` because port ``11434`` is published to the host.
+The ``ollama`` services mount your host Ollama cache (default ``~/.ollama``).
+Override with ``OLLAMA_DATA_DIR`` if needed.
 
-Pull both the chat model and the embedding model (defaults in ``docker-compose.yml``):
-
-.. code-block:: bash
-
-   ollama pull gemma4:e4b
-   ollama pull nomic-embed-text
-
-Model, API mode, and prompts are configured in ``docker-compose.yml`` under ``x-soju-web-environment``.
+Browser env (Compose)
+---------------------
 
 .. list-table::
    :header-rows: 1
@@ -47,42 +43,39 @@ Model, API mode, and prompts are configured in ``docker-compose.yml`` under ``x-
      - Purpose
    * - ``PUBLIC_AI_ENABLED``
      - ``true`` / ``false``
-     - Show Practice & Chat; call the model at runtime
-   * - ``PUBLIC_AI_API_MODE``
-     - ``chat-completions`` (default), ``conversations``
-     - API adapter (``/v1/chat/completions`` vs ``/v1/conversations`` + ``/v1/responses``)
+     - Show Practice & Chat
    * - ``PUBLIC_AI_BASE_URL``
-     - e.g. ``http://localhost:11434``
-     - OpenAI-compatible server root (**browser-reachable** URL)
-   * - ``PUBLIC_AI_MODEL``
-     - model id
-     - Chat / Practice generation model
-   * - ``PUBLIC_AI_EMBED_MODEL``
-     - model id (default ``nomic-embed-text``)
-     - Browser-side theme embedding for Practice retrieval (must match ``soju embed-index``)
-   * - ``PUBLIC_AI_SYSTEM_PROMPT``
-     - text (supports ``{{tutor_name}}``)
-     - Chat tutor system prompt; ``{{tutor_name}}`` is replaced with ``PUBLIC_AI_TUTOR_NAME``
-   * - ``PUBLIC_AI_TUTOR_NAME``
-     - e.g. ``Hee-jae (희재)``
-     - Chat dock tutor display name (also fills ``{{tutor_name}}`` in the system prompt)
-   * - ``PUBLIC_AI_CHAT_SUMMARY_TRIGGER``
-     - positive integer (default ``10``)
-     - Summarize older chat turns when message count exceeds this
-   * - ``PUBLIC_AI_CHAT_KEEP_RECENT``
-     - positive integer (default ``6``)
-     - Recent turns kept verbatim after summarization
+     - e.g. ``http://localhost:8080``
+     - Soju API root (nginx → FastAPI)
    * - ``PUBLIC_TTS_ENGINE``
-     - ``piper`` (default) / ``browser``
+     - ``local`` (default) / ``browser``
      - Default speech engine (Settings can override)
-   * - ``PUBLIC_TTS_PIPER_BASE_URL``
-     - e.g. ``http://localhost:5500``
-     - Piper TTS HTTP root (**browser-reachable**)
-   * - ``PUBLIC_TTS_PIPER_VOICE``
-     - e.g. ``ko-KR-SunHiNeural``
-     - Edge neural voice id sent to local TTS ``/v1/audio/speech``
 
-Legacy ``PUBLIC_OLLAMA_*`` names are still read as fallbacks.
+Chat model, embed model, tutor name/prompt, and TTS voice are loaded at runtime from
+``GET /v1/soju/client-config`` (backend YAML). Legacy ``PUBLIC_OLLAMA_*`` / older
+``PUBLIC_AI_MODEL`` names remain as fallbacks when set.
+
+Backend config (YAML)
+---------------------
+
+Edit packaged defaults or overrides:
+
+- Packaged: ``src/soju/backend/config/files/default_config.yaml``
+- User: ``~/.config/soju/backend.yaml``
+- Compose: ``config/backend.yaml`` (``llm.base_url`` for Docker)
+
+Typical keys: ``llm.chat_model``, ``llm.embed_model``, ``llm.base_url``,
+``client.system_prompt``, ``client.tutor_name``, ``tts.engine`` (``edge`` / ``piper``),
+``tts.voice``.
+
+Run the API on the host (optional):
+
+.. code-block:: bash
+
+   uv sync --group backend
+   uv run soju backend --config config/backend.yaml
+
+See :doc:`/cli/backend`.
 
 Practice generation
 -------------------
@@ -107,17 +100,17 @@ registry/grammar changes):
 
 This writes ``data/cache/embeddings/`` (gitignored). See :doc:`/cli/embed-index`.
 Python uses ``OLLAMA_HOST`` + ``SOJU_EMBED_MODEL`` (default ``nomic-embed-text``).
+Keep that model in sync with backend ``llm.embed_model`` / client-config.
 
 **Retrieve (dev-only API)**
 
 Flow on **Generate session**:
 
-1. Browser embeds the theme text via Ollama ``/api/embeddings`` (``PUBLIC_AI_EMBED_MODEL``).
+1. Browser embeds the theme via Soju ``/v1/embeddings``.
 2. Browser ``POST``\ s ``{ level, queryVector }`` to ``/api/practice/retrieve``.
 3. The SvelteKit endpoint (dev server only) filters the cache by level, ranks by cosine
    similarity, and returns hangul + grammar snippets.
-4. Browser calls the chat model with that RAG payload to produce JSON for the selected
-   exercise type / count.
+4. Browser calls chat completions through the Soju API with that RAG payload.
 
 ``/api/practice/retrieve`` is **dev-only** (same gate as ``/api/staging``): it runs under
 ``vite dev`` / ``docker compose up``, not in the static production build. Missing or

@@ -48,6 +48,7 @@ Documentation
    cli/fill-examples
    cli/fill-verbs
    cli/embed-index
+   cli/backend
 
 .. toctree::
    :maxdepth: 1
