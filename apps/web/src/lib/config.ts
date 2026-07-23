@@ -1,13 +1,5 @@
 import { env as dynamicPublicEnv } from '$env/dynamic/public';
-import {
-  PUBLIC_AI_API_MODE,
-  PUBLIC_AI_BASE_URL,
-  PUBLIC_AI_EMBED_MODEL,
-  PUBLIC_AI_ENABLED,
-  PUBLIC_AI_MODEL,
-  PUBLIC_AI_SYSTEM_PROMPT,
-  PUBLIC_AI_TUTOR_NAME,
-} from '$env/static/public';
+import { PUBLIC_AI_BASE_URL, PUBLIC_AI_ENABLED } from '$env/static/public';
 
 export type AiApiMode = 'chat-completions' | 'conversations';
 export type TtsEngine = 'local' | 'browser';
@@ -44,7 +36,7 @@ export function resolveTtsEngine(raw?: string): TtsEngine {
 /** When true, Practice and Chat are available (requires Soju backend + LLM at runtime). */
 export const aiEnabled = firstDefined(PUBLIC_AI_ENABLED, dynamicPublicEnv.PUBLIC_OLLAMA_ENABLED) === 'true';
 
-/** Browser-reachable Soju API root (nginx → FastAPI). */
+/** Browser-reachable Soju API root (nginx → FastAPI in prod). */
 export const sojuApiBaseUrl = (
   firstDefined(PUBLIC_AI_BASE_URL, dynamicPublicEnv.PUBLIC_OLLAMA_BASE_URL, dynamicPublicEnv.PUBLIC_TTS_PIPER_BASE_URL) ??
   'http://localhost:8080'
@@ -66,7 +58,7 @@ const envChatThresholds = resolveChatContextThresholds(
 export const defaultChatTutorName = 'Hee-jae (희재)';
 
 const envSystemPrompt =
-  firstDefined(PUBLIC_AI_SYSTEM_PROMPT, dynamicPublicEnv.PUBLIC_OLLAMA_SYSTEM_PROMPT) ||
+  firstDefined(dynamicPublicEnv.PUBLIC_AI_SYSTEM_PROMPT, dynamicPublicEnv.PUBLIC_OLLAMA_SYSTEM_PROMPT) ||
   [
     'You are {{tutor_name}}, a friendly Korean language teacher for beginners.',
     'Keep replies short (2–4 sentences). If the question is vague, ask one clarifying question first.',
@@ -77,10 +69,10 @@ const envSystemPrompt =
   ].join(' ');
 
 /** Overridable at runtime via ``GET /v1/soju/client-config`` (see ``applyClientConfig``). */
-export let aiModel = firstDefined(PUBLIC_AI_MODEL, dynamicPublicEnv.PUBLIC_OLLAMA_MODEL) ?? 'gemma4:e4b';
-export let aiEmbedModel = firstDefined(PUBLIC_AI_EMBED_MODEL, dynamicPublicEnv.PUBLIC_OLLAMA_EMBED_MODEL) ?? 'nomic-embed-text';
-export let aiApiMode: AiApiMode = firstDefined(PUBLIC_AI_API_MODE) === 'conversations' ? 'conversations' : 'chat-completions';
-export let aiTutorName = firstDefined(PUBLIC_AI_TUTOR_NAME) ?? defaultChatTutorName;
+export let aiModel = firstDefined(dynamicPublicEnv.PUBLIC_AI_MODEL, dynamicPublicEnv.PUBLIC_OLLAMA_MODEL) ?? 'gemma4:e4b';
+export let aiEmbedModel = firstDefined(dynamicPublicEnv.PUBLIC_AI_EMBED_MODEL, dynamicPublicEnv.PUBLIC_OLLAMA_EMBED_MODEL) ?? 'nomic-embed-text';
+export let aiApiMode: AiApiMode = firstDefined(dynamicPublicEnv.PUBLIC_AI_API_MODE) === 'conversations' ? 'conversations' : 'chat-completions';
+export let aiTutorName = firstDefined(dynamicPublicEnv.PUBLIC_AI_TUTOR_NAME) ?? defaultChatTutorName;
 export let defaultChatSystemPrompt = envSystemPrompt;
 export let chatSummaryTrigger = envChatThresholds.trigger;
 export let chatKeepRecent = envChatThresholds.keepRecent;
@@ -121,11 +113,11 @@ export function applyClientConfig(payload: SojuClientConfigPayload): void {
   if (typeof payload.tts_default_voice === 'string' && payload.tts_default_voice.trim()) {
     localTtsVoice = payload.tts_default_voice.trim();
   }
-  const nextThresholds = resolveChatContextThresholds(
-    payload.chat_summary_trigger !== undefined ? String(payload.chat_summary_trigger) : undefined,
-    payload.chat_keep_recent !== undefined ? String(payload.chat_keep_recent) : undefined,
-  );
   if (payload.chat_summary_trigger !== undefined || payload.chat_keep_recent !== undefined) {
+    const nextThresholds = resolveChatContextThresholds(
+      payload.chat_summary_trigger !== undefined ? String(payload.chat_summary_trigger) : undefined,
+      payload.chat_keep_recent !== undefined ? String(payload.chat_keep_recent) : undefined,
+    );
     chatSummaryTrigger = nextThresholds.trigger;
     chatKeepRecent = nextThresholds.keepRecent;
   }
