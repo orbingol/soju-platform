@@ -54,6 +54,11 @@ Flashcards while keeping it available to Practice and chat. Grammar practice phr
 ``type: phrase`` and ``visibility: hidden``, with optional ``grammar_pattern`` linking to a
 Grammar lesson id.
 
+**Course level:** optional ``--level`` (or per-record ``level``) tags new words with a course
+id from ``data/content/levels.yaml``. Per-record wins over the CLI flag. If both are omitted,
+the entry is **unassigned** (no ``level`` field) — not silently ``1A``. Retag existing entries
+with :doc:`levels` (``soju levels set``), not by hand-editing the registry.
+
 Verbs
 -----
 
@@ -62,6 +67,8 @@ Verbs
    cat verbs.json | uv run soju import verbs --stdin-json
 
 Requires ``hangul``, ``romanization``, ``english``, ``forms`` (and optional ``examples``) per record. ``--file`` without JSON is not supported for new verbs.
+
+Optional ``--level`` / per-record ``level`` follows the same rules as words (omit = unassigned).
 
 **Limitation:** Re-importing an existing verb with the same hangul **and** English meaning is
 not supported — the CLI returns an error. Same hangul with a different English gloss is allowed

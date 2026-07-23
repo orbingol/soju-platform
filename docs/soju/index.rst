@@ -43,6 +43,7 @@ Documentation
    cli/soju
    cli/import
    cli/promote
+   cli/levels
    cli/validate-schemas
    cli/align
    cli/registry

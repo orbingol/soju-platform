@@ -47,9 +47,13 @@ Do not edit `data/content/topics/manifest.yaml` unless the user asks — topics 
 
    ```bash
    cat records.json | uv run soju import words --topic <topic> --stdin-json
+   # optional batch level:
+   # cat records.json | uv run soju import words --topic <topic> --stdin-json --level 1A
    ```
 
 5. `uv run poe validate` (or Docker validate profile).
+
+Optional course `level`: see `import-words.md` (per-record `"level"` or CLI `--level`; omit = unassigned).
 
 ## Output summary
 

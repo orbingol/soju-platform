@@ -18,6 +18,7 @@ the live Typer apps (``sphinxcontrib-typer``).
 - :doc:`soju` (unified entry — all subcommands)
 - :doc:`import`
 - :doc:`promote`
+- :doc:`levels`
 - :doc:`validate-schemas`
 - :doc:`align`
 - :doc:`registry`
