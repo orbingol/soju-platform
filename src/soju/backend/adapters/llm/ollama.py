@@ -136,10 +136,7 @@ class OllamaLlmProvider:
         raw_input = payload.get("input")
         if isinstance(raw_input, list):
             if len(raw_input) != 1 or not isinstance(raw_input[0], str):
-                raise LlmProviderError(
-                    "Native Ollama embeddings fallback supports a single string input only "
-                    "(or use OpenAI-compatible /v1/embeddings)."
-                )
+                raise LlmProviderError("Native Ollama embeddings fallback supports a single string input only (or use OpenAI-compatible /v1/embeddings).")
             prompt = raw_input[0]
         elif isinstance(raw_input, str):
             prompt = raw_input

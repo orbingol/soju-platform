@@ -52,13 +52,8 @@ def _verb_user_message(
     for verb, forms in batch:
         if not get_language().embedded_form_hint(forms):
             continue
-        sample = forms.get("past", {}).get("casual_polite") or next(
-            forms[t][v] for t in TENSES for v in VARIANTS if forms.get(t, {}).get(v)
-        )
-        lines.append(
-            f'- {verb["hangul"]}: example past/casual_polite hangul = "어제 친구하고 {sample}." — '
-            f'do NOT change {sample.rsplit(" ", 1)[0]!r} to another place.'
-        )
+        sample = forms.get("past", {}).get("casual_polite") or next(forms[t][v] for t in TENSES for v in VARIANTS if forms.get(t, {}).get(v))
+        lines.append(f'- {verb["hangul"]}: example past/casual_polite hangul = "어제 친구하고 {sample}." — do NOT change {sample.rsplit(" ", 1)[0]!r} to another place.')
         missing = missing_verb_cells(forms, (partial or {}).get(verb["id"], {}))
         if missing:
             need = ", ".join(f"{t}/{v}={form!r}" for t, v, form in missing[:6])
@@ -242,10 +237,7 @@ def generate_verb_batch(
                 missing = missing_verb_cells(forms, partial.get(verb["id"], {}))
                 if missing and attempt == max_attempts - 1:
                     need = missing[0]
-                    log(
-                        f"  rejected {verb['hangul']}: still missing {need[0]}/{need[1]} "
-                        f"(need form {need[2]!r})"
-                    )
+                    log(f"  rejected {verb['hangul']}: still missing {need[0]}/{need[1]} (need form {need[2]!r})")
 
     logger.debug(
         "Verb batch generation result batch_size=%s matched_verbs=%s verb_hangul=%s",

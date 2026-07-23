@@ -15,8 +15,7 @@ def require_ollama_client(*, model: str, base_url: str) -> OllamaClient:
     client = OllamaClient(model=model, base_url=base_url)
     if not client.check_available():
         print(
-            f"Error: Ollama is not reachable at {base_url}. "
-            "Start Ollama or run: docker compose --profile ollama up ollama ollama-pull",
+            f"Error: Ollama is not reachable at {base_url}. Start Ollama or run: docker compose --profile ollama up ollama ollama-pull",
             file=sys.stderr,
         )
         raise typer.Exit(1)

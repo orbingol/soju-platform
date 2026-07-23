@@ -125,10 +125,7 @@ def fill_examples(
     log(f"Examples per variant: {examples_per}")
     log(f"Fill mode: {fill_mode}")
     if verb_batch_size >= 10 and verbs:
-        log(
-            f"Note: verb batch size {verb_batch_size} can take several minutes per batch "
-            "before the next status line appears."
-        )
+        log(f"Note: verb batch size {verb_batch_size} can take several minutes per batch before the next status line appears.")
 
     if verbs:
         verb_entries = vocabulary_by_type("verb", root)
