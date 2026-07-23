@@ -50,6 +50,8 @@ Pipe a JSON **array** (or `{"records": [...]}`) to stdin:
 
 Omit `examples` when the line has no parenthesized example.
 
+Optional course ``level`` (``1A``, ``1B``, … from ``data/content/levels.yaml``): set per record as ``"level": "1A"``, or pass ``--level 1A`` on the import command as a batch default. Per-record wins. If both are omitted, the new word is **unassigned** (no ``level`` field).
+
 ## Workflow
 
 1. Parse all lines into JSON records (skip duplicates by **hangul + English meaning** against the registry when possible — query `data/content/registry/vocabulary.yaml` or run `soju import words --topic common --stdin-json --dry-run` first). Same hangul with a different English gloss is a new homonym entry.
@@ -63,6 +65,8 @@ Omit `examples` when the line has no parenthesized example.
 
    ```bash
    cat records.json | uv run soju import words --topic common --stdin-json
+   # or with a batch level:
+   # cat records.json | uv run soju import words --topic common --stdin-json --level 1A
    ```
 
 4. Validate:

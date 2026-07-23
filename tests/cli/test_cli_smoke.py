@@ -44,6 +44,8 @@ Options:
   --file <path>          Plain-text word list file
   --stdin-json           Read JSON records from stdin
   --from-staging <path>  Staging YAML file path
+  --level <str>          Course level id from levels.yaml (omit to leave new
+                         words unassigned; per-record level wins)
   -h, --help             Show this message and exit.
 """,
     ),
@@ -58,6 +60,8 @@ Options:
   --dry-run
   --file <path>  Not supported without --stdin-json
   --stdin-json   Read JSON records from stdin
+  --level <str>  Course level id from levels.yaml (omit to leave new words
+                 unassigned; per-record level wins)
   -h, --help     Show this message and exit.
 """,
     ),

@@ -32,5 +32,6 @@ class VocabularyEntry(TypedDict, total=False):
     romanization: str
     english: str
     type: str
+    level: str
     visibility: str
     grammar_pattern: str
