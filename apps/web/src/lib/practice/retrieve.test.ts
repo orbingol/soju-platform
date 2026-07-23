@@ -36,14 +36,16 @@ function setUpFixture(): void {
 
   const cacheDir = path.join(dataDir, 'cache', 'embeddings');
   fs.mkdirSync(cacheDir, { recursive: true });
-  fs.writeFileSync(path.join(cacheDir, 'meta.json'), JSON.stringify({ embed_model: 'mock-model', dimension: 2, vocab_count: 3, grammar_count: 1 }), 'utf8');
+  fs.writeFileSync(path.join(cacheDir, 'meta.json'), JSON.stringify({ embed_model: 'mock-model', dimension: 2, vocab_count: 4, grammar_count: 2 }), 'utf8');
   writeJsonl(path.join(cacheDir, 'vocab.jsonl'), [
-    { id: 'v1', hangul: '학교', romanization: 'hak-gyo', english: 'school', type: 'noun', level: null, embedding: [1, 0] },
+    { id: 'v1', hangul: '학교', romanization: 'hak-gyo', english: 'school', type: 'noun', level: '1A', embedding: [1, 0] },
     { id: 'v2', hangul: '사과', romanization: 'sa-gwa', english: 'apple', type: 'noun', level: '1B', embedding: [0, 1] },
     { id: 'v3', hangul: '물', romanization: 'mul', english: 'water', type: 'noun', level: '1A', embedding: [0.6, 0.8] },
+    { id: 'v4', hangul: '커피', romanization: 'keo-pi', english: 'coffee', type: 'noun', level: null, embedding: [0.9, 0.1] },
   ]);
   writeJsonl(path.join(cacheDir, 'grammar.jsonl'), [
     { id: 'do', form: '-도', english: 'also / even', category: 'particles', summary: 'Additive particle.', level: '1A', embedding: [1, 0] },
+    { id: 'extra', form: '-만', english: 'only', category: 'particles', summary: 'Limitation.', level: null, embedding: [0.95, 0.05] },
   ]);
 }
 
@@ -77,8 +79,8 @@ describe('loadEmbeddingsCache', () => {
   it('loads meta + vocab + grammar records', () => {
     const cache = loadEmbeddingsCache(dataDir);
     expect(cache.meta.embed_model).toBe('mock-model');
-    expect(cache.vocab).toHaveLength(3);
-    expect(cache.grammar).toHaveLength(1);
+    expect(cache.vocab).toHaveLength(4);
+    expect(cache.grammar).toHaveLength(2);
   });
 });
 
@@ -104,15 +106,25 @@ describe('retrievePractice', () => {
     }
   });
 
-  it('excludes higher-level vocab and ranks by cosine similarity for the default level', () => {
+  it('excludes higher-level and unassigned vocab for the default level', () => {
     const result = retrievePractice({ level: '1A', queryVector: [1, 0], vocabK: 5, grammarM: 5 }, dataDir);
-    // v2 (사과) is 1B-only and must not appear when querying level 1A.
+    // v2 is 1B-only; v4 (커피) is unassigned — both excluded.
     expect(result.hangul).toEqual(['학교', '물']);
+    expect(result.grammar.map((g) => g.id)).toEqual(['do']);
   });
 
   it('includes parent-level vocab when include_levels expands the requested level', () => {
     const result = retrievePractice({ level: '1B', queryVector: [1, 0], vocabK: 5, grammarM: 5 }, dataDir);
     expect(result.hangul).toEqual(['학교', '물', '사과']);
+  });
+
+  it('includes unassigned vocab and grammar when includeUnassigned is true', () => {
+    const result = retrievePractice(
+      { level: '1A', queryVector: [1, 0], vocabK: 5, grammarM: 5, includeUnassigned: true },
+      dataDir,
+    );
+    expect(result.hangul).toEqual(['학교', '커피', '물']);
+    expect(result.grammar.map((g) => g.id)).toEqual(['do', 'extra']);
   });
 
   it('respects vocabK and grammarM limits', () => {

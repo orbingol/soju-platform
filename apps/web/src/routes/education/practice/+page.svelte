@@ -18,6 +18,7 @@
   let customThemeText = $state('');
   let exerciseType = $state<PracticeExerciseType>('sentences');
   let count = $state(5);
+  let includeSupplemental = $state(false);
 
   let loading = $state(false);
   let error = $state('');
@@ -134,7 +135,9 @@
       const queryVector = await embedQueryText(embedText);
 
       status = 'Retrieving vocabulary and grammar…';
-      const retrieved = await fetchRetrieval(selectedLevel, queryVector);
+      const retrieved = await fetchRetrieval(selectedLevel, queryVector, {
+        includeUnassigned: includeSupplemental,
+      });
 
       status = exerciseType === 'story' ? 'Generating model story…' : 'Generating session…';
       session = await generatePracticeSession({
@@ -271,6 +274,11 @@
       <label class="practice-control">
         <span class="practice-control__label">{isStory ? 'Max sentences' : 'Count'}</span>
         <input type="number" min="1" max="20" bind:value={count} />
+      </label>
+
+      <label class="practice-control practice-control--checkbox">
+        <input type="checkbox" bind:checked={includeSupplemental} />
+        <span class="practice-control__label">Include supplemental content</span>
       </label>
     </div>
 

@@ -224,6 +224,22 @@
   width: 100%;
 }
 
+.practice-control--checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: end;
+}
+
+.practice-control--checkbox input {
+  width: auto;
+  margin: 0;
+}
+
+.practice-control--checkbox .practice-control__label {
+  margin: 0;
+}
+
 .practice-control--custom-theme input {
   margin: 0;
   width: 100%;

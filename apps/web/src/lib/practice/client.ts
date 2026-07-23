@@ -8,11 +8,19 @@ import type { PracticeRetrieveResult } from './retrieve';
  * @throws {Error} With the endpoint's error message (e.g. missing embedding cache, dimension
  *   mismatch, unknown level) or a generic message if the response body has no `error` field.
  */
-export async function fetchRetrieval(level: string, queryVector: number[]): Promise<PracticeRetrieveResult> {
+export async function fetchRetrieval(
+  level: string,
+  queryVector: number[],
+  options: { includeUnassigned?: boolean } = {},
+): Promise<PracticeRetrieveResult> {
   const response = await fetch(`${base}/api/practice/retrieve`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ level, queryVector }),
+    body: JSON.stringify({
+      level,
+      queryVector,
+      ...(options.includeUnassigned ? { includeUnassigned: true } : {}),
+    }),
   });
 
   const body = await response.json().catch(() => ({}));
