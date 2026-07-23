@@ -55,16 +55,30 @@ class OllamaLlmProvider:
             payload["model"] = default
         return payload
 
-    async def list_models(self) -> dict[str, Any]:
+    async def _get_json_object(self, path: str, *, label: str) -> dict[str, Any]:
         try:
-            response = await self._client.get("/v1/models")
+            response = await self._client.get(path)
             response.raise_for_status()
             data = response.json()
         except httpx.HTTPError as exc:
-            raise LlmProviderError(f"Ollama /v1/models failed: {exc}") from exc
+            raise LlmProviderError(f"{label} failed: {exc}") from exc
         if not isinstance(data, dict):
-            raise LlmProviderError("Ollama /v1/models returned a non-object JSON payload")
+            raise LlmProviderError(f"{label} returned a non-object JSON payload")
         return data
+
+    async def _post_json_object(self, path: str, payload: dict[str, Any], *, label: str) -> dict[str, Any]:
+        try:
+            response = await self._client.post(path, json=payload)
+            response.raise_for_status()
+            data = response.json()
+        except httpx.HTTPError as exc:
+            raise LlmProviderError(f"{label} failed: {exc}") from exc
+        if not isinstance(data, dict):
+            raise LlmProviderError(f"{label} returned a non-object JSON payload")
+        return data
+
+    async def list_models(self) -> dict[str, Any]:
+        return await self._get_json_object("/v1/models", label="Ollama /v1/models")
 
     async def chat_completions(
         self,
@@ -76,15 +90,11 @@ class OllamaLlmProvider:
         payload["stream"] = stream
 
         if not stream:
-            try:
-                response = await self._client.post("/v1/chat/completions", json=payload)
-                response.raise_for_status()
-                data = response.json()
-            except httpx.HTTPError as exc:
-                raise LlmProviderError(f"Ollama /v1/chat/completions failed: {exc}") from exc
-            if not isinstance(data, dict):
-                raise LlmProviderError("Ollama /v1/chat/completions returned a non-object JSON payload")
-            return data
+            return await self._post_json_object(
+                "/v1/chat/completions",
+                payload,
+                label="Ollama /v1/chat/completions",
+            )
 
         return self._stream_chat_completions(payload)
 
@@ -126,21 +136,23 @@ class OllamaLlmProvider:
         raw_input = payload.get("input")
         if isinstance(raw_input, list):
             if len(raw_input) != 1 or not isinstance(raw_input[0], str):
-                raise LlmProviderError("Native Ollama embeddings fallback supports a single string input only (or use OpenAI-compatible /v1/embeddings).")
+                raise LlmProviderError(
+                    "Native Ollama embeddings fallback supports a single string input only "
+                    "(or use OpenAI-compatible /v1/embeddings)."
+                )
             prompt = raw_input[0]
         elif isinstance(raw_input, str):
             prompt = raw_input
         else:
             raise LlmProviderError("Embeddings request missing string 'input'")
 
-        try:
-            response = await self._client.post("/api/embeddings", json={"model": model, "prompt": prompt})
-            response.raise_for_status()
-            data = response.json()
-        except httpx.HTTPError as exc:
-            raise LlmProviderError(f"Ollama /api/embeddings failed: {exc}") from exc
+        data = await self._post_json_object(
+            "/api/embeddings",
+            {"model": model, "prompt": prompt},
+            label="Ollama /api/embeddings",
+        )
 
-        embedding = data.get("embedding") if isinstance(data, dict) else None
+        embedding = data.get("embedding")
         if not isinstance(embedding, list) or not embedding:
             raise LlmProviderError("Ollama /api/embeddings returned an empty or invalid embedding")
 

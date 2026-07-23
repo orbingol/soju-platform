@@ -318,3 +318,12 @@ def test_embed_index_dry_run(data_root: Path) -> None:
     assert result.stdout == ""
     assert "Would embed" in result.stderr
     assert "vocabulary entries" in result.stderr
+
+
+def test_backend_help_smoke() -> None:
+    """``soju backend --help`` exits cleanly (not pinned byte-for-byte; needs backend extras)."""
+    pytest.importorskip("fastapi")
+    result = _run_script(["soju", "backend", "--help"])
+    assert result.returncode == 0, result.stderr
+    assert "backend" in result.stdout.lower()
+    assert "--config" in result.stdout

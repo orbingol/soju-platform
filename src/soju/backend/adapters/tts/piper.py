@@ -87,7 +87,7 @@ class PiperTtsEngine:
 
             if not out_path.is_file():
                 raise TtsError("Piper did not produce an output file")
-            audio = out_path.read_bytes()
-            if not audio:
-                raise TtsError("Piper returned empty audio")
-            return audio, "audio/wav"
+            return out_path.read_bytes(), "audio/wav"
+
+    async def aclose(self) -> None:
+        return None

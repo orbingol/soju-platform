@@ -13,7 +13,9 @@ from soju.backend.adapters.llm import build_llm_provider
 from soju.backend.adapters.tts import build_tts_engine
 from soju.backend.config import BackendSettings, load_settings
 from soju.backend.routes import client_config, health, llm, tts
-from soju.backend.services import AppServices
+from soju.backend.services.bag import AppServices
+from soju.backend.services.llm import LlmProxyService
+from soju.backend.services.tts import TtsService
 
 
 def create_app(settings: BackendSettings | None = None) -> FastAPI:
@@ -27,20 +29,22 @@ def create_app(settings: BackendSettings | None = None) -> FastAPI:
 
     @asynccontextmanager
     async def lifespan(app: FastAPI) -> AsyncIterator[None]:
-        llm = build_llm_provider(resolved.llm)
+        llm_provider = build_llm_provider(resolved.llm)
         tts_engine = build_tts_engine(resolved.tts)
-        app.state.services = AppServices(settings=resolved, llm=llm, tts=tts_engine)
+        llm_service = LlmProxyService(llm_provider)
+        tts_service = TtsService(tts_engine, default_voice=resolved.tts.voice)
+        app.state.services = AppServices(settings=resolved, llm=llm_service, tts=tts_service)
         try:
             yield
         finally:
-            await llm.aclose()
+            await llm_service.aclose()
+            await tts_service.aclose()
 
     app = FastAPI(
         title="Soju Backend",
         version="0.1.0",
         lifespan=lifespan,
     )
-    app.state.settings = resolved
     app.add_middleware(
         CORSMiddleware,
         allow_origins=list(resolved.server.cors_origins),
