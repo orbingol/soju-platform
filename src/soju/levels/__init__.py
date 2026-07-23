@@ -157,11 +157,7 @@ def vocabulary_for_level(
     included when ``include_unassigned`` is true.
     """
     included_ids = _included_level_ids(level_id, root)
-    return [
-        entry
-        for entry in load_vocabulary(root)
-        if _matches_course_band(entry.get("level"), included_ids, include_unassigned)
-    ]
+    return [entry for entry in load_vocabulary(root) if _matches_course_band(entry.get("level"), included_ids, include_unassigned)]
 
 
 def grammar_for_level(
