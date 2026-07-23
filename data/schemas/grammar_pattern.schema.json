@@ -17,8 +17,12 @@
       "type": "string",
       "enum": ["particles", "time_place", "verb_patterns", "question_words", "connectors"]
     },
-    "summary": { "type": "string", "minLength": 1 },
-    "notes": {
+      "summary": { "type": "string", "minLength": 1 },
+      "level": {
+        "type": "string",
+        "description": "Course level id from content/levels.yaml (e.g. 1A, 1B). Omitted entries are unassigned (not in any course band)."
+      },
+      "notes": {
       "type": "array",
       "items": { "type": "string", "minLength": 1 }
     },

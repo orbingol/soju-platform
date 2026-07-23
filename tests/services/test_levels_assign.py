@@ -84,3 +84,34 @@ def test_set_levels_unknown_level(data_root: Path) -> None:
 def test_parse_ids_file() -> None:
     text = "# comment\n\n" + WORD_ID + "\n  " + VERB_ID + "  \n"
     assert parse_ids_file(text) == [WORD_ID, VERB_ID]
+
+
+def test_list_unassigned_grammar(data_root: Path) -> None:
+    rows = list_unassigned(data_root, kind="grammar")
+    assert [r["id"] for r in rows] == ["do"]
+
+
+def test_set_levels_grammar_all_unassigned(data_root: Path) -> None:
+    from soju.registry.grammar import load_grammar_pattern
+
+    report = set_levels(data_root, level_id="1A", kind="grammar", all_unassigned=True)
+    assert report.updated == 1
+    assert report.kind == "grammar"
+    assert load_grammar_pattern("do", data_root)["level"] == "1A"
+    assert list_unassigned(data_root, kind="grammar") == []
+
+
+def test_set_levels_grammar_by_id_requires_force(data_root: Path) -> None:
+    set_levels(data_root, level_id="1A", kind="grammar", all_unassigned=True)
+    with pytest.raises(ValueError, match="Already tagged"):
+        set_levels(data_root, level_id="1B", kind="grammar", ids=["do"])
+    report = set_levels(data_root, level_id="1B", kind="grammar", ids=["do"], force=True)
+    assert report.updated == 1
+    from soju.registry.grammar import load_grammar_pattern
+
+    assert load_grammar_pattern("do", data_root)["level"] == "1B"
+
+
+def test_set_levels_grammar_unknown_id(data_root: Path) -> None:
+    with pytest.raises(ValueError, match="Unknown grammar pattern id"):
+        set_levels(data_root, level_id="1A", kind="grammar", ids=["missing_pattern"])

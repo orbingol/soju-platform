@@ -78,3 +78,17 @@ def test_valid_level_ok(data_root: Path) -> None:
         entry["level"] = "1A"
     save_vocabulary(vocab, data_root)
     assert validate_registry(data_root) == []
+
+
+def test_unknown_grammar_level_reported(data_root: Path) -> None:
+    from soju.registry.grammar import load_grammar_pattern, save_grammar_pattern
+
+    pattern = load_grammar_pattern("do", data_root)
+    pattern["level"] = "9Z"
+    save_grammar_pattern("do", pattern, data_root)
+    errors = validate_registry(data_root)
+    assert any("grammar pattern do" in e and "unknown level '9Z'" in e for e in errors)
+
+
+def test_grammar_omitted_level_ok(data_root: Path) -> None:
+    assert validate_registry(data_root) == []

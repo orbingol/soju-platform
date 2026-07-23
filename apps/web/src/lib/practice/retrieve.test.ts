@@ -42,7 +42,9 @@ function setUpFixture(): void {
     { id: 'v2', hangul: '사과', romanization: 'sa-gwa', english: 'apple', type: 'noun', level: '1B', embedding: [0, 1] },
     { id: 'v3', hangul: '물', romanization: 'mul', english: 'water', type: 'noun', level: '1A', embedding: [0.6, 0.8] },
   ]);
-  writeJsonl(path.join(cacheDir, 'grammar.jsonl'), [{ id: 'do', form: '-도', english: 'also / even', category: 'particles', summary: 'Additive particle.', embedding: [1, 0] }]);
+  writeJsonl(path.join(cacheDir, 'grammar.jsonl'), [
+    { id: 'do', form: '-도', english: 'also / even', category: 'particles', summary: 'Additive particle.', level: '1A', embedding: [1, 0] },
+  ]);
 }
 
 beforeEach(() => {

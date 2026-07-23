@@ -122,6 +122,7 @@ def build_embedding_index(
                 "english": doc.english,
                 "category": doc.category,
                 "summary": doc.summary,
+                "level": doc.level,
                 "embedding": vector,
             }
             for doc, vector in zip(grammar_docs, grammar_vectors)

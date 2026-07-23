@@ -53,6 +53,7 @@ interface CachedGrammarRecord {
   english: string;
   category: string;
   summary: string;
+  level: string | null;
   embedding: number[];
 }
 
