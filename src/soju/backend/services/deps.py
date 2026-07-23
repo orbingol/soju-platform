@@ -5,7 +5,7 @@ from __future__ import annotations
 
 from fastapi import Request
 
-from soju.backend.config import BackendSettings
+from soju.backend.config.settings import BackendSettings
 from soju.backend.services.bag import AppServices
 from soju.backend.services.llm import LlmProxyService
 from soju.backend.services.tts import TtsService

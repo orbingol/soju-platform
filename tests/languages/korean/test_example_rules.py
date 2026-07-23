@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import pytest
 
-from soju.languages import get_language
+from soju.languages.plugins import get_language
 from soju.languages.korean.example_rules import embedded_form_hint, form_in_sentence
 
 

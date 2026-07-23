@@ -10,7 +10,7 @@ import typer
 
 from soju.cli._common import flag, make_app
 from soju.cli._ollama import require_ollama_client
-from soju.llm import LlmError
+from soju.llm.base import LlmError
 from soju.llm.ollama import DEFAULT_BASE_URL, DEFAULT_MODEL
 from soju.registry.examples import save_examples_store
 from soju.services.examples_fill.service import dry_run_examples_preview, fill_examples

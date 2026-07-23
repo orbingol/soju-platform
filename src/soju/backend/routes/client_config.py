@@ -7,7 +7,11 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends
 
-from soju.backend.config import BackendSettings, ClientConfigResponse, client_config_from_settings
+from soju.backend.config.settings import BackendSettings
+from soju.backend.config.client import (
+    ClientConfigResponse,
+    client_config_from_settings,
+)
 from soju.backend.services.deps import get_settings
 
 router = APIRouter(tags=["client-config"])

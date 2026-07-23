@@ -21,7 +21,7 @@ def test_strip_example_english() -> None:
 
 
 def test_is_acceptable_gloss_via_base() -> None:
-    from soju.base import get_base_language
+    from soju.base.plugins import get_base_language
 
     bl = get_base_language("en")
     assert bl.is_acceptable_gloss("I ate rice.", tense="past") is True

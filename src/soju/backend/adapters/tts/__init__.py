@@ -6,7 +6,7 @@ from __future__ import annotations
 from soju.backend.abstract.tts import TtsEngine, TtsError
 from soju.backend.adapters.tts.edge import EdgeTtsEngine
 from soju.backend.adapters.tts.piper import PiperTtsEngine
-from soju.backend.config import TtsSettings
+from soju.backend.config.settings import TtsSettings
 
 
 def build_tts_engine(settings: TtsSettings) -> TtsEngine:
@@ -27,7 +27,5 @@ def build_tts_engine(settings: TtsSettings) -> TtsEngine:
 
 
 __all__ = [
-    "EdgeTtsEngine",
-    "PiperTtsEngine",
     "build_tts_engine",
 ]

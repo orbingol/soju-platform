@@ -10,14 +10,16 @@ import typer
 
 from soju.cli._common import flag, make_app
 from soju.cli._ollama import require_ollama_client
-from soju.llm import LlmError
+from soju.llm.base import LlmError
 from soju.llm.ollama import DEFAULT_BASE_URL
-from soju.services.embeddings import (
+from soju.services.embeddings.build import (
     DEFAULT_EMBED_MODEL,
     build_embedding_index,
+    make_ollama_embed_fn,
+)
+from soju.services.embeddings.documents import (
     load_grammar_docs,
     load_vocab_docs,
-    make_ollama_embed_fn,
 )
 
 app = make_app()

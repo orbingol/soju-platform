@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from soju.base import get_base_language
+from soju.base.plugins import get_base_language
 from soju.registry.examples import load_examples_store, merge_default_examples, save_examples_store
 from soju.registry.topics import load_topic, save_topic
 from soju.registry.vocabulary import build_sense_index, load_vocabulary, save_vocabulary

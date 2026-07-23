@@ -5,10 +5,10 @@ from __future__ import annotations
 
 from typing import Any
 
-from soju.base import get_base_language
+from soju.base.plugins import get_base_language
 from soju.core.models import EXAMPLE_TENSES as TENSES
 from soju.core.models import EXAMPLE_VARIANTS as VARIANTS
-from soju.languages import get_language
+from soju.languages.plugins import get_language
 from soju.registry.examples import noun_entry_needs_fill, verb_entry_needs_fill
 
 

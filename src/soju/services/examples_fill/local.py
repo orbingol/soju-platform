@@ -7,7 +7,7 @@ from typing import Any
 
 from soju.core.models import EXAMPLE_TENSES as TENSES
 from soju.core.models import EXAMPLE_VARIANTS as VARIANTS
-from soju.languages import get_language
+from soju.languages.plugins import get_language
 from soju.levels import vocabulary_for_level
 from soju.registry.examples import load_examples_store, noun_entry_needs_fill, verb_entry_needs_fill
 from soju.registry.verbs import load_verb_forms, load_verb_forms_cache

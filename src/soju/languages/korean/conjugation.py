@@ -8,7 +8,7 @@ examples or ``soju fill-examples`` for learner-facing content.
 
 from __future__ import annotations
 
-from soju.base import get_base_language
+from soju.base.plugins import get_base_language
 from soju.core.models import TenseForms
 
 VariantForms = dict[str, str]

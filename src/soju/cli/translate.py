@@ -13,7 +13,7 @@ import typer
 from soju.cli._common import flag, make_app
 from soju.cli._ollama import require_ollama_client
 from soju.levels import get_language_level
-from soju.llm import LlmError
+from soju.llm.base import LlmError
 from soju.llm.ollama import DEFAULT_BASE_URL, DEFAULT_MODEL
 from soju.services.translate import parse_word_list_lines, translate_words
 

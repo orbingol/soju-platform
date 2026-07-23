@@ -14,7 +14,7 @@ from fastapi.testclient import TestClient
 
 from soju.backend.abstract.llm import LlmProviderError
 from soju.backend.app import create_app
-from soju.backend.config import BackendSettings
+from soju.backend.config.settings import BackendSettings
 
 
 class FakeLlm:

@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from soju.languages import get_language
+from soju.languages.plugins import get_language
 from soju.registry.examples import load_examples_store, save_examples_store, verb_entry_needs_fill
 from soju.registry.verbs import load_verb_forms_file, save_verb_forms_file
 from soju.registry.vocabulary import load_vocabulary

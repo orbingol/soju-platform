@@ -21,7 +21,7 @@ def register(base: BaseLanguage) -> None:
 def _ensure_builtins_loaded() -> None:
     """Import built-in base languages so they self-register."""
     if DEFAULT_BASE_LANGUAGE not in _REGISTRY:
-        import soju.base.english  # noqa: F401
+        import soju.base.english.plugin  # noqa: F401
 
 
 def get_base_language(code: str | None = None) -> BaseLanguage:

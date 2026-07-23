@@ -9,7 +9,7 @@ from typing import Any
 import httpx
 
 from soju.backend.abstract.llm import LlmProviderError
-from soju.backend.config import LlmSettings
+from soju.backend.config.settings import LlmSettings
 
 
 class OllamaLlmProvider:

@@ -7,7 +7,7 @@ from typing import Any
 
 from soju.core.models import EXAMPLE_TENSES as TENSES
 from soju.core.models import EXAMPLE_VARIANTS as VARIANTS
-from soju.languages import get_language
+from soju.languages.plugins import get_language
 from soju.languages.contracts import PromptProvider
 from soju.levels import get_language_level
 from soju.llm.base import LlmClient

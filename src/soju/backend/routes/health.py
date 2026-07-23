@@ -7,7 +7,7 @@ from typing import Annotated, Any
 
 from fastapi import APIRouter, Depends
 
-from soju.backend.config import BackendSettings
+from soju.backend.config.settings import BackendSettings
 from soju.backend.services.deps import get_llm, get_settings, get_tts
 from soju.backend.services.llm import LlmProxyService
 from soju.backend.services.tts import TtsService

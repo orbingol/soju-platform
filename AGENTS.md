@@ -80,6 +80,7 @@ One console entry is installed by `uv sync`: **`soju`**. Invoke as `uv run soju 
 - Topics: `data/content/topics/manifest.yaml` (files at `topics/<id>/topic.yaml`). Grammar: `data/content/grammar/` (manifest + `patterns/`). Web app: `apps/web/`. Backend API: `src/soju/backend/` (do **not** revive `docker/piper`).
 - Registry uniqueness is **hangul + English meaning** (homonyms allowed). Optional `visibility: hidden` + `type: phrase` hides practice sentences from Word types/Flashcards; Practice/chat still see them.
 - If a request is ambiguous or would require broad refactors, **stop and ask** rather than guessing.
+- **Python imports / exports:** A module (or package `__init__.py`) may export names it **defines** (classes, functions, constants, factories owned by that file). That is normal and convenient. Do **not** passthrough-re-export: module A must not `from B import X` and then expose `X` as part of A's public API (`__all__`, or an implied package surface) solely so callers can write `from A import X` instead of `from B import X`. Callers import from the module that owns the symbol. Passthrough barrels hide dependency edges and invite cyclic imports.
 
 ### Steps
 

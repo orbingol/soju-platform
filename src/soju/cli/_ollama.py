@@ -7,7 +7,7 @@ import sys
 
 import typer
 
-from soju.llm import OllamaClient
+from soju.llm.ollama import OllamaClient
 
 
 def require_ollama_client(*, model: str, base_url: str) -> OllamaClient:

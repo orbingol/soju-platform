@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from soju.languages import get_language
+from soju.languages.plugins import get_language
 from soju.levels import get_language_level
 from soju.llm.base import LlmError
 from soju.llm.jsonutil import parse_json_content
