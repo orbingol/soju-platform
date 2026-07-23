@@ -7,7 +7,8 @@ from pathlib import Path
 
 import yaml
 
-from soju.levels import default_level_id, load_levels_config, vocabulary_for_level
+from soju.levels import default_level_id, grammar_for_level, load_levels_config, vocabulary_for_level
+from soju.registry.grammar import load_grammar_pattern, save_grammar_pattern
 from soju.registry.vocabulary import load_vocabulary, save_vocabulary
 from tests.constants import VERB_ID, WORD_ID
 
@@ -93,3 +94,40 @@ def test_vocabulary_for_level_empty_when_no_matches(data_root: Path) -> None:
     )
     # Fixture vocabulary is tagged 1A only.
     assert vocabulary_for_level("2A", data_root) == []
+
+
+def test_grammar_for_level_includes_tagged_patterns(data_root: Path) -> None:
+    rows = grammar_for_level("1A", data_root)
+    assert {r["id"] for r in rows} == {"do"}
+
+
+def test_grammar_for_level_excludes_unassigned_by_default(data_root: Path) -> None:
+    pattern = load_grammar_pattern("do", data_root)
+    pattern.pop("level", None)
+    save_grammar_pattern("do", pattern, data_root)
+
+    assert grammar_for_level("1A", data_root) == []
+
+
+def test_grammar_for_level_include_unassigned(data_root: Path) -> None:
+    pattern = load_grammar_pattern("do", data_root)
+    pattern.pop("level", None)
+    save_grammar_pattern("do", pattern, data_root)
+
+    assert grammar_for_level("1A", data_root) == []
+    with_extra = grammar_for_level("1A", data_root, include_unassigned=True)
+    assert [r["id"] for r in with_extra] == ["do"]
+
+
+def test_grammar_for_level_expands_include_levels(data_root: Path) -> None:
+    pattern = load_grammar_pattern("do", data_root)
+    pattern["level"] = "1A"
+    save_grammar_pattern("do", pattern, data_root)
+
+    assert {r["id"] for r in grammar_for_level("1A", data_root)} == {"do"}
+    assert {r["id"] for r in grammar_for_level("1B", data_root)} == {"do"}
+
+    pattern["level"] = "1B"
+    save_grammar_pattern("do", pattern, data_root)
+    assert grammar_for_level("1A", data_root) == []
+    assert {r["id"] for r in grammar_for_level("1B", data_root)} == {"do"}

@@ -74,3 +74,8 @@ New vocabulary can take an optional course level at import time
 (``soju import words|verbs --level …`` or per-record ``level``). Omitted = unassigned.
 To retag existing vocab or grammar, use ``soju levels`` — do not mass-edit YAML by hand.
 See :doc:`import`.
+
+Unassigned vocabulary is excluded from Practice (unless *Include supplemental content*) and
+from course AI prompt word lists. ``soju fill-examples --local`` still generates for
+unassigned rows in the selected band; stamp or import with ``--level`` when you want them in
+the course band — see :doc:`fill-examples`.

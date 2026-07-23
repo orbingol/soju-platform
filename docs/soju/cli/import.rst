@@ -59,6 +59,11 @@ id from ``data/content/levels.yaml``. Per-record wins over the CLI flag. If both
 the entry is **unassigned** (no ``level`` field) — not silently ``1A``. Retag existing entries
 with :doc:`levels` (``soju levels set``), not by hand-editing the registry.
 
+Practice and course AI prompts exclude unassigned rows unless supplemental content is opted
+in. ``soju fill-examples --local`` includes unassigned entries in its generation target so a
+fresh import without ``--level`` can still receive examples; stamp with ``soju levels`` (or
+pass ``--level`` on import) before relying on course-banded Practice filtering.
+
 Verbs
 -----
 

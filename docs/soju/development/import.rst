@@ -21,7 +21,10 @@ Course levels on import
 New words and verbs may take an optional course level via ``--level`` or a per-record
 ``level`` field (ids from ``data/content/levels.yaml``). Per-record wins. If both are
 omitted, the entry is **unassigned**. To stamp or retag existing vocabulary or grammar
-patterns, use ``soju levels`` — see :doc:`/cli/levels`.
+patterns, use ``soju levels`` — see :doc:`/cli/levels`. Unassigned rows are excluded from
+Practice course bands and prompt vocabulary lists; ``soju fill-examples --local`` still
+includes them when generating examples so a bare import can be filled before you stamp a
+level.
 
 Staging workflow
 -----------------

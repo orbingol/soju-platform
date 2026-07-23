@@ -391,6 +391,33 @@ def test_levels_set_all_unassigned_dry_run(data_root: Path) -> None:
     assert all("level" not in e for e in load_vocabulary(data_root))
 
 
+def test_levels_set_grammar_all_unassigned_dry_run(data_root: Path) -> None:
+    from soju.registry.grammar import load_grammar_pattern, save_grammar_pattern
+
+    pattern = load_grammar_pattern("do", data_root)
+    pattern.pop("level", None)
+    save_grammar_pattern("do", pattern, data_root)
+
+    result = _run_script(
+        [
+            "soju",
+            "levels",
+            "set",
+            "--kind",
+            "grammar",
+            "--level",
+            "1A",
+            "--all-unassigned",
+            "--dry-run",
+        ],
+        env={"DATA_DIR": str(data_root)},
+    )
+    assert result.returncode == 0, result.stderr
+    assert result.stdout == "would set level=1A on 1 grammar entry.\n"
+    assert result.stderr == ""
+    assert "level" not in load_grammar_pattern("do", data_root)
+
+
 def test_backend_help_smoke() -> None:
     """``soju backend --help`` exits cleanly (not pinned byte-for-byte; needs backend extras)."""
     pytest.importorskip("fastapi")

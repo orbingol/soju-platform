@@ -147,6 +147,8 @@ def test_import_existing_sense_updates_level(data_root: Path) -> None:
     session.commit(dry_run=False)
     entry = next(e for e in load_vocabulary(data_root) if e["id"] == WORD_ID)
     assert entry["level"] == "1B"
+    assert report.retagged_level == 1
+    assert report.skipped == 0
 
 
 def test_import_verb_record_with_level(data_root: Path) -> None:

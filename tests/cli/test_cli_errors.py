@@ -231,3 +231,16 @@ def test_registry_unknown_level_fails(data_env: Path) -> None:
     result = runner.invoke(validate_cli.registry_app, [], catch_exceptions=False)
     assert result.exit_code == 1
     assert "unknown level" in (result.output + result.stderr).lower()
+
+
+def test_registry_unknown_grammar_level_fails(data_env: Path) -> None:
+    from soju.registry.grammar import load_grammar_pattern, save_grammar_pattern
+
+    pattern = load_grammar_pattern("do", data_env)
+    pattern["level"] = "9Z"
+    save_grammar_pattern("do", pattern, data_env)
+    result = runner.invoke(validate_cli.registry_app, [], catch_exceptions=False)
+    assert result.exit_code == 1
+    combined = (result.output + result.stderr).lower()
+    assert "unknown level" in combined
+    assert "grammar pattern do" in combined
