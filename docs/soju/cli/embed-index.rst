@@ -28,6 +28,6 @@ grammar pattern from the grammar manifest.
    uv run soju embed-index --embed-model nomic-embed-text --batch-size 32
 
 Requires a reachable Ollama server with the embedding model pulled (default
-``nomic-embed-text``, or ``SOJU_EMBED_MODEL`` / ``--embed-model``). The browser
-Practice UI embeds the theme with the same model via ``PUBLIC_AI_EMBED_MODEL`` —
-keep those in sync. See :doc:`/development/ai` for the full Practice flow.
+``nomic-embed-text``, or ``SOJU_EMBED_MODEL`` / ``--embed-model``). Keep that model
+aligned with backend ``llm.embed_model`` (surfaced to the browser via
+``/v1/soju/client-config``). See :doc:`/development/ai` for the full Practice flow.

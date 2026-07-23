@@ -1,9 +1,12 @@
 <script lang="ts">
   import '../app.css';
 
+  import { onMount } from 'svelte';
+  import { browser } from '$app/environment';
   import { base } from '$app/paths';
   import { page } from '$app/stores';
 
+  import { ensureClientConfig } from '$lib/ai/client-config';
   import Breadcrumb from '$lib/components/Breadcrumb.svelte';
   import type { Crumb } from '$lib/components/breadcrumb';
   import ChatDock from '$lib/components/ChatDock.svelte';
@@ -15,6 +18,11 @@
   let { children } = $props();
 
   const siteTitle = 'Soju (소주)';
+
+  onMount(() => {
+    if (!browser) return;
+    void ensureClientConfig();
+  });
 
   const isEducation = $derived($page.url.pathname.includes('/education'));
   const pathname = $derived($page.url.pathname);

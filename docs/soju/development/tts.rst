@@ -1,10 +1,17 @@
-Piper TTS (local speech)
-========================
+Local TTS (speech)
+==================
 
-``docker compose up`` starts a ``piper`` service on port ``5500`` exposing ``/v1/audio/speech``.
+``uv run poe up-prod`` / ``docker compose up`` serves the UI and ``POST /v1/audio/speech`` through nginx
+on port ``8080``. In ``poe up``, call the API at ``http://localhost:8000``.
 
-**Korean note:** upstream Piper has no official Korean neural voice that works with stock ``piper-tts``.
-The Soju TTS container therefore uses **edge-tts** with ``ko-KR-SunHiNeural`` (natural Korean; needs
-network). Override the voice with ``PUBLIC_TTS_PIPER_VOICE`` (e.g. ``ko-KR-InJoonNeural``). Switch engines
-under **Controls → Speech** (``piper`` local service, or ``browser`` Web Speech). If the local service
-is down, the app falls back to the browser.
+**Korean note:** upstream Piper has no official Korean neural voice that works with stock
+``piper-tts``. The backend defaults to **edge-tts** (``tts.engine: edge``) with
+``ko-KR-SunHiNeural``. Override voice / engine in backend YAML
+(``~/.config/soju/backend.yaml`` or ``config/backend.yaml``). Native Piper is available
+when you set ``tts.engine: piper`` and a valid ``tts.piper.model_path``.
+
+In the UI, choose **Controls → Speech**: ``local`` (Soju backend) or ``browser``
+(Web Speech). If local TTS is down, the app falls back to the browser.
+
+Default browser env: ``PUBLIC_TTS_ENGINE=local`` and ``PUBLIC_AI_BASE_URL=http://localhost:8080``
+(same origin as the API).

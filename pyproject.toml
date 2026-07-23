@@ -53,9 +53,20 @@ dev = [
   "pytest-cov>=7.1.0",
   "python-dotenv>=1.2.0",
 ]
+# Optional FastAPI runtime: `uv sync --group backend` (Docker backend image installs this).
+backend = [
+  "edge-tts>=7.2.3",
+  "fastapi>=0.115.12",
+  "httpx>=0.28.0",
+  "pydantic>=2.10.0",
+  "uvicorn[standard]>=0.34.2",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+"soju.backend.config.files" = ["*.yaml"]
 
 [tool.setuptools_scm]
 write_to = "src/soju/_version.py"
@@ -122,6 +133,14 @@ cmd = "soju import verbs --stdin-json"
 [tool.poe.tasks.embed-index]
 help = "Build the Ollama embedding cache for Practice retrieval (data/cache/embeddings/)."
 cmd = "soju embed-index"
+
+[tool.poe.tasks.up]
+help = "Start Soju in dev mode: Vite :5173 and FastAPI :8000 (no nginx)."
+cmd = "docker compose -f docker-compose.yml -f docker-compose.dev.yml up"
+
+[tool.poe.tasks.up-prod]
+help = "Start Soju in prod mode: nginx :8080 → web + backend."
+cmd = "docker compose up"
 
 [tool.poe.tasks.validate-docker]
 help = "Run validation inside the validate Docker image."

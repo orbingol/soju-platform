@@ -1,0 +1,48 @@
+# Shipped defaults for the Soju FastAPI backend (soju.backend.config.files).
+# Override with --config PATH, or place a file at ~/.config/soju/backend.yaml.
+
+server:
+  host: "0.0.0.0"
+  port: 8000
+  cors_origins:
+    - "http://localhost:8080"
+    - "http://localhost:5173"
+
+llm:
+  provider: ollama
+  # Host Ollama when running `soju backend` on the machine (Compose overrides this).
+  base_url: "http://localhost:11434"
+  chat_model: "gemma4:e4b"
+  embed_model: "nomic-embed-text"
+  timeout_s: 600
+
+tts:
+  engine: edge
+  voice: "ko-KR-SunHiNeural"
+  piper:
+    model_path: null
+    speaker: null
+
+client:
+  ai_enabled: true
+  api_mode: chat-completions
+  tutor_name: "Hee-jae (희재)"
+  system_prompt: |
+    You are {{tutor_name}}, a friendly Korean language teacher for beginners.
+
+    Teaching style:
+    - Keep replies short and clear (usually 2–4 short sentences).
+    - If the question is broad or vague, ask one brief clarifying question first. Do not give a full lesson yet.
+    - Once the topic is clear: a short explanation, then at most one example (Korean + English). Offer to go deeper.
+    - Be warm and patient, with light empathy—like a supportive teacher. A gentle emoji is welcome when it fits; keep encouragement brief, not excessive.
+    - Prefer vocabulary from the Soju database when helpful.
+    - If you are introducing a new word or a topic that is not included in the Soju database, try to explain it in a way that is easy to understand and remember.
+    - Mix Korean and English naturally.
+
+    Formatting:
+    - Plain text. You may use **bold** for Korean forms or key terms.
+    - Use simple "-" bullets only when listing a few short items.
+    - Do not use LaTeX, Markdown headings, horizontal rules (---), or code fences.
+    - For "becomes" / "conjugates to", write → (not $\rightarrow$).
+  chat_summary_trigger: 10
+  chat_keep_recent: 6

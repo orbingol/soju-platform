@@ -20,6 +20,22 @@ Validate
    * - Validate in Docker
      - ``uv run poe validate-docker``
 
+Compose
+-------
+
+.. list-table::
+   :header-rows: 1
+   :widths: 35 65
+
+   * - Task
+     - Command
+   * - Dev (Vite :5173, API :8000)
+     - ``uv run poe up``
+   * - Prod (nginx :8080)
+     - ``uv run poe up-prod``
+
+See :doc:`docker` for the full Compose layout.
+
 Import, translate & embed
 -------------------------
 

@@ -1,16 +1,8 @@
 import { env as dynamicPublicEnv } from '$env/dynamic/public';
-import {
-  PUBLIC_AI_API_MODE,
-  PUBLIC_AI_BASE_URL,
-  PUBLIC_AI_EMBED_MODEL,
-  PUBLIC_AI_ENABLED,
-  PUBLIC_AI_MODEL,
-  PUBLIC_AI_SYSTEM_PROMPT,
-  PUBLIC_AI_TUTOR_NAME,
-} from '$env/static/public';
+import { PUBLIC_AI_BASE_URL, PUBLIC_AI_ENABLED } from '$env/static/public';
 
 export type AiApiMode = 'chat-completions' | 'conversations';
-export type TtsEngine = 'piper' | 'browser';
+export type TtsEngine = 'local' | 'browser';
 
 function firstDefined(...values: Array<string | undefined>): string | undefined {
   for (const value of values) {
@@ -34,28 +26,33 @@ export function resolveChatContextThresholds(triggerRaw?: string, keepRaw?: stri
   return { trigger, keepRecent };
 }
 
+/** Resolve TTS engine; ``piper`` is accepted as a legacy alias for ``local``. */
 export function resolveTtsEngine(raw?: string): TtsEngine {
-  return raw?.trim().toLowerCase() === 'browser' ? 'browser' : 'piper';
+  const normalized = raw?.trim().toLowerCase();
+  if (normalized === 'browser') return 'browser';
+  return 'local';
 }
 
-/** When true, Practice and Chat are available (requires a running language model at runtime). */
+/** When true, Practice and Chat are available (requires Soju backend + LLM at runtime). */
 export const aiEnabled = firstDefined(PUBLIC_AI_ENABLED, dynamicPublicEnv.PUBLIC_OLLAMA_ENABLED) === 'true';
 
-export const aiBaseUrl = (firstDefined(PUBLIC_AI_BASE_URL, dynamicPublicEnv.PUBLIC_OLLAMA_BASE_URL) ?? 'http://localhost:11434').replace(/\/$/, '');
+/** Browser-reachable Soju API root (nginx → FastAPI in prod). */
+export const sojuApiBaseUrl = (
+  firstDefined(PUBLIC_AI_BASE_URL, dynamicPublicEnv.PUBLIC_OLLAMA_BASE_URL, dynamicPublicEnv.PUBLIC_TTS_PIPER_BASE_URL) ?? 'http://localhost:8080'
+).replace(/\/$/, '');
 
-export const aiModel = firstDefined(PUBLIC_AI_MODEL, dynamicPublicEnv.PUBLIC_OLLAMA_MODEL) ?? 'gemma4:e4b';
+/** @deprecated Prefer ``sojuApiBaseUrl`` — same origin for OpenAI-compatible AI routes. */
+export const aiBaseUrl = sojuApiBaseUrl;
 
-/** Ollama embedding model for Practice's browser-side theme embedding (must match `soju embed-index`). */
-export const aiEmbedModel = firstDefined(PUBLIC_AI_EMBED_MODEL, dynamicPublicEnv.PUBLIC_OLLAMA_EMBED_MODEL) ?? 'nomic-embed-text';
+/** Local TTS HTTP root (same Soju API as AI). */
+export const localTtsBaseUrl = (firstDefined(dynamicPublicEnv.PUBLIC_TTS_PIPER_BASE_URL, PUBLIC_AI_BASE_URL) ?? sojuApiBaseUrl).replace(/\/$/, '');
 
-export const aiApiMode: AiApiMode = firstDefined(PUBLIC_AI_API_MODE) === 'conversations' ? 'conversations' : 'chat-completions';
+const envChatThresholds = resolveChatContextThresholds(dynamicPublicEnv.PUBLIC_AI_CHAT_SUMMARY_TRIGGER, dynamicPublicEnv.PUBLIC_AI_CHAT_KEEP_RECENT);
 
 export const defaultChatTutorName = 'Hee-jae (희재)';
 
-export const aiTutorName = firstDefined(PUBLIC_AI_TUTOR_NAME) ?? defaultChatTutorName;
-
-export const defaultChatSystemPrompt =
-  firstDefined(PUBLIC_AI_SYSTEM_PROMPT, dynamicPublicEnv.PUBLIC_OLLAMA_SYSTEM_PROMPT) ||
+const envSystemPrompt =
+  firstDefined(dynamicPublicEnv.PUBLIC_AI_SYSTEM_PROMPT, dynamicPublicEnv.PUBLIC_OLLAMA_SYSTEM_PROMPT) ||
   [
     'You are {{tutor_name}}, a friendly Korean language teacher for beginners.',
     'Keep replies short (2–4 sentences). If the question is vague, ask one clarifying question first.',
@@ -65,19 +62,57 @@ export const defaultChatSystemPrompt =
     'Use plain text; **bold** for key Korean forms is fine. Write → for conjugation; avoid LaTeX and ---.',
   ].join(' ');
 
-const chatThresholds = resolveChatContextThresholds(dynamicPublicEnv.PUBLIC_AI_CHAT_SUMMARY_TRIGGER, dynamicPublicEnv.PUBLIC_AI_CHAT_KEEP_RECENT);
-
-/** Summarize when chat turn count exceeds this value. */
-export const chatSummaryTrigger = chatThresholds.trigger;
-
-/** Recent turns kept verbatim after summarization. */
-export const chatKeepRecent = chatThresholds.keepRecent;
+/** Overridable at runtime via ``GET /v1/soju/client-config`` (see ``applyClientConfig``). */
+export let aiModel = firstDefined(dynamicPublicEnv.PUBLIC_AI_MODEL, dynamicPublicEnv.PUBLIC_OLLAMA_MODEL) ?? 'gemma4:e4b';
+export let aiEmbedModel = firstDefined(dynamicPublicEnv.PUBLIC_AI_EMBED_MODEL, dynamicPublicEnv.PUBLIC_OLLAMA_EMBED_MODEL) ?? 'nomic-embed-text';
+export let aiApiMode: AiApiMode = firstDefined(dynamicPublicEnv.PUBLIC_AI_API_MODE) === 'conversations' ? 'conversations' : 'chat-completions';
+export let aiTutorName = firstDefined(dynamicPublicEnv.PUBLIC_AI_TUTOR_NAME) ?? defaultChatTutorName;
+export let defaultChatSystemPrompt = envSystemPrompt;
+export let chatSummaryTrigger = envChatThresholds.trigger;
+export let chatKeepRecent = envChatThresholds.keepRecent;
+export let localTtsVoice = firstDefined(dynamicPublicEnv.PUBLIC_TTS_PIPER_VOICE) ?? 'ko-KR-SunHiNeural';
 
 /** Default TTS engine from env (user can override in Settings). */
 export const defaultTtsEngine = resolveTtsEngine(dynamicPublicEnv.PUBLIC_TTS_ENGINE);
 
-/** Browser-reachable Piper HTTP root. */
-export const piperBaseUrl = (firstDefined(dynamicPublicEnv.PUBLIC_TTS_PIPER_BASE_URL) ?? 'http://localhost:5500').replace(/\/$/, '');
+export type SojuClientConfigPayload = {
+  ai_enabled?: boolean;
+  api_mode?: string;
+  chat_model?: string;
+  embed_model?: string;
+  tutor_name?: string;
+  system_prompt?: string;
+  chat_summary_trigger?: number;
+  chat_keep_recent?: number;
+  tts_default_voice?: string;
+};
 
-/** Piper / Edge voice name for /v1/audio/speech. */
-export const piperVoice = firstDefined(dynamicPublicEnv.PUBLIC_TTS_PIPER_VOICE) ?? 'ko-KR-SunHiNeural';
+/** Apply non-secret bootstrap values from the Soju backend. */
+export function applyClientConfig(payload: SojuClientConfigPayload): void {
+  if (typeof payload.chat_model === 'string' && payload.chat_model.trim()) {
+    aiModel = payload.chat_model.trim();
+  }
+  if (typeof payload.embed_model === 'string' && payload.embed_model.trim()) {
+    aiEmbedModel = payload.embed_model.trim();
+  }
+  if (payload.api_mode === 'conversations' || payload.api_mode === 'chat-completions') {
+    aiApiMode = payload.api_mode;
+  }
+  if (typeof payload.tutor_name === 'string' && payload.tutor_name.trim()) {
+    aiTutorName = payload.tutor_name.trim();
+  }
+  if (typeof payload.system_prompt === 'string' && payload.system_prompt.trim()) {
+    defaultChatSystemPrompt = payload.system_prompt;
+  }
+  if (typeof payload.tts_default_voice === 'string' && payload.tts_default_voice.trim()) {
+    localTtsVoice = payload.tts_default_voice.trim();
+  }
+  if (payload.chat_summary_trigger !== undefined || payload.chat_keep_recent !== undefined) {
+    const nextThresholds = resolveChatContextThresholds(
+      payload.chat_summary_trigger !== undefined ? String(payload.chat_summary_trigger) : undefined,
+      payload.chat_keep_recent !== undefined ? String(payload.chat_keep_recent) : undefined,
+    );
+    chatSummaryTrigger = nextThresholds.trigger;
+    chatKeepRecent = nextThresholds.keepRecent;
+  }
+}

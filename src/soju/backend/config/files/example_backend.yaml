@@ -1,0 +1,15 @@
+# Example user override. Copy to ~/.config/soju/backend.yaml or pass with --config.
+# Packaged with soju.backend; only listed keys override shipped defaults (deep merge).
+#
+#   mkdir -p ~/.config/soju
+#   # from a checkout after uv sync --group backend:
+#   cp src/soju/backend/config/files/example_backend.yaml ~/.config/soju/backend.yaml
+
+llm:
+  # Use host.docker.internal when the backend runs in Docker and Ollama is on the host.
+  # base_url: "http://host.docker.internal:11434"
+  base_url: "http://localhost:11434"
+
+# tts:
+#   engine: edge
+#   voice: "ko-KR-SunHiNeural"

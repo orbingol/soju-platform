@@ -8,6 +8,7 @@ from typing import Annotated, Optional
 
 import typer
 
+from soju.backend.cli import backend as backend_cli
 from soju.cli import embed as embed_cli
 from soju.cli import examples as examples_cli
 from soju.cli import promote as promote_cli
@@ -55,6 +56,7 @@ app.command("fill-verbs")(verbs_cli.fill_verbs_cmd)
 app.command("fill-examples")(examples_cli.fill_examples_cmd)
 app.command("translate-words")(translate_cli.translate)
 app.command("embed-index")(embed_cli.build)
+app.command("backend")(backend_cli)
 
 
 def main() -> None:

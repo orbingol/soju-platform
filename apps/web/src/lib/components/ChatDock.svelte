@@ -1,11 +1,12 @@
 <script lang="ts">
-  import { onDestroy, onMount } from 'svelte';
+  import { onDestroy, onMount, untrack } from 'svelte';
   import { browser } from '$app/environment';
 
   import { checkAiAvailable } from '$lib/ai/client';
-  import { GLOBAL_CHAT_SESSION_KEY, loadChatDockOpen, saveChatDockOpen } from '$lib/chat';
+  import { ensureClientConfig } from '$lib/ai/client-config';
+  import { applyTutorName, chatTutorLabel, GLOBAL_CHAT_SESSION_KEY, loadChatDockOpen, saveChatDockOpen } from '$lib/chat';
   import { openChatPopoutWindow } from '$lib/chat-popout';
-  import { aiBaseUrl } from '$lib/config';
+  import { aiBaseUrl, aiModel, aiTutorName, defaultChatSystemPrompt } from '$lib/config';
 
   import ChatConversation from '$lib/components/ChatConversation.svelte';
 
@@ -32,9 +33,26 @@
   let popoutWindow: Window | null = null;
   let removePopoutListeners: (() => void) | null = null;
 
-  const tutorShortName = $derived(chat.tutorName.split('(')[0]?.trim() || chat.tutorName);
+  /**
+   * Seed from SSR ``chat`` (includes vocabulary-enriched system prompt).
+   * ``untrack`` marks the intentional initial-only capture (no ``state_referenced_locally``).
+   * Never call ``buildChatSystemPrompt()`` here — it reads the data tree via Node APIs.
+   */
+  let model = $state(untrack(() => chat.model));
+  let systemPrompt = $state(untrack(() => chat.systemPrompt));
+  let tutorName = $state(untrack(() => chat.tutorName));
+  let tutorLabel = $state(untrack(() => chat.tutorLabel));
+
+  const tutorShortName = $derived(tutorName.split('(')[0]?.trim() || tutorName);
   const tutorInitial = $derived([...tutorShortName][0] ?? '희');
 
+  function syncFromConfig() {
+    model = aiModel;
+    tutorName = aiTutorName;
+    tutorLabel = chatTutorLabel(aiTutorName);
+    // Client-config may replace the template; do not rebuild vocab hints in the browser.
+    systemPrompt = applyTutorName(defaultChatSystemPrompt);
+  }
   async function setOpen(next: boolean) {
     open = next;
     await saveChatDockOpen(next);
@@ -146,7 +164,7 @@
     const win = await openChatPopoutWindow({
       width: 400,
       height: 560,
-      title: chat.tutorLabel,
+      title: tutorLabel,
     });
     if (!win) return;
 
@@ -180,6 +198,8 @@
     if (!browser) return;
 
     void (async () => {
+      await ensureClientConfig();
+      syncFromConfig();
       open = await loadChatDockOpen();
       available = await checkAiAvailable();
       checking = false;
@@ -221,7 +241,7 @@
 
 <div class="chat-dock" class:is-open={open} class:is-popped-out={poppedOut}>
   <div class="chat-dock__panel-host" bind:this={panelHost}>
-    <aside class="chat-dock__panel" id="chat-dock-panel" bind:this={panelEl} aria-label={chat.tutorLabel}>
+    <aside class="chat-dock__panel" id="chat-dock-panel" bind:this={panelEl} aria-label={tutorLabel}>
       <div class="chat-dock__header">
         <div class="chat-dock__identity">
           <span class="chat-dock__avatar" aria-hidden="true">{tutorInitial}</span>
@@ -260,7 +280,7 @@
             <code>{typeof window !== 'undefined' ? window.location.origin : 'this site'}</code>, then reload.
           </p>
         {:else}
-          <ChatConversation bind:this={conversation} systemPrompt={chat.systemPrompt} model={chat.model} sessionKey={GLOBAL_CHAT_SESSION_KEY} compact />
+          <ChatConversation bind:this={conversation} {systemPrompt} {model} sessionKey={GLOBAL_CHAT_SESSION_KEY} compact />
         {/if}
       </div>
     </aside>
@@ -272,10 +292,10 @@
     class:chat-dock__handle--return={poppedOut}
     aria-controls="chat-dock-panel"
     aria-expanded={open && !poppedOut}
-    aria-label={poppedOut ? `Pop ${chat.tutorLabel} back into the page` : open ? `Close ${chat.tutorLabel}` : chat.tutorLabel}
+    aria-label={poppedOut ? `Pop ${tutorLabel} back into the page` : open ? `Close ${tutorLabel}` : tutorLabel}
     onclick={toggle}
   >
-    {poppedOut ? `Pop in · ${tutorShortName}` : chat.tutorLabel}
+    {poppedOut ? `Pop in · ${tutorShortName}` : tutorLabel}
   </button>
 </div>
 

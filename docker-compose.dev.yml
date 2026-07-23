@@ -1,0 +1,21 @@
+# Dev override: publish Vite and FastAPI on the host; skip nginx.
+#
+#   uv run poe up
+#   docker compose -f docker-compose.yml -f docker-compose.dev.yml up
+#
+# App: http://localhost:5173  ·  API: http://localhost:8000
+
+services:
+  nginx:
+    # Keep the service defined but out of the default project start set.
+    profiles: ["nginx"]
+
+  web:
+    ports:
+      - "5173:5173"
+    environment:
+      PUBLIC_AI_BASE_URL: http://localhost:8000
+
+  backend:
+    ports:
+      - "8000:8000"

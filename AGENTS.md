@@ -16,6 +16,7 @@ If an `AGENTS.local.md` file exists at the repository root, agents **should also
 Use **uv** for Python and **poe-the-poet** for repo tasks (`uv run poe <task>`).
 
 - Install deps: `uv sync`
+- Backend/API extras: `uv sync --group backend` (needed for `soju backend` and backend unit tests)
 - If `.venv` is missing or imports fail, ask the user to run that first.
 - If **`uv` is not installed** (command not found), ask the user to install it. Do **not** attempt to install uv yourself. Point users to [uv](https://docs.astral.sh/uv/).
 
@@ -31,10 +32,12 @@ Assume Python commands run as `uv run …` or `uv run poe …` unless the venv i
 | Lint / pre-commit | `uv run poe lint` / `uv run poe pre-commit` |
 | Web format (Docker) | `docker compose run --rm --no-deps web npm run format` |
 | Validate in Docker | `docker compose --profile validate run --rm validate` / `uv run poe validate-docker` |
-| Web dev | `docker compose up` → http://localhost:5173 |
+| Web (dev) | `uv run poe up` → Vite :5173, API :8000 |
+| Web (prod) | `uv run poe up-prod` / `docker compose up` → http://localhost:8080 |
 | Import words (JSON) | `cat records.json \| uv run soju import words --topic <id> --stdin-json` |
 | Import verbs (JSON) | `cat verbs.json \| uv run soju import verbs --stdin-json` |
 | Promote local words | `uv run soju promote --topic <id>` |
+| Backend API (host) | `uv sync --group backend` · `uv run soju backend --config config/backend.yaml` |
 | CLI help | `uv run soju --help` · `uv run soju <subcommand> --help` |
 | Python tests | `uv run poe test` (unit + offline system; skips LLM) |
 | System / LLM / coverage | `uv run poe test-system` · `uv run poe test-llm` · `uv run poe test-all` · `uv run poe coverage` |
@@ -58,6 +61,7 @@ One console entry is installed by `uv sync`: **`soju`**. Invoke as `uv run soju 
 | **`fill-examples`** | Generate missing noun/verb examples (Ollama or `--local`) |
 | **`fill-verbs`** | Fill missing verb conjugation forms |
 | **`embed-index`** | Build Ollama embedding cache for Practice retrieval (`data/cache/embeddings/`) |
+| **`backend`** | Run FastAPI Soju API (LLM proxy + TTS; needs `uv sync --group backend`) |
 
 **Poe shortcuts:** `validate`, `validate-schemas`, `validate-align`, `validate-registry`, `validate-docker`, `test`, `pre-commit`, `lint`, `import-words`, `import-verbs`, `translate-words`, `embed-index`, `docs`, `docs-serve`.
 
@@ -73,7 +77,7 @@ One console entry is installed by `uv sync`: **`soju`**. Invoke as `uv run soju 
 
 - Keep diffs focused: change only what the task requires; match existing patterns in the touched area.
 - **Never hand-edit** canonical vocabulary under `data/content/registry/`, `data/content/topics/*/topic.yaml` (entry lists), `data/content/verbs/forms/`, or examples. Use **`soju import`** (and **`soju promote`** when promoting locals) instead.
-- Topics: `data/content/topics/manifest.yaml` (files at `topics/<id>/topic.yaml`). Grammar: `data/content/grammar/` (manifest + `patterns/`). Web app: `apps/web/`.
+- Topics: `data/content/topics/manifest.yaml` (files at `topics/<id>/topic.yaml`). Grammar: `data/content/grammar/` (manifest + `patterns/`). Web app: `apps/web/`. Backend API: `src/soju/backend/` (do **not** revive `docker/piper`).
 - Registry uniqueness is **hangul + English meaning** (homonyms allowed). Optional `visibility: hidden` + `type: phrase` hides practice sentences from Word types/Flashcards; Practice/chat still see them.
 - If a request is ambiguous or would require broad refactors, **stop and ask** rather than guessing.
 

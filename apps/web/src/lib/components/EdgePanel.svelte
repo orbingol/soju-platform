@@ -39,7 +39,7 @@
   let open = $state(false);
   let theme = $state<ThemeMode>('auto');
   let ttsAvailable = $state(false);
-  let engine = $state<TtsEngine>('piper');
+  let engine = $state<TtsEngine>('local');
   let rate = $state(DEFAULT_RATE);
   let pitch = $state(DEFAULT_PITCH);
   let volume = $state(DEFAULT_VOLUME);
@@ -71,7 +71,7 @@
 
   async function onEngineChange(event: Event) {
     const select = event.currentTarget as HTMLSelectElement;
-    engine = await saveTtsEngine(select.value === 'browser' ? 'browser' : 'piper');
+    engine = await saveTtsEngine(select.value === 'browser' ? 'browser' : 'local');
   }
 
   async function onRateInput(event: Event) {
@@ -167,7 +167,7 @@
       <div class="setting-row">
         <label for="tts-engine">Engine</label>
         <select id="tts-engine" name="tts-engine" value={engine} onchange={onEngineChange}>
-          <option value="piper">Local TTS</option>
+          <option value="local">Local TTS</option>
           <option value="browser" disabled={!hasBrowserTts}>Browser</option>
         </select>
       </div>
@@ -205,8 +205,8 @@
         </div>
         <input type="range" id="tts-volume" name="tts-volume" min={MIN_VOLUME} max={MAX_VOLUME} step="0.05" value={volume} oninput={onVolumeInput} />
       </div>
-      {#if engine === 'piper'}
-        <p class="setting-note">Local TTS uses a neural Korean voice (needs network). Falls back to browser speech if the service is offline.</p>
+      {#if engine === 'local'}
+        <p class="setting-note">Local TTS uses the Soju backend neural Korean voice (edge-tts; needs network). Falls back to browser speech if the service is offline.</p>
       {/if}
     </section>
   {/if}
