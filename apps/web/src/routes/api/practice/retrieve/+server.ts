@@ -12,6 +12,7 @@ interface RetrieveRequestBody {
   queryVector?: unknown;
   vocabK?: number;
   grammarM?: number;
+  includeUnassigned?: boolean;
 }
 
 export const POST: RequestHandler = async ({ request, getClientAddress }) => {
@@ -36,6 +37,7 @@ export const POST: RequestHandler = async ({ request, getClientAddress }) => {
         queryVector: body.queryVector as number[],
         vocabK: body.vocabK,
         grammarM: body.grammarM,
+        includeUnassigned: body.includeUnassigned === true,
       },
       getDataDir(),
     );

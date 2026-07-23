@@ -25,6 +25,8 @@ app = make_app(
     no_args_is_help=True,
 )
 
+_LEVEL_HELP = "Course level id from levels.yaml (omit to leave new words unassigned; per-record level wins)"
+
 
 @app.command("words")
 def words(
@@ -37,6 +39,7 @@ def words(
         Optional[Path],
         typer.Option("--from-staging", help="Staging YAML file path"),
     ] = None,
+    level: Annotated[Optional[str], typer.Option("--level", help=_LEVEL_HELP)] = None,
 ) -> None:
     """Import words into a topic."""
     report = ImportReport()
@@ -49,6 +52,7 @@ def words(
                 report,
                 section_id=section,
                 dry_run=dry_run,
+                level_id=level,
             )
         elif stdin_json:
             for record in load_records_json(True, None):
@@ -58,6 +62,7 @@ def words(
                     report,
                     section_id=section,
                     dry_run=dry_run,
+                    level_id=level,
                 )
         elif file is not None:
             lines = file.read_text(encoding="utf-8").splitlines()
@@ -67,6 +72,7 @@ def words(
                 report,
                 section_id=section,
                 dry_run=dry_run,
+                level_id=level,
             )
         else:
             print("Provide --file, --stdin-json, or --from-staging.", file=sys.stderr)
@@ -91,6 +97,7 @@ def verbs(
     dry_run: Annotated[bool, flag("--dry-run")] = False,
     file: Annotated[Optional[Path], typer.Option("--file", help="Not supported without --stdin-json")] = None,
     stdin_json: Annotated[bool, flag("--stdin-json", help="Read JSON records from stdin")] = False,
+    level: Annotated[Optional[str], typer.Option("--level", help=_LEVEL_HELP)] = None,
 ) -> None:
     """Import verbs."""
     report = ImportReport()
@@ -98,7 +105,7 @@ def verbs(
         session = ImportSession.open_verbs()
         if stdin_json:
             for record in load_records_json(True, None):
-                import_verb_record(record, session, report, dry_run=dry_run)
+                import_verb_record(record, session, report, dry_run=dry_run, level_id=level)
         elif file is not None:
             print(
                 "Verb file import requires --stdin-json with full conjugations.",

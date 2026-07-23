@@ -1,6 +1,8 @@
-# Course levels for AI example generation and translation prompts.
-# Vocabulary: registry entries with no `level` field belong to `default`.
-# Higher levels include vocabulary from `include_levels` plus their own tagged entries.
+# Course levels for AI example generation, translation prompts, and Practice.
+# Vocabulary registry entries and grammar pattern files may omit `level` (= unassigned,
+# not in any course band) or set `level` to a key below (e.g. 1A, 1B). Stamp/retag via
+# `soju levels` (`--kind vocabulary|grammar`); do not invent ids outside this catalog.
+# Higher levels include tagged entries from `include_levels` plus their own tags.
 
 default: "1A"
 

@@ -42,7 +42,7 @@ def align() -> None:
 
 @registry_app.command()
 def registry() -> None:
-    """Validate vocabulary registry, types, and topic refs."""
+    """Validate vocabulary registry, types, topic refs, and grammar levels."""
     errors = validate_registry()
     if errors:
         print("Registry validation errors:", file=sys.stderr)

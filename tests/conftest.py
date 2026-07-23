@@ -77,6 +77,7 @@ def data_root(tmp_path: Path) -> Path:
                 "romanization": "hak-gyo",
                 "english": "school",
                 "type": "noun",
+                "level": "1A",
             },
             {
                 "id": VERB_ID,
@@ -84,6 +85,7 @@ def data_root(tmp_path: Path) -> Path:
                 "romanization": "meok-da",
                 "english": "to eat",
                 "type": "verb",
+                "level": "1A",
             },
         ],
     )
@@ -242,6 +244,7 @@ def data_root(tmp_path: Path) -> Path:
                     "label": "Korean 1B",
                     "description": "High beginner",
                     "guidance": "Slightly richer sentences.",
+                    "include_levels": ["1A"],
                 },
             },
         },
@@ -270,6 +273,7 @@ def data_root(tmp_path: Path) -> Path:
             "english": "also / even",
             "category": "particles",
             "summary": "Additive particle: also/too, or even.",
+            "level": "1A",
             "sections": [
                 {
                     "id": "also",

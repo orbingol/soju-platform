@@ -35,6 +35,8 @@ export interface PracticeRetrieveRequest {
   queryVector: number[];
   vocabK?: number;
   grammarM?: number;
+  /** When true, also include cache rows with no course ``level`` (unassigned / supplemental). */
+  includeUnassigned?: boolean;
 }
 
 interface CachedVocabRecord {
@@ -53,6 +55,7 @@ interface CachedGrammarRecord {
   english: string;
   category: string;
   summary: string;
+  level: string | null;
   embedding: number[];
 }
 
@@ -135,6 +138,15 @@ function clampCount(value: number | undefined, fallback: number): number {
   return Math.min(Math.floor(value), MAX_RESULT_COUNT);
 }
 
+function isUnassignedLevel(level: string | null | undefined): boolean {
+  return level == null || (typeof level === 'string' && level.trim() === '');
+}
+
+function matchesCourseBand(level: string | null | undefined, includedLevels: Set<string>, includeUnassigned: boolean): boolean {
+  if (isUnassignedLevel(level)) return includeUnassigned;
+  return includedLevels.has(String(level).trim());
+}
+
 /**
  * Rank cached vocabulary + grammar embeddings against a query vector for Practice generation.
  *
@@ -167,17 +179,19 @@ export function retrievePractice(request: PracticeRetrieveRequest, dataDir = get
     throw new PracticeRetrieveError(`Unknown level ${JSON.stringify(levelId)}. Known levels: ${known}`, 400);
   }
   const includedLevels = expandLevelIds(levelId, levelsConfig.levels);
+  const includeUnassigned = request.includeUnassigned === true;
 
   const vocabK = clampCount(request.vocabK, DEFAULT_VOCAB_K);
   const grammarM = clampCount(request.grammarM, DEFAULT_GRAMMAR_M);
 
   const rankedVocab = cache.vocab
-    .filter((entry) => includedLevels.has(entry.level ?? levelsConfig.default))
+    .filter((entry) => matchesCourseBand(entry.level, includedLevels, includeUnassigned))
     .map((entry) => ({ entry, score: cosineSimilarity(queryVector, entry.embedding) }))
     .sort((a, b) => b.score - a.score)
     .slice(0, vocabK);
 
   const rankedGrammar = cache.grammar
+    .filter((entry) => matchesCourseBand(entry.level, includedLevels, includeUnassigned))
     .map((entry) => ({ entry, score: cosineSimilarity(queryVector, entry.embedding) }))
     .sort((a, b) => b.score - a.score)
     .slice(0, grammarM);

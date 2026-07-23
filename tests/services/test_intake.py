@@ -72,6 +72,108 @@ def test_import_missing_fields_errors(data_root: Path) -> None:
     assert report.skipped == 1
 
 
+def test_import_word_record_with_level(data_root: Path) -> None:
+    session = ImportSession.open_words("family", data_root)
+    report = ImportReport()
+    import_word_record(
+        {
+            "hangul": "책",
+            "romanization": "chaek",
+            "english": "book",
+            "level": "1B",
+        },
+        session,
+        report,
+        section_id="general",
+    )
+    session.commit(dry_run=False)
+    entry = next(e for e in load_vocabulary(data_root) if e["hangul"] == "책")
+    assert entry["level"] == "1B"
+
+
+def test_import_word_record_cli_level_default(data_root: Path) -> None:
+    session = ImportSession.open_words("family", data_root)
+    report = ImportReport()
+    import_word_record(
+        {"hangul": "펜", "romanization": "pen", "english": "pen"},
+        session,
+        report,
+        section_id="general",
+        level_id="1A",
+    )
+    session.commit(dry_run=False)
+    entry = next(e for e in load_vocabulary(data_root) if e["hangul"] == "펜")
+    assert entry["level"] == "1A"
+
+
+def test_import_word_record_omits_level_when_unassigned(data_root: Path) -> None:
+    session = ImportSession.open_words("family", data_root)
+    report = ImportReport()
+    import_word_record(
+        {"hangul": "컵", "romanization": "keop", "english": "cup"},
+        session,
+        report,
+        section_id="general",
+    )
+    session.commit(dry_run=False)
+    entry = next(e for e in load_vocabulary(data_root) if e["hangul"] == "컵")
+    assert "level" not in entry
+
+
+def test_import_word_record_unknown_level_errors(data_root: Path) -> None:
+    session = ImportSession.open_words("family", data_root)
+    report = ImportReport()
+    import_word_record(
+        {"hangul": "책", "romanization": "chaek", "english": "book", "level": "9Z"},
+        session,
+        report,
+        section_id="general",
+    )
+    assert report.added == 0
+    assert report.skipped == 1
+    assert any("Unknown language level" in e for e in report.errors)
+
+
+def test_import_existing_sense_updates_level(data_root: Path) -> None:
+    session = ImportSession.open_words("family", data_root)
+    report = ImportReport()
+    import_word_record(
+        {"hangul": "학교", "romanization": "hak-gyo", "english": "school"},
+        session,
+        report,
+        section_id="general",
+        level_id="1B",
+    )
+    session.commit(dry_run=False)
+    entry = next(e for e in load_vocabulary(data_root) if e["id"] == WORD_ID)
+    assert entry["level"] == "1B"
+    assert report.retagged_level == 1
+    assert report.skipped == 0
+
+
+def test_import_verb_record_with_level(data_root: Path) -> None:
+    session = ImportSession.open_verbs(data_root)
+    report = ImportReport()
+    import_verb_record(
+        {
+            "hangul": "가다",
+            "romanization": "ga-da",
+            "english": "to go",
+            "level": "1B",
+            "forms": {
+                "present": {"casual_polite": "가요", "formal_polite": "갑니다"},
+                "past": {"casual_polite": "갔어요", "formal_polite": "갔습니다"},
+                "future": {"casual_polite": "갈 거예요", "formal_polite": "가겠습니다"},
+            },
+        },
+        session,
+        report,
+    )
+    session.commit(dry_run=False)
+    entry = next(e for e in load_vocabulary(data_root) if e["hangul"] == "가다")
+    assert entry["level"] == "1B"
+
+
 def test_resolve_topic_section_requires_section(data_root: Path) -> None:
     from soju.services.intake import resolve_topic_section
 

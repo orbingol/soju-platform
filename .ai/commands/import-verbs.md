@@ -57,10 +57,11 @@ Read `data/content/verbs/table.yaml` for required tense groups and variants (`pr
 - **`forms`** — required; keys must match `data/content/verbs/manifest.yaml` form files
 - **`examples`** — optional; nest by tense → variant → array of `{hangul, english}`
 - Place each parenthesized example under the tense/variant it demonstrates (default `present.casual_polite` when unclear)
+- Optional course `level` (`1A`, `1B`, …): per-record `"level"` or CLI `--level`; omit = **unassigned**
 
 ## Workflow
 
-1. Read `data/content/verbs/table.yaml` and existing `data/content/registry/vocabulary.yaml` (skip duplicate **hangul + English meaning**; same hangul with a different gloss is a homonym).
+1. Read `data/content/verbs/table.yaml` and existing `data/content/registry/vocabulary.yaml` (skip duplicate **hangul + English meaning**; same hangul with a different English gloss is a homonym).
 2. Build JSON records for new verbs only.
 3. Dry run:
 
@@ -72,6 +73,7 @@ Read `data/content/verbs/table.yaml` for required tense groups and variants (`pr
 
    ```bash
    cat records.json | uv run soju import verbs --stdin-json
+   # or: … --stdin-json --level 1A
    ```
 
 5. Validate:

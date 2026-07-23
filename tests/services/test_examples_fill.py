@@ -138,6 +138,31 @@ def test_fill_examples_local_refresh(data_root: Path) -> None:
     assert store[WORD_ID]["default"]
 
 
+def test_fill_examples_local_includes_unassigned(data_root: Path) -> None:
+    from soju.registry.vocabulary import load_vocabulary, save_vocabulary
+    from soju.services.examples_fill.local import fill_examples_local
+
+    vocab = load_vocabulary(data_root)
+    for entry in vocab:
+        if entry["id"] == WORD_ID:
+            entry.pop("level", None)
+        else:
+            entry["level"] = "1A"
+    save_vocabulary(vocab, data_root)
+
+    store, updated = fill_examples_local(
+        level_id="1A",
+        verbs=False,
+        nouns=True,
+        examples_per=1,
+        fill_mode="refresh-all",
+        root=data_root,
+    )
+    assert updated >= 1
+    assert WORD_ID in store
+    assert store[WORD_ID]["default"]
+
+
 def test_fill_examples_clean_only(data_root: Path) -> None:
     from soju.registry.examples import save_examples_store
 

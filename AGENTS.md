@@ -36,6 +36,7 @@ Assume Python commands run as `uv run …` or `uv run poe …` unless the venv i
 | Web (prod) | `uv run poe up-prod` / `docker compose up` → http://localhost:8080 |
 | Import words (JSON) | `cat records.json \| uv run soju import words --topic <id> --stdin-json` |
 | Import verbs (JSON) | `cat verbs.json \| uv run soju import verbs --stdin-json` |
+| Assign course levels | `uv run soju levels set --level 1A --all-unassigned` · `--kind grammar` |
 | Promote local words | `uv run soju promote --topic <id>` |
 | Backend API (host) | `uv sync --group backend` · `uv run soju backend --config config/backend.yaml` |
 | CLI help | `uv run soju --help` · `uv run soju <subcommand> --help` |
@@ -53,10 +54,11 @@ One console entry is installed by `uv sync`: **`soju`**. Invoke as `uv run soju 
 | Subcommand | Role |
 |------------|------|
 | **`import words` / `import verbs`** | **Only write path** for registry words/verbs (examples, topic refs, verb forms) |
+| **`levels`** | List/assign course `level` on vocabulary or grammar (`--kind`); omit = unassigned |
 | **`promote`** | Promote `local: true` topic entries into the registry |
 | **`validate-schemas`** | JSON Schema check over data files (in `poe validate`) |
 | **`align`** | Verb forms ↔ registry alignment (in `poe validate`) |
-| **`registry`** | UUID / refs / **sense uniqueness** (hangul+english; homonyms OK) (in `poe validate`) |
+| **`registry`** | UUID / refs / **sense uniqueness** / unknown vocab or grammar `level` ids (in `poe validate`) |
 | **`translate-words`** | Plain-text list → import JSON via Ollama (`poe translate-words`) |
 | **`fill-examples`** | Generate missing noun/verb examples (Ollama or `--local`) |
 | **`fill-verbs`** | Fill missing verb conjugation forms |
@@ -77,6 +79,7 @@ One console entry is installed by `uv sync`: **`soju`**. Invoke as `uv run soju 
 
 - Keep diffs focused: change only what the task requires; match existing patterns in the touched area.
 - **Never hand-edit** canonical vocabulary under `data/content/registry/`, `data/content/topics/*/topic.yaml` (entry lists), `data/content/verbs/forms/`, or examples. Use **`soju import`** (and **`soju promote`** when promoting locals) instead.
+- **Course levels:** stamp/retag vocabulary and grammar via **`soju levels`** (`--kind vocabulary|grammar`). Do not mass-edit `level` fields by hand. Import may set optional `--level` / per-record `level` for new vocab (omit = unassigned).
 - Topics: `data/content/topics/manifest.yaml` (files at `topics/<id>/topic.yaml`). Grammar: `data/content/grammar/` (manifest + `patterns/`). Web app: `apps/web/`. Backend API: `src/soju/backend/` (do **not** revive `docker/piper`).
 - Registry uniqueness is **hangul + English meaning** (homonyms allowed). Optional `visibility: hidden` + `type: phrase` hides practice sentences from Word types/Flashcards; Practice/chat still see them.
 - If a request is ambiguous or would require broad refactors, **stop and ask** rather than guessing.
@@ -97,6 +100,7 @@ One console entry is installed by `uv sync`: **`soju`**. Invoke as `uv run soju 
 ### What agents must not do
 
 - Edit `data/content/registry/vocabulary.yaml`, `data/content/registry/examples.yaml`, topic entry lists under `data/content/topics/`, or `data/content/verbs/forms/` by hand.
+- Mass-edit vocabulary or grammar `level` fields by hand — use `soju levels` (or import `--level` for new vocab).
 - Change `data/content/topics/manifest.yaml` or `data/content/grammar/manifest.yaml` unless the user asks (or the task clearly requires a new topic/pattern).
 - Skip validation after an import.
 
@@ -112,9 +116,21 @@ One console entry is installed by `uv sync`: **`soju`**. Invoke as `uv run soju 
 - **`--topic`** — id from `data/content/topics/manifest.yaml` (e.g. `common`, `family`).
 - **`--section`** — required when the topic has multiple sections.
 - **`--stdin-json`** — JSON array or `{"records": [...]}`. Required for **new** words.
-- Optional record fields: `type`, `examples`, `visibility` (`hidden`), `grammar_pattern`.
+- **`--level`** — optional course id from `data/content/levels.yaml`; per-record `level` wins. Omit = **unassigned**.
+- Optional record fields: `type`, `examples`, `visibility` (`hidden`), `grammar_pattern`, `level`.
 
 **Record shape:** `hangul`, `romanization`, `english`; optional `examples` as `[{ "hangul", "english" }]`. Romanization: Revised Romanization, lowercase, hyphenated (`hak-gyo`).
+
+### Course levels (`soju levels`)
+
+```bash
+uv run soju levels list-unassigned
+uv run soju levels set --level 1A --all-unassigned
+uv run soju levels set --kind grammar --level 1A --all-unassigned
+uv run soju levels set --level 1B --id <uuid>
+```
+
+Selection: `--all-unassigned` **or** `--id` / `--ids-file` (not mixed). Use `--force` to overwrite an existing tag.
 
 ### Verbs (`soju import verbs`)
 
@@ -122,7 +138,7 @@ One console entry is installed by `uv sync`: **`soju`**. Invoke as `uv run soju 
 cat verbs.json | uv run soju import verbs --stdin-json
 ```
 
-Each record needs `hangul`, `romanization`, `english`, `forms` (present/past/future × casual_polite/formal_polite); optional nested `examples`. Always use **`--stdin-json`**.
+Each record needs `hangul`, `romanization`, `english`, `forms` (present/past/future × casual_polite/formal_polite); optional nested `examples`. Always use **`--stdin-json`**. Optional `--level` / per-record `level` same as words.
 
 ### Promote local entries (`soju promote`)
 

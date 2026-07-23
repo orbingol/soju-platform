@@ -87,7 +87,12 @@ instead of dumping the full registry into the prompt.
 
 **Content**
 
-- Levels come from ``data/content/levels.yaml`` (guidance + optional ``grammar_summary``).
+- Levels come from ``data/content/levels.yaml`` (guidance + optional ``grammar_summary``
+  and ``include_levels`` for parent bands).
+- Vocabulary and grammar in the embedding cache carry optional ``level``. Tagged entries
+  match the selected course band (including parents via ``include_levels``).
+  **Unassigned** entries (missing/null ``level``) are excluded unless the Practice UI
+  checkbox **Include supplemental content** is enabled (``includeUnassigned``).
 - Themes come from ``data/content/practice/themes.yaml`` (café, directions, family, daily
   routine, shopping). The UI also accepts a custom free-text theme.
 
@@ -109,9 +114,11 @@ Keep that model in sync with backend ``llm.embed_model`` / client-config.
 Flow on **Generate session**:
 
 1. Browser embeds the theme via Soju ``/v1/embeddings``.
-2. Browser ``POST``\ s ``{ level, queryVector }`` to ``/api/practice/retrieve``.
-3. The SvelteKit endpoint (dev server only) filters the cache by level, ranks by cosine
-   similarity, and returns hangul + grammar snippets.
+2. Browser ``POST``\ s ``{ level, queryVector, includeUnassigned? }`` to
+   ``/api/practice/retrieve``.
+3. The SvelteKit endpoint (dev server only) filters the cache by course band (and
+   optionally unassigned vocab **and** grammar), ranks by cosine similarity, and returns
+   hangul + grammar snippets.
 4. Browser calls chat completions through the Soju API with that RAG payload.
 
 ``/api/practice/retrieve`` is **dev-only** (same gate as ``/api/staging``): it runs under
@@ -121,5 +128,6 @@ corrupt cache returns ``503`` with a hint to run ``poe embed-index``.
 **UI controls**
 
 Level → Theme (or Custom) → Exercise type (sentences / questions / fill-in-blank /
-story / vocabulary candidates) → Count → Generate. Results show the active type; any
-``vocabulary_candidates`` are listed as hangul — english (display only; no add-to-vocab).
+story / vocabulary candidates) → Count → optional **Include supplemental content** →
+Generate. Results show the active type; any ``vocabulary_candidates`` are listed as
+hangul — english (display only; no add-to-vocab).

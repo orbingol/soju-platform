@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: BSD-3-Clause
-"""Course language-level configuration and vocabulary filtering."""
+"""Course language-level configuration and vocabulary/grammar filtering."""
 
 from __future__ import annotations
 
@@ -11,6 +11,7 @@ from typing import Any
 
 from soju.core.config import data_root as _resolve_data_root
 from soju.core.yaml_io import load_yaml
+from soju.registry.grammar import iter_grammar_patterns
 from soju.registry.vocabulary import load_vocabulary
 
 ENV_LANGUAGE_LEVEL = "SOJU_LANGUAGE_LEVEL"
@@ -111,6 +112,25 @@ def _expand_level_ids(level_id: str, config: dict[str, Any]) -> list[str]:
     return order
 
 
+def _included_level_ids(level_id: str | None, root) -> set[str]:
+    """Resolve ``level_id`` and return the expanded course-band id set."""
+    config = load_levels_config(root)
+    chosen = resolve_level_id(level_id, root)
+    return set(_expand_level_ids(chosen, config))
+
+
+def _is_unassigned_level(raw: Any) -> bool:
+    """Return True when ``raw`` is missing or blank (unassigned)."""
+    return raw is None or (isinstance(raw, str) and not str(raw).strip())
+
+
+def _matches_course_band(raw_level: Any, included_ids: set[str], include_unassigned: bool) -> bool:
+    """Return True when a vocab/grammar ``level`` belongs in the course band."""
+    if _is_unassigned_level(raw_level):
+        return include_unassigned
+    return str(raw_level).strip() in included_ids
+
+
 def get_language_level(level_id: str | None = None, root=None) -> LanguageLevel:
     """Return a :class:`LanguageLevel` for the resolved level id."""
     config = load_levels_config(root)
@@ -124,17 +144,39 @@ def get_language_level(level_id: str | None = None, root=None) -> LanguageLevel:
     )
 
 
-def vocabulary_for_level(level_id: str | None = None, root=None) -> list[dict]:
-    """Return vocabulary entries belonging to ``level_id`` (and included parents)."""
-    config = load_levels_config(root)
-    chosen = resolve_level_id(level_id, root)
-    included_ids = set(_expand_level_ids(chosen, config))
-    fallback = str(config.get("default", "1A"))
+def vocabulary_for_level(
+    level_id: str | None = None,
+    root=None,
+    *,
+    include_unassigned: bool = False,
+) -> list[dict]:
+    """Return vocabulary entries for ``level_id`` (and ``include_levels`` parents).
 
-    vocabulary = load_vocabulary(root)
-    filtered: list[dict] = []
-    for entry in vocabulary:
-        entry_level = str(entry.get("level", fallback))
-        if entry_level in included_ids:
-            filtered.append(entry)
-    return filtered
+    Entries with a ``level`` field are included when that id is in the expanded
+    course set. Entries with no ``level`` are **unassigned**: excluded by default,
+    included when ``include_unassigned`` is true.
+    """
+    included_ids = _included_level_ids(level_id, root)
+    return [entry for entry in load_vocabulary(root) if _matches_course_band(entry.get("level"), included_ids, include_unassigned)]
+
+
+def grammar_for_level(
+    level_id: str | None = None,
+    root=None,
+    *,
+    include_unassigned: bool = False,
+) -> list[dict]:
+    """Return grammar pattern dicts for ``level_id`` (and ``include_levels`` parents).
+
+    Same membership rules as :func:`vocabulary_for_level`. Each row is the pattern
+    YAML mapping with ``id`` set from the manifest key when missing.
+    """
+    included_ids = _included_level_ids(level_id, root)
+    rows: list[dict] = []
+    for pattern_id, _meta, pattern in iter_grammar_patterns(root):
+        if not _matches_course_band(pattern.get("level"), included_ids, include_unassigned):
+            continue
+        row = dict(pattern)
+        row.setdefault("id", pattern_id)
+        rows.append(row)
+    return rows

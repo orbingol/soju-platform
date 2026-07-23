@@ -11,7 +11,6 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from soju.core.config import content_root
-from soju.core.yaml_io import load_yaml
 from soju.registry.vocabulary import load_vocabulary
 
 
@@ -20,7 +19,7 @@ class VocabDoc:
     """A vocabulary entry prepared for embedding.
 
     ``level`` mirrors the registry's optional ``level`` field: ``None`` means the
-    entry belongs to the default course level (see ``soju.levels``).
+    entry is unassigned (not tagged to a course level; see ``soju.levels``).
     """
 
     id: str
@@ -34,13 +33,17 @@ class VocabDoc:
 
 @dataclass(frozen=True)
 class GrammarDoc:
-    """A grammar pattern prepared for embedding."""
+    """A grammar pattern prepared for embedding.
+
+    ``level`` comes from the pattern YAML file: ``None`` means unassigned.
+    """
 
     id: str
     form: str
     english: str
     category: str
     summary: str
+    level: str | None
     text: str
 
 
@@ -72,17 +75,19 @@ def load_vocab_docs(root: Path | None = None) -> list[VocabDoc]:
     return [_vocab_doc(entry) for entry in load_vocabulary(root)]
 
 
-def _grammar_doc(pattern_id: str, meta: dict) -> GrammarDoc:
+def _grammar_doc(pattern_id: str, meta: dict, pattern: dict | None = None) -> GrammarDoc:
     form = str(meta.get("form", ""))
     english = str(meta.get("english", ""))
     summary = str(meta.get("description", "")).strip()
     text = f"{form}: {english}. {summary}".strip()
+    raw_level = None if pattern is None else pattern.get("level")
     return GrammarDoc(
         id=pattern_id,
         form=form,
         english=english,
         category=str(meta.get("category", "")),
         summary=summary,
+        level=str(raw_level) if raw_level else None,
         text=text,
     )
 
@@ -96,13 +101,15 @@ def load_grammar_docs(root: Path | None = None) -> list[GrammarDoc]:
     Returns:
         Documents sorted by pattern id; empty when the manifest is missing.
     """
+    from soju.registry.grammar import iter_grammar_patterns, load_grammar_manifest
+
     manifest_path = content_root(root) / "grammar" / "manifest.yaml"
     if not manifest_path.is_file():
         return []
-    manifest = load_yaml(manifest_path)
-    if not isinstance(manifest, dict):
-        return []
-    patterns = manifest.get("patterns", {})
-    if not isinstance(patterns, dict):
-        return []
-    return [_grammar_doc(pattern_id, meta) for pattern_id, meta in sorted(patterns.items()) if isinstance(meta, dict)]
+    try:
+        rows = iter_grammar_patterns(root)
+    except (ValueError, OSError):
+        # Fall back to manifest-only docs when a pattern file is missing.
+        patterns = load_grammar_manifest(root)["patterns"]
+        return [_grammar_doc(pattern_id, meta) for pattern_id, meta in sorted(patterns.items()) if isinstance(meta, dict)]
+    return [_grammar_doc(pattern_id, meta, pattern) for pattern_id, meta, pattern in rows]

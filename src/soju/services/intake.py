@@ -11,6 +11,7 @@ from soju.base.plugins import get_base_language
 from soju.core.text import parse_import_line
 from soju.core.yaml_io import load_yaml, new_id
 from soju.languages.plugins import get_language
+from soju.levels import resolve_level_id
 from soju.registry.examples import load_examples_store, merge_default_examples, merge_verb_examples, save_examples_store
 from soju.registry.topics import find_local_entry, find_section, load_topic, save_topic, topic_has_ref
 from soju.registry.verbs import load_all_verb_forms, save_verb_forms_file
@@ -23,6 +24,7 @@ class ImportReport:
     added: int = 0
     merged_examples: int = 0
     add_ref: int = 0
+    retagged_level: int = 0
     skipped: int = 0
     homonyms: int = 0
     errors: list[str] = field(default_factory=list)
@@ -36,6 +38,8 @@ class ImportReport:
             f"skipped={self.skipped}",
             f"errors={len(self.errors)}",
         ]
+        if self.retagged_level:
+            parts.insert(3, f"retagged_level={self.retagged_level}")
         if self.homonyms:
             parts.append(f"homonyms={self.homonyms}")
         return " ".join(parts)
@@ -137,6 +141,20 @@ def _resolve_word_romanization(record: dict) -> str | None:
     return generated or None
 
 
+def _resolve_record_level(record: dict, cli_level: str | None, root) -> str | None:
+    """Resolve course level from record then CLI; ``None`` means unassigned.
+
+    Raises:
+        ValueError: If a provided level id is not defined in ``levels.yaml``.
+    """
+    raw = record.get("level")
+    if isinstance(raw, str) and raw.strip():
+        return resolve_level_id(raw.strip(), root)
+    if isinstance(cli_level, str) and cli_level.strip():
+        return resolve_level_id(cli_level.strip(), root)
+    return None
+
+
 def import_word_record(
     record: dict,
     session: ImportSession,
@@ -144,6 +162,7 @@ def import_word_record(
     *,
     section_id: str | None = None,
     dry_run: bool = False,
+    level_id: str | None = None,
 ) -> None:
     required = {"hangul", "english"}
     if not required.issubset(record):
@@ -154,6 +173,13 @@ def import_word_record(
     romanization = _resolve_word_romanization(record)
     if not romanization:
         report.errors.append(f"Word record missing romanization and could not generate one from hangul {record.get('hangul')!r}")
+        report.skipped += 1
+        return
+
+    try:
+        resolved_level = _resolve_record_level(record, level_id, session.root)
+    except ValueError as exc:
+        report.errors.append(str(exc))
         report.skipped += 1
         return
 
@@ -186,6 +212,7 @@ def import_word_record(
 
     if sense in session.by_sense:
         entry = session.by_sense[sense]
+        did_work = False
         if examples:
             if not dry_run:
                 merged = merge_default_examples(entry["id"], examples, session.root, store=session.examples, example_key=example_key)
@@ -195,12 +222,20 @@ def import_word_record(
                 merged = len(examples)
             if merged:
                 report.merged_examples += merged
+                did_work = True
+        if resolved_level is not None and entry.get("level") != resolved_level:
+            if not dry_run:
+                entry["level"] = resolved_level
+                session.vocab_dirty = True
+            report.retagged_level += 1
+            did_work = True
         if not topic_has_ref(session.topic, entry["id"]):
             if not dry_run:
                 section.setdefault("entries", []).append({"ref": entry["id"]})
                 session.topic_dirty = True
             report.add_ref += 1
-        else:
+            did_work = True
+        elif not did_work:
             report.skipped += 1
         return
 
@@ -219,6 +254,8 @@ def import_word_record(
         "english": english,
         "type": word_type,
     }
+    if resolved_level is not None:
+        registry_entry["level"] = resolved_level
 
     if not dry_run:
         session.vocabulary.append(registry_entry)
@@ -242,10 +279,18 @@ def import_verb_record(
     report: ImportReport,
     *,
     dry_run: bool = False,
+    level_id: str | None = None,
 ) -> None:
     required = {"hangul", "romanization", "english", "forms"}
     if not required.issubset(record):
         report.errors.append(f"Verb record missing fields: {sorted(required - set(record))}")
+        report.skipped += 1
+        return
+
+    try:
+        resolved_level = _resolve_record_level(record, level_id, session.root)
+    except ValueError as exc:
+        report.errors.append(str(exc))
         report.skipped += 1
         return
 
@@ -265,15 +310,16 @@ def import_verb_record(
 
     vocab_id = record.get("id") or new_id()
     if not dry_run:
-        session.vocabulary.append(
-            {
-                "id": vocab_id,
-                "hangul": record["hangul"],
-                "romanization": record["romanization"],
-                "english": english,
-                "type": "verb",
-            }
-        )
+        registry_entry = {
+            "id": vocab_id,
+            "hangul": record["hangul"],
+            "romanization": record["romanization"],
+            "english": english,
+            "type": "verb",
+        }
+        if resolved_level is not None:
+            registry_entry["level"] = resolved_level
+        session.vocabulary.append(registry_entry)
         session.by_sense[sense] = session.vocabulary[-1]
         session.vocab_dirty = True
 
@@ -306,12 +352,20 @@ def import_words_from_staging(
     *,
     section_id: str | None = None,
     dry_run: bool = False,
+    level_id: str | None = None,
 ) -> None:
     data = load_yaml(staging_path)
     if not isinstance(data, dict):
         raise ValueError("Staging file must be a mapping.")
     for entry in data.get("entries", []):
-        import_word_record(entry, session, report, section_id=section_id, dry_run=dry_run)
+        import_word_record(
+            entry,
+            session,
+            report,
+            section_id=section_id,
+            dry_run=dry_run,
+            level_id=level_id,
+        )
 
 
 def import_words_from_lines(
@@ -321,6 +375,7 @@ def import_words_from_lines(
     *,
     section_id: str | None = None,
     dry_run: bool = False,
+    level_id: str | None = None,
 ) -> None:
     if session.topic is None:
         raise ValueError("Import session has no topic loaded.")
@@ -354,6 +409,20 @@ def import_words_from_lines(
                 continue
 
         if word is not None:
+            did_work = False
+            if level_id:
+                try:
+                    resolved_level = _resolve_record_level({}, level_id, session.root)
+                except ValueError as exc:
+                    report.errors.append(str(exc))
+                    report.skipped += 1
+                    continue
+                if resolved_level is not None and word.get("level") != resolved_level:
+                    if not dry_run:
+                        word["level"] = resolved_level
+                        session.vocab_dirty = True
+                    report.retagged_level += 1
+                    did_work = True
             if example:
                 hangul_part = example if lang.is_target_script(example) else entry
                 english_part = entry if not lang.is_target_script(entry) else example
@@ -366,13 +435,15 @@ def import_words_from_lines(
                     merged = 1
                 if merged:
                     report.merged_examples += merged
+                    did_work = True
             if not topic_has_ref(session.topic, word["id"]):
                 if not dry_run:
                     section = resolve_topic_section(session.topic, section_id)
                     section.setdefault("entries", []).append({"ref": word["id"]})
                     session.topic_dirty = True
                 report.add_ref += 1
-            else:
+                did_work = True
+            elif not did_work:
                 report.skipped += 1
             continue
 

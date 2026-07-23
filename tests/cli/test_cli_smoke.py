@@ -44,6 +44,8 @@ Options:
   --file <path>          Plain-text word list file
   --stdin-json           Read JSON records from stdin
   --from-staging <path>  Staging YAML file path
+  --level <str>          Course level id from levels.yaml (omit to leave new
+                         words unassigned; per-record level wins)
   -h, --help             Show this message and exit.
 """,
     ),
@@ -58,6 +60,8 @@ Options:
   --dry-run
   --file <path>  Not supported without --stdin-json
   --stdin-json   Read JSON records from stdin
+  --level <str>  Course level id from levels.yaml (omit to leave new words
+                 unassigned; per-record level wins)
   -h, --help     Show this message and exit.
 """,
     ),
@@ -164,6 +168,55 @@ Options:
                        [default: 32]
   --dry-run            Count documents to embed without calling Ollama
   -h, --help           Show this message and exit.
+""",
+    ),
+    (
+        ["soju", "levels", "--help"],
+        """\
+Usage: soju levels [OPTIONS] COMMAND [ARGS]...
+
+  List and assign vocabulary and grammar course levels.
+
+Options:
+  -h, --help  Show this message and exit.
+
+Commands:
+  list-unassigned  List entries with no course level tag.
+  set              Assign a course level to selected vocabulary or...
+""",
+    ),
+    (
+        ["soju", "levels", "list-unassigned", "--help"],
+        """\
+Usage: soju levels list-unassigned [OPTIONS]
+
+  List entries with no course level tag.
+
+Options:
+  --format <str>  Output format: table (default) or ids  [default: table]
+  --kind <str>    Target kind: vocabulary (default) or grammar  [default:
+                  vocabulary]
+  --type <str>    Filter by vocabulary type id (e.g. noun, verb)
+  -h, --help      Show this message and exit.
+""",
+    ),
+    (
+        ["soju", "levels", "set", "--help"],
+        """\
+Usage: soju levels set [OPTIONS]
+
+  Assign a course level to selected vocabulary or grammar entries.
+
+Options:
+  --level <str>      Course level id from levels.yaml  [required]
+  --kind <str>       Target kind: vocabulary (default) or grammar  [default:
+                     vocabulary]
+  --all-unassigned   Assign every unassigned entry of the chosen kind
+  --id <str>         Vocabulary UUID or grammar pattern id (repeatable)
+  --ids-file <path>  File of ids (one per line); use - for stdin
+  --dry-run
+  --force            Allow overwriting an existing level tag
+  -h, --help         Show this message and exit.
 """,
     ),
 ]
@@ -318,6 +371,51 @@ def test_embed_index_dry_run(data_root: Path) -> None:
     assert result.stdout == ""
     assert "Would embed" in result.stderr
     assert "vocabulary entries" in result.stderr
+
+
+def test_levels_set_all_unassigned_dry_run(data_root: Path) -> None:
+    from soju.registry.vocabulary import load_vocabulary, save_vocabulary
+
+    vocab = load_vocabulary(data_root)
+    for entry in vocab:
+        entry.pop("level", None)
+    save_vocabulary(vocab, data_root)
+
+    result = _run_script(
+        ["soju", "levels", "set", "--level", "1A", "--all-unassigned", "--dry-run"],
+        env={"DATA_DIR": str(data_root)},
+    )
+    assert result.returncode == 0, result.stderr
+    assert result.stdout == "would set level=1A on 2 vocabulary entries.\n"
+    assert result.stderr == ""
+    assert all("level" not in e for e in load_vocabulary(data_root))
+
+
+def test_levels_set_grammar_all_unassigned_dry_run(data_root: Path) -> None:
+    from soju.registry.grammar import load_grammar_pattern, save_grammar_pattern
+
+    pattern = load_grammar_pattern("do", data_root)
+    pattern.pop("level", None)
+    save_grammar_pattern("do", pattern, data_root)
+
+    result = _run_script(
+        [
+            "soju",
+            "levels",
+            "set",
+            "--kind",
+            "grammar",
+            "--level",
+            "1A",
+            "--all-unassigned",
+            "--dry-run",
+        ],
+        env={"DATA_DIR": str(data_root)},
+    )
+    assert result.returncode == 0, result.stderr
+    assert result.stdout == "would set level=1A on 1 grammar entry.\n"
+    assert result.stderr == ""
+    assert "level" not in load_grammar_pattern("do", data_root)
 
 
 def test_backend_help_smoke() -> None:

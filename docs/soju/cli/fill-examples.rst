@@ -27,3 +27,10 @@
    uv run soju fill-examples --clean-only
 
 Use carefully on large registries; prefer ``--dry-run`` / ``--limit`` first. Prefer ``soju import`` when you already have curated examples.
+
+**Course levels:** ``--level`` selects guidance/templates for the course band. With
+``--local``, generation targets tagged entries in that band **plus unassigned** vocabulary
+(omit ``level``), so newly imported words still get examples. Higher-level tagged rows stay
+excluded. Practice retrieval remains stricter (unassigned only with *Include supplemental
+content*). Prefer ``soju import … --level`` or ``soju levels set`` so new words join a course
+band before Practice filtering matters — see :doc:`levels`.

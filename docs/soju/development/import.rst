@@ -15,6 +15,17 @@ directly; see :doc:`data-layout` for what lives where.
 Always finish with ``uv run poe validate`` (or the Docker validate profile) after an
 import — see :doc:`validate`.
 
+Course levels on import
+-----------------------
+
+New words and verbs may take an optional course level via ``--level`` or a per-record
+``level`` field (ids from ``data/content/levels.yaml``). Per-record wins. If both are
+omitted, the entry is **unassigned**. To stamp or retag existing vocabulary or grammar
+patterns, use ``soju levels`` — see :doc:`/cli/levels`. Unassigned rows are excluded from
+Practice course bands and prompt vocabulary lists; ``soju fill-examples --local`` still
+includes them when generating examples so a bare import can be filled before you stamp a
+level.
+
 Staging workflow
 -----------------
 
@@ -42,6 +53,8 @@ Grammar lessons
 -----------------
 
 Grammar lesson YAML under ``data/content/grammar/`` is authored directly (schemas still
-apply, see :doc:`editor`) — only vocabulary and verbs go through ``soju import``.
+apply, see :doc:`editor`) — only vocabulary and verbs go through ``soju import``. Assign
+or retag pattern ``level`` with ``soju levels --kind grammar`` rather than hand-mass-
+editing levels across pattern files.
 
-See :doc:`/cli/import` and :doc:`/cli/promote` for flags and record shapes.
+See :doc:`/cli/import`, :doc:`/cli/promote`, and :doc:`/cli/levels` for flags and record shapes.

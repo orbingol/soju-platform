@@ -5,1626 +5,1951 @@
   romanization: e o-da
   english: to come
   type: verb
+  level: 1A
 - id: e82c8d54-86c3-49ac-9443-526db3d5b736
   hangul: 에 가다
   romanization: e ga-da
   english: to go
   type: verb
+  level: 1A
 - id: dfbb3f58-a4a6-42b2-a64d-70b4fa36a1e5
   hangul: 쇼핑하다
   romanization: syo-ping-ha-da
   english: to shop
   type: verb
+  level: 1A
 - id: 24161884-87a3-4b0a-8919-3097f8ce3755
   hangul: 이야기하다
   romanization: i-ya-gi-ha-da
   english: to talk
   type: verb
+  level: 1A
 - id: 96148473-44f8-488c-b1da-8ecb8dff4088
   hangul: 읽다
   romanization: ilk-da
   english: to read
   type: verb
+  level: 1A
 - id: b7927563-bdee-44b8-a801-81401e421355
   hangul: 먹다
   romanization: meok-da
   english: to eat
   type: verb
+  level: 1A
 - id: efe788f7-8db8-4328-a934-10563db4b1fd
   hangul: 배우다
   romanization: bae-u-da
   english: to learn
   type: verb
+  level: 1A
 - id: 0c818196-e474-483f-82cd-5d3172eba866
   hangul: 가르치다
   romanization: ga-reu-chi-da
   english: to teach
   type: verb
+  level: 1A
 - id: 723ad49e-9e9c-4293-a0c7-64399a8c7120
   hangul: 만나다
   romanization: man-na-da
   english: to meet
   type: verb
+  level: 1A
 - id: 13598715-b996-4c29-a414-43c8c196b94d
   hangul: 마시다
   romanization: ma-si-da
   english: to drink
   type: verb
+  level: 1A
 - id: f58e655b-3df5-4fa3-b271-39b07cf67e85
   hangul: 물을 마시다
   romanization: mul-eul ma-si-da
   english: to drink water
   type: verb
+  level: 1A
 - id: f2e85524-0e1b-4867-8da5-538687871427
   hangul: 책을 읽다
   romanization: chaek-eul ilk-da
   english: to read a book
   type: verb
+  level: 1A
 - id: 2ad321c2-9f57-4867-98bf-b82c6f9d7975
   hangul: 보다
   romanization: bo-da
   english: to watch / to see
   type: verb
+  level: 1A
 - id: 5a86af96-d6d2-492c-b7a7-a53a73eef228
   hangul: 받다
   romanization: bat-da
   english: to receive
   type: verb
+  level: 1A
 - id: f8cd9f7f-5a2b-4af4-a5b4-6535ac870a28
   hangul: 기다리다
   romanization: gi-da-ri-da
   english: to wait
   type: verb
+  level: 1A
 - id: 0ee4c2d3-2054-4310-9904-b5ef3257352e
   hangul: 비자를 받다
   romanization: bi-ja-reul bat-da
   english: to receive a visa
   type: verb
+  level: 1A
 - id: c02d7606-ff4e-41f5-8df6-aaa5746379a5
   hangul: 영화를 보다
   romanization: yeong-hwa-reul bo-da
   english: to watch a movie
   type: verb
+  level: 1A
 - id: 3236ee6d-36b0-415f-9cb5-49ca68c2730b
   hangul: 춤추다
   romanization: chum-chu-da
   english: to dance
   type: verb
+  level: 1A
 - id: 7c513960-a68d-4323-9591-94955172b031
   hangul: 듣다
   romanization: deut-da
   english: to listen
   type: verb
+  level: 1A
 - id: 9a45b171-62e7-42d6-ab0a-9e50dd6c9757
   hangul: 음악을 듣다
   romanization: eum-ak-eul deut-da
   english: to listen to music
   type: verb
+  level: 1A
 - id: f68246fa-297f-428a-818c-7beebcac0b48
   hangul: 테니스를 치다
   romanization: te-ni-seu-reul chi-da
   english: to play tennis
   type: verb
+  level: 1A
 - id: 956d9cf2-5562-4b38-bffb-309b83ace266
   hangul: 드럼을 치다
   romanization: deu-reom-eul chi-da
   english: to play drums
   type: verb
+  level: 1A
 - id: 7e255ea6-9990-4dad-a17f-6e4147949bf7
   hangul: 기타를 치다
   romanization: gi-ta-reul chi-da
   english: to play guitar
   type: verb
+  level: 1A
 - id: 0320469b-9b2c-499d-a354-78f548cf153a
   hangul: 사다
   romanization: sa-da
   english: to buy
   type: verb
+  level: 1A
 - id: 3873cac9-9b9f-46d9-8c34-f5b82b786d34
   hangul: 빌리다
   romanization: bil-ri-da
   english: to borrow
   type: verb
+  level: 1A
 - id: e2a03578-d2a2-4491-b9f5-f7af3aae9502
   hangul: 주다
   romanization: ju-da
   english: to give
   type: verb
+  level: 1A
 - id: acbe5268-c8aa-4c6a-93f6-50efd4f1147c
   hangul: 치다
   romanization: chi-da
   english: to hit / to strike / to beat
   type: verb
+  level: 1A
 - id: b8605920-0a6b-41f5-9546-1eaee3887537
   hangul: 아프다
   romanization: a-peu-da
   english: to be sick
   type: adjective
+  level: 1A
 - id: 5d33e7dc-f5cb-414f-9386-45d4d2b2a331
   hangul: 많다
   romanization: manh-da
   english: to be many / a lot
   type: adjective
+  level: 1A
 - id: ae0c6389-e883-4e58-86c9-2d1604359452
   hangul: 수영장에 가다
   romanization: su-yeong-jang-e ga-da
   english: to go to swimming pool
   type: verb
+  level: 1A
 - id: f2de4757-237d-4c6d-a059-07d53e815f14
   hangul: 집에 가다
   romanization: jip-e ga-da
   english: to go home
   type: verb
+  level: 1A
 - id: 1fd75b38-dd8f-4c75-b894-44515416096f
   hangul: 친구 집에 가다
   romanization: chin-gu jip-e ga-da
   english: to go to the friend's house
   type: verb
+  level: 1A
 - id: 288cc559-f5e1-4f6d-b4ac-28f4f8e3d09a
   hangul: 아침 식사하다
   romanization: a-chim sik-sa-ha-da
   english: to have breakfast (formal)
   type: verb
+  level: 1A
 - id: 10bd0e87-ba63-4813-bf04-16405d7d9b03
   hangul: 아침을 먹다
   romanization: a-chim-eul meok-da
   english: to eat breakfast (casual / common)
   type: verb
+  level: 1A
 - id: 83d3f179-7838-419e-85f6-6e856b0c8f50
   hangul: 점심을 먹다
   romanization: jeom-sim-eul meok-da
   english: to have lunch
   type: verb
+  level: 1A
 - id: b1ad2c53-570a-4368-b779-b5694b65c32c
   hangul: 저녁을 먹다
   romanization: jeo-nyeok-eul meok-da
   english: to have dinner
   type: verb
+  level: 1A
 - id: 9f1bf47c-bb47-42e1-b089-a64291d02d71
   hangul: 식당에서 먹다
   romanization: sik-dang-e-seo meok-da
   english: to eat at a restaurant
   type: verb
+  level: 1A
 - id: a360b5eb-61a9-43c7-8afa-6f4ad92b212b
   hangul: 한국어를 공부하다
   romanization: han-guk-eo-reul gong-bu-ha-da
   english: to study Korean
   type: verb
+  level: 1A
 - id: d29c2008-f57b-4595-89c9-c8b0abc1cf36
   hangul: 커피를 마시다
   romanization: keo-pi-reul ma-si-da
   english: to drink coffee
   type: verb
+  level: 1A
 - id: 895fff63-f2ed-4447-bb9f-15f331e890f1
   hangul: 숙제하다
   romanization: suk-je-ha-da
   english: to do homework
   type: verb
+  level: 1A
 - id: 52816c9b-f678-44da-8956-e33e540d944c
   hangul: 운동하다
   romanization: un-dong-ha-da
   english: to work out
   type: verb
+  level: 1A
 - id: dcb4ef49-55e5-4eea-9e8c-77c90a9327ab
   hangul: 공부하다
   romanization: gong-bu-ha-da
   english: to study
   type: verb
+  level: 1A
 - id: 36ad457d-ad70-4c89-828a-97478eff9d1b
   hangul: 생각하다
   romanization: saeng-gak-ha-da
   english: to think
   type: verb
+  level: 1A
 - id: bf52c177-987c-4018-b8cd-8c845606ba56
   hangul: 일하다
   romanization: il-ha-da
   english: to work
   type: verb
+  level: 1A
 - id: 67feca10-2c88-4a98-92d1-5f1aaa59d6bd
   hangul: 컴퓨터 하다
   romanization: keom-pyu-teo ha-da
   english: to use the computer
   type: verb
+  level: 1A
 - id: 3f9ba750-098e-4855-8cd6-08ea2fe7f8ba
   hangul: 인터넷하다
   romanization: in-teo-net-ha-da
   english: to surf the internet
   type: verb
+  level: 1A
 - id: 56b00e45-39ce-4956-a16c-19a02ec878f8
   hangul: 좋아하다
   romanization: jot-a-ha-da
   english: to like something
   type: verb
+  level: 1A
 - id: 24f7b7b7-56d1-44a3-8b83-8c49f1577ef1
   hangul: 싫어하다
   romanization: silh-eo-ha-da
   english: to dislike / hate
   type: verb
+  level: 1A
 - id: 24800ee0-f179-4998-a1e9-5a684710fa90
   hangul: 조용하다
   romanization: jo-yong-ha-da
   english: to be quiet / silent
   type: adjective
+  level: 1A
 - id: 7493d7c3-db93-45b6-961e-9f105ad7616b
   hangul: 세수하다
   romanization: se-su-ha-da
   english: to wash one's face
   type: verb
+  level: 1A
 - id: a073bd81-80ca-4f86-abed-f0806d6317b7
   hangul: 전화하다
   romanization: jeon-hwa-ha-da
   english: to talk on the phone
   type: verb
+  level: 1A
 - id: 5ab9c09c-4906-4bda-9d7a-d97046701bcd
   hangul: 수영하다
   romanization: su-yeong-ha-da
   english: to swim
   type: verb
+  level: 1A
 - id: ba82c095-5e1d-47f6-b336-8a6db41c9296
   hangul: 여행하다
   romanization: yeo-haeng-ha-da
   english: to travel
   type: verb
+  level: 1A
 - id: b567d796-1c56-4fcf-a700-96d58bfca8c2
   hangul: 여행을 하다
   romanization: yeo-haeng-eul ha-da
   english: to travel
   type: verb
+  level: 1A
 - id: 5afb6a59-5c48-4453-8ad5-a75ce31fbe0e
   hangul: 등산하다
   romanization: deung-san-ha-da
   english: to hike / to climb a mountain
   type: verb
+  level: 1A
 - id: 41580dc5-4ab8-45c4-bdfb-dd8b1d29e302
   hangul: 바쁘다
   romanization: ba-ppeu-da
   english: to be busy
   type: adjective
+  level: 1A
 - id: 3667c4f9-2b25-4b8b-8489-9eec111999f8
   hangul: 시작하다
   romanization: si-jak-ha-da
   english: to start / begin
   type: verb
+  level: 1A
 - id: 6afa7451-6802-4986-abe0-a0cafcf2bbc8
   hangul: 끝나다
   romanization: kkeut-na-da
   english: to finish / end
   type: verb
+  level: 1A
 - id: 59a2ce59-07a3-4ca9-a0b3-83d6b0561400
   hangul: 모르다
   romanization: mo-reu-da
   english: to not know
   type: verb
+  level: 1A
 - id: adc81a77-67bb-455b-8792-4a20898a1640
   hangul: 알다
   romanization: al-da
   english: to know
   type: verb
+  level: 1A
 - id: 32965245-5be6-4f83-a605-943771e0a0c4
   hangul: 재미있다
   romanization: jae-mi-it-da
   english: to be fun / interesting
   type: adjective
+  level: 1A
 - id: 808676a3-4278-4917-a679-a9d5ae5d6540
   hangul: 농구하다
   romanization: nong-gu-ha-da
   english: to play basketball (casual / common)
   type: verb
+  level: 1A
 - id: cf079837-1303-4168-811b-a696788f351e
   hangul: 농구를 하다
   romanization: nong-gu-reul ha-da
   english: to play basketball (formal)
   type: verb
+  level: 1A
 - id: dcd77b0f-8cbd-47b0-ad35-4251a89f57b9
   hangul: 피곤하다
   romanization: pi-gon-ha-da
   english: to be tired
   type: adjective
+  level: 1A
 - id: bc04b2db-8235-4aa4-9277-4500df110019
   hangul: 이사를 하다
   romanization: i-sa-reul ha-da
   english: to move (house) / to relocate
   type: verb
+  level: 1A
 - id: 33935457-ea10-42bc-b5a6-3c9776012b03
   hangul: 결혼을 하다
   romanization: gyeol-hon-eul ha-da
   english: to get married / to marry
   type: verb
+  level: 1A
 - id: f127d6b0-9ac6-455e-ab4a-617c2ed3b1a6
   hangul: 학교를 졸업하다
   romanization: hak-gyo-reul jol-eop-ha-da
   english: to graduate from school
   type: verb
+  level: 1A
 - id: 9a5ba9d4-379a-4f84-9cc2-dfbe5563ceb6
   hangul: 컴퓨터 게임을 하다
   romanization: keom-pyu-teo ge-im-eul ha-da
   english: to play a computer game
   type: verb
+  level: 1A
 - id: baab4ba8-4ae5-4f22-9422-a964ceee96a6
   hangul: 신문을 읽다
   romanization: sin-mun-eul ilk-da
   english: to read newspaper
   type: verb
+  level: 1A
 - id: 32563d25-b774-4a31-867e-600b8c06ca3b
   hangul: 요리하다
   romanization: yo-ri-ha-da
   english: to cook
   type: verb
+  level: 1A
 - id: cb51db5f-b097-4b28-b273-71f0d2f5db8d
   hangul: 청소를 하다
   romanization: cheong-so-reul ha-da
   english: to clean (formal)
   type: verb
+  level: 1A
 - id: e41a496c-d5e9-476c-8ba5-6a45e438fe92
   hangul: 청소하다
   romanization: cheong-so-ha-da
   english: to clean (casual / common)
   type: verb
+  level: 1A
 - id: 942cd694-c5f9-45de-933d-481692e49e32
   hangul: 정리를 하다
   romanization: jeong-ri-reul ha-da
   english: to organize / to tidy up
   type: verb
+  level: 1A
 - id: 31c24773-8382-4c5d-8609-eb09384366a8
   hangul: 일이 많다
   romanization: il-i manh-da
   english: to have a lot of work
   type: adjective
+  level: 1A
 - id: b50f7409-ccff-49e9-b3cf-f5b4b5f8747e
   hangul: 시간이 없다
   romanization: si-gan-i eops-da
   english: to have no time / there is no time
   type: adjective
+  level: 1A
 - id: 0f621224-ac4e-4805-be77-5d573cc75e50
   hangul: 괜찮다
   romanization: gwaen-chanh-da
   english: to be okay, all right, fine
   type: adjective
+  level: 1A
 - id: 1c0f4671-982f-4f96-b424-fd759d8b197a
   hangul: 씻다
   romanization: ssit-da
   english: to wash (hands, face)
   type: verb
+  level: 1A
 - id: d6629adf-9e97-4ed0-a69f-2f834cc2b2e0
   hangul: 세탁하다
   romanization: se-tak-ha-da
   english: to wash (clothes)
   type: verb
+  level: 1A
 - id: 06d82021-6956-4adf-b23a-86889024a2f6
   hangul: 빨래를 하다
   romanization: ppal-rae-reul ha-da
   english: to do laundry (formal)
   type: verb
+  level: 1A
 - id: ecfab8d9-bf1b-435a-a305-39be796fc809
   hangul: 빨래하다
   romanization: ppal-rae-ha-da
   english: to do laundry (casual / common)
   type: verb
+  level: 1A
 - id: 458b0165-a6ca-4c7f-aa7e-096f2bbdf562
   hangul: 산책하다
   romanization: san-chaek-ha-da
   english: to walk / stroll
   type: verb
+  level: 1A
 - id: d4de8994-9b0e-4e8b-a91b-6e20ade16f95
   hangul: 보내다
   romanization: bo-nae-da
   english: to send
   type: verb
+  level: 1A
 - id: 43544bc3-2154-4f8c-9551-c51c870c4b24
   hangul: 도착하다
   romanization: do-chak-ha-da
   english: to arrive
   type: verb
+  level: 1A
 - id: 4193b3b6-0c72-46ac-8118-4cf10c2c9888
   hangul: 돈을 찾다
   romanization: don-eul chat-da
   english: to withdraw money
   type: verb
+  level: 1A
 - id: efb9a9cc-e0b2-4667-91a7-832f191dc0d7
   hangul: 돈을 입금하다
   romanization: don-eul ip-geum-ha-da
   english: to deposit money
   type: verb
+  level: 1A
 - id: 58ef9ee8-0122-4c3f-b1ba-f367158b36f5
   hangul: 돈을 보내다
   romanization: don-eul bo-nae-da
   english: to send money
   type: verb
+  level: 1A
 - id: c9098849-9abf-4265-b993-47d8c4676fd7
   hangul: 말하다
   romanization: mal-ha-da
   english: to speak / to tell / to say
   type: verb
+  level: 1A
 - id: 41015758-4aeb-4f97-bc9d-d030a57ffad1
   hangul: 기쁘다
   romanization: gi-ppeu-da
   english: to be happy / glad
   type: adjective
+  level: 1A
 - id: 59101948-acc9-40a0-8f56-215becdd35c7
   hangul: 가지고 오다
   romanization: ga-ji-go o-da
   english: to bring / to keep and come
   type: verb
+  level: 1A
 - id: 055823d5-04af-44ef-8441-39d6c53dcbe4
   hangul: 선생님
   romanization: seon-saeng-nim
   english: teacher
   type: noun
+  level: 1A
 - id: af63be07-28fe-4f59-b13f-c3f5096ee04a
   hangul: 요리사
   romanization: yo-ri-sa
   english: chef / cook
   type: noun
+  level: 1A
 - id: d8536ebe-36f3-45dd-9d3b-63a0f9504b2b
   hangul: 의사
   romanization: ui-sa
   english: doctor
   type: noun
+  level: 1A
 - id: dfed38fc-5453-4359-a05d-abe1a9a1d765
   hangul: 학생
   romanization: hak-saeng
   english: student
   type: noun
+  level: 1A
 - id: e4646944-4f1e-480d-9934-2aed1ec05519
   hangul: 회사원
   romanization: hoe-sa-won
   english: office worker
   type: noun
+  level: 1A
 - id: e0ffaaf9-e212-44c8-a82e-8c8846358cf8
   hangul: 숙제
   romanization: suk-je
   english: homework
   type: noun
+  level: 1A
 - id: d9446c0a-91c3-48fd-a0a7-c4c78a0d1414
   hangul: 시계
   romanization: si-gye
   english: clock / watch
   type: noun
+  level: 1A
 - id: fd81e5bc-896d-4bf1-961b-6f836411022e
   hangul: 책
   romanization: chaek
   english: book
   type: noun
+  level: 1A
 - id: 322c6caa-8743-44c7-8e8f-e32538c7313a
   hangul: 사전
   romanization: sa-jeon
   english: dictionary
   type: noun
+  level: 1A
 - id: 889c6f45-c256-40ff-99b5-d7f5bc1fa502
   hangul: 모자
   romanization: mo-ja
   english: hat
   type: noun
+  level: 1A
 - id: 26274ddf-4663-4aad-ba32-94797b68421e
   hangul: 핸드폰
   romanization: haen-deu-pon
   english: cell phone
   type: noun
+  level: 1A
 - id: 3934b1a1-f39d-4780-8623-c6f30cb878b5
   hangul: 구두
   romanization: gu-du
   english: dress shoes
   type: noun
+  level: 1A
 - id: a81204a1-7be4-4f02-a2ad-daa191859f36
   hangul: 의자
   romanization: ui-ja
   english: chair
   type: noun
+  level: 1A
 - id: 3f340697-680b-4412-a319-1481c51b6fe2
   hangul: 가방
   romanization: ga-bang
   english: bag
   type: noun
+  level: 1A
 - id: aafb5994-17cf-41ee-abc7-d3c525a1745f
   hangul: 안경
   romanization: an-gyeong
   english: eye glasses
   type: noun
+  level: 1A
 - id: 274265b2-e5c2-4282-9ce9-12287d7dae55
   hangul: 연필
   romanization: yeon-pil
   english: pencil
   type: noun
+  level: 1A
 - id: 94a8f85e-1df4-407f-a361-4820913cc30a
   hangul: 필통
   romanization: pil-tong
   english: pencil case
   type: noun
+  level: 1A
 - id: 29439003-4f54-4a57-98b5-d5588f9eeae2
   hangul: 볼펜
   romanization: bol-pen
   english: pen
   type: noun
+  level: 1A
 - id: b857423f-3b27-43bd-80c9-3ee9eb89f72a
   hangul: 지우개
   romanization: ji-u-gae
   english: eraser
   type: noun
+  level: 1A
 - id: e706f9bb-e433-4e69-aaf7-27a0138ca71e
   hangul: 책상
   romanization: chaek-sang
   english: desk
   type: noun
+  level: 1A
 - id: 58869e68-1bf5-4681-be74-23706be97a4d
   hangul: 컴퓨터
   romanization: keom-pyu-teo
   english: computer
   type: noun
+  level: 1A
 - id: f6c272c0-f8ca-4004-91ef-15ecf61ccaab
   hangul: 복사기
   romanization: bok-sa-gi
   english: photocopier
   type: noun
+  level: 1A
 - id: 5f047b20-fbcb-4bca-b662-625dfbb4d34d
   hangul: 카메라
   romanization: ka-me-ra
   english: camera
   type: noun
+  level: 1A
 - id: f3706a1c-c94e-418e-9ffb-a1fc4252b405
   hangul: 이어폰
   romanization: i-eo-pon
   english: earphones
   type: noun
+  level: 1A
 - id: b2b3e512-1e4d-4961-a7d6-cbf56ad113b3
   hangul: 노트북
   romanization: no-teu-buk
   english: laptop computer
   type: noun
+  level: 1A
 - id: ffc2206f-55e5-4905-8931-3b08705c292e
   hangul: 컵
   romanization: keop
   english: cup
   type: noun
+  level: 1A
 - id: f140d921-252a-4b77-bf95-b560eb55234d
   hangul: 우산
   romanization: u-san
   english: umbrella
   type: noun
+  level: 1A
 - id: c84d4c4f-9700-4f44-a06b-316cf8c7a5cc
   hangul: 한국 친구
   romanization: han-guk chin-gu
   english: Korean friend
   type: noun
+  level: 1A
 - id: ef397cb3-28e5-4437-9e12-40197366bd16
   hangul: 공책
   romanization: gong-chaek
   english: notebook / notepad
   type: noun
+  level: 1A
 - id: 5be964ab-628c-46cc-bcb8-6531b21b810a
   hangul: 봉투
   romanization: bong-tu
   english: envelope
   type: noun
+  level: 1A
 - id: 2657210a-bf81-442a-8c33-37bb787a352c
   hangul: 가위
   romanization: ga-wi
   english: scissors
   type: noun
+  level: 1A
 - id: e76ede9d-29e6-43dc-9850-299f828caf5c
   hangul: 커피
   romanization: keo-pi
   english: coffee
   type: noun
+  level: 1A
 - id: 73c5abc4-8963-48be-9551-5e6ce79698c7
   hangul: 물
   romanization: mul
   english: water
   type: noun
+  level: 1A
 - id: 6f0fb54d-606f-4433-bbaf-f291591fe6d1
   hangul: 레몬차
   romanization: re-mon-cha
   english: lemon tea
   type: noun
+  level: 1A
 - id: 01a1be78-ca18-4e91-b772-ac0c1b38de69
   hangul: 녹차
   romanization: nok-cha
   english: green tea
   type: noun
+  level: 1A
 - id: df79e7f4-34a7-4a40-b257-1d5520edd5a4
   hangul: 사이다
   romanization: sa-i-da
   english: soda
   type: noun
+  level: 1A
 - id: 56a7849c-772b-4cc8-928b-5f055da69810
   hangul: 콜라
   romanization: kol-ra
   english: coca-cola
   type: noun
+  level: 1A
 - id: 01427e95-d5a9-43aa-ab71-d46b5e5a1fc3
   hangul: 오렌지주스
   romanization: o-ren-ji-ju-seu
   english: orange juice
   type: noun
+  level: 1A
 - id: dfaf7cdb-0f0c-4fe2-8762-015e93088866
   hangul: 맥주
   romanization: maek-ju
   english: beer
   type: noun
+  level: 1A
 - id: 55019c3f-d57e-438d-8f96-c4f64193da5b
   hangul: 사과
   romanization: sa-gwa
   english: apple
   type: noun
+  level: 1A
 - id: abb5995b-f72f-4efe-9bb1-67693db5668e
   hangul: 비빔밥
   romanization: bi-bim-bap
   english: bibimbap
   type: noun
+  level: 1A
 - id: 3a021251-e11f-4628-ae3d-c2485589af2d
   hangul: 불고기
   romanization: bul-go-gi
   english: bulgogi
   type: noun
+  level: 1A
 - id: 5da53010-25e5-49ad-86b3-8c4923896034
   hangul: 갈비
   romanization: gal-bi
   english: kalbi / galbi
   type: noun
+  level: 1A
 - id: ffa51da8-c073-4c6c-a0d6-7fba412714ee
   hangul: 초콜릿
   romanization: cho-kol-rit
   english: chocolate
   type: noun
+  level: 1A
 - id: 2dfd5be0-8109-4bbb-a3c1-d9c1b71e8405
   hangul: 우유
   romanization: u-yu
   english: milk
   type: noun
+  level: 1A
 - id: d1a995c9-0213-4fe8-8df0-5ab55cbbea9f
   hangul: 라면
   romanization: ra-myeon
   english: ramen / ramyeon
   type: noun
+  level: 1A
 - id: 397f9981-026a-4a51-b85d-6b8e8bd7106d
   hangul: 케이크
   romanization: ke-i-keu
   english: cake
   type: noun
+  level: 1A
 - id: eb01816c-5f16-433f-80f9-b55dff8ff7f3
   hangul: 생일 케이크
   romanization: saeng-il ke-i-keu
   english: birthday cake
   type: noun
+  level: 1A
 - id: c2caf351-8f98-414e-8a25-3460a3211039
   hangul: 김치
   romanization: gim-chi
   english: kimchi
   type: noun
+  level: 1A
 - id: 6a95f7ee-6645-4527-9e07-94476c1c40d1
   hangul: 오렌지
   romanization: o-ren-ji
   english: orange
   type: noun
+  level: 1A
 - id: afb0960a-2f74-4ec2-9b0a-35062b44a5e2
   hangul: 아이스크림
   romanization: a-i-seu-keu-rim
   english: ice cream
   type: noun
+  level: 1A
 - id: a8db037a-8595-4329-a799-f23321f1b1c9
   hangul: 교실
   romanization: gyo-sil
   english: classroom
   type: noun
+  level: 1A
 - id: d6754853-b8bb-4430-b5b3-4a8faa609669
   hangul: 영화관
   romanization: yeong-hwa-gwan
   english: movie theater
   type: noun
+  level: 1A
 - id: fba7867a-6b3b-4549-82d6-67d6f977161b
   hangul: 대사관
   romanization: dae-sa-gwan
   english: embassy
   type: noun
+  level: 1A
 - id: d30a4ef6-8b4b-4b40-a737-4e252da6a904
   hangul: 도서관
   romanization: do-seo-gwan
   english: library
   type: noun
+  level: 1A
 - id: 178da633-1157-4053-ad55-0de5ba9f6230
   hangul: 문구점
   romanization: mun-gu-jeom
   english: stationery store
   type: noun
+  level: 1A
 - id: d173c9b1-18de-4cdc-89c1-147c2c66768e
   hangul: 병원
   romanization: byeong-won
   english: hospital
   type: noun
+  level: 1A
 - id: 10fa7180-ff7b-4c36-a944-d49414d1d354
   hangul: 서점
   romanization: seo-jeom
   english: bookstore
   type: noun
+  level: 1A
 - id: 4f8f7c7b-6e0c-486d-bae5-967c1fd4e752
   hangul: 수영장
   romanization: su-yeong-jang
   english: swimming pool
   type: noun
+  level: 1A
 - id: b640e3b8-bfdd-415b-ae9e-f394f1e5605b
   hangul: 식당
   romanization: sik-dang
   english: restaurant
   type: noun
+  level: 1A
 - id: 320b41a7-ec4b-4fd1-b2d1-6b4163bfa2ec
   hangul: 은행
   romanization: eun-haeng
   english: bank
   type: noun
+  level: 1A
 - id: 4c3a15d0-9dc7-4499-93a8-d37d89d88eea
   hangul: 학교
   romanization: hak-gyo
   english: school
   type: noun
+  level: 1A
 - id: 060681a3-34fc-4e27-85e6-4ad7dd5dc7c3
   hangul: 화장실
   romanization: hwa-jang-sil
   english: restroom
   type: noun
+  level: 1A
 - id: 13d0fc8b-3a1f-496b-82d0-40d180b68b50
   hangul: 회사
   romanization: hoe-sa
   english: company
   type: noun
+  level: 1A
 - id: 5fb6af75-6cf6-48e4-bc55-8f98c22fe0f7
   hangul: 공항
   romanization: gong-hang
   english: airport
   type: noun
+  level: 1A
 - id: 9f0a5d8e-8c0d-4ae0-9be3-430347d0849c
   hangul: 우체국
   romanization: u-che-guk
   english: post office
   type: noun
+  level: 1A
 - id: 287fb82f-056e-4ddc-89b8-8ddd7fe0fafd
   hangul: 수업
   romanization: su-eop
   english: class
   type: noun
+  level: 1A
 - id: 2333dcc6-3086-4fdd-a905-5468e3e1cff5
   hangul: 기차
   romanization: gi-cha
   english: train
   type: noun
+  level: 1A
 - id: db6cd9b1-8a31-4085-ac0a-05df9586ac49
   hangul: 기차역
   romanization: gi-cha-yeok
   english: train station
   type: noun
+  level: 1A
 - id: 8d3f38c8-ec02-412b-a6ae-5ad207e7a6e0
   hangul: 지하철
   romanization: ji-ha-cheol
   english: subway
   type: noun
+  level: 1A
 - id: 2082973f-e553-4000-a1e5-0fe578961a91
   hangul: 지하철역
   romanization: ji-ha-cheol-yeok
   english: subway station
   type: noun
+  level: 1A
 - id: 48af1a28-117f-4eed-bfbf-75dbcd772c48
   hangul: 버스 터미널
   romanization: beo-seu teo-mi-neol
   english: bus terminal
   type: noun
+  level: 1A
 - id: 72899182-5014-4979-af60-1e44040bcdbc
   hangul: 콘서트
   romanization: kon-seo-teu
   english: concert
   type: noun
+  level: 1A
 - id: 563100a7-0a8d-464c-aaf3-986b3a48de2f
   hangul: 생일
   romanization: saeng-il
   english: birthday
   type: noun
+  level: 1A
 - id: a1cb2f39-97ab-49cf-84b2-ddbb0f68cc76
   hangul: 생일 파티
   romanization: saeng-il pa-ti
   english: birthday party
   type: noun
+  level: 1A
 - id: 8a1a21a0-86da-4828-a418-ae1489dd64b2
   hangul: 백화점
   romanization: baek-hwa-jeom
   english: department store
   type: noun
+  level: 1A
 - id: 5eb2cf31-7fb9-421b-9244-2e7d3e2877e7
   hangul: 약국
   romanization: yak-guk
   english: pharmacy
   type: noun
+  level: 1A
 - id: e697c6d4-c8fe-428d-bc06-9560f97031da
   hangul: 카페
   romanization: ka-pe
   english: cafe
   type: noun
+  level: 1A
 - id: 1c737272-6890-4dae-bf31-aeac96c576f8
   hangul: 커피숍
   romanization: keo-pi-syop
   english: coffee shop (cafe)
   type: noun
+  level: 1A
 - id: 38a0e3d8-0922-41e2-b5fb-230179ef7986
   hangul: 극장
   romanization: geuk-jang
   english: theater
   type: noun
+  level: 1A
 - id: 9fc5a459-7758-41ff-8434-fb92b9ce2835
   hangul: 체육관
   romanization: che-yuk-gwan
   english: gymnasium / sports hall (athletics)
   type: noun
+  level: 1A
 - id: 85613282-b3dc-47c8-81f8-b7c7450d6021
   hangul: 헬스장
   romanization: hel-seu-jang
   english: fitness center / gym (workout)
   type: noun
+  level: 1A
 - id: ff1a449f-4e4d-4b7a-88b8-0021fd2f1cc5
   hangul: 테니스
   romanization: te-ni-seu
   english: tennis
   type: noun
+  level: 1A
 - id: bca13aa3-446b-4eee-9bcd-afb504895f62
   hangul: 테니스장
   romanization: te-ni-seu-jang
   english: tennis area / tennis court
   type: noun
+  level: 1A
 - id: cb8db88a-0b8a-4a11-a540-79585e9b87aa
   hangul: 역
   romanization: yeok
   english: station
   type: noun
+  level: 1A
 - id: d10d57b5-b0d7-4055-9268-2f593229901b
   hangul: 공원
   romanization: gong-won
   english: park
   type: noun
+  level: 1A
 - id: 992e13e7-6f06-454f-83ba-27a7ff2275cb
   hangul: 지갑
   romanization: ji-gap
   english: wallet
   type: noun
+  level: 1A
 - id: a3b48849-a1ff-409a-99a5-4511b5311ae3
   hangul: 편의점
   romanization: pyeon-ui-jeom
   english: convenience store
   type: noun
+  level: 1A
 - id: d1f3d055-4d8e-474b-92f6-6c735fcea9a1
   hangul: 길
   romanization: gil
   english: road / street
   type: noun
+  level: 1A
 - id: 114b5c05-a6ca-4ded-8500-651928fa7eda
   hangul: 목욕탕
   romanization: mok-yok-tang
   english: public bathhouse / sauna
   type: noun
+  level: 1A
 - id: 7a7ed601-bdd1-4703-a89f-7124a053ade9
   hangul: 밖
   romanization: bakk
   english: outside
   type: noun
+  level: 1A
 - id: 0ee37907-8c8a-49d1-963f-eedc9e4c376a
   hangul: 방
   romanization: bang
   english: room
   type: noun
+  level: 1A
 - id: a9b83a6f-d5d3-4695-9f30-824abcd797c5
   hangul: 자동차
   romanization: ja-dong-cha
   english: car
   type: noun
+  level: 1A
 - id: dda92b53-9f92-4bec-b82b-29a40d39f7f3
   hangul: 신문
   romanization: sin-mun
   english: newspaper (physical medium to deliver 뉴스)
   type: noun
+  level: 1A
 - id: ec135fff-6bec-470d-8d88-5a8b063b7d70
   hangul: 온라인 뉴스
   romanization: on-ra-in nyu-seu
   english: online news
   type: noun
+  level: 1A
 - id: 237d404d-63b4-40c1-b19f-5dabeb7b2600
   hangul: 김밥
   romanization: gim-bap
   english: kimbap
   type: noun
+  level: 1A
 - id: 80698ca5-cc9c-4563-8a2c-2cfd311a3182
   hangul: 삼계탕
   romanization: sam-gye-tang
   english: samgyetang (ginseng chicken soup)
   type: noun
+  level: 1A
 - id: f1ba5f35-2e8b-4ae3-9618-71d90f690462
   hangul: 배
   romanization: bae
   english: pear
   type: noun
+  level: 1A
 - id: d4d1ace5-7859-453f-9983-1f7273183dc2
   hangul: 바나나
   romanization: ba-na-na
   english: banana
   type: noun
+  level: 1A
 - id: c4246840-7df1-47b1-a19b-001f0a1f5494
   hangul: 음식
   romanization: eum-sik
   english: food
   type: noun
+  level: 1A
 - id: 7929ab83-e365-4d11-b094-b328949e1221
   hangul: 고양이
   romanization: go-yang-i
   english: cat
   type: noun
+  level: 1A
 - id: 650b05d9-801b-48d3-b223-e2105e177b6f
   hangul: 공
   romanization: gong
   english: ball
   type: noun
+  level: 1A
 - id: fb2d86e1-e7b0-4baa-be3d-b60564c7dcfe
   hangul: 축구
   romanization: chuk-gu
   english: soccer
   type: noun
+  level: 1A
 - id: ed35ccd9-def3-4161-93ca-568bcd924424
   hangul: 축구공
   romanization: chuk-gu-gong
   english: soccer ball
   type: noun
+  level: 1A
 - id: 34397423-a67b-4109-b47c-a65626021692
   hangul: 농구공
   romanization: nong-gu-gong
   english: basketball ball
   type: noun
+  level: 1A
 - id: 2fa62023-3153-473d-b500-b794cecf636c
   hangul: 돈
   romanization: don
   english: money
   type: noun
+  level: 1A
 - id: 29998aea-188b-4fb9-bd74-9d368a1e9223
   hangul: 약속 시간
   romanization: yak-sok si-gan
   english: meeting time
   type: noun
+  level: 1A
 - id: fca2a518-3f71-4f6a-ad66-493111525879
   hangul: 약속 장소
   romanization: yak-sok jang-so
   english: meeting place
   type: noun
+  level: 1A
 - id: 8dbc0ea8-663b-4a5b-8189-fdcda5092ecd
   hangul: 빌딩
   romanization: bil-ding
   english: building
   type: noun
+  level: 1A
 - id: edfb8684-15df-4c7d-bef2-e5a86b0a840b
   hangul: 일찍
   romanization: il-jjik
   english: early
   type: adverb
+  level: 1A
 - id: ec543411-975e-417e-8ed3-c6bef3bdf4bf
   hangul: 저기
   romanization: jeo-gi
   english: over there / there
   type: pronoun
+  level: 1A
 - id: 5a68171f-e0b5-4b6e-9033-4bf6fea60798
   hangul: 혹시
   romanization: hok-si
   english: by any chance / perhaps
   type: adverb
+  level: 1A
 - id: 636947c1-0511-4eb8-adb4-7ecf46da95e1
   hangul: 대학교
   romanization: dae-hak-gyo
   english: university / college
   type: noun
+  level: 1A
 - id: 230b441a-0c21-44b6-9289-039fc3169db1
   hangul: 휴게실
   romanization: hyu-ge-sil
   english: rest area / lounge / break room
   type: noun
+  level: 1A
 - id: f1a2799d-b82e-4145-bd03-84f908654ddf
   hangul: 동료
   romanization: dong-ryo
   english: colleague / co-worker
   type: noun
+  level: 1A
 - id: 333d7228-509e-404a-af54-527bee562e52
   hangul: 사무실
   romanization: sa-mu-sil
   english: office
   type: noun
+  level: 1A
 - id: b7f1d0c9-82b3-4f67-8a69-d1272dab85cc
   hangul: 열쇠
   romanization: yeol-soe
   english: key
   type: noun
+  level: 1A
 - id: 74c769ff-777f-4d9e-a571-8c6c64e1b153
   hangul: 월요일
   romanization: wol-yo-il
   english: monday
   type: noun
+  level: 1A
 - id: a7d8e423-42b4-46fa-a812-e5c72212cce3
   hangul: 화요일
   romanization: hwa-yo-il
   english: tuesday
   type: noun
+  level: 1A
 - id: 523215a4-69d7-4a3e-84a1-0a8ec866cfd0
   hangul: 수요일
   romanization: su-yo-il
   english: wednesday
   type: noun
+  level: 1A
 - id: 4bffcc8b-74f4-42d3-bde0-3db71323789e
   hangul: 목요일
   romanization: mok-yo-il
   english: thursday
   type: noun
+  level: 1A
 - id: ef9fe650-cdd3-48a6-b2f6-a7035b4085e6
   hangul: 금요일
   romanization: geum-yo-il
   english: friday
   type: noun
+  level: 1A
 - id: 0f662ad6-eba9-4dfe-a0de-e81210ad0976
   hangul: 토요일
   romanization: to-yo-il
   english: saturday
   type: noun
+  level: 1A
 - id: 85d84cff-45b0-4af2-bbc8-00bdb0337dd6
   hangul: 일요일
   romanization: il-yo-il
   english: sunday
   type: noun
+  level: 1A
 - id: 3e5550e5-972c-45dd-ba6c-6e16c28d180e
   hangul: 일월
   romanization: il-wol
   english: january
   type: noun
+  level: 1A
 - id: 39c434fa-3050-43fc-a7cb-57dbbca79807
   hangul: 이월
   romanization: i-wol
   english: february
   type: noun
+  level: 1A
 - id: f63119d2-7815-4d82-8ad5-7c4c6704cf26
   hangul: 삼월
   romanization: sam-wol
   english: march
   type: noun
+  level: 1A
 - id: 0b19e1f0-9374-4bae-8666-4ad287a3da2b
   hangul: 사월
   romanization: sa-wol
   english: april
   type: noun
+  level: 1A
 - id: ed9d3ec8-c357-446d-87c7-6bc12acb5241
   hangul: 오월
   romanization: o-wol
   english: may
   type: noun
+  level: 1A
 - id: f1ec263b-8ca6-4565-a274-89a547417af1
   hangul: 유월
   romanization: yu-wol
   english: june
   type: noun
+  level: 1A
 - id: 04659e0d-9c30-4505-9314-28e7049c954c
   hangul: 칠월
   romanization: chil-wol
   english: july
   type: noun
+  level: 1A
 - id: e8eece0d-d030-4906-8e95-5a43e1771f68
   hangul: 팔월
   romanization: pal-wol
   english: august
   type: noun
+  level: 1A
 - id: c1f0c5e4-4586-49bc-9f87-6e549bbe7e86
   hangul: 구월
   romanization: gu-wol
   english: september
   type: noun
+  level: 1A
 - id: e2f4eda5-207b-44da-9524-fdbc56b88df5
   hangul: 시월
   romanization: si-wol
   english: october
   type: noun
+  level: 1A
 - id: a89aef40-5566-4c1c-b838-d8abb44f097c
   hangul: 십일월
   romanization: sip-il-wol
   english: november
   type: noun
+  level: 1A
 - id: 0bb478a7-f6e9-44ea-af27-7f438cdc7969
   hangul: 십이월
   romanization: sip-i-wol
   english: december
   type: noun
+  level: 1A
 - id: 9c3a9adf-52ec-4c15-8518-1cd588648061
   hangul: 어제
   romanization: eo-je
   english: yesterday
   type: noun
+  level: 1A
 - id: 35b1f61b-75fe-4f84-85f9-7043850e424a
   hangul: 오늘
   romanization: o-neul
   english: today
   type: noun
+  level: 1A
 - id: c08970c2-17b3-4d5d-9692-9db737bc7c61
   hangul: 내일
   romanization: nae-il
   english: tomorrow
   type: noun
+  level: 1A
 - id: 16de5ca4-b6b1-4d29-b59d-d110480e1c8b
   hangul: 이틀 전
   romanization: i-teul jeon
   english: 2 days ago
   type: noun
+  level: 1A
 - id: ddf21ddd-318d-4f0b-9f7b-e4ce1e83374f
   hangul: 사흘 후
   romanization: sa-heul hu
   english: 3 days later
   type: noun
+  level: 1A
 - id: e176adf3-73de-44ba-b4a1-421c154c725f
   hangul: 지난달
   romanization: ji-nan-dal
   english: last month
   type: noun
+  level: 1A
 - id: 2a88a8ce-3cfa-427b-8593-8983ef296ff8
   hangul: 이번 달
   romanization: i-beon dal
   english: this month
   type: noun
+  level: 1A
 - id: 1c7a0597-aa03-4d04-b410-5550017db29a
   hangul: 다음 달
   romanization: da-eum dal
   english: next month
   type: noun
+  level: 1A
 - id: f09f4b32-65af-483e-9730-9460458854c3
   hangul: 두 달 전
   romanization: du dal jeon
   english: 2 months ago
   type: noun
+  level: 1A
 - id: 408527fb-be38-4651-ba10-1b79c00e62b5
   hangul: 세 달 후
   romanization: se dal hu
   english: 3 months later
   type: noun
+  level: 1A
 - id: 3a854f9a-df5b-4378-8bf9-8179fa1293fa
   hangul: 작년
   romanization: jak-nyeon
   english: last year
   type: noun
+  level: 1A
 - id: 6485694a-825f-44be-b178-42bd63f643da
   hangul: 올해
   romanization: ol-hae
   english: this year
   type: noun
+  level: 1A
 - id: 8bde57dc-7438-4632-a15d-184359c1655c
   hangul: 내년
   romanization: nae-nyeon
   english: next year
   type: noun
+  level: 1A
 - id: 8c249aa5-6aee-48c6-9e73-c2edb50a7e19
   hangul: 이년 전
   romanization: i-nyeon jeon
   english: 2 years ago
   type: noun
+  level: 1A
 - id: 546daccc-a801-46e0-b4c8-f6507968a221
   hangul: 삼년 후
   romanization: sam-nyeon hu
   english: 3 years later
   type: noun
+  level: 1A
 - id: f38c61a9-e4a0-4ddf-bc24-0e65b2ac1b60
   hangul: 한 시간 전
   romanization: han si-gan jeon
   english: 1 hour ago
   type: noun
+  level: 1A
 - id: 339744f7-db3f-4fd1-bb63-d0651ed5cdfc
   hangul: 지금
   romanization: ji-geum
   english: now
   type: adverb
+  level: 1A
 - id: b640dd41-c567-490b-97ad-b21392df91b0
   hangul: 한 시간 후
   romanization: han si-gan hu
   english: 1 hour later
   type: noun
+  level: 1A
 - id: 7608a136-bc43-4888-9d24-5024ff51c746
   hangul: 두 시간 전
   romanization: du si-gan jeon
   english: 2 hours ago
   type: noun
+  level: 1A
 - id: 533dc7c5-a15f-458f-8696-e83ad985a003
   hangul: 세 시간 후
   romanization: se si-gan hu
   english: 3 hours later
   type: noun
+  level: 1A
 - id: f112ffea-6d68-4873-992f-7861fcc796fe
   hangul: 어머니
   romanization: eo-meo-ni
   english: mother
   type: noun
+  level: 1A
 - id: 9e055ca8-fd65-4ec6-85f4-a07bb5d5481b
   hangul: 엄마
   romanization: eom-ma
   english: mom
   type: noun
+  level: 1A
 - id: 29e60ff9-a779-4b80-bd25-35cefa4d22ec
   hangul: 아버지
   romanization: a-beo-ji
   english: father
   type: noun
+  level: 1A
 - id: 2b831bcf-f0de-4920-b8fb-1f286fb849b5
   hangul: 아빠
   romanization: a-ppa
   english: dad
   type: noun
+  level: 1A
 - id: 697ada42-4ef8-42d6-957d-a7e2895af2af
   hangul: 부모님
   romanization: bu-mo-nim
   english: parents
   type: noun
+  level: 1A
 - id: b22e9b7d-4b58-4a02-9970-49523767a269
   hangul: 형
   romanization: hyeong
   english: older brother (said by a male)
   type: noun
+  level: 1A
 - id: 1b055d9b-0a5a-48f4-a5b9-136f2e7e1858
   hangul: 오빠
   romanization: o-ppa
   english: older brother (said by a female)
   type: noun
+  level: 1A
 - id: 8873f9c1-73c7-417f-998f-938f23555108
   hangul: 누나
   romanization: nu-na
   english: older sister (said by a male)
   type: noun
+  level: 1A
 - id: 75eaef4d-5847-46e4-9a54-6e96c8fd8aa0
   hangul: 언니
   romanization: eon-ni
   english: older sister (said by a female)
   type: noun
+  level: 1A
 - id: 47995919-f769-4867-bfef-b7c704188421
   hangul: 동생
   romanization: dong-saeng
   english: younger sibling
   type: noun
+  level: 1A
 - id: 0f2a8357-1b9c-4328-ba96-f19835b05bea
   hangul: 남동생
   romanization: nam-dong-saeng
   english: younger brother
   type: noun
+  level: 1A
 - id: 3ab39f9f-6bd1-4e2e-9f1a-ab6bd4266b44
   hangul: 여동생
   romanization: yeo-dong-saeng
   english: younger sister
   type: noun
+  level: 1A
 - id: 6cf20fe1-b66a-494d-a804-5c31f24c8ddc
   hangul: 아들
   romanization: a-deul
   english: son
   type: noun
+  level: 1A
 - id: 32b81c42-b72a-4ead-ad1e-0aec20f2b562
   hangul: 딸
   romanization: ttal
   english: daughter
   type: noun
+  level: 1A
 - id: eabcd488-7722-4768-8023-0edbddbb9fbc
   hangul: 아이
   romanization: a-i
   english: child
   type: noun
+  level: 1A
 - id: 9bc14e02-4b4e-4df1-b5f0-43968db97cc7
   hangul: 아기
   romanization: a-gi
   english: baby
   type: noun
+  level: 1A
 - id: 389b13dc-c7b1-46a7-99ce-ff2a879b64f6
   hangul: 남편
   romanization: nam-pyeon
   english: husband
   type: noun
+  level: 1A
 - id: e546d115-36db-4e5d-9720-5bf8a2037641
   hangul: 아내
   romanization: a-nae
   english: wife
   type: noun
+  level: 1A
 - id: c8149379-420a-46ed-8ccd-5797bc6c9670
   hangul: 가족
   romanization: ga-jok
   english: family
   type: noun
+  level: 1A
 - id: 7bd70a37-ba8d-4c36-866c-fb562843bdfa
   hangul: 할아버지
   romanization: hal-a-beo-ji
   english: grandfather
   type: noun
+  level: 1A
 - id: 120290d6-54c8-4002-ac83-deb4cf81313e
   hangul: 할머니
   romanization: hal-meo-ni
   english: grandmother
   type: noun
+  level: 1A
 - id: d93cddda-e47a-4b66-93cd-cc8bff0e84fc
   hangul: 삼촌
   romanization: sam-chon
   english: uncle
   type: noun
+  level: 1A
 - id: 2ca41b95-82dd-41bc-8d22-5cd1d2250fec
   hangul: 이모
   romanization: i-mo
   english: aunt (maternal)
   type: noun
+  level: 1A
 - id: 0605b9b4-d704-4fd5-a632-babf3fc68ed6
   hangul: 고모
   romanization: go-mo
   english: aunt (paternal)
   type: noun
+  level: 1A
 - id: 0d72534f-4d53-46fd-8c0c-ee8b7bca0b6e
   hangul: 사촌
   romanization: sa-chon
   english: cousin
   type: noun
+  level: 1A
 - id: 345dd719-7e46-4a05-9131-cf90aa49b187
   hangul: 사랑하다
   romanization: sa-rang-ha-da
   english: to love
   type: verb
+  level: 1A
 - id: e4366dc3-3e4a-4cff-b29c-778b2ba7f4f5
   hangul: 걸리다
   romanization: geol-li-da
   english: to take (time)
   type: verb
+  level: 1A
 - id: 4da843db-1224-4915-8f1e-40fd42326a29
   hangul: 쓰다
   romanization: sseu-da
   english: to use / to write
   type: verb
+  level: 1A
 - id: b8fead97-c8de-4563-9fa7-22a46fa9cfd7
   hangul: 쉬다
   romanization: swi-da
   english: to rest / to sleep
   type: verb
+  level: 1A
 - id: d9f60ae0-155a-422a-bab8-8eb0799df071
   hangul: 열다
   romanization: yeol-da
   english: to open
   type: verb
+  level: 1A
 - id: d5e12bb4-ccbb-481d-8c15-999ff8291b16
   hangul: 만들다
   romanization: man-deul-da
   english: to make
   type: verb
+  level: 1A
 - id: cb03ebd1-488d-4bdb-ae35-94ae14c3e9f4
   hangul: 타다
   romanization: ta-da
   english: to ride
   type: verb
+  level: 1A
 - id: 54f8af42-9b0d-4b32-a531-f3047f210319
   hangul: 갈아타다
   romanization: ga-ra-ta-da
   english: to transfer
   type: verb
+  level: 1A
 - id: 68130dd6-50b9-4915-9e9c-62017e68f571
   hangul: 내리다
   romanization: nae-ri-da
   english: to get off
   type: verb
+  level: 1A
 - id: ce14623b-4b7d-4fa2-8bf9-37a795b63fbc
   hangul: 뛰다
   romanization: ttwi-da
   english: to jump / to run
   type: verb
+  level: 1A
 - id: 604ae239-3073-488d-988b-1e3a1a6747fc
   hangul: 찍다
   romanization: jjik-da
   english: to take (a photo)
   type: verb
+  level: 1A
 - id: b19c0250-b301-4f88-bdf9-db7aae9c533e
   hangul: 찍어 오다
   romanization: jjig-eo o-da
   english: to take and bring
   type: verb
+  level: 1A
 - id: 21dca706-90ea-4e9b-89b5-148059eac22e
   hangul: 자다
   romanization: ja-da
   english: to sleep
   type: verb
+  level: 1A
 - id: 9885e85e-5c84-4178-9abf-093ff060df69
   hangul: 찾다
   romanization: chat-da
   english: to look up / to find
   type: verb
+  level: 1A
 - id: 9d1d82d7-17b3-48c6-95a0-fbde65173fd8
   hangul: 자전거
   romanization: ja-jeon-geo
   english: bicycle
   type: noun
+  level: 1A
 - id: d705c138-bb51-4e98-aced-15c71b85f2c3
   hangul: 버스
   romanization: beo-seu
   english: bus
   type: noun
+  level: 1A
 - id: 75d7657d-e842-4983-834f-32ad7b7a2ba9
   hangul: 택시
   romanization: taek-si
   english: taxi
   type: noun
+  level: 1A
 - id: 81846fb5-a3e6-45be-931e-ea25dcc65849
   hangul: 비행기
   romanization: bi-haeng-gi
   english: airplane
   type: noun
+  level: 1A
 - id: 6d2ade0d-31bd-4a85-a0a0-cd0a74ca60a8
   hangul: 2호선
   romanization: i-ho-seon
   english: line 2
   type: noun
+  level: 1A
 - id: 10d171f6-202f-4ddf-8ef9-eb10a4f5b5ed
   hangul: 칠판
   romanization: chil-pan
   english: blackboard
   type: noun
+  level: 1A
 - id: 7d7c5141-5dfa-4ad0-bbc0-6492b217a17f
   hangul: 소리
   romanization: so-ri
   english: sound
   type: noun
+  level: 1A
 - id: 34d40d7d-41a7-42e9-803c-2576d802b820
   hangul: 단어
   romanization: dan-eo
   english: word
   type: noun
+  level: 1A
 - id: 05d7ad1c-b8e5-402a-8f29-cc4c55cb1e6e
   hangul: 창문
   romanization: chang-mun
   english: window
   type: noun
+  level: 1A
 - id: f12f4ee3-0ae9-4e36-a2a5-2c7924005ff0
   hangul: 문
   romanization: mun
   english: door
   type: noun
+  level: 1A
 - id: d8d2fdc9-5387-4ee8-9211-83a1555be88c
   hangul: 벽
   romanization: byeok
   english: wall
   type: noun
+  level: 1A
 - id: 640ff935-41d6-4512-8bac-966e669db45c
   hangul: 바닥
   romanization: ba-dak
   english: floor
   type: noun
+  level: 1A
 - id: 4f2ff63d-86be-445b-95bb-d5f2e4eb4e87
   hangul: 천장
   romanization: cheon-jang
   english: ceiling
   type: noun
+  level: 1A
 - id: 448b5180-de41-4f85-b1cc-75bb96aa6fcd
   hangul: 액자
   romanization: aek-ja
   english: picture frame
   type: noun
+  level: 1A
 - id: f458a351-7809-407a-be3b-3d2ffadf7845
   hangul: 전등
   romanization: jeon-deung
   english: lamp
   type: noun
+  level: 1A
 - id: b5d061f6-74c8-42aa-ab46-316a69b423d7
   hangul: 장스탠드
   romanization: jang-seu-taen-deu
   english: floor lamp
   type: noun
+  level: 1A
 - id: 74149550-4a47-4c51-b504-0c7c6b945246
   hangul: 빵
   romanization: ppang
   english: bread
   type: noun
+  level: 1A
 - id: a022139e-7e7c-4692-a1d3-b65ba9268014
   hangul: 정류장
   romanization: jeong-ryu-jang
   english: bus stop
   type: noun
+  level: 1A
 - id: eac7dae7-0c9a-4873-a3d3-5bb69d38e744
   hangul: 옷
   romanization: ot
   english: clothes
   type: noun
+  level: 1A
 - id: 963ca783-e1bc-4a8a-8b38-4ba70fe11044
   hangul: 사진
   romanization: sa-jin
   english: photo
   type: noun
+  level: 1A
 - id: b94c3d10-8a88-43bc-843a-0c07b2842535
   hangul: 한국말
   romanization: han-gung-mal
   english: Korean language
   type: noun
+  level: 1A
 - id: 72f96317-b1fd-41c3-8989-cbe0470f7b57
   hangul: 박물관
   romanization: bang-mul-gwan
   english: museum
   type: noun
+  level: 1A
 - id: 40e037a2-45d9-40d3-99c6-cb74550e9965
   hangul: 시장
   romanization: si-jang
   english: market
   type: noun
+  level: 1A
 - id: e6cde32b-1f11-44cf-acc0-c46777f6a7e5
   hangul: 재미없다
   romanization: jae-mi-eop-da
   english: to be boring / uninteresting
   type: adjective
+  level: 1A
 - id: 58b0bcc0-c04f-419d-899e-c5f686a89c04
   hangul: 좋다
   romanization: jot-da
   english: to be good
   type: adjective
+  level: 1A
 - id: f9965d5f-d420-484e-9b87-35f291bb3c20
   hangul: 복잡하다
   romanization: bok-jap-ha-da
   english: to be complicated
   type: adjective
+  level: 1A
 - id: de23a829-453c-46ec-9adc-9f5880921f56
   hangul: 늦다
   romanization: neut-da
   english: to be late
   type: adjective
+  level: 1A
 - id: 6f353127-fd21-4567-bcd1-bb9522dc4216
   hangul: 가깝다
   romanization: ga-kkap-da
   english: to be near
   type: adjective
+  level: 1A
 - id: 81c39c29-1f37-4c99-837e-9de717b7a66a
   hangul: 멀다
   romanization: meol-da
   english: to be far
   type: adjective
+  level: 1A
 - id: 7a50c91e-8702-4dfd-9c92-cfecce0b32d1
   hangul: 빠르다
   romanization: ppa-reu-da
   english: to be fast
   type: adjective
+  level: 1A
 - id: c2ded703-208b-463e-a4a0-0d2c70c8d1f0
   hangul: 비싸다
   romanization: bi-ssa-da
   english: to be expensive
   type: adjective
+  level: 1A
 - id: c8155f1f-3f6d-40c9-bce5-4c8765769459
   hangul: 열심히
   romanization: yeol-sim-hi
   english: hard / diligently
   type: adverb
+  level: 1A
 - id: 2c9ecf90-9474-4e93-9ea0-5f0b7896c79f
   hangul: 아주
   romanization: a-ju
   english: very
   type: adverb
+  level: 1A
 - id: 7227a7d9-2349-4981-a246-11d4eb309d9c
   hangul: 처음
   romanization: cheo-eum
   english: for the first time
   type: adverb
+  level: 1A
 - id: ebb9ab1e-e89e-46bf-8b2b-90dcc565ac22
   hangul: 이제
   romanization: i-je
   english: now
   type: adverb
+  level: 1A
 - id: ce59dbf3-cc12-4911-8f92-ab8c349564a4
   hangul: 큰 소리로
   romanization: keun so-ri-ro
   english: loudly
   type: adverb
+  level: 1A
 - id: b0727056-d027-42a1-a180-394e94cc9b1d
   hangul: 너무
   romanization: neo-mu
   english: too / very
   type: adverb
+  level: 1A
 - id: 4c3e7e9b-eb0c-47bd-8588-13697d460475
   hangul: 배
   romanization: bae
   english: ship / boat
   type: noun
+  level: 1A
 - id: 5757bc03-056a-4c8b-9631-0813fe6ee9d4
   hangul: 보통
   romanization: bo-tong
   english: commonly / usually
   type: adverb
+  level: 1A
 - id: ee2fa0d7-e1ac-4d96-9975-bfdafbeafd59
   hangul: 다시
   romanization: da-si
   english: again
   type: adverb
+  level: 1A
 - id: 7d818c4a-dc40-4c54-b923-1140865a8318
   hangul: 다
   romanization: da
   english: all / everything
   type: adverb
+  level: 1A
 - id: 54514475-bade-4e25-8f79-70afc5dbf1c8
   hangul: 커피하고 빵
   romanization: keo-pi-ha-go ppang
@@ -1632,6 +1957,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: hago
+  level: 1A
 - id: 7c77078a-fdf9-48a1-83dd-346b45278934
   hangul: 친구하고 가요
   romanization: chin-gu-ha-go ga-yo
@@ -1639,6 +1965,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: hago
+  level: 1A
 - id: 18197539-1796-4fdd-8503-fb15d3293da5
   hangul: 엄마하고 먹어요
   romanization: eom-ma-ha-go meo-geo-yo
@@ -1646,6 +1973,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: hago
+  level: 1A
 - id: faa6cf0a-6611-4bf5-af38-98bfd216da53
   hangul: 친구들이 왔어요
   romanization: chin-gu-deul-i wa-sseo-yo
@@ -1653,6 +1981,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: deul
+  level: 1A
 - id: 923933e2-68c8-42e9-98ce-d938d37a189f
   hangul: 책 세 권
   romanization: chaek se gwon
@@ -1660,6 +1989,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: deul
+  level: 1A
 - id: 7f6e2df2-ed97-4eb9-aad1-9792ea895435
   hangul: 저도 학생이에요
   romanization: jeo-do hak-saeng-i-e-yo
@@ -1667,6 +1997,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: do
+  level: 1A
 - id: bfa8aebf-d50e-4158-8867-77bd15d6650f
   hangul: 친구도 왔어요
   romanization: chin-gu-do wa-sseo-yo
@@ -1674,6 +2005,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: do
+  level: 1A
 - id: 997d9cdc-65da-4319-8951-9008e2585669
   hangul: 1분도 없어요
   romanization: il-bun-do eop-seo-yo
@@ -1681,6 +2013,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: do
+  level: 1A
 - id: 6861d0dc-e15b-4056-815d-d5f2da3c8456
   hangul: 9시부터 6시까지
   romanization: a-hop-si-bu-teo yeo-seot-si-kka-ji
@@ -1688,6 +2021,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: buteo_kkaji
+  level: 1A
 - id: 7461df22-228a-4b75-8519-fed8468c5dae
   hangul: 월요일부터 금요일까지
   romanization: wo-ryo-il-bu-teo geu-myo-il-kka-ji
@@ -1695,6 +2029,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: buteo_kkaji
+  level: 1A
 - id: 99a5390b-163e-4647-a0bb-0fa2c7791f7b
   hangul: 처음부터 끝까지
   romanization: cheo-eum-bu-teo kkeut-kka-ji
@@ -1702,6 +2037,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: buteo_kkaji
+  level: 1A
 - id: 718e45ed-9d43-4972-93ac-cea08a79854b
   hangul: 집에서 학교까지
   romanization: jib-e-seo hak-gyo-kka-ji
@@ -1709,6 +2045,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: buteo_kkaji
+  level: 1A
 - id: 0170d3a0-0216-4fcc-9d5e-a58207116059
   hangul: 한 시간 동안
   romanization: han si-gan dong-an
@@ -1716,6 +2053,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: dongan
+  level: 1A
 - id: 1a720319-cbe3-4218-9aee-9b8324bbe0b5
   hangul: 방학 동안
   romanization: bang-hak dong-an
@@ -1723,6 +2061,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: dongan
+  level: 1A
 - id: b639f845-bcd0-4453-8628-3eb5d9247f73
   hangul: 공부하는 동안
   romanization: gong-bu-ha-neun dong-an
@@ -1730,6 +2069,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: dongan
+  level: 1A
 - id: d9ea8a06-adfc-4f48-bbe2-2465c5dfe641
   hangul: 한국에서 일 년 동안 살았어요
   romanization: han-gug-e-seo il nyeon dong-an sa-ra-sseo-yo
@@ -1737,6 +2077,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: dongan
+  level: 1A
 - id: cc1e8cf1-5836-48b0-a0a1-a1758a34b399
   hangul: 공부하러 가요
   romanization: gong-bu-ha-reo ga-yo
@@ -1744,6 +2085,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: hareo
+  level: 1A
 - id: 1b1e3919-b6db-418d-b538-2b32ea8742d6
   hangul: 운동하러 가요
   romanization: un-dong-ha-reo ga-yo
@@ -1751,6 +2093,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: hareo
+  level: 1A
 - id: c11d874b-9490-4394-9efb-3f8c15f0ae48
   hangul: 1시간 후
   romanization: han si-gan hu
@@ -1758,6 +2101,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: hu
+  level: 1A
 - id: 0d53e3b8-ae40-473b-b5f4-c6608f4a5700
   hangul: 식사 후
   romanization: sik-sa hu
@@ -1765,6 +2109,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: hu
+  level: 1A
 - id: eae0a170-b8d3-4355-aa35-cb484152d146
   hangul: 수업 후에 집에 가요
   romanization: su-eob hu-e jib-e ga-yo
@@ -1772,6 +2117,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: hu
+  level: 1A
 - id: 3ec24304-69b6-449a-b112-23fffedf4419
   hangul: 삼 층이에요
   romanization: sam cheung-i-e-yo
@@ -1779,6 +2125,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: cheung
+  level: 1A
 - id: e2e6f768-bed5-420b-9891-964f263a26dd
   hangul: 몇 층이에요
   romanization: myeot cheung-i-e-yo
@@ -1786,6 +2133,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: cheung
+  level: 1A
 - id: f89b9533-927f-4957-97dc-8f939530cb97
   hangul: 버스로 가요
   romanization: beo-seu-ro ga-yo
@@ -1793,6 +2141,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: euro
+  level: 1A
 - id: 4d52962d-41b1-491f-acd5-5e6892a2800c
   hangul: 한국어로 말해요
   romanization: han-gu-geo-ro mal-hae-yo
@@ -1800,6 +2149,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: euro
+  level: 1A
 - id: 3530883f-81ef-4cdc-b713-269a08c237e1
   hangul: 버스나 지하철로 가요
   romanization: beo-seu-na ji-ha-cheol-lo ga-yo
@@ -1807,6 +2157,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: ina
+  level: 1A
 - id: 86852c5a-1e48-479a-96d1-d0a2a6c6cee4
   hangul: 배우고 싶어요
   romanization: bae-u-go si-peo-yo
@@ -1814,6 +2165,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: go_sipeoyo
+  level: 1A
 - id: eff77196-957e-4985-bc82-0a868d8641c6
   hangul: 집에 가고 싶어요
   romanization: jib-e ga-go si-peo-yo
@@ -1821,6 +2173,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: go_sipeoyo
+  level: 1A
 - id: 86b984a4-10a2-4760-8cb0-5db749c25d51
   hangul: 사진을 찍고 싶어요
   romanization: sa-jin-eul jjik-go si-peo-yo
@@ -1828,6 +2181,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: go_sipeoyo
+  level: 1A
 - id: c96e844d-7700-4263-858a-6a96e2ecade7
   hangul: 창문을 여세요
   romanization: chang-mun-eul yeo-se-yo
@@ -1835,6 +2189,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: seyo
+  level: 1A
 - id: 47c21099-0914-4378-b384-52588edbdb6c
   hangul: 책을 펴세요
   romanization: chaeg-eul pyeo-se-yo
@@ -1842,6 +2197,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: seyo
+  level: 1A
 - id: c340f242-0fbf-4537-ac7e-08836c9f9e22
   hangul: 담배를 피우지 마세요
   romanization: dam-bae-reul pi-u-ji ma-se-yo
@@ -1849,6 +2205,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: ji_maseyo
+  level: 1A
 - id: dde62520-d32e-4817-a08b-fe70e6b79441
   hangul: 전화하지 마세요
   romanization: jeon-hwa-ha-ji ma-se-yo
@@ -1856,6 +2213,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: ji_maseyo
+  level: 1A
 - id: a2062f25-5a5c-4386-abd7-70da927b5025
   hangul: 크게 말하지 마세요
   romanization: keu-ge mal-ha-ji ma-se-yo
@@ -1863,6 +2221,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: ji_maseyo
+  level: 1A
 - id: 21033fbc-99ae-4f06-8430-cf76679cd189
   hangul: 사진을 찍지 마세요
   romanization: sa-jin-eul jjik-ji ma-se-yo
@@ -1870,6 +2229,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: ji_maseyo
+  level: 1A
 - id: 78bf49ef-d461-45a9-a82b-7bbf21224889
   hangul: 영어를 말하지 마세요
   romanization: yeong-eo-reul mal-ha-ji ma-se-yo
@@ -1877,6 +2237,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: ji_maseyo
+  level: 1A
 - id: e7ea607e-dcca-4fd9-b69d-71bf4895f40e
   hangul: 친구한테서 들었어요
   romanization: chin-gu-han-te-seo deu-reo-sseo-yo
@@ -1884,6 +2245,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: hanteseo
+  level: 1A
 - id: b2f90de9-f33c-4a79-a47e-61818be18783
   hangul: 선생님한테서 받았어요
   romanization: seon-saeng-nim-han-te-seo ba-da-sseo-yo
@@ -1891,6 +2253,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: hanteseo
+  level: 1A
 - id: 7bc9d8dd-490b-4968-9d4f-49f71a6aefbf
   hangul: 친구한테 말해요
   romanization: chin-gu-han-te mal-hae-yo
@@ -1898,6 +2261,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: hante
+  level: 1A
 - id: c7eca61f-d868-4282-8559-d7d16ca64cc4
   hangul: 동생한테 줘요
   romanization: dong-saeng-han-te jwo-yo
@@ -1905,6 +2269,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: hante
+  level: 1A
 - id: fb7e528d-f404-41ee-b7ea-29cfb7cb6290
   hangul: 커피나 차
   romanization: keo-pi-na cha
@@ -1912,6 +2277,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: ina
+  level: 1A
 - id: 10964051-bcbd-4313-a604-3486cb882fc9
   hangul: 저녁까지 공부해요
   romanization: jeo-nyeok-kka-ji gong-bu-hae-yo
@@ -1919,6 +2285,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: kkaji
+  level: 1A
 - id: 6a6eb778-ba64-4ae8-ab8f-28904b6c69ba
   hangul: 서울역까지 가요
   romanization: seo-ul-yeok-kka-ji ga-yo
@@ -1926,6 +2293,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: kkaji
+  level: 1A
 - id: f026f0b2-fb01-436e-a219-cae6e5b17841
   hangul: 한국어를 공부해요
   romanization: han-gu-geo-reul gong-bu-hae-yo
@@ -1933,6 +2301,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: hada
+  level: 1A
 - id: 6a8391cf-463a-4b18-b116-e06b063366c5
   hangul: 주말에 운동해요
   romanization: ju-mal-e un-dong-hae-yo
@@ -1940,6 +2309,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: hada
+  level: 1A
 - id: 390e608b-a015-4343-a892-4420a2e79f3c
   hangul: 무슨 요일이에요
   romanization: mu-seun yo-il-i-e-yo
@@ -1947,6 +2317,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: museun
+  level: 1A
 - id: cb9ed118-b124-4a8c-8258-67f4aea7b078
   hangul: 무슨 책을 읽어요
   romanization: mu-seun chae-geul il-geo-yo
@@ -1954,6 +2325,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: museun
+  level: 1A
 - id: e6649624-6192-4804-9da0-5b2c2d06364f
   hangul: 언제 와요
   romanization: eon-je wa-yo
@@ -1961,6 +2333,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: eonje
+  level: 1A
 - id: a4a9f53a-9733-4940-9fe5-9707dfd3fd98
   hangul: 생일이 언제예요
   romanization: saeng-il-i eon-je-ye-yo
@@ -1968,6 +2341,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: eonje
+  level: 1A
 - id: 91de6c29-6cee-4485-8e5e-bb5e51187b94
   hangul: 왜 늦었어요
   romanization: wae neu-jeo-sseo-yo
@@ -1975,6 +2349,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: wae
+  level: 1A
 - id: bbd0082a-bd1c-41e4-8223-fb4cf4fc540b
   hangul: 왜 한국어를 공부해요
   romanization: wae han-gu-geo-reul gong-bu-hae-yo
@@ -1982,6 +2357,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: wae
+  level: 1A
 - id: a2fb03ce-937e-4f25-8863-874f02557b96
   hangul: 왜 안 와요
   romanization: wae an wa-yo
@@ -1989,6 +2365,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: wae_an
+  level: 1A
 - id: 077c9f24-d87f-4f20-bd04-a96800528776
   hangul: 왜 안 가요
   romanization: wae an ga-yo
@@ -1996,6 +2373,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: wae_an
+  level: 1A
 - id: 2db21337-d1f0-4426-b039-380f1db085a3
   hangul: 어떻게 가요
   romanization: eo-tteo-ke ga-yo
@@ -2003,6 +2381,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: eotteoke
+  level: 1A
 - id: 88cb9da1-698d-4eac-a6fc-8e252d520bc5
   hangul: 이름이 어떻게 돼요
   romanization: i-reum-i eo-tteo-ke dwae-yo
@@ -2010,6 +2389,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: eotteoke
+  level: 1A
 - id: dad307e1-b846-42f6-9ed1-2b605aa12cf1
   hangul: 얼마나 걸려요
   romanization: eol-ma-na geol-lyeo-yo
@@ -2017,6 +2397,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: eolmana
+  level: 1A
 - id: bf971565-2f69-4406-b32a-afd2c1f66e61
   hangul: 집에서 학교까지 얼마나 걸려요
   romanization: jib-e-seo hak-gyo-kka-ji eol-ma-na geol-lyeo-yo
@@ -2024,36 +2405,43 @@
   type: phrase
   visibility: hidden
   grammar_pattern: eolmana
+  level: 1A
 - id: 29789853-d47a-415e-bd63-afc3c1af8950
   hangul: 그럼
   romanization: geu-reom
   english: then / in that case
   type: adverb
+  level: 1A
 - id: 36938242-a234-4001-b5bd-bef94fc68e4a
   hangul: 그리고
   romanization: geu-ri-go
   english: and / and then
   type: adverb
+  level: 1A
 - id: 005a0aef-17a0-4af1-aba4-9fc97c008c87
   hangul: 그런데
   romanization: geu-reon-de
   english: but / by the way
   type: adverb
+  level: 1A
 - id: 492c3e5c-1c55-4900-b84d-e0dcc85e68ed
   hangul: 그래요
   romanization: geu-rae-yo
   english: i see / that's right / okay
   type: adverb
+  level: 1A
 - id: de7a9481-283c-44c9-9db6-7756b50fa72d
   hangul: 같이
   romanization: ga-chi
   english: together
   type: adverb
+  level: 1A
 - id: dd750129-9133-44da-a177-24079c66f085
   hangul: 하지만
   romanization: ha-ji-man
   english: but / however
   type: adverb
+  level: 1A
 - id: a3f9346a-2354-43b6-9a17-98d16858c513
   hangul: 그럼 같이 가요
   romanization: geu-reom ga-chi ga-yo
@@ -2061,6 +2449,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: geureom
+  level: 1A
 - id: 6c97c1ed-1531-4562-8bca-25f7fda8399c
   hangul: 그럼 내일 만나요
   romanization: geu-reom nae-il man-na-yo
@@ -2068,6 +2457,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: geureom
+  level: 1A
 - id: dc0ed558-f360-4f6c-981f-9a0fcd3ac46c
   hangul: 그리고 운동해요
   romanization: geu-ri-go un-dong-hae-yo
@@ -2075,6 +2465,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: geurigo
+  level: 1A
 - id: ab9da35d-519a-43fd-aa70-c22260bb3e13
   hangul: 그리고 학교에 가요
   romanization: geu-ri-go hak-gyo-e ga-yo
@@ -2082,6 +2473,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: geurigo
+  level: 1A
 - id: 4f4ebe6b-1d6e-46f6-91d7-170b59365acb
   hangul: 그런데 비가 와요
   romanization: geu-reon-de bi-ga wa-yo
@@ -2089,6 +2481,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: geureonde
+  level: 1A
 - id: 14d01e7d-93ee-4990-91f5-79b872505b66
   hangul: 그런데 어디서 만나요
   romanization: geu-reon-de eo-di-seo man-na-yo
@@ -2096,6 +2489,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: geureonde
+  level: 1A
 - id: de440c09-442a-474e-bcf7-65c26473ff03
   hangul: 하지만 공부해요
   romanization: ha-ji-man gong-bu-hae-yo
@@ -2103,6 +2497,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: hajiman
+  level: 1A
 - id: d7b0afc9-e30e-4ac5-aae7-fff6a2091309
   hangul: 하지만 사고 싶어요
   romanization: ha-ji-man sa-go si-peo-yo
@@ -2110,16 +2505,19 @@
   type: phrase
   visibility: hidden
   grammar_pattern: hajiman
+  level: 1A
 - id: 5e798c51-3936-4758-ab8b-13545a15bf97
   hangul: 뭐예요
   romanization: mwo-ye-yo
   english: what is it?
   type: adverb
+  level: 1A
 - id: 315997c9-0eec-4a95-be8e-d1dc547f034f
   hangul: 뭐 해요
   romanization: mwo hae-yo
   english: what are you doing? / what do you do?
   type: adverb
+  level: 1A
 - id: 7049357c-80ed-4a2b-86bb-feccaa6441f3
   hangul: 이게 뭐예요
   romanization: i-ge mwo-ye-yo
@@ -2127,6 +2525,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: mwoeyo_vs_mwo_haeyo
+  level: 1A
 - id: 5cf2246c-0bc0-456a-b238-4b4e609f2b74
   hangul: 지금 뭐 해요
   romanization: ji-geum mwo hae-yo
@@ -2134,6 +2533,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: mwoeyo_vs_mwo_haeyo
+  level: 1A
 - id: 063a5ebd-5df3-4261-9d1e-7acf9c231779
   hangul: 이름이 뭐예요
   romanization: i-reum-i mwo-ye-yo
@@ -2141,6 +2541,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: mwoeyo_vs_mwo_haeyo
+  level: 1A
 - id: 3c6f619f-3199-4e99-aad0-ac722a9afe26
   hangul: 주말에 뭐 해요
   romanization: ju-mal-e mwo hae-yo
@@ -2148,41 +2549,49 @@
   type: phrase
   visibility: hidden
   grammar_pattern: mwoeyo_vs_mwo_haeyo
+  level: 1A
 - id: ab169702-1c45-4899-a737-4aba8de546c7
   hangul: 무슨
   romanization: mu-seun
   english: what kind of / what
   type: adverb
+  level: 1A
 - id: 996f8141-3a2c-4005-b8a6-2b3ab7d3d7c5
   hangul: 언제
   romanization: eon-je
   english: when
   type: adverb
+  level: 1A
 - id: d815ffef-9096-4e41-9039-820e66fab8e9
   hangul: 왜
   romanization: wae
   english: why
   type: adverb
+  level: 1A
 - id: ee31de3a-548b-4230-af70-8e16bd9c5c05
   hangul: 왜 안
   romanization: wae an
   english: why not / why don’t you
   type: adverb
+  level: 1A
 - id: 79cadc19-cc7b-4c95-8205-7545bc19552b
   hangul: 어떻게
   romanization: eo-tteo-ke
   english: how
   type: adverb
+  level: 1A
 - id: 1083bebf-15ac-454c-853a-c566f5af9537
   hangul: 얼마나
   romanization: eol-ma-na
   english: how much / how long
   type: adverb
+  level: 1A
 - id: c678da34-4cc0-4e00-b166-38af85ca3cea
   hangul: 뭐
   romanization: mwo
   english: what
   type: adverb
+  level: 1A
 - id: 80c17482-3d17-47e9-858f-6c0e03f4bc39
   hangul: 무슨 음식을 좋아해요
   romanization: mu-seun eum-sig-eul jo-a-hae-yo
@@ -2190,6 +2599,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: museun
+  level: 1A
 - id: f3a64ca1-1999-4072-9759-62d7b3df77b5
   hangul: 언제부터 한국어를 공부해요
   romanization: eon-je-bu-teo han-gu-geo-reul gong-bu-hae-yo
@@ -2197,6 +2607,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: eonje
+  level: 1A
 - id: ba2e8d9d-c0e1-402e-afcd-06319bc1a238
   hangul: 왜 안 먹어요
   romanization: wae an meo-geo-yo
@@ -2204,6 +2615,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: wae_an
+  level: 1A
 - id: 98dae3dd-bf00-489f-aeb4-b34a2e2597bd
   hangul: 왜 안 해요
   romanization: wae an hae-yo
@@ -2211,6 +2623,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: wae_an
+  level: 1A
 - id: df382bd7-d29e-4df8-98c8-2a5a8c3dc859
   hangul: 어떻게 생각해요
   romanization: eo-tteo-ke saeng-gak-hae-yo
@@ -2218,6 +2631,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: eotteoke
+  level: 1A
 - id: 54c5a7ba-5dce-44e0-ac01-f2a5e1ee939f
   hangul: 얼마나예요
   romanization: eol-ma-ye-yo
@@ -2225,6 +2639,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: eolmana
+  level: 1A
 - id: 6e8e06bc-866c-4a1c-9486-c9ef375346ed
   hangul: 한국어를 얼마나 공부해요
   romanization: han-gu-geo-reul eol-ma-na gong-bu-hae-yo
@@ -2232,6 +2647,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: eolmana
+  level: 1A
 - id: 8bfb0972-4c04-49b2-a13b-23e8c8123543
   hangul: 내일 뭐 해요
   romanization: nae-il mwo hae-yo
@@ -2239,6 +2655,7 @@
   type: phrase
   visibility: hidden
   grammar_pattern: mwoeyo_vs_mwo_haeyo
+  level: 1A
 - id: e4bc4fac-8f3d-47fc-9786-65e1aedc3342
   hangul: 저게 뭐예요
   romanization: jeo-ge mwo-ye-yo
@@ -2246,3 +2663,4 @@
   type: phrase
   visibility: hidden
   grammar_pattern: mwoeyo_vs_mwo_haeyo
+  level: 1A

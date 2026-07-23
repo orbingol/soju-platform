@@ -51,3 +51,49 @@ def test_examples_orphan_id(data_root: Path) -> None:
 def test_word_id_still_referenced(data_root: Path) -> None:
     # Sanity: fixture word remains loadable after other mutations in this module order.
     assert WORD_ID in vocabulary_by_id(data_root)
+
+
+def test_unknown_level_reported(data_root: Path) -> None:
+    vocab = load_vocabulary(data_root)
+    for entry in vocab:
+        if entry["id"] == WORD_ID:
+            entry["level"] = "9Z"
+            break
+    save_vocabulary(vocab, data_root)
+    errors = validate_registry(data_root)
+    assert any("unknown level '9Z'" in e and WORD_ID in e for e in errors)
+
+
+def test_omitted_level_ok(data_root: Path) -> None:
+    vocab = load_vocabulary(data_root)
+    for entry in vocab:
+        entry.pop("level", None)
+    save_vocabulary(vocab, data_root)
+    assert validate_registry(data_root) == []
+
+
+def test_valid_level_ok(data_root: Path) -> None:
+    vocab = load_vocabulary(data_root)
+    for entry in vocab:
+        entry["level"] = "1A"
+    save_vocabulary(vocab, data_root)
+    assert validate_registry(data_root) == []
+
+
+def test_unknown_grammar_level_reported(data_root: Path) -> None:
+    from soju.registry.grammar import load_grammar_pattern, save_grammar_pattern
+
+    pattern = load_grammar_pattern("do", data_root)
+    pattern["level"] = "9Z"
+    save_grammar_pattern("do", pattern, data_root)
+    errors = validate_registry(data_root)
+    assert any("grammar pattern do" in e and "unknown level '9Z'" in e for e in errors)
+
+
+def test_grammar_omitted_level_ok(data_root: Path) -> None:
+    from soju.registry.grammar import load_grammar_pattern, save_grammar_pattern
+
+    pattern = load_grammar_pattern("do", data_root)
+    pattern.pop("level", None)
+    save_grammar_pattern("do", pattern, data_root)
+    assert validate_registry(data_root) == []

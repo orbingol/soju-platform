@@ -58,7 +58,7 @@ def test_load_vocab_docs_includes_hangul_and_english(data_root: Path) -> None:
     assert school.hangul == "학교"
     assert "school" in school.text
     assert "학교" in school.text
-    assert school.level is None
+    assert school.level == "1A"
 
 
 def test_load_grammar_docs_uses_manifest_description(data_root: Path) -> None:
@@ -69,6 +69,7 @@ def test_load_grammar_docs_uses_manifest_description(data_root: Path) -> None:
     assert do_doc.form == "-도"
     assert "Additive particle" in do_doc.summary
     assert do_doc.form in do_doc.text
+    assert do_doc.level == "1A"
 
 
 def test_load_grammar_docs_empty_without_manifest(tmp_path: Path) -> None:
@@ -107,7 +108,7 @@ def test_build_embedding_index_writes_cache_files(data_root: Path) -> None:
     grammar_lines = grammar_jsonl_path(data_root).read_text(encoding="utf-8").strip().splitlines()
     assert len(grammar_lines) == result.grammar_count
     first_grammar = json.loads(grammar_lines[0])
-    assert set(first_grammar) == {"id", "form", "english", "category", "summary", "embedding"}
+    assert set(first_grammar) == {"id", "form", "english", "category", "summary", "level", "embedding"}
 
 
 def test_build_embedding_index_dimension_mismatch_raises(data_root: Path) -> None:

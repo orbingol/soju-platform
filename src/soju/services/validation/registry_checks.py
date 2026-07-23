@@ -3,7 +3,9 @@
 
 from __future__ import annotations
 
+from soju.levels import list_level_ids
 from soju.registry.examples import load_examples_store
+from soju.registry.grammar import iter_grammar_patterns
 from soju.registry.topics import load_topic, load_topics_manifest
 from soju.registry.types import load_types
 from soju.registry.vocabulary import load_vocabulary, vocabulary_by_id
@@ -11,10 +13,12 @@ from soju.services.keys import sense_key
 
 
 def validate_registry(root=None) -> list[str]:
+    """Validate vocabulary registry, types, topic refs, and grammar level tags."""
     errors: list[str] = []
     types = load_types(root)
     type_ids = {entry["id"] for entry in types}
     type_slugs = {entry["slug"] for entry in types}
+    known_levels = set(list_level_ids(root))
 
     vocab_ids: set[str] = set()
     sense_seen: set[tuple[str, str]] = set()
@@ -32,6 +36,12 @@ def validate_registry(root=None) -> list[str]:
 
         if entry.get("type") not in type_ids:
             errors.append(f"{entry['hangul']}: unknown type '{entry.get('type')}'")
+
+        raw_level = entry.get("level")
+        if isinstance(raw_level, str) and raw_level.strip():
+            level = raw_level.strip()
+            if level not in known_levels:
+                errors.append(f"{entry['hangul']} ({vid}): unknown level '{level}' (not in levels.yaml)")
 
     vocab_by_id = vocabulary_by_id(root)
     manifest = load_topics_manifest(root)
@@ -65,4 +75,23 @@ def validate_registry(root=None) -> list[str]:
         if vocab_id not in vocab_by_id:
             errors.append(f"examples: unknown vocabulary id {vocab_id}")
 
+    errors.extend(validate_grammar_levels(root, known_levels=known_levels))
+    return errors
+
+
+def validate_grammar_levels(root=None, *, known_levels: set[str] | None = None) -> list[str]:
+    """Return errors for grammar patterns whose ``level`` is not in ``levels.yaml``."""
+    known = known_levels if known_levels is not None else set(list_level_ids(root))
+    errors: list[str] = []
+    try:
+        patterns = iter_grammar_patterns(root)
+    except (ValueError, OSError) as exc:
+        return [str(exc)]
+
+    for pattern_id, _meta, pattern in patterns:
+        raw_level = pattern.get("level")
+        if isinstance(raw_level, str) and raw_level.strip():
+            level = raw_level.strip()
+            if level not in known:
+                errors.append(f"grammar pattern {pattern_id}: unknown level '{level}' (not in levels.yaml)")
     return errors
