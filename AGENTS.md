@@ -32,7 +32,8 @@ Assume Python commands run as `uv run …` or `uv run poe …` unless the venv i
 | Lint / pre-commit | `uv run poe lint` / `uv run poe pre-commit` |
 | Web format (Docker) | `docker compose run --rm --no-deps web npm run format` |
 | Validate in Docker | `docker compose --profile validate run --rm validate` / `uv run poe validate-docker` |
-| Web dev | `docker compose up` → http://localhost:5173 (API http://localhost:8080) |
+| Web (dev) | `uv run poe up` → Vite :5173, API :8000 |
+| Web (prod) | `uv run poe up-prod` / `docker compose up` → http://localhost:8080 |
 | Import words (JSON) | `cat records.json \| uv run soju import words --topic <id> --stdin-json` |
 | Import verbs (JSON) | `cat verbs.json \| uv run soju import verbs --stdin-json` |
 | Promote local words | `uv run soju promote --topic <id>` |

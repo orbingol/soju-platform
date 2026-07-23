@@ -1,11 +1,47 @@
 Docker
 ======
 
-Compose services run the web app and validate data. The Compose **project name** is
-``soju``: containers use the ``soju-`` prefix, named volumes use ``soju_``.
+Compose services run the web app, FastAPI backend, and (by default) nginx.
+The Compose **project name** is ``soju``: containers use the ``soju-`` prefix,
+named volumes use ``soju_``.
 
-Core services
--------------
+Prod vs dev
+-----------
+
+**Dev (default via poe)** — Vite and FastAPI on the host; nginx is not started.
+
+.. code-block:: bash
+
+   uv run poe up
+   # or
+   docker compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+**Prod** — only nginx is published. UI and API share ``http://localhost:8080``.
+
+.. code-block:: bash
+
+   uv run poe up-prod
+   # or
+   docker compose up
+
+.. list-table::
+   :header-rows: 1
+   :widths: 18 28 54
+
+   * - Mode
+     - Host ports
+     - Notes
+   * - Dev
+     - ``5173`` (Vite), ``8000`` (API)
+     - ``PUBLIC_AI_BASE_URL=http://localhost:8000``
+   * - Prod
+     - ``8080`` (nginx)
+     - nginx → ``web:5173`` + ``backend:8000``
+
+Do not revive the old ``docker/piper`` TTS image — speech is served by the Soju backend.
+
+Other commands
+--------------
 
 .. list-table::
    :header-rows: 1
@@ -13,18 +49,12 @@ Core services
 
    * - Goal
      - Command
-   * - Web + Soju API (nginx :8080)
-     - ``docker compose up``
    * - Web unit tests
      - ``docker compose exec web npm test``
    * - Validate (canonical image)
      - ``docker compose --profile validate run --rm validate``
    * - Static web build
      - ``scripts/docker-build-web.sh`` (see :doc:`static-build`)
-
-``docker compose up`` starts ``web`` (:5173), ``backend`` (FastAPI), and ``nginx``
-(:8080 → backend). Do not revive the old ``docker/piper`` TTS image — speech is
-served by the Soju backend.
 
 Optional profiles
 ------------------
@@ -36,7 +66,7 @@ Optional profiles
    * - Goal
      - Command
    * - Ollama (AI features, containerized)
-     - ``docker compose --profile ollama up ollama ollama-pull web``
+     - ``docker compose --profile ollama up ollama ollama-pull``
 
 See :doc:`ai` for Practice/Chat setup and :doc:`tts` for local speech.
 

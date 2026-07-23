@@ -5,6 +5,7 @@ server:
   host: "0.0.0.0"
   port: 8000
   cors_origins:
+    - "http://localhost:8080"
     - "http://localhost:5173"
 
 llm:

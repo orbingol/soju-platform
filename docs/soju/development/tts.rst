@@ -1,8 +1,8 @@
 Local TTS (speech)
 ==================
 
-``docker compose up`` starts the Soju ``backend`` (behind nginx on port ``8080``).
-Speak buttons call ``POST /v1/audio/speech`` on that API.
+``uv run poe up-prod`` / ``docker compose up`` serves the UI and ``POST /v1/audio/speech`` through nginx
+on port ``8080``. In ``poe up``, call the API at ``http://localhost:8000``.
 
 **Korean note:** upstream Piper has no official Korean neural voice that works with stock
 ``piper-tts``. The backend defaults to **edge-tts** (``tts.engine: edge``) with

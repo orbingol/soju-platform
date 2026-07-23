@@ -134,6 +134,14 @@ cmd = "soju import verbs --stdin-json"
 help = "Build the Ollama embedding cache for Practice retrieval (data/cache/embeddings/)."
 cmd = "soju embed-index"
 
+[tool.poe.tasks.up]
+help = "Start Soju in dev mode: Vite :5173 and FastAPI :8000 (no nginx)."
+cmd = "docker compose -f docker-compose.yml -f docker-compose.dev.yml up"
+
+[tool.poe.tasks.up-prod]
+help = "Start Soju in prod mode: nginx :8080 → web + backend."
+cmd = "docker compose up"
+
 [tool.poe.tasks.validate-docker]
 help = "Run validation inside the validate Docker image."
 cmd = "docker compose --profile validate run --rm validate"

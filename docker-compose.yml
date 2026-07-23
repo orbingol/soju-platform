@@ -1,3 +1,8 @@
+# Default Compose file = prod topology: only nginx is published to the host.
+#   uv run poe up-prod   ·   docker compose up
+# Dev (Vite + FastAPI on the host):
+#   uv run poe up   ·   docker compose -f docker-compose.yml -f docker-compose.dev.yml up
+#
 # Ollama model cache on the host (default: ~/.ollama). Override with OLLAMA_DATA_DIR.
 x-ollama-volume: &ollama-volume "${OLLAMA_DATA_DIR:-${HOME}/.ollama}:/root/.ollama"
 
@@ -5,9 +10,9 @@ x-ollama-volume: &ollama-volume "${OLLAMA_DATA_DIR:-${HOME}/.ollama}:/root/.olla
 x-soju-ai-chat-model: &soju-ai-chat-model gemma4:e4b
 x-soju-ai-embed-model: &soju-ai-embed-model nomic-embed-text
 
-# Speech: local = Soju backend TTS (via nginx :8080); browser = Web Speech API.
+# Speech: local = Soju backend TTS; browser = Web Speech API.
 x-soju-tts-engine: &soju-tts-engine local
-# Browser-reachable Soju API (nginx → FastAPI).
+# Browser-reachable Soju API (prod: nginx :8080).
 x-soju-api-base-url: &soju-api-base-url http://localhost:8080
 
 # Minimal browser-visible env (models / tutor prompt come from GET /v1/soju/client-config).
@@ -25,8 +30,8 @@ services:
       context: .
       dockerfile: docker/Dockerfile.web
       target: dev
-    ports:
-      - "5173:5173"
+    expose:
+      - "5173"
     volumes:
       - ./data:/data:rw
       - ./apps/web:/app:rw
@@ -35,8 +40,6 @@ services:
       <<: *soju-web-environment
     extra_hosts:
       - host.docker.internal:host-gateway
-    depends_on:
-      - nginx
 
   backend:
     build:
@@ -57,6 +60,7 @@ services:
     volumes:
       - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
+      - web
       - backend
     restart: unless-stopped
 

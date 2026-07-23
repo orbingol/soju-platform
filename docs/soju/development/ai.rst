@@ -1,15 +1,17 @@
 AI practice & chat
 ==================
 
-Practice and Chat talk to the **Soju backend** (OpenAI-compatible API behind nginx),
-not directly to Ollama. ``docker compose up`` starts ``web``, ``backend``, and ``nginx``.
-Set ``PUBLIC_AI_ENABLED=true`` (default in Compose).
+Practice and Chat talk to the **Soju backend** (OpenAI-compatible API),
+not directly to Ollama. ``uv run poe up`` exposes Vite and FastAPI on
+``:5173`` / ``:8000``. Prod puts UI and API behind nginx on ``:8080`` —
+see :doc:`docker`. Set ``PUBLIC_AI_ENABLED=true`` (default in Compose).
 
 **Host Ollama (desktop app)** — usual setup:
 
 .. code-block:: bash
 
-   docker compose up
+   uv run poe up
+   # or: uv run poe up-prod
 
 Pull models on the host (defaults match backend YAML / ``ollama-pull``):
 
@@ -20,7 +22,7 @@ Pull models on the host (defaults match backend YAML / ``ollama-pull``):
 
 The backend reaches host Ollama at ``http://host.docker.internal:11434``
 (see ``config/backend.yaml``). The **browser** calls ``PUBLIC_AI_BASE_URL``
-(default ``http://localhost:8080``).
+(default ``http://localhost:8000`` in ``poe up``; ``http://localhost:8080`` in ``poe up-prod``).
 
 **Ollama in Docker Compose:**
 

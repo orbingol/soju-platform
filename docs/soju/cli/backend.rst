@@ -36,5 +36,6 @@ packaged defaults under ``src/soju/backend/config/files/``. Compose mounts
    uv run soju backend --config config/backend.yaml
    uv run soju backend --host 127.0.0.1 --port 8000
 
-With ``docker compose up``, nginx exposes the API at ``http://localhost:8080``.
+With ``uv run poe up-prod`` / ``docker compose up``, nginx exposes the app and API at ``http://localhost:8080``.
+With ``uv run poe up``, the API is on ``http://localhost:8000``.
 See :doc:`/development/ai` and :doc:`/development/tts`.

@@ -13,7 +13,9 @@ class ServerSettings(BaseModel):
 
     host: str = "0.0.0.0"
     port: int = Field(default=8000, ge=1, le=65535)
-    cors_origins: list[str] = Field(default_factory=lambda: ["http://localhost:5173"])
+    cors_origins: list[str] = Field(
+        default_factory=lambda: ["http://localhost:8080", "http://localhost:5173"],
+    )
 
 
 class LlmSettings(BaseModel):

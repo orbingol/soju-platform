@@ -17,10 +17,12 @@ You only need `Docker Desktop <https://www.docker.com/products/docker-desktop/>`
 .. code-block:: bash
 
    docker compose up
+   # or: uv run poe up-prod
 
-Then open http://localhost:5173 in your browser. Browsing words, grammar, and
-flashcards works out of the box; Practice and Chat need a local AI model — see
-:doc:`development/ai` if you want those.
+Then open http://localhost:8080 in your browser (nginx fronts the UI and API).
+For Vite on :5173 and the API on :8000, use ``uv run poe up`` — see :doc:`development/docker`.
+Browsing words, grammar, and flashcards works out of the box; Practice and Chat need
+a local AI model — see :doc:`development/ai` if you want those.
 
 For a non-technical overview of features, see ``README.md`` at the repository root.
 
