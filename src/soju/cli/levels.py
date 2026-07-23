@@ -115,7 +115,4 @@ def set_cmd(
         raise typer.Exit(1) from exc
 
     mode = "would set" if report.dry_run else "set"
-    print(
-        f"{mode} level={report.level_id} on {report.updated} "
-        f"{report.kind} entr{'y' if report.updated == 1 else 'ies'}."
-    )
+    print(f"{mode} level={report.level_id} on {report.updated} {report.kind} entr{'y' if report.updated == 1 else 'ies'}.")

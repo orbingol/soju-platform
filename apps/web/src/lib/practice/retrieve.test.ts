@@ -119,10 +119,7 @@ describe('retrievePractice', () => {
   });
 
   it('includes unassigned vocab and grammar when includeUnassigned is true', () => {
-    const result = retrievePractice(
-      { level: '1A', queryVector: [1, 0], vocabK: 5, grammarM: 5, includeUnassigned: true },
-      dataDir,
-    );
+    const result = retrievePractice({ level: '1A', queryVector: [1, 0], vocabK: 5, grammarM: 5, includeUnassigned: true }, dataDir);
     expect(result.hangul).toEqual(['학교', '커피', '물']);
     expect(result.grammar.map((g) => g.id)).toEqual(['do', 'extra']);
   });

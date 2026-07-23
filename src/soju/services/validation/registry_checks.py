@@ -41,9 +41,7 @@ def validate_registry(root=None) -> list[str]:
         if isinstance(raw_level, str) and raw_level.strip():
             level = raw_level.strip()
             if level not in known_levels:
-                errors.append(
-                    f"{entry['hangul']} ({vid}): unknown level '{level}' (not in levels.yaml)"
-                )
+                errors.append(f"{entry['hangul']} ({vid}): unknown level '{level}' (not in levels.yaml)")
 
     vocab_by_id = vocabulary_by_id(root)
     manifest = load_topics_manifest(root)
