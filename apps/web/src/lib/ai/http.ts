@@ -50,17 +50,12 @@ export async function readError(response: Response): Promise<string> {
   return `Request failed (${response.status})`;
 }
 
-const HEALTH_CHECK_PATHS = ['/v1/models', '/api/tags'] as const;
-
-/** Browser-side probe for a reachable OpenAI-compatible or Ollama server. */
+/** Browser-side probe for a reachable Soju OpenAI-compatible API. */
 export async function checkServerAvailable(): Promise<boolean> {
-  for (const path of HEALTH_CHECK_PATHS) {
-    try {
-      const response = await fetchWithTimeout(apiUrl(path));
-      if (response.ok) return true;
-    } catch {
-      // Try the next probe path.
-    }
+  try {
+    const response = await fetchWithTimeout(apiUrl('/v1/models'));
+    return response.ok;
+  } catch {
+    return false;
   }
-  return false;
 }

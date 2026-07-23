@@ -3,9 +3,10 @@
   import { browser } from '$app/environment';
 
   import { checkAiAvailable } from '$lib/ai/client';
-  import { GLOBAL_CHAT_SESSION_KEY, loadChatDockOpen, saveChatDockOpen } from '$lib/chat';
+  import { ensureClientConfig } from '$lib/ai/client-config';
+  import { buildChatSystemPrompt, chatTutorLabel, GLOBAL_CHAT_SESSION_KEY, loadChatDockOpen, saveChatDockOpen } from '$lib/chat';
   import { openChatPopoutWindow } from '$lib/chat-popout';
-  import { aiBaseUrl } from '$lib/config';
+  import { aiBaseUrl, aiModel, aiTutorName } from '$lib/config';
 
   import ChatConversation from '$lib/components/ChatConversation.svelte';
 
@@ -32,7 +33,12 @@
   let popoutWindow: Window | null = null;
   let removePopoutListeners: (() => void) | null = null;
 
-  const tutorShortName = $derived(chat.tutorName.split('(')[0]?.trim() || chat.tutorName);
+  let model = $state(chat.model);
+  let systemPrompt = $state(chat.systemPrompt);
+  let tutorName = $state(chat.tutorName);
+  let tutorLabel = $state(chat.tutorLabel);
+
+  const tutorShortName = $derived(tutorName.split('(')[0]?.trim() || tutorName);
   const tutorInitial = $derived([...tutorShortName][0] ?? '희');
 
   async function setOpen(next: boolean) {
@@ -180,6 +186,11 @@
     if (!browser) return;
 
     void (async () => {
+      await ensureClientConfig();
+      model = aiModel;
+      systemPrompt = buildChatSystemPrompt();
+      tutorName = aiTutorName;
+      tutorLabel = chatTutorLabel(aiTutorName);
       open = await loadChatDockOpen();
       available = await checkAiAvailable();
       checking = false;
@@ -221,7 +232,7 @@
 
 <div class="chat-dock" class:is-open={open} class:is-popped-out={poppedOut}>
   <div class="chat-dock__panel-host" bind:this={panelHost}>
-    <aside class="chat-dock__panel" id="chat-dock-panel" bind:this={panelEl} aria-label={chat.tutorLabel}>
+    <aside class="chat-dock__panel" id="chat-dock-panel" bind:this={panelEl} aria-label={tutorLabel}>
       <div class="chat-dock__header">
         <div class="chat-dock__identity">
           <span class="chat-dock__avatar" aria-hidden="true">{tutorInitial}</span>
@@ -260,7 +271,7 @@
             <code>{typeof window !== 'undefined' ? window.location.origin : 'this site'}</code>, then reload.
           </p>
         {:else}
-          <ChatConversation bind:this={conversation} systemPrompt={chat.systemPrompt} model={chat.model} sessionKey={GLOBAL_CHAT_SESSION_KEY} compact />
+          <ChatConversation bind:this={conversation} systemPrompt={systemPrompt} model={model} sessionKey={GLOBAL_CHAT_SESSION_KEY} compact />
         {/if}
       </div>
     </aside>

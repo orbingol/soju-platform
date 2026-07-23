@@ -1,48 +1,21 @@
 # Ollama model cache on the host (default: ~/.ollama). Override with OLLAMA_DATA_DIR.
 x-ollama-volume: &ollama-volume "${OLLAMA_DATA_DIR:-${HOME}/.ollama}:/root/.ollama"
 
-# Chat / embed models (ollama-pull + backend YAML defaults).
+# Chat / embed models for ollama-pull (backend YAML is source of truth for the API).
 x-soju-ai-chat-model: &soju-ai-chat-model gemma4:e4b
 x-soju-ai-embed-model: &soju-ai-embed-model nomic-embed-text
 
 # Speech: local = Soju backend TTS (via nginx :8080); browser = Web Speech API.
-x-soju-tts-engine: &soju-tts-engine piper
-# Browser-reachable Soju API (nginx → FastAPI). Used for AI and local TTS until frontend rename.
+x-soju-tts-engine: &soju-tts-engine local
+# Browser-reachable Soju API (nginx → FastAPI).
 x-soju-api-base-url: &soju-api-base-url http://localhost:8080
-x-soju-tts-piper-voice: &soju-tts-piper-voice ko-KR-SunHiNeural
 
-# Browser-visible env vars for apps/web (PUBLIC_* are embedded at build / passed to Vite dev).
-# Model / tutor prompt still here until frontend client-config cutover (plan step 11).
+# Minimal browser-visible env (models / tutor prompt come from GET /v1/soju/client-config).
 x-soju-web-environment: &soju-web-environment
   DATA_DIR: /data
   PUBLIC_TTS_ENGINE: *soju-tts-engine
-  PUBLIC_TTS_PIPER_BASE_URL: *soju-api-base-url
-  PUBLIC_TTS_PIPER_VOICE: *soju-tts-piper-voice
   PUBLIC_AI_ENABLED: "true"
-  PUBLIC_AI_API_MODE: chat-completions
   PUBLIC_AI_BASE_URL: *soju-api-base-url
-  PUBLIC_AI_MODEL: *soju-ai-chat-model
-  PUBLIC_AI_EMBED_MODEL: *soju-ai-embed-model
-  PUBLIC_AI_CHAT_SUMMARY_TRIGGER: "10"
-  PUBLIC_AI_CHAT_KEEP_RECENT: "6"
-  PUBLIC_AI_TUTOR_NAME: "Hee-jae (희재)"
-  PUBLIC_AI_SYSTEM_PROMPT: |
-    You are {{tutor_name}}, a friendly Korean language teacher for beginners.
-
-    Teaching style:
-    - Keep replies short and clear (usually 2–4 short sentences).
-    - If the question is broad or vague, ask one brief clarifying question first. Do not give a full lesson yet.
-    - Once the topic is clear: a short explanation, then at most one example (Korean + English). Offer to go deeper.
-    - Be warm and patient, with light empathy—like a supportive teacher. A gentle emoji is welcome when it fits; keep encouragement brief, not excessive.
-    - Prefer vocabulary from the Soju database when helpful.
-    - If you are introducing a new word or a topic that is not included in the Soju database, try to explain it in a way that is easy to understand and remember.
-    - Mix Korean and English naturally.
-
-    Formatting:
-    - Plain text. You may use **bold** for Korean forms or key terms.
-    - Use simple "-" bullets only when listing a few short items.
-    - Do not use LaTeX, Markdown headings, horizontal rules (---), or code fences.
-    - For "becomes" / "conjugates to", write → (not $\rightarrow$).
 
 name: soju
 

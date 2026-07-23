@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { resolveTtsEngine } from './config';
+import { aiEmbedModel, aiModel, applyClientConfig, localTtsVoice, resolveTtsEngine } from './config';
 import { formatVoiceLabel, getTtsEngine, isKoreanVoice, pickVoices, resolveVoiceByUri, setPitch, setRate, setTtsEngine, setVoiceUri, setVolume } from './tts';
 
 function voice(name: string, lang: string, uri = name): SpeechSynthesisVoice {
@@ -50,11 +50,19 @@ describe('tts', () => {
 
   it('resolves and stores TTS engine selection', () => {
     expect(resolveTtsEngine('browser')).toBe('browser');
-    expect(resolveTtsEngine('PIPER')).toBe('piper');
-    expect(resolveTtsEngine(undefined)).toBe('piper');
+    expect(resolveTtsEngine('PIPER')).toBe('local');
+    expect(resolveTtsEngine('local')).toBe('local');
+    expect(resolveTtsEngine(undefined)).toBe('local');
     expect(setTtsEngine('browser')).toBe('browser');
     expect(getTtsEngine()).toBe('browser');
-    expect(setTtsEngine('piper')).toBe('piper');
-    expect(getTtsEngine()).toBe('piper');
+    expect(setTtsEngine('local')).toBe('local');
+    expect(getTtsEngine()).toBe('local');
+  });
+
+  it('applies client-config model overrides', () => {
+    applyClientConfig({ chat_model: 'test-chat', embed_model: 'test-embed', tts_default_voice: 'ko-KR-InJoonNeural' });
+    expect(aiModel).toBe('test-chat');
+    expect(aiEmbedModel).toBe('test-embed');
+    expect(localTtsVoice).toBe('ko-KR-InJoonNeural');
   });
 });

@@ -1,4 +1,4 @@
-import { defaultTtsEngine, piperBaseUrl, piperVoice, type TtsEngine } from '$lib/config';
+import { defaultTtsEngine, localTtsBaseUrl, localTtsVoice, type TtsEngine } from '$lib/config';
 import { getItem, setItem } from '$lib/storage';
 
 const TTS_RATE_KEY = 'tts-rate';
@@ -30,7 +30,6 @@ let pitch = DEFAULT_PITCH;
 let volume = DEFAULT_VOLUME;
 let selectedVoiceUri: string | null = null;
 let selectedEngine: TtsEngine = defaultTtsEngine;
-let rateReady = false;
 let readyPromise: Promise<void> | null = null;
 
 export function isKoreanVoice(voice: SpeechSynthesisVoice): boolean {
@@ -108,7 +107,7 @@ export function getVoiceUri(): string | null {
 }
 
 export function setTtsEngine(engine: TtsEngine): TtsEngine {
-  selectedEngine = engine === 'browser' ? 'browser' : 'piper';
+  selectedEngine = engine === 'browser' ? 'browser' : 'local';
   return selectedEngine;
 }
 
@@ -116,9 +115,9 @@ export function getTtsEngine(): TtsEngine {
   return selectedEngine;
 }
 
-/** Speech is usable via Piper config and/or browser voices. */
+/** Speech is usable via local Soju TTS and/or browser voices. */
 export function isTtsAvailable(): boolean {
-  return selectedEngine === 'piper' || hasBrowserTts;
+  return selectedEngine === 'local' || hasBrowserTts;
 }
 
 function getBrowserVoices(): SpeechSynthesisVoice[] {
@@ -205,8 +204,15 @@ async function loadStoredVoice(): Promise<void> {
 
 async function loadStoredEngine(): Promise<void> {
   const stored = await getItem<string>(TTS_ENGINE_KEY);
-  if (stored === 'browser' || stored === 'piper') {
-    selectedEngine = stored;
+  if (stored === 'browser') {
+    selectedEngine = 'browser';
+    return;
+  }
+  if (stored === 'local' || stored === 'piper') {
+    selectedEngine = 'local';
+    if (stored === 'piper') {
+      await setItem(TTS_ENGINE_KEY, 'local');
+    }
     return;
   }
   selectedEngine = defaultTtsEngine;
@@ -214,7 +220,6 @@ async function loadStoredEngine(): Promise<void> {
 
 async function loadStoredSettings(): Promise<void> {
   await Promise.all([loadStoredRate(), loadStoredPitch(), loadStoredVolume(), loadStoredVoice(), loadStoredEngine()]);
-  rateReady = true;
 }
 
 export function ttsReady(): Promise<void> {
@@ -262,9 +267,9 @@ export async function saveTtsEngine(engine: TtsEngine): Promise<TtsEngine> {
   return next;
 }
 
-export async function checkPiperAvailable(): Promise<boolean> {
+export async function checkLocalTtsAvailable(): Promise<boolean> {
   try {
-    const response = await fetch(`${piperBaseUrl}/health`, { method: 'GET' });
+    const response = await fetch(`${localTtsBaseUrl}/health`, { method: 'GET' });
     if (!response.ok) return false;
     const payload = (await response.json()) as { ok?: boolean };
     return payload.ok === true;
@@ -272,6 +277,9 @@ export async function checkPiperAvailable(): Promise<boolean> {
     return false;
   }
 }
+
+/** @deprecated Use {@link checkLocalTtsAvailable}. */
+export const checkPiperAvailable = checkLocalTtsAvailable;
 
 function clearSpeakingUi(): void {
   if (activeBtn) {
@@ -322,7 +330,7 @@ function speakWithBrowser(text: string, btn?: HTMLButtonElement | null): void {
   window.speechSynthesis.speak(utterance);
 }
 
-async function speakWithPiper(text: string, btn?: HTMLButtonElement | null): Promise<void> {
+async function speakWithLocalTts(text: string, btn?: HTMLButtonElement | null): Promise<void> {
   stopPlayback();
 
   activeBtn = btn ?? null;
@@ -330,19 +338,19 @@ async function speakWithPiper(text: string, btn?: HTMLButtonElement | null): Pro
     activeBtn.classList.add('speaking');
   }
 
-  const response = await fetch(`${piperBaseUrl}/v1/audio/speech`, {
+  const response = await fetch(`${localTtsBaseUrl}/v1/audio/speech`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      model: piperVoice,
-      voice: piperVoice,
+      model: localTtsVoice,
+      voice: localTtsVoice,
       input: text,
       speed: getRate(),
     }),
   });
 
   if (!response.ok) {
-    throw new Error(`Piper TTS failed (${response.status})`);
+    throw new Error(`Local TTS failed (${response.status})`);
   }
 
   const blob = await response.blob();
@@ -370,19 +378,19 @@ async function speakWithPiper(text: string, btn?: HTMLButtonElement | null): Pro
 }
 
 /**
- * Speak Hangul (or other text). Uses Piper when selected, falling back to
- * browser Web Speech if Piper is unavailable.
+ * Speak Hangul (or other text). Uses local Soju TTS when selected, falling back to
+ * browser Web Speech if the service is unavailable.
  */
 export function speak(text: string, btn?: HTMLButtonElement | null): void {
   if (!text.trim()) return;
   void (async () => {
     await ttsReady();
-    if (getTtsEngine() === 'piper') {
+    if (getTtsEngine() === 'local') {
       try {
-        await speakWithPiper(text, btn);
+        await speakWithLocalTts(text, btn);
         return;
       } catch {
-        // Fall through to browser when Piper is down.
+        // Fall through to browser when local TTS is down.
       }
     }
     speakWithBrowser(text, btn);
