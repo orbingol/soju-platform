@@ -9,7 +9,11 @@ from typing import Annotated, Optional
 import typer
 
 from soju.cli._common import make_app
-from soju.backend.config import BackendSettings, load_settings, user_config_path
+from soju.backend.config.settings import BackendSettings
+from soju.backend.config.loader import (
+    load_settings,
+    user_config_path,
+)
 
 app = make_app()
 

@@ -15,7 +15,10 @@ from soju.backend.abstract.tts import TtsError
 from soju.backend.adapters.tts import build_tts_engine
 from soju.backend.adapters.tts.edge import EdgeTtsEngine, speed_to_edge_rate
 from soju.backend.adapters.tts.piper import PiperTtsEngine
-from soju.backend.config import PiperTtsSettings, TtsSettings
+from soju.backend.config.settings import (
+    PiperTtsSettings,
+    TtsSettings,
+)
 
 
 def test_speed_to_edge_rate() -> None:

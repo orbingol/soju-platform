@@ -5,9 +5,9 @@ from __future__ import annotations
 
 import pytest
 
-from soju.languages import LanguagePlugin, get_language
-from soju.languages.korean import KoreanLanguage
-from soju.languages.plugins import ENV_LANGUAGE
+from soju.languages.contracts import LanguagePlugin
+from soju.languages.korean.plugin import KoreanLanguage
+from soju.languages.plugins import ENV_LANGUAGE, get_language
 
 
 def test_get_language_ko_is_language_plugin() -> None:

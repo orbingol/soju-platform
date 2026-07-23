@@ -5,7 +5,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from soju.base import get_base_language
+from soju.base.plugins import get_base_language
 from soju.core.models import EXAMPLE_TENSES as TENSES
 from soju.core.models import EXAMPLE_VARIANTS as VARIANTS
 from soju.languages.korean.morphology import (

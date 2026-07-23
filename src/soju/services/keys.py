@@ -9,10 +9,10 @@ data-access layer never reaches into a language plugin itself.
 
 from __future__ import annotations
 
-from soju.base import get_base_language
+from soju.base.plugins import get_base_language
 from soju.core.text import example_key as _compose_example_key
 from soju.core.text import sense_key as _compose_sense_key
-from soju.languages import get_language
+from soju.languages.plugins import get_language
 
 __all__ = ["example_key", "match_gloss", "normalize_term", "sense_key"]
 

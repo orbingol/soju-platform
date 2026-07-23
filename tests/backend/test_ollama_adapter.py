@@ -15,7 +15,7 @@ import httpx
 from soju.backend.abstract.llm import LlmProviderError
 from soju.backend.adapters.llm import build_llm_provider
 from soju.backend.adapters.llm.ollama import OllamaLlmProvider
-from soju.backend.config import LlmSettings
+from soju.backend.config.settings import LlmSettings
 
 
 class FakeTransport(httpx.AsyncBaseTransport):

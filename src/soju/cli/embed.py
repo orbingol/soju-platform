@@ -9,14 +9,17 @@ from typing import Annotated
 import typer
 
 from soju.cli._common import flag, make_app
-from soju.llm import LlmError, OllamaClient
+from soju.cli._ollama import require_ollama_client
+from soju.llm.base import LlmError
 from soju.llm.ollama import DEFAULT_BASE_URL
-from soju.services.embeddings import (
+from soju.services.embeddings.build import (
     DEFAULT_EMBED_MODEL,
     build_embedding_index,
+    make_ollama_embed_fn,
+)
+from soju.services.embeddings.documents import (
     load_grammar_docs,
     load_vocab_docs,
-    make_ollama_embed_fn,
 )
 
 app = make_app()
@@ -52,13 +55,7 @@ def build(
         )
         return
 
-    client = OllamaClient(model=embed_model, base_url=base_url)
-    if not client.check_available():
-        print(
-            f"Error: Ollama is not reachable at {base_url}. Start Ollama or run: docker compose --profile ollama up ollama ollama-pull",
-            file=sys.stderr,
-        )
-        raise typer.Exit(1)
+    client = require_ollama_client(model=embed_model, base_url=base_url)
 
     def on_progress(done: int, total: int) -> None:
         print(f"Embedded {done}/{total}…", file=sys.stderr, flush=True)

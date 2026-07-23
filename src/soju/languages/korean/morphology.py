@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from soju.base import get_base_language
+from soju.base.plugins import get_base_language
 from soju.languages.korean.conjugation import _split_prefix_and_root
 
 _TIME_1A = {

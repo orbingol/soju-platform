@@ -2,8 +2,8 @@
   import { onMount } from 'svelte';
   import type { Snippet } from 'svelte';
 
-  import { checkAiAvailable } from '$lib/ai/client';
-  import { aiBaseUrl, aiEnabled } from '$lib/config';
+  import { aiOfflineMessage, probeAiAvailability } from '$lib/ai/availability';
+  import { aiEnabled, sojuApiBaseUrl } from '$lib/config';
 
   interface Props {
     featureLabel?: string;
@@ -16,13 +16,9 @@
   let available = $state(false);
 
   onMount(async () => {
-    if (!aiEnabled) {
-      checking = false;
-      return;
-    }
-
-    available = await checkAiAvailable();
-    checking = false;
+    const result = await probeAiAvailability(aiEnabled);
+    checking = result.checking;
+    available = result.available;
   });
 
   const disabled = $derived(!aiEnabled);
@@ -38,8 +34,7 @@
   <p class="ai-status" role="status">Checking language model service…</p>
 {:else if offline}
   <p class="ai-status ai-status--offline" role="status">
-    {featureLabel} is unavailable at <code>{aiBaseUrl}</code>. Confirm the model service is running, CORS allows
-    <code>{typeof window !== 'undefined' ? window.location.origin : 'this site'}</code>, then reload.
+    {aiOfflineMessage(featureLabel, sojuApiBaseUrl)}
   </p>
 {:else if ready}
   {@render children()}

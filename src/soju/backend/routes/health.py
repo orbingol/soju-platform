@@ -7,18 +7,25 @@ from typing import Annotated, Any
 
 from fastapi import APIRouter, Depends
 
-from soju.backend.services import AppServices, get_services
+from soju.backend.config.settings import BackendSettings
+from soju.backend.services.deps import get_llm, get_settings, get_tts
+from soju.backend.services.llm import LlmProxyService
+from soju.backend.services.tts import TtsService
 
 router = APIRouter(tags=["health"])
 
 
 @router.get("/health")
-async def health(services: Annotated[AppServices, Depends(get_services)]) -> dict[str, Any]:
+async def health(
+    llm: Annotated[LlmProxyService, Depends(get_llm)],
+    tts: Annotated[TtsService, Depends(get_tts)],
+    settings: Annotated[BackendSettings, Depends(get_settings)],
+) -> dict[str, Any]:
     """Return a lightweight readiness payload (no secrets)."""
     return {
         "ok": True,
-        "llm_provider": services.llm.name,
-        "tts_engine": services.tts.name,
-        "chat_model": services.settings.llm.chat_model,
-        "embed_model": services.settings.llm.embed_model,
+        "llm_provider": llm.name,
+        "tts_engine": tts.name,
+        "chat_model": settings.llm.chat_model,
+        "embed_model": settings.llm.embed_model,
     }

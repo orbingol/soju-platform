@@ -26,26 +26,16 @@ export function resolveChatContextThresholds(triggerRaw?: string, keepRaw?: stri
   return { trigger, keepRecent };
 }
 
-/** Resolve TTS engine; ``piper`` is accepted as a legacy alias for ``local``. */
+/** Resolve TTS engine from config/env (``local`` or ``browser`` only). */
 export function resolveTtsEngine(raw?: string): TtsEngine {
-  const normalized = raw?.trim().toLowerCase();
-  if (normalized === 'browser') return 'browser';
-  return 'local';
+  return raw?.trim().toLowerCase() === 'browser' ? 'browser' : 'local';
 }
 
 /** When true, Practice and Chat are available (requires Soju backend + LLM at runtime). */
 export const aiEnabled = firstDefined(PUBLIC_AI_ENABLED, dynamicPublicEnv.PUBLIC_OLLAMA_ENABLED) === 'true';
 
 /** Browser-reachable Soju API root (nginx → FastAPI in prod). */
-export const sojuApiBaseUrl = (
-  firstDefined(PUBLIC_AI_BASE_URL, dynamicPublicEnv.PUBLIC_OLLAMA_BASE_URL, dynamicPublicEnv.PUBLIC_TTS_PIPER_BASE_URL) ?? 'http://localhost:8080'
-).replace(/\/$/, '');
-
-/** @deprecated Prefer ``sojuApiBaseUrl`` — same origin for OpenAI-compatible AI routes. */
-export const aiBaseUrl = sojuApiBaseUrl;
-
-/** Local TTS HTTP root (same Soju API as AI). */
-export const localTtsBaseUrl = (firstDefined(dynamicPublicEnv.PUBLIC_TTS_PIPER_BASE_URL, PUBLIC_AI_BASE_URL) ?? sojuApiBaseUrl).replace(/\/$/, '');
+export const sojuApiBaseUrl = (firstDefined(PUBLIC_AI_BASE_URL, dynamicPublicEnv.PUBLIC_OLLAMA_BASE_URL) ?? 'http://localhost:8080').replace(/\/$/, '');
 
 const envChatThresholds = resolveChatContextThresholds(dynamicPublicEnv.PUBLIC_AI_CHAT_SUMMARY_TRIGGER, dynamicPublicEnv.PUBLIC_AI_CHAT_KEEP_RECENT);
 

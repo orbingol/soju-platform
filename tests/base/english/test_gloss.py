@@ -45,7 +45,7 @@ def test_english_clause_snapshots(gloss: str, tense: str, expected: str) -> None
 
 
 def test_clause_for_tense_matches_english_for_tense() -> None:
-    from soju.base import get_base_language
+    from soju.base.plugins import get_base_language
 
     bl = get_base_language("en")
     assert bl.clause_for_tense("to eat", "past") == english_for_tense("to eat", "past")

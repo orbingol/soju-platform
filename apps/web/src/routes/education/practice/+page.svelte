@@ -2,12 +2,10 @@
   import { untrack } from 'svelte';
   import yaml from 'yaml';
 
-  import { base } from '$app/paths';
-
   import AiServiceGate from '$lib/components/AiServiceGate.svelte';
   import SpeakButton from '$lib/components/SpeakButton.svelte';
   import { evaluatePracticeStory, generatePracticeSession, type PracticeExerciseType } from '$lib/practice';
-  import { fetchRetrieval } from '$lib/practice/client';
+  import { fetchRetrieval, savePracticeSessionToStaging } from '$lib/practice/client';
   import { embedQueryText } from '$lib/practice/embed-query';
   import { downloadTextFile, normalizePracticeSession, todayIsoDate, type PracticeSessionJson } from '$lib/staging';
 
@@ -221,42 +219,8 @@
     const date = todayIsoDate();
     status = 'Saving to data/staging…';
 
-    const stagingUrl = `${base}/api/staging`;
-    const requests = [
-      fetch(stagingUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ kind: 'exercises', payload: docs.exercises, date }),
-      }),
-    ];
-
-    if (docs.stories) {
-      requests.push(
-        fetch(stagingUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ kind: 'stories', payload: docs.stories, date }),
-        }),
-      );
-    }
-
-    if (docs.vocabulary) {
-      requests.push(
-        fetch(stagingUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ kind: 'vocabulary', payload: docs.vocabulary }),
-        }),
-      );
-    }
-
     try {
-      const responses = await Promise.all(requests);
-      const failed = responses.find((response) => !response.ok);
-      if (failed) {
-        const body = await failed.json().catch(() => ({}));
-        throw new Error((body as { error?: string }).error ?? 'Save failed');
-      }
+      await savePracticeSessionToStaging(docs, date);
       status = 'Saved under data/staging/ (dev only).';
     } catch (err) {
       error = err instanceof Error ? err.message : 'Save failed';

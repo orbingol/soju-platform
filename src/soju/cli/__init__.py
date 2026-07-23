@@ -1,6 +1,2 @@
 # SPDX-License-Identifier: BSD-3-Clause
-"""Typer CLI entry points and argument parsing."""
-
-from soju.cli.app import app, main
-
-__all__ = ["app", "main"]
+"""Soju console CLI package."""

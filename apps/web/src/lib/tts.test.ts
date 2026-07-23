@@ -1,13 +1,31 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { aiEmbedModel, aiModel, applyClientConfig, localTtsVoice, resolveTtsEngine } from './config';
-import { formatVoiceLabel, getTtsEngine, isKoreanVoice, pickVoices, resolveVoiceByUri, setPitch, setRate, setTtsEngine, setVoiceUri, setVolume } from './tts';
+import { aiEmbedModel, aiModel, applyClientConfig, localTtsVoice, resolveTtsEngine, sojuApiBaseUrl } from './config';
+import {
+  checkLocalTtsAvailable,
+  fetchLocalSpeechAudio,
+  formatVoiceLabel,
+  getTtsEngine,
+  isKoreanVoice,
+  pickVoices,
+  resolveVoiceByUri,
+  setPitch,
+  setRate,
+  setTtsEngine,
+  setVoiceUri,
+  setVolume,
+} from './tts';
 
 function voice(name: string, lang: string, uri = name): SpeechSynthesisVoice {
   return { name, lang, voiceURI: uri } as SpeechSynthesisVoice;
 }
 
 describe('tts', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    vi.restoreAllMocks();
+  });
+
   it('detects Korean voices by language tag', () => {
     expect(isKoreanVoice(voice('Yuna', 'ko-KR'))).toBe(true);
     expect(isKoreanVoice(voice('English', 'en-US'))).toBe(false);
@@ -50,9 +68,9 @@ describe('tts', () => {
 
   it('resolves and stores TTS engine selection', () => {
     expect(resolveTtsEngine('browser')).toBe('browser');
-    expect(resolveTtsEngine('PIPER')).toBe('local');
     expect(resolveTtsEngine('local')).toBe('local');
     expect(resolveTtsEngine(undefined)).toBe('local');
+    expect(resolveTtsEngine('unknown')).toBe('local');
     expect(setTtsEngine('browser')).toBe('browser');
     expect(getTtsEngine()).toBe('browser');
     expect(setTtsEngine('local')).toBe('local');
@@ -64,5 +82,45 @@ describe('tts', () => {
     expect(aiModel).toBe('test-chat');
     expect(aiEmbedModel).toBe('test-embed');
     expect(localTtsVoice).toBe('ko-KR-InJoonNeural');
+  });
+
+  it('checkLocalTtsAvailable probes apiUrl(/health)', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ ok: true }),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    await expect(checkLocalTtsAvailable()).resolves.toBe(true);
+    expect(fetchMock).toHaveBeenCalledOnce();
+    const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
+    expect(url).toBe(`${sojuApiBaseUrl}/health`);
+    expect(init.method).toBe('GET');
+  });
+
+  it('checkLocalTtsAvailable returns false on non-ok health', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: false,
+        json: async () => ({ ok: false }),
+      }),
+    );
+    await expect(checkLocalTtsAvailable()).resolves.toBe(false);
+  });
+
+  it('fetchLocalSpeechAudio posts speech and uses readError on failure', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: false,
+      status: 503,
+      text: async () => 'tts down',
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    await expect(fetchLocalSpeechAudio('안녕')).rejects.toThrow(/Request failed \(503\)/);
+    const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
+    expect(url).toBe(`${sojuApiBaseUrl}/v1/audio/speech`);
+    expect(init.method).toBe('POST');
+    expect(JSON.parse(String(init.body))).toMatchObject({ input: '안녕' });
   });
 });

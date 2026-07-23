@@ -5,8 +5,9 @@ from __future__ import annotations
 
 import pytest
 
-from soju.base import BaseLanguage, get_base_language
-from soju.base.english import EnglishBase
+from soju.base.contract import BaseLanguage
+from soju.base.plugins import get_base_language
+from soju.base.english.plugin import EnglishBase
 from soju.base.plugins import ENV_BASE_LANGUAGE
 
 

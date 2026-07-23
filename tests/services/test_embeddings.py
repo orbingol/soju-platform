@@ -8,16 +8,20 @@ from pathlib import Path
 
 import pytest
 
-from soju.services.embeddings import (
+from soju.services.embeddings.build import (
     build_embedding_index,
-    cosine_similarity,
+    make_ollama_embed_fn,
+)
+from soju.services.embeddings.cosine import cosine_similarity
+from soju.services.embeddings.paths import (
     embeddings_cache_dir,
     grammar_jsonl_path,
-    load_grammar_docs,
-    load_vocab_docs,
-    make_ollama_embed_fn,
     meta_json_path,
     vocab_jsonl_path,
+)
+from soju.services.embeddings.documents import (
+    load_grammar_docs,
+    load_vocab_docs,
 )
 from tests.constants import VERB_ID, WORD_ID
 

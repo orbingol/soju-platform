@@ -12,9 +12,9 @@ import re
 from dataclasses import dataclass
 from typing import Any
 
-from soju.base import get_base_language
+from soju.base.plugins import get_base_language
 from soju.core.text import parse_import_line
-from soju.languages import get_language
+from soju.languages.plugins import get_language
 from soju.languages.contracts import PromptProvider
 from soju.levels import LanguageLevel, get_language_level
 from soju.llm.base import LlmClient, LlmError

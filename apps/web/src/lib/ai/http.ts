@@ -1,4 +1,4 @@
-import { aiBaseUrl } from '$lib/config';
+import { sojuApiBaseUrl } from '$lib/config';
 
 /** Default timeout for AI complete/stream requests. */
 export const AI_FETCH_TIMEOUT_MS = 60_000;
@@ -7,7 +7,7 @@ export const AI_FETCH_TIMEOUT_MS = 60_000;
 export const HEALTH_FETCH_TIMEOUT_MS = 4_000;
 
 export function apiUrl(path: string): string {
-  return `${aiBaseUrl}${path.startsWith('/') ? path : `/${path}`}`;
+  return `${sojuApiBaseUrl}${path.startsWith('/') ? path : `/${path}`}`;
 }
 
 export async function fetchWithTimeout(url: string, init: RequestInit = {}, timeoutMs = HEALTH_FETCH_TIMEOUT_MS): Promise<Response> {
@@ -48,6 +48,18 @@ export async function readError(response: Response): Promise<string> {
     return `Request failed (${response.status}): ${detail}`;
   }
   return `Request failed (${response.status})`;
+}
+
+export async function jsonPost(path: string, body: unknown, timeoutMs = AI_FETCH_TIMEOUT_MS): Promise<Response> {
+  return fetchWithTimeout(
+    apiUrl(path),
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    },
+    timeoutMs,
+  );
 }
 
 /** Browser-side probe for a reachable Soju OpenAI-compatible API. */

@@ -48,6 +48,7 @@ class EdgeTtsEngine:
         except Exception as exc:  # noqa: BLE001 - surface provider errors to the route layer
             raise TtsError(str(exc) or "edge-tts failed") from exc
 
-        if not audio:
-            raise TtsError("edge-tts returned empty audio")
         return audio, "audio/mpeg"
+
+    async def aclose(self) -> None:
+        return None

@@ -40,3 +40,7 @@ class TtsEngine(Protocol):
             TtsError: On misconfiguration or synthesis failure.
         """
         ...
+
+    async def aclose(self) -> None:
+        """Release engine resources (default: no-op)."""
+        ...

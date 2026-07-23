@@ -7,10 +7,10 @@ import json
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
-from soju.base import get_base_language
+from soju.base.plugins import get_base_language
 from soju.core.text import parse_import_line
 from soju.core.yaml_io import load_yaml, new_id
-from soju.languages import get_language
+from soju.languages.plugins import get_language
 from soju.registry.examples import load_examples_store, merge_default_examples, merge_verb_examples, save_examples_store
 from soju.registry.topics import find_local_entry, find_section, load_topic, save_topic, topic_has_ref
 from soju.registry.verbs import load_all_verb_forms, save_verb_forms_file

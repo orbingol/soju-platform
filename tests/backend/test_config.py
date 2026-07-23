@@ -9,7 +9,12 @@ import pytest
 
 pytest.importorskip("pydantic")
 
-from soju.backend.config import deep_merge, load_settings, resolve_config_path, user_config_path
+from soju.backend.config.loader import (
+    deep_merge,
+    load_settings,
+    resolve_config_path,
+    user_config_path,
+)
 
 
 def test_deep_merge_nested() -> None:
