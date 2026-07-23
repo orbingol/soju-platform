@@ -2,11 +2,10 @@
   import { onDestroy, onMount, untrack } from 'svelte';
   import { browser } from '$app/environment';
 
-  import { checkAiAvailable } from '$lib/ai/client';
-  import { ensureClientConfig } from '$lib/ai/client-config';
+  import { aiOfflineMessage, probeAiAvailability } from '$lib/ai/availability';
   import { applyTutorName, chatTutorLabel, GLOBAL_CHAT_SESSION_KEY, loadChatDockOpen, saveChatDockOpen } from '$lib/chat';
   import { openChatPopoutWindow } from '$lib/chat-popout';
-  import { aiBaseUrl, aiModel, aiTutorName, defaultChatSystemPrompt } from '$lib/config';
+  import { aiEnabled, aiModel, aiTutorName, defaultChatSystemPrompt, sojuApiBaseUrl } from '$lib/config';
 
   import ChatConversation from '$lib/components/ChatConversation.svelte';
 
@@ -198,11 +197,11 @@
     if (!browser) return;
 
     void (async () => {
-      await ensureClientConfig();
       syncFromConfig();
       open = await loadChatDockOpen();
-      available = await checkAiAvailable();
-      checking = false;
+      const result = await probeAiAvailability(aiEnabled);
+      available = result.available;
+      checking = result.checking;
     })();
 
     const onOpenRequest = () => {
@@ -276,8 +275,7 @@
           <p class="ai-status" role="status">Checking language model service…</p>
         {:else if offline}
           <p class="ai-status ai-status--offline" role="status">
-            Chat is unavailable at <code>{aiBaseUrl}</code>. Confirm the model service is running, CORS allows
-            <code>{typeof window !== 'undefined' ? window.location.origin : 'this site'}</code>, then reload.
+            {aiOfflineMessage('Chat', sojuApiBaseUrl)}
           </p>
         {:else}
           <ChatConversation bind:this={conversation} {systemPrompt} {model} sessionKey={GLOBAL_CHAT_SESSION_KEY} compact />

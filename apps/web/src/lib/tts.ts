@@ -1,4 +1,5 @@
-import { defaultTtsEngine, localTtsBaseUrl, localTtsVoice, type TtsEngine } from '$lib/config';
+import { defaultTtsEngine, localTtsVoice, type TtsEngine } from '$lib/config';
+import { AI_FETCH_TIMEOUT_MS, apiUrl, fetchWithTimeout, HEALTH_FETCH_TIMEOUT_MS, jsonPost, readError } from '$lib/ai/http';
 import { getItem, setItem } from '$lib/storage';
 
 const TTS_RATE_KEY = 'tts-rate';
@@ -208,11 +209,8 @@ async function loadStoredEngine(): Promise<void> {
     selectedEngine = 'browser';
     return;
   }
-  if (stored === 'local' || stored === 'piper') {
+  if (stored === 'local') {
     selectedEngine = 'local';
-    if (stored === 'piper') {
-      await setItem(TTS_ENGINE_KEY, 'local');
-    }
     return;
   }
   selectedEngine = defaultTtsEngine;
@@ -269,7 +267,7 @@ export async function saveTtsEngine(engine: TtsEngine): Promise<TtsEngine> {
 
 export async function checkLocalTtsAvailable(): Promise<boolean> {
   try {
-    const response = await fetch(`${localTtsBaseUrl}/health`, { method: 'GET' });
+    const response = await fetchWithTimeout(apiUrl('/health'), { method: 'GET' }, HEALTH_FETCH_TIMEOUT_MS);
     if (!response.ok) return false;
     const payload = (await response.json()) as { ok?: boolean };
     return payload.ok === true;
@@ -278,8 +276,23 @@ export async function checkLocalTtsAvailable(): Promise<boolean> {
   }
 }
 
-/** @deprecated Use {@link checkLocalTtsAvailable}. */
-export const checkPiperAvailable = checkLocalTtsAvailable;
+/** POST `/v1/audio/speech` and return audio bytes (throws using ``readError`` on failure). */
+export async function fetchLocalSpeechAudio(text: string): Promise<Blob> {
+  const response = await jsonPost(
+    '/v1/audio/speech',
+    {
+      model: localTtsVoice,
+      voice: localTtsVoice,
+      input: text,
+      speed: getRate(),
+    },
+    AI_FETCH_TIMEOUT_MS,
+  );
+  if (!response.ok) {
+    throw new Error(await readError(response));
+  }
+  return response.blob();
+}
 
 function clearSpeakingUi(): void {
   if (activeBtn) {
@@ -338,22 +351,7 @@ async function speakWithLocalTts(text: string, btn?: HTMLButtonElement | null): 
     activeBtn.classList.add('speaking');
   }
 
-  const response = await fetch(`${localTtsBaseUrl}/v1/audio/speech`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: localTtsVoice,
-      voice: localTtsVoice,
-      input: text,
-      speed: getRate(),
-    }),
-  });
-
-  if (!response.ok) {
-    throw new Error(`Local TTS failed (${response.status})`);
-  }
-
-  const blob = await response.blob();
+  const blob = await fetchLocalSpeechAudio(text);
   const objectUrl = URL.createObjectURL(blob);
   activeObjectUrl = objectUrl;
 

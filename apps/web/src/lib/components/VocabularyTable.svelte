@@ -93,7 +93,7 @@
 
 <p class="verb-no-tts" hidden={browser ? isTtsAvailable() : true}>
   <span class="icon-alert" aria-hidden="true"></span>
-  Speech is unavailable (no Piper service and no Web Speech API). Speaker buttons are hidden.
+  Speech is unavailable (no local TTS service and no Web Speech API). Speaker buttons are hidden.
 </p>
 
 <div bind:this={wrapper} data-vocab-table class:no-tts={browser && !isTtsAvailable()}>

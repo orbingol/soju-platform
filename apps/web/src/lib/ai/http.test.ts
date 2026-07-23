@@ -1,6 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { fetchWithTimeout } from './http';
+import { sojuApiBaseUrl } from '$lib/config';
+
+import { apiUrl, fetchWithTimeout, jsonPost } from './http';
 
 describe('fetchWithTimeout', () => {
   let originalFetch: typeof fetch;
@@ -41,5 +43,26 @@ describe('fetchWithTimeout', () => {
     globalThis.fetch = vi.fn(() => Promise.resolve(response)) as unknown as typeof fetch;
 
     await expect(fetchWithTimeout('http://example.test/fast', {}, 1000)).resolves.toBe(response);
+  });
+});
+
+describe('jsonPost', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it('posts JSON to apiUrl(path) with Content-Type', async () => {
+    const response = new Response('{}', { status: 200 });
+    const fetchMock = vi.fn().mockResolvedValue(response);
+    vi.stubGlobal('fetch', fetchMock);
+
+    await expect(jsonPost('/v1/audio/speech', { input: 'hi' })).resolves.toBe(response);
+    expect(fetchMock).toHaveBeenCalledOnce();
+    const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
+    expect(url).toBe(apiUrl('/v1/audio/speech'));
+    expect(url).toBe(`${sojuApiBaseUrl}/v1/audio/speech`);
+    expect(init.method).toBe('POST');
+    expect((init.headers as Record<string, string>)['Content-Type']).toBe('application/json');
+    expect(JSON.parse(String(init.body))).toEqual({ input: 'hi' });
   });
 });
