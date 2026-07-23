@@ -9,7 +9,7 @@ from fastapi import Request
 
 from soju.backend.abstract.llm import LlmProvider
 from soju.backend.abstract.tts import TtsEngine
-from soju.backend.models.settings import BackendSettings
+from soju.backend.config import BackendSettings
 
 
 @dataclass(slots=True)

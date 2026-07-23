@@ -5,7 +5,7 @@ from __future__ import annotations
 
 from soju.backend.abstract.llm import LlmProvider, LlmProviderError
 from soju.backend.adapters.llm.ollama import OllamaLlmProvider
-from soju.backend.models.settings import LlmSettings
+from soju.backend.config import LlmSettings
 
 
 def build_llm_provider(settings: LlmSettings) -> LlmProvider:

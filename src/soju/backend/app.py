@@ -11,8 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from soju.backend.adapters.llm import build_llm_provider
 from soju.backend.adapters.tts import build_tts_engine
-from soju.backend.config import load_settings
-from soju.backend.models.settings import BackendSettings
+from soju.backend.config import BackendSettings, load_settings
 from soju.backend.routes import client_config, health, llm, tts
 from soju.backend.services import AppServices
 

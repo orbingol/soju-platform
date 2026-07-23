@@ -7,7 +7,7 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
-from soju.backend.models.settings import BackendSettings
+from soju.backend.config.settings import BackendSettings
 
 
 class ClientConfigResponse(BaseModel):

@@ -8,8 +8,7 @@ from typing import Annotated, Optional
 
 import typer
 
-from soju.backend.config import load_settings, user_config_path
-from soju.backend.models.settings import BackendSettings
+from soju.backend.config import BackendSettings, load_settings, user_config_path
 
 
 def _apply_server_overrides(

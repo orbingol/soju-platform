@@ -9,9 +9,10 @@ from typing import Any
 
 import yaml
 
-from soju.backend.models.settings import BackendSettings
+from soju.backend.config.settings import BackendSettings
 
 DEFAULT_CONFIG_RESOURCE = "default_config.yaml"
+CONFIG_FILES_PACKAGE = "soju.backend.config.files"
 
 
 def user_config_path() -> Path:
@@ -31,8 +32,8 @@ def _read_yaml_mapping(path: Path) -> dict[str, Any]:
 
 
 def _read_default_yaml() -> dict[str, Any]:
-    """Load shipped defaults from package data."""
-    with as_file(files("soju.backend").joinpath(DEFAULT_CONFIG_RESOURCE)) as resolved:
+    """Load shipped defaults from package data under ``config/files/``."""
+    with as_file(files(CONFIG_FILES_PACKAGE).joinpath(DEFAULT_CONFIG_RESOURCE)) as resolved:
         return _read_yaml_mapping(Path(resolved))
 
 

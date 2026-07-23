@@ -3,7 +3,7 @@
 #
 #   mkdir -p ~/.config/soju
 #   # from a checkout after uv sync --group backend:
-#   cp src/soju/backend/example_backend.yaml ~/.config/soju/backend.yaml
+#   cp src/soju/backend/config/files/example_backend.yaml ~/.config/soju/backend.yaml
 
 llm:
   # Use host.docker.internal when the backend runs in Docker and Ollama is on the host.

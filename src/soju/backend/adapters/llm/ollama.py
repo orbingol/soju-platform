@@ -9,7 +9,7 @@ from typing import Any
 import httpx
 
 from soju.backend.abstract.llm import LlmProviderError
-from soju.backend.models.settings import LlmSettings
+from soju.backend.config import LlmSettings
 
 
 class OllamaLlmProvider:
@@ -35,7 +35,7 @@ class OllamaLlmProvider:
 
     @classmethod
     def from_settings(cls, settings: LlmSettings, *, client: httpx.AsyncClient | None = None) -> OllamaLlmProvider:
-        """Build a provider from :class:`~soju.backend.models.settings.LlmSettings`."""
+        """Build a provider from :class:`~soju.backend.config.settings.LlmSettings`."""
         return cls(
             base_url=settings.base_url,
             chat_model=settings.chat_model,
