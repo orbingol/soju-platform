@@ -1,5 +1,6 @@
-# Course levels for AI example generation and translation prompts.
-# Vocabulary: registry entries with no `level` field belong to `default`.
+# Course levels for AI example generation, translation prompts, and Practice.
+# Vocabulary: omit `level` = unassigned (not in any course band). Set `level` to a
+# key below (e.g. 1A, 1B) when the word belongs to that course level.
 # Higher levels include vocabulary from `include_levels` plus their own tagged entries.
 
 default: "1A"

@@ -124,17 +124,30 @@ def get_language_level(level_id: str | None = None, root=None) -> LanguageLevel:
     )
 
 
-def vocabulary_for_level(level_id: str | None = None, root=None) -> list[dict]:
-    """Return vocabulary entries belonging to ``level_id`` (and included parents)."""
+def vocabulary_for_level(
+    level_id: str | None = None,
+    root=None,
+    *,
+    include_unassigned: bool = False,
+) -> list[dict]:
+    """Return vocabulary entries for ``level_id`` (and ``include_levels`` parents).
+
+    Entries with a ``level`` field are included when that id is in the expanded
+    course set. Entries with no ``level`` are **unassigned**: excluded by default,
+    included when ``include_unassigned`` is true.
+    """
     config = load_levels_config(root)
     chosen = resolve_level_id(level_id, root)
     included_ids = set(_expand_level_ids(chosen, config))
-    fallback = str(config.get("default", "1A"))
 
     vocabulary = load_vocabulary(root)
     filtered: list[dict] = []
     for entry in vocabulary:
-        entry_level = str(entry.get("level", fallback))
-        if entry_level in included_ids:
+        raw = entry.get("level")
+        if raw is None or (isinstance(raw, str) and not raw.strip()):
+            if include_unassigned:
+                filtered.append(entry)
+            continue
+        if str(raw).strip() in included_ids:
             filtered.append(entry)
     return filtered

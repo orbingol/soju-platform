@@ -58,7 +58,7 @@ def test_load_vocab_docs_includes_hangul_and_english(data_root: Path) -> None:
     assert school.hangul == "학교"
     assert "school" in school.text
     assert "학교" in school.text
-    assert school.level is None
+    assert school.level == "1A"
 
 
 def test_load_grammar_docs_uses_manifest_description(data_root: Path) -> None:

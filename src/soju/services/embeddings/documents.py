@@ -20,7 +20,7 @@ class VocabDoc:
     """A vocabulary entry prepared for embedding.
 
     ``level`` mirrors the registry's optional ``level`` field: ``None`` means the
-    entry belongs to the default course level (see ``soju.levels``).
+    entry is unassigned (not tagged to a course level; see ``soju.levels``).
     """
 
     id: str
