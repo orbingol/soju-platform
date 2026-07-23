@@ -7,6 +7,7 @@ from pathlib import Path
 
 import pytest
 
+from soju.registry.grammar import load_grammar_pattern, save_grammar_pattern
 from soju.registry.vocabulary import load_vocabulary, save_vocabulary
 from soju.services.levels_assign import list_unassigned, parse_ids_file, set_levels
 from tests.constants import VERB_ID, WORD_ID
@@ -17,6 +18,12 @@ def _clear_levels(data_root: Path) -> None:
     for entry in vocab:
         entry.pop("level", None)
     save_vocabulary(vocab, data_root)
+
+
+def _clear_grammar_levels(data_root: Path) -> None:
+    pattern = load_grammar_pattern("do", data_root)
+    pattern.pop("level", None)
+    save_grammar_pattern("do", pattern, data_root)
 
 
 def test_list_unassigned_and_type_filter(data_root: Path) -> None:
@@ -87,13 +94,13 @@ def test_parse_ids_file() -> None:
 
 
 def test_list_unassigned_grammar(data_root: Path) -> None:
+    _clear_grammar_levels(data_root)
     rows = list_unassigned(data_root, kind="grammar")
     assert [r["id"] for r in rows] == ["do"]
 
 
 def test_set_levels_grammar_all_unassigned(data_root: Path) -> None:
-    from soju.registry.grammar import load_grammar_pattern
-
+    _clear_grammar_levels(data_root)
     report = set_levels(data_root, level_id="1A", kind="grammar", all_unassigned=True)
     assert report.updated == 1
     assert report.kind == "grammar"
@@ -102,13 +109,11 @@ def test_set_levels_grammar_all_unassigned(data_root: Path) -> None:
 
 
 def test_set_levels_grammar_by_id_requires_force(data_root: Path) -> None:
-    set_levels(data_root, level_id="1A", kind="grammar", all_unassigned=True)
+    # Fixture pattern is already tagged 1A.
     with pytest.raises(ValueError, match="Already tagged"):
         set_levels(data_root, level_id="1B", kind="grammar", ids=["do"])
     report = set_levels(data_root, level_id="1B", kind="grammar", ids=["do"], force=True)
     assert report.updated == 1
-    from soju.registry.grammar import load_grammar_pattern
-
     assert load_grammar_pattern("do", data_root)["level"] == "1B"
 
 

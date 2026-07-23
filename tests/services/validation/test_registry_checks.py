@@ -91,4 +91,9 @@ def test_unknown_grammar_level_reported(data_root: Path) -> None:
 
 
 def test_grammar_omitted_level_ok(data_root: Path) -> None:
+    from soju.registry.grammar import load_grammar_pattern, save_grammar_pattern
+
+    pattern = load_grammar_pattern("do", data_root)
+    pattern.pop("level", None)
+    save_grammar_pattern("do", pattern, data_root)
     assert validate_registry(data_root) == []

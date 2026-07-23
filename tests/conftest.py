@@ -273,6 +273,7 @@ def data_root(tmp_path: Path) -> Path:
             "english": "also / even",
             "category": "particles",
             "summary": "Additive particle: also/too, or even.",
+            "level": "1A",
             "sections": [
                 {
                     "id": "also",

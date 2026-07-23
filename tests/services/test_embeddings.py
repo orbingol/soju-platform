@@ -69,6 +69,7 @@ def test_load_grammar_docs_uses_manifest_description(data_root: Path) -> None:
     assert do_doc.form == "-도"
     assert "Additive particle" in do_doc.summary
     assert do_doc.form in do_doc.text
+    assert do_doc.level == "1A"
 
 
 def test_load_grammar_docs_empty_without_manifest(tmp_path: Path) -> None:
