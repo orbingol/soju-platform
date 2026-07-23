@@ -38,22 +38,16 @@ export const aiEnabled = firstDefined(PUBLIC_AI_ENABLED, dynamicPublicEnv.PUBLIC
 
 /** Browser-reachable Soju API root (nginx → FastAPI in prod). */
 export const sojuApiBaseUrl = (
-  firstDefined(PUBLIC_AI_BASE_URL, dynamicPublicEnv.PUBLIC_OLLAMA_BASE_URL, dynamicPublicEnv.PUBLIC_TTS_PIPER_BASE_URL) ??
-  'http://localhost:8080'
+  firstDefined(PUBLIC_AI_BASE_URL, dynamicPublicEnv.PUBLIC_OLLAMA_BASE_URL, dynamicPublicEnv.PUBLIC_TTS_PIPER_BASE_URL) ?? 'http://localhost:8080'
 ).replace(/\/$/, '');
 
 /** @deprecated Prefer ``sojuApiBaseUrl`` — same origin for OpenAI-compatible AI routes. */
 export const aiBaseUrl = sojuApiBaseUrl;
 
 /** Local TTS HTTP root (same Soju API as AI). */
-export const localTtsBaseUrl = (
-  firstDefined(dynamicPublicEnv.PUBLIC_TTS_PIPER_BASE_URL, PUBLIC_AI_BASE_URL) ?? sojuApiBaseUrl
-).replace(/\/$/, '');
+export const localTtsBaseUrl = (firstDefined(dynamicPublicEnv.PUBLIC_TTS_PIPER_BASE_URL, PUBLIC_AI_BASE_URL) ?? sojuApiBaseUrl).replace(/\/$/, '');
 
-const envChatThresholds = resolveChatContextThresholds(
-  dynamicPublicEnv.PUBLIC_AI_CHAT_SUMMARY_TRIGGER,
-  dynamicPublicEnv.PUBLIC_AI_CHAT_KEEP_RECENT,
-);
+const envChatThresholds = resolveChatContextThresholds(dynamicPublicEnv.PUBLIC_AI_CHAT_SUMMARY_TRIGGER, dynamicPublicEnv.PUBLIC_AI_CHAT_KEEP_RECENT);
 
 export const defaultChatTutorName = 'Hee-jae (희재)';
 

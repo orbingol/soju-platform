@@ -280,7 +280,7 @@
             <code>{typeof window !== 'undefined' ? window.location.origin : 'this site'}</code>, then reload.
           </p>
         {:else}
-          <ChatConversation bind:this={conversation} systemPrompt={systemPrompt} model={model} sessionKey={GLOBAL_CHAT_SESSION_KEY} compact />
+          <ChatConversation bind:this={conversation} {systemPrompt} {model} sessionKey={GLOBAL_CHAT_SESSION_KEY} compact />
         {/if}
       </div>
     </aside>

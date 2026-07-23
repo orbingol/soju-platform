@@ -23,10 +23,7 @@ class PiperTtsEngine:
         piper_bin: str = "piper",
     ) -> None:
         if not model_path or not str(model_path).strip():
-            raise TtsError(
-                "Piper TTS requires tts.piper.model_path in backend config "
-                "(path to a Piper ONNX voice model)."
-            )
+            raise TtsError("Piper TTS requires tts.piper.model_path in backend config (path to a Piper ONNX voice model).")
         resolved = Path(model_path).expanduser()
         if not resolved.is_file():
             raise TtsError(f"Piper model file not found: {resolved}")
@@ -57,10 +54,7 @@ class PiperTtsEngine:
         _ = voice  # Piper voice is the ONNX model; request voice is ignored.
         piper = shutil.which(self._piper_bin)
         if piper is None:
-            raise TtsError(
-                f"Piper executable {self._piper_bin!r} not found on PATH. "
-                "Install Piper or switch tts.engine to 'edge'."
-            )
+            raise TtsError(f"Piper executable {self._piper_bin!r} not found on PATH. Install Piper or switch tts.engine to 'edge'.")
 
         with tempfile.TemporaryDirectory() as tmp:
             out_path = Path(tmp) / "speech.wav"

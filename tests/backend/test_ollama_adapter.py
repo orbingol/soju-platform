@@ -8,7 +8,9 @@ from typing import Any
 
 import pytest
 
-httpx = pytest.importorskip("httpx")
+pytest.importorskip("httpx")
+
+import httpx
 
 from soju.backend.abstract.llm import LlmProviderError
 from soju.backend.adapters.llm import build_llm_provider
