@@ -11,7 +11,7 @@ import typer
 from soju.cli._common import flag, make_app
 from soju.core.models import EXAMPLE_TENSES as TENSES
 from soju.core.models import EXAMPLE_VARIANTS as VARIANTS
-from soju.levels import get_language_level, list_level_ids
+from soju.levels import get_language_level
 from soju.llm import LlmError, OllamaClient
 from soju.llm.ollama import DEFAULT_BASE_URL, DEFAULT_MODEL
 from soju.registry.examples import load_examples_store, save_examples_store
@@ -55,7 +55,7 @@ def fill_examples_cmd(
         Optional[str],
         typer.Option(
             "--level",
-            help=f"Course level (default: SOJU_LANGUAGE_LEVEL or 1A). Known: {', '.join(list_level_ids())}",
+            help="Course level (default: SOJU_LANGUAGE_LEVEL or 1A; see data/content/levels.yaml)",
         ),
     ] = None,
     examples: Annotated[
