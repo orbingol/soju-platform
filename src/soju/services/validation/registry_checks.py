@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+from soju.levels import list_level_ids
 from soju.registry.examples import load_examples_store
 from soju.registry.topics import load_topic, load_topics_manifest
 from soju.registry.types import load_types
@@ -15,6 +16,7 @@ def validate_registry(root=None) -> list[str]:
     types = load_types(root)
     type_ids = {entry["id"] for entry in types}
     type_slugs = {entry["slug"] for entry in types}
+    known_levels = set(list_level_ids(root))
 
     vocab_ids: set[str] = set()
     sense_seen: set[tuple[str, str]] = set()
@@ -32,6 +34,14 @@ def validate_registry(root=None) -> list[str]:
 
         if entry.get("type") not in type_ids:
             errors.append(f"{entry['hangul']}: unknown type '{entry.get('type')}'")
+
+        raw_level = entry.get("level")
+        if isinstance(raw_level, str) and raw_level.strip():
+            level = raw_level.strip()
+            if level not in known_levels:
+                errors.append(
+                    f"{entry['hangul']} ({vid}): unknown level '{level}' (not in levels.yaml)"
+                )
 
     vocab_by_id = vocabulary_by_id(root)
     manifest = load_topics_manifest(root)

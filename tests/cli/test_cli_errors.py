@@ -146,3 +146,15 @@ def test_levels_set_already_tagged_without_force(data_env: Path) -> None:
     )
     assert result.exit_code == 1
     assert "Already tagged" in (result.output + result.stderr)
+
+
+def test_registry_unknown_level_fails(data_env: Path) -> None:
+    vocab = load_vocabulary(data_env)
+    for entry in vocab:
+        if entry["id"] == WORD_ID:
+            entry["level"] = "9Z"
+            break
+    save_vocabulary(vocab, data_env)
+    result = runner.invoke(validate_cli.registry_app, [], catch_exceptions=False)
+    assert result.exit_code == 1
+    assert "unknown level" in (result.output + result.stderr).lower()
