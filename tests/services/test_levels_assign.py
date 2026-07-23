@@ -88,6 +88,16 @@ def test_set_levels_unknown_level(data_root: Path) -> None:
         set_levels(data_root, level_id="9Z", all_unassigned=True)
 
 
+def test_list_unassigned_grammar_rejects_type_filter(data_root: Path) -> None:
+    with pytest.raises(ValueError, match="--type applies only"):
+        list_unassigned(data_root, kind="grammar", type_id="noun")
+
+
+def test_set_levels_rejects_invalid_kind(data_root: Path) -> None:
+    with pytest.raises(ValueError, match="--kind must be"):
+        set_levels(data_root, level_id="1A", kind="topics", all_unassigned=True)  # type: ignore[arg-type]
+
+
 def test_parse_ids_file() -> None:
     text = "# comment\n\n" + WORD_ID + "\n  " + VERB_ID + "  \n"
     assert parse_ids_file(text) == [WORD_ID, VERB_ID]

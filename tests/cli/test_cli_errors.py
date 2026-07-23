@@ -148,6 +148,79 @@ def test_levels_set_already_tagged_without_force(data_env: Path) -> None:
     assert "Already tagged" in (result.output + result.stderr)
 
 
+def test_levels_invalid_kind_fails(data_env: Path) -> None:
+    result = runner.invoke(
+        levels_cli.app,
+        ["list-unassigned", "--kind", "topics"],
+        catch_exceptions=False,
+    )
+    assert result.exit_code == 2
+    assert "vocabulary' or 'grammar" in (result.output + result.stderr)
+
+
+def test_levels_invalid_format_fails(data_env: Path) -> None:
+    result = runner.invoke(
+        levels_cli.app,
+        ["list-unassigned", "--format", "json"],
+        catch_exceptions=False,
+    )
+    assert result.exit_code == 2
+    assert "table' or 'ids" in (result.output + result.stderr)
+
+
+def test_levels_list_unassigned_vocab_table_and_ids(data_env: Path) -> None:
+    vocab = load_vocabulary(data_env)
+    for entry in vocab:
+        entry.pop("level", None)
+    save_vocabulary(vocab, data_env)
+
+    table = runner.invoke(levels_cli.app, ["list-unassigned"], catch_exceptions=False)
+    assert table.exit_code == 0
+    assert "2 unassigned entries." in table.stdout
+    assert WORD_ID in table.stdout
+
+    ids = runner.invoke(levels_cli.app, ["list-unassigned", "--format", "ids"], catch_exceptions=False)
+    assert ids.exit_code == 0
+    assert WORD_ID in ids.stdout
+    assert ids.stdout.strip().count("\n") == 1  # two ids → one newline between
+
+
+def test_levels_list_unassigned_grammar_table(data_env: Path) -> None:
+    from soju.registry.grammar import load_grammar_pattern, save_grammar_pattern
+
+    pattern = load_grammar_pattern("do", data_env)
+    pattern.pop("level", None)
+    save_grammar_pattern("do", pattern, data_env)
+
+    result = runner.invoke(
+        levels_cli.app,
+        ["list-unassigned", "--kind", "grammar"],
+        catch_exceptions=False,
+    )
+    assert result.exit_code == 0
+    assert "1 unassigned entry." in result.stdout
+    assert "do\t" in result.stdout
+
+
+def test_levels_set_via_ids_file(data_env: Path, tmp_path: Path) -> None:
+    vocab = load_vocabulary(data_env)
+    for entry in vocab:
+        entry.pop("level", None)
+    save_vocabulary(vocab, data_env)
+
+    ids_path = tmp_path / "ids.txt"
+    ids_path.write_text(f"{WORD_ID}\n", encoding="utf-8")
+    result = runner.invoke(
+        levels_cli.app,
+        ["set", "--level", "1B", "--ids-file", str(ids_path)],
+        catch_exceptions=False,
+    )
+    assert result.exit_code == 0
+    assert "set level=1B on 1 vocabulary entry." in result.stdout
+    updated = next(e for e in load_vocabulary(data_env) if e["id"] == WORD_ID)
+    assert updated["level"] == "1B"
+
+
 def test_registry_unknown_level_fails(data_env: Path) -> None:
     vocab = load_vocabulary(data_env)
     for entry in vocab:
