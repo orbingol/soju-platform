@@ -150,6 +150,8 @@
     <p class="chat-conversation__error" role="alert">{error}</p>
   {/if}
 
+  <p class="chat-ai-note">AI can make mistakes. Please verify the output.</p>
+
   <form class="chat-form" class:chat-form--compact={compact} use:nativeSubmit>
     {#if compact}
       <input type="text" bind:value={input} placeholder="Ask in English or Korean…" disabled={sending || disabled} />

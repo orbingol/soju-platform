@@ -655,6 +655,21 @@
   font-size: 0.75rem;
 }
 
+.chat-ai-note {
+  margin: 0;
+  color: var(--pico-muted-color);
+  font-size: var(--kr-font-body-sm);
+  line-height: 1.4;
+  text-align: center;
+}
+
+.chat-conversation--compact .chat-ai-note {
+  flex-shrink: 0;
+  font-size: 0.625rem;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
 .chat-log--compact {
   flex: 1;
   min-height: 5.5rem;
@@ -675,7 +690,8 @@
   overflow: hidden;
 }
 
-.chat-dock__panel .chat-form--compact {
+.chat-dock__panel .chat-form--compact,
+.chat-dock__panel .chat-ai-note {
   flex-shrink: 0;
 }
 
