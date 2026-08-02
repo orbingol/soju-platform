@@ -8,7 +8,8 @@ API/class reference. Building is a thin wrapper around ``docs/Makefile``, which 
 .. code-block:: bash
 
    uv run poe docs          # HTML → docs/_build/html/
-   uv run poe docs-serve    # live-reload preview, opens a browser tab
+   uv run poe docs-serve    # live-reload preview on :14321, opens a browser tab
+   uv run poe docs-serve --port 9000
 
 Equivalent to running ``make`` directly from ``docs/``:
 
@@ -16,7 +17,8 @@ Equivalent to running ``make`` directly from ``docs/``:
 
    make -C docs html
    make -C docs clean
-   make -C docs serve
+   make -C docs serve              # default PORT=14321
+   make -C docs serve PORT=9000
    # Windows: docs\make.bat html
 
 CLI option help (e.g. ``--level``) is generated at build time from the live Typer apps

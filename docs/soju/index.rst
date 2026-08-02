@@ -70,3 +70,4 @@ Documentation
    development/data-layout
    development/poe
    development/docker
+   development/libraries

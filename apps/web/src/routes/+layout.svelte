@@ -12,6 +12,7 @@
   import ChatDock from '$lib/components/ChatDock.svelte';
   import EdgePanel from '$lib/components/EdgePanel.svelte';
   import SiteChrome from '$lib/components/SiteChrome.svelte';
+  import SiteFooter from '$lib/components/SiteFooter.svelte';
   import { buildEducationFallbackCrumbs, buildEducationNavItems, educationHref } from '$lib/education-nav';
   import { aiEnabled } from '$lib/config';
 
@@ -76,5 +77,6 @@
     <main class="app-content">
       {@render children()}
     </main>
+    <SiteFooter />
   </div>
 </div>

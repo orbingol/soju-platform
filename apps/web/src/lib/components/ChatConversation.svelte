@@ -129,7 +129,7 @@
 <div class="chat-conversation" class:chat-conversation--compact={compact}>
   <div class="chat-log chat-log--{compact ? 'compact' : 'full'}" bind:this={logEl}>
     {#if messages.length === 0}
-      <p class="practice-status">Ask a question to start the lesson.</p>
+      <p class="practice-status">Ask a question to your virtual tutor.</p>
     {/if}
     {#each messages as message, index (index)}
       {#if message.role === 'assistant'}
@@ -149,6 +149,8 @@
   {#if error}
     <p class="chat-conversation__error" role="alert">{error}</p>
   {/if}
+
+  <p class="chat-ai-note">AI can make mistakes. Please verify the output.</p>
 
   <form class="chat-form" class:chat-form--compact={compact} use:nativeSubmit>
     {#if compact}

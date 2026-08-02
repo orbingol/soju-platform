@@ -249,3 +249,37 @@
     padding: 0.45rem 0.9rem;
   }
 }
+
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding: 0.5rem clamp(1rem, 3vw, 2.5rem);
+  border-top: 1px solid var(--pico-muted-border-color);
+  color: var(--pico-muted-color);
+  font-size: 0.75rem;
+  line-height: 1.3;
+}
+
+.site-footer__copy {
+  margin: 0;
+}
+
+.site-footer__github {
+  display: inline-flex;
+  color: inherit;
+  line-height: 0;
+}
+
+.site-footer__github:hover {
+  color: var(--pico-color);
+}
+
+.site-footer__github svg {
+  width: 0.8rem;
+  height: 0.8rem;
+  fill: currentColor;
+}

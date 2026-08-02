@@ -5,6 +5,7 @@ SPHINXOPTS      ?=
 SPHINXBUILD     ?= sphinx-build
 SPHINXAUTOBUILD ?= sphinx-autobuild
 SPHINX_THEME    ?= furo
+PORT            ?= 14321
 SOURCEDIR       = soju
 BUILDDIR        = _build
 # conf.py lives in docs/ (this directory), not under SOURCEDIR
@@ -21,4 +22,4 @@ clean:
 	@rm -rf "$(BUILDDIR)"
 
 serve:
-	@$(SPHINXAUTOBUILD) "$(SOURCEDIR)" "$(BUILDDIR)/html" $(SPHINXOPTS) $(O) --open-browser
+	@$(SPHINXAUTOBUILD) "$(SOURCEDIR)" "$(BUILDDIR)/html" $(SPHINXOPTS) $(O) --port $(PORT) --open-browser

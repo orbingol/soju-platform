@@ -246,7 +246,7 @@
           <span class="chat-dock__avatar" aria-hidden="true">{tutorInitial}</span>
           <div class="chat-dock__titles">
             <h2>{tutorShortName}</h2>
-            <p class="chat-dock__subtitle">Korean tutor</p>
+            <p class="chat-dock__subtitle">Virtual Tutor</p>
           </div>
         </div>
         <div class="chat-dock__actions">

@@ -18,3 +18,4 @@ Technical setup for running and contributing to the Soju platform.
 - :doc:`data-layout`
 - :doc:`poe`
 - :doc:`docker`
+- :doc:`libraries`

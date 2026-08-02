@@ -24,11 +24,15 @@ body {
 }
 
 .app-main {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   min-width: 0;
+  min-height: 100dvh;
 }
 
 .app-content {
+  flex: 1;
   width: 100%;
   padding: clamp(1rem, 2.5vw, 2rem) clamp(1rem, 3vw, 2.5rem) clamp(2rem, 4vw, 3rem);
   font-size: var(--kr-font-body);

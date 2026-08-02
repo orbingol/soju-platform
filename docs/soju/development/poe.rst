@@ -69,8 +69,8 @@ Test & docs
      - ``uv run poe test-system`` · ``test-llm`` · ``test-all`` · ``coverage``
    * - Build docs
      - ``uv run poe docs``
-   * - Serve docs (live reload)
-     - ``uv run poe docs-serve``
+   * - Serve docs (live reload, :14321)
+     - ``uv run poe docs-serve`` · ``--port N``
 
 Lint & pre-commit
 -----------------

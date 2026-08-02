@@ -14,6 +14,9 @@ if "%SPHINXAUTOBUILD%" == "" (
 if "%SPHINX_THEME%" == "" (
     set SPHINX_THEME=furo
 )
+if "%PORT%" == "" (
+    set PORT=14321
+)
 set SOURCEDIR=soju
 set BUILDDIR=_build
 REM conf.py lives in docs\ (this directory), not under SOURCEDIR
@@ -25,6 +28,7 @@ if "%1" == "serve" goto serve
 
 echo Usage: make.bat [html^|clean^|serve]
 echo Theme: set SPHINX_THEME=alabaster (default: furo)
+echo Port: set PORT=9000 (default: 14321)
 exit /b 1
 
 :html
@@ -36,7 +40,7 @@ if exist %BUILDDIR% rmdir /s /q %BUILDDIR%
 goto end
 
 :serve
-%SPHINXAUTOBUILD% %SOURCEDIR% %BUILDDIR%/html %SPHINXOPTS% %O% --open-browser
+%SPHINXAUTOBUILD% %SOURCEDIR% %BUILDDIR%/html %SPHINXOPTS% %O% --port %PORT% --open-browser
 goto end
 
 :end

@@ -184,6 +184,7 @@ cmd = "make clean html"
 cwd = "docs"
 
 [tool.poe.tasks.docs-serve]
-help = "Build and serve Sphinx docs with live reload."
-cmd = "make clean html serve"
+help = "Build and serve Sphinx docs with live reload (default port 14321)."
+cmd = "make clean html serve PORT=${port}"
 cwd = "docs"
+args = [{ name = "port", default = "14321", options = ["--port"] }]
