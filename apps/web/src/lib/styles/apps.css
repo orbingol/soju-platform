@@ -233,17 +233,37 @@
 .practice-control--checkbox {
   flex-direction: row;
   align-items: center;
-  gap: 0.5rem;
-  align-self: end;
+  gap: 0.55rem;
+  align-self: center;
+  cursor: pointer;
+  min-height: 2.5rem;
 }
 
-.practice-control--checkbox input {
-  width: auto;
+.practice-control--checkbox input[type='checkbox'] {
+  /* Keep a real box — width:auto collapses Pico's appearance:none checkbox to a line */
+  width: 1.25rem;
+  height: 1.25rem;
   margin: 0;
+  flex-shrink: 0;
+  border: var(--pico-border-width) solid var(--pico-muted-border-color);
+  border-radius: 0.25rem;
+  background-color: var(--pico-form-element-background-color, var(--pico-background-color));
+}
+
+.practice-control--checkbox input[type='checkbox']:checked,
+.practice-control--checkbox input[type='checkbox']:checked:active,
+.practice-control--checkbox input[type='checkbox']:checked:focus {
+  border-color: var(--pico-primary-border);
+  background-color: var(--pico-primary-background);
+}
+
+.practice-control--checkbox input[type='checkbox']:focus {
+  --pico-box-shadow: 0 0 0 var(--pico-outline-width) var(--pico-primary-focus);
 }
 
 .practice-control--checkbox .practice-control__label {
   margin: 0;
+  color: var(--pico-color);
 }
 
 .practice-control--custom-theme input {
