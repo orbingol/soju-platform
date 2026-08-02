@@ -154,6 +154,12 @@
   min-width: 10rem;
 }
 
+.practice-ai-note {
+  margin: 0 0 1rem;
+  color: var(--pico-muted-color);
+  font-size: var(--kr-font-body-sm);
+}
+
 .practice-app,
 .chat-app {
   display: grid;
