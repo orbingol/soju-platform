@@ -1,12 +1,6 @@
 <footer class="site-footer">
   <p class="site-footer__copy">Copyright © 2026 Soju Platform</p>
-  <a
-    class="site-footer__github"
-    href="https://github.com/orbingol/soju-platform"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="GitHub"
-  >
+  <a class="site-footer__github" href="https://github.com/orbingol/soju-platform" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
     <!-- Simple Icons GitHub glyph — https://github.com/simple-icons/simple-icons (CC0 1.0) -->
     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path
