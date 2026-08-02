@@ -64,6 +64,13 @@ uv run poe docs-serve
 - **Code** (`src/`, `apps/`, tooling): [BSD 3-Clause](LICENSE)
 - **Content & data** (`data/content/`): [CC BY 4.0](data/content/LICENSE)
 
+### Third-party
+
+Vendored assets distributed with this repository:
+
+- [Pico CSS](https://picocss.com) (`apps/web/static/vendor/pico.min.css`): MIT
+- [Simple Icons](https://github.com/simple-icons/simple-icons) (GitHub glyph in the site footer): [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
+
 ## Author(s)
 
 - Onur R. Bingol, Ph.D. ([@orbingol](https://github.com/orbingol))
