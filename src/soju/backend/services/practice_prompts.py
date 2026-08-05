@@ -43,9 +43,7 @@ def screen_practice_text(*parts: str, prompts: PromptsSettings | None = None) ->
         compiled, message = _compiled_blocklist()
     else:
         compiled = tuple(
-            re.compile(raw, re.IGNORECASE)
-            for category_id in prompts.guardrails.blocked_categories
-            for raw in prompts.guardrails.category_patterns.get(category_id, [])
+            re.compile(raw, re.IGNORECASE) for category_id in prompts.guardrails.blocked_categories for raw in prompts.guardrails.category_patterns.get(category_id, [])
         )
         message = prompts.practice.topic_blocked
     for pattern in compiled:
@@ -63,9 +61,7 @@ def _response_spec(
         exercise = PracticeExercisePrompt()
     candidates = prompts.practice.candidates_optional
     shape = render(exercise.shape.strip(), count=count, candidates_optional=candidates)
-    requirements = [
-        render(item, count=count, candidates_optional=candidates) for item in exercise.requirements
-    ]
+    requirements = [render(item, count=count, candidates_optional=candidates) for item in exercise.requirements]
     return shape, requirements
 
 
@@ -112,22 +108,12 @@ def build_practice_system_prompt(
     regen_rule = ""
     if exercise_type == "story" and previous_story:
         sentences = previous_story.get("sentences") or []
-        hangul_lines = " ".join(
-            str(item.get("hangul", "")).strip()
-            for item in sentences
-            if isinstance(item, dict) and str(item.get("hangul", "")).strip()
-        )
+        hangul_lines = " ".join(str(item.get("hangul", "")).strip() for item in sentences if isinstance(item, dict) and str(item.get("hangul", "")).strip())
         if hangul_lines:
             title = str(previous_story.get("title") or "").strip()
             title_line = f"Title: {title}\n" if title else ""
-            previous_block = (
-                "\n\nPrevious sample (do NOT reuse — write a clearly different story "
-                f"with a new title and different events/details):\n{title_line}{hangul_lines}"
-            )
-            regen_rule = (
-                "\n- This is a regeneration: invent a fresh narrative; "
-                "do not copy or lightly paraphrase the previous sample."
-            )
+            previous_block = f"\n\nPrevious sample (do NOT reuse — write a clearly different story with a new title and different events/details):\n{title_line}{hangul_lines}"
+            regen_rule = "\n- This is a regeneration: invent a fresh narrative; do not copy or lightly paraphrase the previous sample."
 
     guidance_block = level_guidance
     if grammar_summary and grammar_summary.strip():
@@ -188,10 +174,7 @@ def build_story_topic_prompt(
     cfg = prompts or get_prompts()
     previous_line = ""
     if previous_topic and previous_topic.strip():
-        previous_line = (
-            "\n\nDo NOT repeat or lightly rephrase this previous topic:\n"
-            f"{previous_topic.strip()}\nInvent a clearly different personal question."
-        )
+        previous_line = f"\n\nDo NOT repeat or lightly rephrase this previous topic:\n{previous_topic.strip()}\nInvent a clearly different personal question."
     return render(
         cfg.practice.story_topic,
         content_policy=cfg.content_policy.strip(),

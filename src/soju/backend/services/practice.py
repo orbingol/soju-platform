@@ -296,11 +296,7 @@ class PracticeService:
         )
         last_error = self._prompts.practice.story_topic_failed
         for attempt in range(STORY_TOPIC_MAX_ATTEMPTS):
-            user = (
-                self._prompts.practice.user_story_topic_retry
-                if attempt > 0
-                else self._prompts.practice.user_story_topic
-            )
+            user = self._prompts.practice.user_story_topic_retry if attempt > 0 else self._prompts.practice.user_story_topic
             content = await self._complete_json(
                 system=system,
                 user=user,

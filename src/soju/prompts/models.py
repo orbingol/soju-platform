@@ -42,10 +42,7 @@ class PracticePromptSettings(BaseModel):
     story_topic_unsafe: str = "Generated topic was not appropriate. Please try again."
     evaluate_story: str = ""
     candidates_optional: str = ""
-    topic_blocked: str = (
-        "That topic is not appropriate for this education app. "
-        "Please try a different, everyday theme (school, food, travel, hobbies, family)."
-    )
+    topic_blocked: str = "That topic is not appropriate for this education app. Please try a different, everyday theme (school, food, travel, hobbies, family)."
     exercises: dict[str, PracticeExercisePrompt] = Field(default_factory=dict)
 
 
@@ -53,10 +50,7 @@ class KoreanCliPromptSettings(BaseModel):
     """CLI translation / example-fill system and user templates."""
 
     translation_system: str = ""
-    translation_user: str = (
-        "Translate these vocabulary items into records. "
-        "Return one record per item, in the same order.\n{{items_json}}"
-    )
+    translation_user: str = "Translate these vocabulary items into records. Return one record per item, in the same order.\n{{items_json}}"
     verb_examples_system: str = ""
     noun_examples_system: str = ""
 

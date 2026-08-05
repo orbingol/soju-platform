@@ -11,7 +11,6 @@ import yaml
 
 from soju.backend.config.settings import BackendSettings
 from soju.prompts.loader import load_prompts
-from soju.prompts.models import PromptsSettings
 
 DEFAULT_CONFIG_RESOURCE = "default_config.yaml"
 CONFIG_FILES_PACKAGE = "soju.backend.config.files"
