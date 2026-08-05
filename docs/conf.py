@@ -19,9 +19,9 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 os.environ.setdefault("DATA_DIR", str(REPO_ROOT / "data"))
 
 # -- Project information -----------------------------------------------------
-project = "Soju"
+project = "Soju Platform"
 author = "Onur R. Bingol"
-copyright = f"{date.today().year}, {author}"
+copyright = f"{date.today().year}. {author}"
 
 try:
     release = pkg_version("soju")
