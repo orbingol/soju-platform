@@ -144,9 +144,7 @@ Requirements:
 ${spec.requirements.map((requirement) => `- ${requirement}`).join('\n')}
 - Keep hangul natural and beginner-friendly.
 - Do not include romanization fields anywhere in the JSON.${
-    previousStoryBlock
-      ? '\n- This is a regeneration: invent a fresh narrative; do not copy or lightly paraphrase the previous sample.'
-      : ''
+    previousStoryBlock ? '\n- This is a regeneration: invent a fresh narrative; do not copy or lightly paraphrase the previous sample.' : ''
   }`;
 }
 
@@ -158,9 +156,7 @@ export async function generatePracticeSession(options: PracticeGenerateOptions):
       { role: 'system', content: buildPracticeSystemPrompt(options) },
       {
         role: 'user',
-        content: regenerating
-          ? 'Generate a different practice session JSON. Do not reuse the previous story.'
-          : "Generate today's practice session JSON.",
+        content: regenerating ? 'Generate a different practice session JSON. Do not reuse the previous story.' : "Generate today's practice session JSON.",
       },
     ],
     jsonMode: true,

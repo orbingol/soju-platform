@@ -377,12 +377,7 @@
         </div>
 
         {#if storyTab === 'yours'}
-          <div
-            class="practice-story-tabpanel"
-            role="tabpanel"
-            id="practice-story-panel-yours"
-            aria-labelledby="practice-story-tab-yours"
-          >
+          <div class="practice-story-tabpanel" role="tabpanel" id="practice-story-panel-yours" aria-labelledby="practice-story-tab-yours">
             <p class="practice-story-hint">
               Using the topic above, write a short first-person story — about {count} sentences is a great length.
             </p>
@@ -404,12 +399,7 @@
             {/if}
           </div>
         {:else}
-          <div
-            class="practice-story-tabpanel"
-            role="tabpanel"
-            id="practice-story-panel-sample"
-            aria-labelledby="practice-story-tab-sample"
-          >
+          <div class="practice-story-tabpanel" role="tabpanel" id="practice-story-panel-sample" aria-labelledby="practice-story-tab-sample">
             {#if loading}
               <p class="practice-story-hint">Generating a new sample story…</p>
               <div class="practice-toolbar practice-toolbar--end">
@@ -443,9 +433,7 @@
                     {translation}
                   </p>
                 {:else}
-                  <p class="practice-story-paragraph practice-story-paragraph--translation">
-                    No English translation was returned for this story. Try generating again.
-                  </p>
+                  <p class="practice-story-paragraph practice-story-paragraph--translation">No English translation was returned for this story. Try generating again.</p>
                 {/if}
               {/if}
               <div class="practice-toolbar practice-toolbar--end">
