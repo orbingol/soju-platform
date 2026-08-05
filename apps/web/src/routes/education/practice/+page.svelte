@@ -427,9 +427,7 @@
                   {loading ? 'Generating…' : 'Regenerate'}
                 </button>
               </div>
-              <p class="practice-story-disclaimer">
-                <strong>Disclaimer:</strong> AI can make mistakes. Please verify the sample story.
-              </p>
+              <p class="practice-story-disclaimer">AI can make mistakes. Please verify the output.</p>
             {:else}
               <p class="practice-story-hint">Generate a sample first-person story for this topic to use as a reference.</p>
               <div class="practice-toolbar">

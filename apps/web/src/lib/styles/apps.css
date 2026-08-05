@@ -568,7 +568,9 @@
 .practice-story-disclaimer {
   margin: 0;
   color: var(--pico-muted-color);
-  font-size: var(--kr-font-body-sm);
+  font-size: var(--kr-font-caption);
+  font-style: italic;
+  text-align: center;
 }
 
 .chat-log {
