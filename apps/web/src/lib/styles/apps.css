@@ -471,32 +471,37 @@
   border-bottom: 1px solid var(--pico-muted-border-color);
 }
 
-.practice-story-tab {
+/* Override Pico button chrome — tabs are text links, not filled buttons. */
+.practice-story-tabs button.practice-story-tab,
+.practice-story-tabs button.practice-story-tab:is(:hover, :focus, :focus-visible, :active) {
   margin: 0;
   padding: 0.55rem 0.9rem;
   border: none;
   border-bottom: 2px solid transparent;
   border-radius: 0;
   background: transparent;
-  color: var(--pico-muted-color);
+  background-color: transparent;
+  box-shadow: none;
+  outline: none;
+  color: var(--kr-text-primary, var(--pico-color));
+  opacity: 0.55;
   font-size: var(--kr-font-body-sm);
   font-weight: 600;
   line-height: 1.2;
   height: auto;
   min-width: 0;
   cursor: pointer;
-  box-shadow: none;
 }
 
-.practice-story-tab:hover,
-.practice-story-tab:focus {
-  color: var(--pico-color);
-  background: transparent;
-  border-bottom-color: color-mix(in srgb, var(--pico-muted-border-color) 80%, var(--pico-primary-border));
+.practice-story-tabs button.practice-story-tab:is(:hover, :focus, :focus-visible) {
+  opacity: 0.85;
+  border-bottom-color: color-mix(in srgb, var(--pico-muted-border-color) 70%, var(--pico-primary-border));
 }
 
-.practice-story-tab[aria-selected='true'] {
-  color: var(--pico-color);
+.practice-story-tabs button.practice-story-tab[aria-selected='true'],
+.practice-story-tabs button.practice-story-tab[aria-selected='true']:is(:hover, :focus, :focus-visible, :active) {
+  color: var(--kr-text-primary, var(--pico-color));
+  opacity: 1;
   border-bottom-color: var(--pico-primary-border);
 }
 
