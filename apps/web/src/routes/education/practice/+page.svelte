@@ -4,7 +4,7 @@
 
   import AiServiceGate from '$lib/components/AiServiceGate.svelte';
   import SpeakButton from '$lib/components/SpeakButton.svelte';
-  import { evaluatePracticeStory, generatePracticeSession, type PracticeExerciseType } from '$lib/practice';
+  import { evaluatePracticeStory, generatePracticeSession, generateStoryTopic, type PracticeExerciseType } from '$lib/practice';
   import { savePracticeSessionToStaging } from '$lib/practice/client';
   import { downloadTextFile, normalizePracticeSession, todayIsoDate, type PracticeSessionJson } from '$lib/staging';
 
@@ -20,6 +20,7 @@
   let includeSupplemental = $state(false);
 
   let loading = $state(false);
+  let topicLoading = $state(false);
   let error = $state('');
   let status = $state('');
   let session = $state<PracticeSessionJson | null>(null);
@@ -40,26 +41,32 @@
   const isStory = $derived(exerciseType === 'story');
   const hasSampleStory = $derived(Boolean(session?.story && resultType === 'story'));
 
-  const STORY_TOPIC_SEEDS = [
-    'What did you do last weekend?',
-    'Where would you go on a holiday?',
-    'What is a typical day like for you?',
-    'Who is someone important in your family, and why?',
-    'What did you eat yesterday, and where?',
-    'What do you usually do after class or work?',
-    'Tell me about a place you like in your city.',
-    'What are you studying or learning right now, and why?',
-    'Describe a time you helped a friend.',
-    'What do you want to do this coming weekend?',
-    'Where do you like to go shopping, and what do you buy?',
-    'Tell me about your morning routine.',
-  ] as const;
+  async function pickAiStoryTopic() {
+    error = '';
+    status = '';
+    const level = data.levels.find((entry) => entry.id === selectedLevel);
+    if (!level) {
+      error = `Unknown level ${selectedLevel}`;
+      return;
+    }
+    const themeText = resolveThemeText();
+    if (!themeText) return;
 
-  function pickRandomStoryTopic() {
-    const current = storyTopic.trim();
-    const pool = STORY_TOPIC_SEEDS.filter((topic) => topic !== current);
-    const choices = pool.length > 0 ? pool : [...STORY_TOPIC_SEEDS];
-    storyTopic = choices[Math.floor(Math.random() * choices.length)] ?? 'What did you do last weekend?';
+    topicLoading = true;
+    try {
+      status = 'Generating story topic…';
+      storyTopic = await generateStoryTopic({
+        levelId: level.id,
+        themeText,
+        previousTopic: storyTopic.trim() || undefined,
+      });
+      status = 'Story topic ready.';
+    } catch (err) {
+      error = err instanceof Error ? err.message : 'Topic generation failed';
+      status = '';
+    } finally {
+      topicLoading = false;
+    }
   }
 
   /** Models sometimes append "(English…)" on the prompt; peel that off for display/TTS. */
@@ -313,7 +320,9 @@
           <span class="practice-control__label">Story topic</span>
           <input type="text" placeholder="e.g. What did you do last weekend?" bind:value={storyTopic} />
         </label>
-        <button type="button" class="secondary practice-story-topic__random" onclick={pickRandomStoryTopic}> Generate random story topic </button>
+        <button type="button" class="secondary practice-story-topic__random" onclick={pickAiStoryTopic} disabled={topicLoading || loading}>
+          {topicLoading ? 'Generating topic…' : 'Generate story topic'}
+        </button>
       </div>
     {/if}
 

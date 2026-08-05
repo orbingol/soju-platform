@@ -239,3 +239,47 @@ Requirements:
 - Mention grammar or vocabulary gently when useful.
 - Do not rewrite the whole story; at most quote a tiny suggested fix.
 - Do not include Korean romanization."""
+
+
+def build_story_topic_prompt(
+    *,
+    level_label: str,
+    level_guidance: str,
+    theme_text: str,
+    previous_topic: str | None = None,
+) -> str:
+    """Build a strict prompt for one age-appropriate story practice question."""
+    previous_line = ""
+    if previous_topic and previous_topic.strip():
+        previous_line = (
+            f"\n\nDo NOT repeat or lightly rephrase this previous topic:\n{previous_topic.strip()}\n"
+            "Invent a clearly different personal question."
+        )
+    return f"""{CONTENT_POLICY}
+
+You invent ONE story prompt for a Korean language education app used by learners under 18.
+
+Learner level: {level_label}
+{level_guidance}
+
+Practice theme (stay close to this everyday situation):
+{theme_text.strip()}{previous_line}
+
+Respond with valid JSON only (no markdown prose) using this shape:
+{{"topic": "..."}}
+
+Hard requirements for "topic":
+- Exactly one short personal question in plain English (or one short "Tell me about…" line).
+- One sentence only — no second sentence, no instructions, no "practice …" coaching.
+- Aim for about 6–12 words (hard max ~14 words).
+- The learner will answer in first person as a short beginner Korean paragraph.
+- Must be wholesome, school-safe, and suitable for ages under 18.
+- Prefer everyday life: school, class, hobbies, food, café, family, friends, travel, shopping, morning routine, weekend plans, weather, pets (non-violent), studying.
+- FORBIDDEN topics and angles: sex, romance/dating, kissing, bodies, nudity, drugs/alcohol abuse, weapons, guns, fighting, violence, crime, horror, gore, self-harm, bullying as entertainment, politics, religion debates, gambling.
+- Do not ask about injuries, accidents, emergencies, or scary events.
+- Keep the question simple enough for a beginner (one clear idea).
+- Do not include Korean hangul, romanization, or JSON besides the required shape.
+- Good: "What did you order at the café yesterday?"
+- Bad: "What do you like to drink at a café? Practice ordering and asking about menu items."
+- "topic" must be a single non-empty string."""
+

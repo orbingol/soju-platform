@@ -70,7 +70,12 @@ def test_retrieve_practice_missing_cache(tmp_path: Path) -> None:
 
 
 def test_screen_blocklist() -> None:
-    from soju.backend.services.practice_prompts import PracticeTopicBlockedError, build_practice_system_prompt, screen_practice_text
+    from soju.backend.services.practice_prompts import (
+        PracticeTopicBlockedError,
+        build_practice_system_prompt,
+        build_story_topic_prompt,
+        screen_practice_text,
+    )
 
     with pytest.raises(PracticeTopicBlockedError):
         screen_practice_text("a story about guns and fighting")
@@ -87,3 +92,24 @@ def test_screen_blocklist() -> None:
     )
     assert "under 18" in prompt.lower()
     assert "Café" in prompt
+
+    topic_prompt = build_story_topic_prompt(
+        level_label="Korean 1A",
+        level_guidance="Keep it simple.",
+        theme_text="Café orders",
+        previous_topic="What did you drink?",
+    )
+    assert "FORBIDDEN" in topic_prompt
+    assert "Café orders" in topic_prompt
+    assert "What did you drink?" in topic_prompt
+    assert "6–12 words" in topic_prompt or "6-12 words" in topic_prompt
+
+
+def test_parse_story_topic_keeps_first_question_only() -> None:
+    from soju.backend.services.practice_session import parse_story_topic_json
+
+    topic = parse_story_topic_json(
+        '{"topic": "What do you like to drink at a café? Practice ordering and asking about menu items."}'
+    )
+    assert topic == "What do you like to drink at a café?"
+    assert "Practice" not in topic

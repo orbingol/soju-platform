@@ -163,3 +163,32 @@ def parse_feedback_json(text: str) -> dict[str, str]:
     if not isinstance(feedback, str) or not feedback.strip():
         raise PracticeSessionParseError("Invalid evaluate JSON: feedback must be a non-empty string")
     return {"feedback": feedback.strip()}
+
+
+def parse_story_topic_json(text: str) -> str:
+    """Parse story-topic JSON into a single cleaned topic string."""
+    trimmed = _strip_fences(text)
+    if not trimmed:
+        raise PracticeSessionParseError("The model returned an empty topic.")
+    try:
+        parsed = json.loads(trimmed)
+    except json.JSONDecodeError as exc:
+        raise PracticeSessionParseError(f"Invalid topic JSON: {exc}") from exc
+    if not isinstance(parsed, dict):
+        raise PracticeSessionParseError("Invalid topic JSON: root must be an object")
+    topic = parsed.get("topic")
+    if not isinstance(topic, str) or not topic.strip():
+        raise PracticeSessionParseError("Invalid topic JSON: topic must be a non-empty string")
+    cleaned = " ".join(topic.strip().split())
+    # One question only — drop coaching / second sentences after the first "?".
+    if "?" in cleaned:
+        cleaned = cleaned.split("?", 1)[0].strip() + "?"
+    else:
+        # No question mark: keep the first sentence only.
+        cleaned = cleaned.split(".", 1)[0].strip()
+    words = cleaned.rstrip("?").split()
+    if len(words) > 14:
+        cleaned = " ".join(words[:14]).rstrip(".,;") + "?"
+    if len(cleaned) > 100:
+        raise PracticeSessionParseError("Invalid topic JSON: topic is too long")
+    return cleaned

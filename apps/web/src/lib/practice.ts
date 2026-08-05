@@ -91,3 +91,32 @@ export async function evaluatePracticeStory(options: PracticeStoryEvaluateOption
   }
   return (await response.json()) as PracticeStoryEvaluateResult;
 }
+
+export interface PracticeStoryTopicOptions {
+  levelId: string;
+  themeText: string;
+  previousTopic?: string;
+}
+
+const STORY_TOPIC_TIMEOUT_MS = 45_000;
+
+/** Generate one age-appropriate story topic via the Soju backend. */
+export async function generateStoryTopic(options: PracticeStoryTopicOptions): Promise<string> {
+  const response = await jsonPost(
+    '/v1/soju/practice/story-topic',
+    {
+      level: options.levelId,
+      theme_text: options.themeText,
+      ...(options.previousTopic?.trim() ? { previous_topic: options.previousTopic.trim() } : {}),
+    },
+    STORY_TOPIC_TIMEOUT_MS,
+  );
+  if (!response.ok) {
+    throw new Error(await readPracticeError(response));
+  }
+  const body = (await response.json()) as { topic?: unknown };
+  if (typeof body.topic !== 'string' || !body.topic.trim()) {
+    throw new Error('Story topic response was empty.');
+  }
+  return body.topic.trim();
+}

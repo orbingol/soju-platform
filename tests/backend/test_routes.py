@@ -213,3 +213,25 @@ def test_practice_evaluate_story_ok(client: TestClient, monkeypatch: pytest.Monk
     )
     assert response.status_code == 200
     assert response.json()["feedback"] == "Nice short answer."
+
+
+def test_practice_story_topic_ok(client: TestClient, monkeypatch: pytest.MonkeyPatch) -> None:
+    async def fake_topic(self, **_kwargs):  # noqa: ANN001
+        return {"topic": "What did you order at the café yesterday?"}
+
+    monkeypatch.setattr("soju.backend.routes.practice.PracticeService.generate_story_topic", fake_topic)
+    response = client.post(
+        "/v1/soju/practice/story-topic",
+        json={"level": "1A", "theme_text": "Ordering drinks at a café.", "previous_topic": "Old topic"},
+    )
+    assert response.status_code == 200
+    assert "café" in response.json()["topic"].lower()
+
+
+def test_practice_story_topic_blocks_unsafe_theme(client: TestClient) -> None:
+    response = client.post(
+        "/v1/soju/practice/story-topic",
+        json={"level": "1A", "theme_text": "guns and fighting"},
+    )
+    assert response.status_code == 400
+    assert "not appropriate" in response.json()["detail"].lower()

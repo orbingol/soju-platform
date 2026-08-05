@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { evaluatePracticeStory, generatePracticeSession } from './practice';
+import { evaluatePracticeStory, generatePracticeSession, generateStoryTopic } from './practice';
 
 describe('generatePracticeSession', () => {
   afterEach(() => {
@@ -90,6 +90,37 @@ describe('evaluatePracticeStory', () => {
       topic: 'Café morning',
       user_story: '카페에 가요.',
       model_story: 'Morning\n카페에 가요.',
+    });
+  });
+});
+
+describe('generateStoryTopic', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    vi.restoreAllMocks();
+  });
+
+  it('posts theme context to the story-topic API', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ topic: 'What did you order at the café?' }),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    await expect(
+      generateStoryTopic({
+        levelId: '1A',
+        themeText: 'Café',
+        previousTopic: 'Old topic',
+      }),
+    ).resolves.toBe('What did you order at the café?');
+
+    const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
+    expect(url).toContain('/v1/soju/practice/story-topic');
+    expect(JSON.parse(String(init.body))).toMatchObject({
+      level: '1A',
+      theme_text: 'Café',
+      previous_topic: 'Old topic',
     });
   });
 });

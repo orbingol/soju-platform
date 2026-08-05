@@ -39,6 +39,14 @@ class PracticeEvaluateRequest(BaseModel):
     model_story: str = Field(min_length=1)
 
 
+class PracticeStoryTopicRequest(BaseModel):
+    """Browser request for an AI-generated story prompt."""
+
+    level: str = Field(min_length=1)
+    theme_text: str = Field(min_length=1)
+    previous_topic: str | None = None
+
+
 def _practice_service(llm: LlmProxyService, settings: BackendSettings) -> PracticeService:
     return PracticeService(llm, settings.llm)
 
@@ -84,6 +92,25 @@ async def practice_evaluate_story(
             topic=body.topic,
             user_story=body.user_story,
             model_story=body.model_story,
+        )
+    except PracticeServiceError as exc:
+        _raise_service_error(exc)
+        raise  # pragma: no cover
+
+
+@router.post("/v1/soju/practice/story-topic")
+async def practice_story_topic(
+    body: PracticeStoryTopicRequest,
+    llm: LlmProxyService = Depends(get_llm),
+    settings: BackendSettings = Depends(get_settings),
+) -> dict[str, str]:
+    """Generate one age-appropriate story topic for the current theme."""
+    service = _practice_service(llm, settings)
+    try:
+        return await service.generate_story_topic(
+            level_id=body.level,
+            theme_text=body.theme_text,
+            previous_topic=body.previous_topic,
         )
     except PracticeServiceError as exc:
         _raise_service_error(exc)

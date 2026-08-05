@@ -14,12 +14,14 @@ from soju.backend.services.practice_prompts import (
     PracticeTopicBlockedError,
     build_practice_system_prompt,
     build_story_evaluate_prompt,
+    build_story_topic_prompt,
     screen_practice_text,
 )
 from soju.backend.services.practice_session import (
     PracticeSessionParseError,
     parse_feedback_json,
     parse_practice_session_json,
+    parse_story_topic_json,
 )
 from soju.levels import get_language_level, load_levels_config
 from soju.services.embeddings.retrieve import PracticeRetrieveError, retrieve_practice
@@ -28,6 +30,8 @@ PRACTICE_BASE_MAX_TOKENS = 600
 PRACTICE_TOKENS_PER_ITEM = 180
 PRACTICE_MAX_TOKENS_CAP = 4000
 EVALUATE_MAX_TOKENS = 800
+STORY_TOPIC_MAX_TOKENS = 200
+STORY_TOPIC_MAX_ATTEMPTS = 2
 
 
 class PracticeServiceError(Exception):
@@ -252,3 +256,57 @@ class PracticeService:
             return parse_feedback_json(content)
         except PracticeSessionParseError as exc:
             raise PracticeServiceError(str(exc), 502) from exc
+
+    async def generate_story_topic(
+        self,
+        *,
+        level_id: str,
+        theme_text: str,
+        previous_topic: str | None = None,
+    ) -> dict[str, str]:
+        """Generate one age-appropriate story prompt for the given theme."""
+        theme = theme_text.strip()
+        if not theme:
+            raise PracticeServiceError("theme_text is required", 400)
+
+        try:
+            screen_practice_text(theme)
+        except PracticeTopicBlockedError as exc:
+            raise PracticeServiceError(str(exc), 400) from exc
+
+        try:
+            level = get_language_level(level_id, self._data_root)
+        except ValueError as exc:
+            raise PracticeServiceError(str(exc), 400) from exc
+
+        system = build_story_topic_prompt(
+            level_label=level.label,
+            level_guidance=level.guidance,
+            theme_text=theme,
+            previous_topic=previous_topic,
+        )
+        last_error = "Could not generate a suitable story topic. Please try again."
+        for attempt in range(STORY_TOPIC_MAX_ATTEMPTS):
+            user = (
+                "Generate one different safe story topic JSON."
+                if attempt > 0
+                else "Generate one safe story topic JSON for this theme."
+            )
+            content = await self._complete_json(
+                system=system,
+                user=user,
+                temperature=0.7 if attempt == 0 else 0.85,
+                max_tokens=STORY_TOPIC_MAX_TOKENS,
+            )
+            try:
+                topic = parse_story_topic_json(content)
+            except PracticeSessionParseError as exc:
+                last_error = str(exc)
+                continue
+            try:
+                screen_practice_text(topic)
+            except PracticeTopicBlockedError:
+                last_error = "Generated topic was not appropriate. Please try again."
+                continue
+            return {"topic": topic}
+        raise PracticeServiceError(last_error, 502)
