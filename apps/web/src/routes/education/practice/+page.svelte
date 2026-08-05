@@ -383,7 +383,9 @@
             id="practice-story-panel-yours"
             aria-labelledby="practice-story-tab-yours"
           >
-            <p class="practice-story-hint">Answer the prompt in first person as a short paragraph.</p>
+            <p class="practice-story-hint">
+              Using the topic above, write a short first-person story — about {count} sentences is a great length.
+            </p>
             <textarea
               class="practice-story-textarea"
               rows="12"
