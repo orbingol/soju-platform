@@ -41,9 +41,7 @@ async function readPracticeError(response: Response): Promise<string> {
     if (typeof body.error === 'string' && body.error.trim()) return body.error;
     if (typeof body.detail === 'string' && body.detail.trim()) return body.detail;
     if (Array.isArray(body.detail)) {
-      const parts = body.detail
-        .map((item) => (typeof item === 'object' && item && 'msg' in item ? String((item as { msg: unknown }).msg) : String(item)))
-        .filter(Boolean);
+      const parts = body.detail.map((item) => (typeof item === 'object' && item && 'msg' in item ? String((item as { msg: unknown }).msg) : String(item))).filter(Boolean);
       if (parts.length) return parts.join('; ');
     }
   } catch {

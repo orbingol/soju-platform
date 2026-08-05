@@ -108,8 +108,6 @@ def test_screen_blocklist() -> None:
 def test_parse_story_topic_keeps_first_question_only() -> None:
     from soju.backend.services.practice_session import parse_story_topic_json
 
-    topic = parse_story_topic_json(
-        '{"topic": "What do you like to drink at a café? Practice ordering and asking about menu items."}'
-    )
+    topic = parse_story_topic_json('{"topic": "What do you like to drink at a café? Practice ordering and asking about menu items."}')
     assert topic == "What do you like to drink at a café?"
     assert "Practice" not in topic

@@ -156,11 +156,7 @@ def retrieve_practice(
         ranked_grammar.append((cosine_similarity(query_vector, list(embedding)), entry))
     ranked_grammar.sort(key=lambda item: item[0], reverse=True)
 
-    hangul = [
-        str(entry.get("hangul", "")).strip()
-        for _, entry in ranked_vocab[:vocab_limit]
-        if str(entry.get("hangul", "")).strip()
-    ]
+    hangul = [str(entry.get("hangul", "")).strip() for _, entry in ranked_vocab[:vocab_limit] if str(entry.get("hangul", "")).strip()]
     grammar: list[RetrievedGrammar] = []
     for _, entry in ranked_grammar[:grammar_limit]:
         summary = str(entry.get("summary") or "").strip() or None

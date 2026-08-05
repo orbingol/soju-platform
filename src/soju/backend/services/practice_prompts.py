@@ -47,10 +47,7 @@ _BLOCKLIST_PATTERNS: tuple[re.Pattern[str], ...] = tuple(
     )
 )
 
-CANDIDATES_OPTIONAL = (
-    '"vocabulary_candidates" is optional: at most 3 new words related to the theme '
-    "(hangul + english only; no romanization); omit the field entirely if none fit."
-)
+CANDIDATES_OPTIONAL = '"vocabulary_candidates" is optional: at most 3 new words related to the theme (hangul + english only; no romanization); omit the field entirely if none fit.'
 
 
 class PracticeTopicBlockedError(Exception):
@@ -64,10 +61,7 @@ def screen_practice_text(*parts: str) -> None:
         return
     for pattern in _BLOCKLIST_PATTERNS:
         if pattern.search(blob):
-            raise PracticeTopicBlockedError(
-                "That topic is not appropriate for this education app. "
-                "Please try a different, everyday theme (school, food, travel, hobbies, family)."
-            )
+            raise PracticeTopicBlockedError("That topic is not appropriate for this education app. Please try a different, everyday theme (school, food, travel, hobbies, family).")
 
 
 def _response_spec(exercise_type: PracticeExerciseType, count: int) -> tuple[str, list[str]]:
@@ -160,16 +154,11 @@ def build_practice_system_prompt(
     regen_rule = ""
     if exercise_type == "story" and previous_story:
         sentences = previous_story.get("sentences") or []
-        hangul_lines = " ".join(
-            str(item.get("hangul", "")).strip() for item in sentences if isinstance(item, dict) and str(item.get("hangul", "")).strip()
-        )
+        hangul_lines = " ".join(str(item.get("hangul", "")).strip() for item in sentences if isinstance(item, dict) and str(item.get("hangul", "")).strip())
         if hangul_lines:
             title = str(previous_story.get("title") or "").strip()
             title_line = f"Title: {title}\n" if title else ""
-            previous_block = (
-                "\n\nPrevious sample (do NOT reuse — write a clearly different story with a new title and different events/details):\n"
-                f"{title_line}{hangul_lines}"
-            )
+            previous_block = f"\n\nPrevious sample (do NOT reuse — write a clearly different story with a new title and different events/details):\n{title_line}{hangul_lines}"
             regen_rule = "\n- This is a regeneration: invent a fresh narrative; do not copy or lightly paraphrase the previous sample."
 
     guidance_block = level_guidance
@@ -251,10 +240,7 @@ def build_story_topic_prompt(
     """Build a strict prompt for one age-appropriate story practice question."""
     previous_line = ""
     if previous_topic and previous_topic.strip():
-        previous_line = (
-            f"\n\nDo NOT repeat or lightly rephrase this previous topic:\n{previous_topic.strip()}\n"
-            "Invent a clearly different personal question."
-        )
+        previous_line = f"\n\nDo NOT repeat or lightly rephrase this previous topic:\n{previous_topic.strip()}\nInvent a clearly different personal question."
     return f"""{CONTENT_POLICY}
 
 You invent ONE story prompt for a Korean language education app used by learners under 18.
@@ -282,4 +268,3 @@ Hard requirements for "topic":
 - Good: "What did you order at the café yesterday?"
 - Bad: "What do you like to drink at a café? Practice ordering and asking about menu items."
 - "topic" must be a single non-empty string."""
-

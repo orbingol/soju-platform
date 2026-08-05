@@ -130,7 +130,7 @@ def parse_practice_session_json(text: str) -> dict[str, Any]:
             raise PracticeSessionParseError('Invalid practice JSON: "story" must be an object')
         sentences_raw = story.get("sentences")
         if not isinstance(sentences_raw, list) or not sentences_raw:
-            raise PracticeSessionParseError('Invalid practice JSON: story.sentences must be a non-empty array')
+            raise PracticeSessionParseError("Invalid practice JSON: story.sentences must be a non-empty array")
         story_out: dict[str, Any] = {
             "sentences": [_parse_story_sentence(item, f"story.sentences[{i}]") for i, item in enumerate(sentences_raw)],
         }

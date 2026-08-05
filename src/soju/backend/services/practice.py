@@ -188,11 +188,7 @@ class PracticeService:
             story_topic=story_topic,
             previous_story=previous_story if regenerating else None,
         )
-        user = (
-            "Generate a different practice session JSON. Do not reuse the previous story."
-            if regenerating
-            else "Generate today's practice session JSON."
-        )
+        user = "Generate a different practice session JSON. Do not reuse the previous story." if regenerating else "Generate today's practice session JSON."
         content = await self._complete_json(
             system=system,
             user=user,
@@ -287,11 +283,7 @@ class PracticeService:
         )
         last_error = "Could not generate a suitable story topic. Please try again."
         for attempt in range(STORY_TOPIC_MAX_ATTEMPTS):
-            user = (
-                "Generate one different safe story topic JSON."
-                if attempt > 0
-                else "Generate one safe story topic JSON for this theme."
-            )
+            user = "Generate one different safe story topic JSON." if attempt > 0 else "Generate one safe story topic JSON for this theme."
             content = await self._complete_json(
                 system=system,
                 user=user,
