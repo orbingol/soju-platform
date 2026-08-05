@@ -163,3 +163,53 @@ def test_embeddings(client: TestClient) -> None:
     response = client.post("/v1/embeddings", json={"input": "theme"})
     assert response.status_code == 200
     assert response.json()["data"][0]["embedding"] == [1.0]
+
+
+def test_practice_generate_blocks_unsafe_topic(client: TestClient) -> None:
+    response = client.post(
+        "/v1/soju/practice/generate",
+        json={
+            "level": "1A",
+            "theme_text": "a story about guns and fighting",
+            "exercise_type": "sentences",
+            "count": 2,
+        },
+    )
+    assert response.status_code == 400
+    assert "not appropriate" in response.json()["detail"].lower()
+
+
+def test_practice_generate_ok(client: TestClient, monkeypatch: pytest.MonkeyPatch) -> None:
+    async def fake_generate(self, **_kwargs):  # noqa: ANN001
+        return {"sentences": [{"hangul": "커피요.", "english": "Coffee please."}]}
+
+    monkeypatch.setattr("soju.backend.routes.practice.PracticeService.generate", fake_generate)
+    response = client.post(
+        "/v1/soju/practice/generate",
+        json={
+            "level": "1A",
+            "theme_text": "Ordering drinks at a café.",
+            "exercise_type": "sentences",
+            "count": 2,
+        },
+    )
+    assert response.status_code == 200
+    assert response.json()["sentences"][0]["hangul"] == "커피요."
+
+
+def test_practice_evaluate_story_ok(client: TestClient, monkeypatch: pytest.MonkeyPatch) -> None:
+    async def fake_evaluate(self, **_kwargs):  # noqa: ANN001
+        return {"feedback": "Nice short answer."}
+
+    monkeypatch.setattr("soju.backend.routes.practice.PracticeService.evaluate_story", fake_evaluate)
+    response = client.post(
+        "/v1/soju/practice/evaluate-story",
+        json={
+            "level": "1A",
+            "topic": "What did you do last weekend?",
+            "user_story": "집에 있었어요.",
+            "model_story": "주말에 카페에 갔어요.",
+        },
+    )
+    assert response.status_code == 200
+    assert response.json()["feedback"] == "Nice short answer."

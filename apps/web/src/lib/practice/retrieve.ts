@@ -150,9 +150,9 @@ function matchesCourseBand(level: string | null | undefined, includedLevels: Set
 /**
  * Rank cached vocabulary + grammar embeddings against a query vector for Practice generation.
  *
- * The query vector is embedded client-side (browser → Ollama `/api/embeddings`) so this
- * endpoint never needs its own Ollama base URL / Docker networking story — it only reads the
- * cache built by `soju embed-index` and computes cosine similarity.
+ * Query vectors are produced by the Soju backend (``POST /v1/embeddings`` / practice generate).
+ * This module only reads the cache built by `soju embed-index` and computes cosine similarity
+ * (used by the legacy SvelteKit retrieve route and unit tests).
  *
  * @throws {PracticeRetrieveError} 503 if the cache is missing/corrupt, 400 on a bad request or
  *   an embedding-dimension mismatch against the cached index.

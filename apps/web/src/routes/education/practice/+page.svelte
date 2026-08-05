@@ -5,8 +5,7 @@
   import AiServiceGate from '$lib/components/AiServiceGate.svelte';
   import SpeakButton from '$lib/components/SpeakButton.svelte';
   import { evaluatePracticeStory, generatePracticeSession, type PracticeExerciseType } from '$lib/practice';
-  import { fetchRetrieval, savePracticeSessionToStaging } from '$lib/practice/client';
-  import { embedQueryText } from '$lib/practice/embed-query';
+  import { savePracticeSessionToStaging } from '$lib/practice/client';
   import { downloadTextFile, normalizePracticeSession, todayIsoDate, type PracticeSessionJson } from '$lib/staging';
 
   let { data } = $props();
@@ -150,23 +149,13 @@
 
     loading = true;
     try {
-      status = 'Embedding theme…';
-      const embedText = exerciseType === 'story' ? `${themeText}\n${storyTopic.trim()}` : themeText;
-      const queryVector = await embedQueryText(embedText);
-
-      status = 'Retrieving vocabulary and grammar…';
-      const retrieved = await fetchRetrieval(selectedLevel, queryVector, {
-        includeUnassigned: includeSupplemental,
-      });
-
       status = exerciseType === 'story' ? 'Generating sample story…' : 'Generating session…';
       session = await generatePracticeSession({
-        level: { label: level.label, guidance: level.guidance, grammarSummary: level.grammarSummary },
+        levelId: level.id,
         themeText,
         exerciseType,
         count,
-        hangul: retrieved.hangul,
-        grammar: retrieved.grammar,
+        includeUnassigned: includeSupplemental,
         storyTopic: exerciseType === 'story' ? storyTopic.trim() : undefined,
         previousStory,
       });
@@ -212,7 +201,7 @@
     try {
       status = 'Evaluating story…';
       const result = await evaluatePracticeStory({
-        level: { label: level.label, guidance: level.guidance, grammarSummary: level.grammarSummary },
+        levelId: level.id,
         topic,
         userStory: draft,
         modelStory,

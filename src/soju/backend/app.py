@@ -13,7 +13,7 @@ from soju.backend.adapters.llm import build_llm_provider
 from soju.backend.adapters.tts import build_tts_engine
 from soju.backend.config.settings import BackendSettings
 from soju.backend.config.loader import load_settings
-from soju.backend.routes import client_config, health, llm, tts
+from soju.backend.routes import client_config, health, llm, practice, tts
 from soju.backend.services.bag import AppServices
 from soju.backend.services.llm import LlmProxyService
 from soju.backend.services.tts import TtsService
@@ -57,4 +57,5 @@ def create_app(settings: BackendSettings | None = None) -> FastAPI:
     app.include_router(tts.router)
     app.include_router(llm.router)
     app.include_router(client_config.router)
+    app.include_router(practice.router)
     return app

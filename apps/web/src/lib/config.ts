@@ -34,7 +34,11 @@ export function resolveTtsEngine(raw?: string): TtsEngine {
 /** When true, Practice and Chat are available (requires Soju backend + LLM at runtime). */
 export const aiEnabled = firstDefined(PUBLIC_AI_ENABLED, dynamicPublicEnv.PUBLIC_OLLAMA_ENABLED) === 'true';
 
-/** Browser-reachable Soju API root (nginx → FastAPI in prod). */
+/**
+ * Browser-reachable Soju API root (nginx → FastAPI in prod).
+ * Never point this at Ollama — the backend is the only AI egress.
+ * ``PUBLIC_OLLAMA_BASE_URL`` is a legacy alias for the same Soju base URL.
+ */
 export const sojuApiBaseUrl = (firstDefined(PUBLIC_AI_BASE_URL, dynamicPublicEnv.PUBLIC_OLLAMA_BASE_URL) ?? 'http://localhost:8080').replace(/\/$/, '');
 
 const envChatThresholds = resolveChatContextThresholds(dynamicPublicEnv.PUBLIC_AI_CHAT_SUMMARY_TRIGGER, dynamicPublicEnv.PUBLIC_AI_CHAT_KEEP_RECENT);

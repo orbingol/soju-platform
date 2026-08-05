@@ -33,4 +33,7 @@ and need a local AI model:
 3. Start Soju again with ``docker compose up``. With Ollama running on your computer,
    Practice and Chat work in the browser at http://localhost:8080.
 
+The browser talks only to the Soju API (never to Ollama directly). Ollama stays on the
+backend host; Practice embed/retrieve/generate run server-side.
+
 Next steps: :doc:`adding-vocabulary` · :doc:`adding-verbs`

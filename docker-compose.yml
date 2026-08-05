@@ -47,6 +47,9 @@ services:
       dockerfile: docker/Dockerfile.backend
     volumes:
       - ./config/backend.yaml:/config/backend.yaml:ro
+      - ./data:/data:ro
+    environment:
+      DATA_DIR: /data
     extra_hosts:
       - host.docker.internal:host-gateway
     expose:

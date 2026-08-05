@@ -3,7 +3,10 @@ import { base } from '$app/paths';
 import type { PracticeRetrieveResult } from './retrieve';
 
 /**
- * POST a browser-embedded theme vector to the dev-only `/api/practice/retrieve` endpoint.
+ * POST a theme vector to the legacy `/api/practice/retrieve` endpoint.
+ *
+ * Prefer ``POST /v1/soju/practice/generate`` on the Soju backend (embeds + retrieves server-side).
+ * This helper remains for local experiments against the SvelteKit retrieve route.
  *
  * @throws {Error} With the endpoint's error message (e.g. missing embedding cache, dimension
  *   mismatch, unknown level) or a generic message if the response body has no `error` field.
