@@ -35,9 +35,11 @@
   let storyFeedback = $state('');
   let storyEvaluating = $state(false);
   let showModelTranslation = $state(false);
+  let storyTab = $state<'yours' | 'sample'>('yours');
 
   const isCustomTheme = $derived(selectedTheme === CUSTOM_THEME_ID);
   const isStory = $derived(exerciseType === 'story');
+  const hasSampleStory = $derived(Boolean(session?.story && resultType === 'story'));
 
   const STORY_TOPIC_SEEDS = [
     'What did you do last weekend?',
@@ -139,7 +141,7 @@
         includeUnassigned: includeSupplemental,
       });
 
-      status = exerciseType === 'story' ? 'Generating model story…' : 'Generating session…';
+      status = exerciseType === 'story' ? 'Generating sample story…' : 'Generating session…';
       session = await generatePracticeSession({
         level: { label: level.label, guidance: level.guidance, grammarSummary: level.grammarSummary },
         themeText,
@@ -151,7 +153,12 @@
       });
       resultType = exerciseType;
       resetItemState();
-      status = exerciseType === 'story' ? 'Model story ready.' : 'Session ready.';
+      if (exerciseType === 'story') {
+        storyTab = 'sample';
+        status = 'Sample story ready.';
+      } else {
+        status = 'Session ready.';
+      }
     } catch (err) {
       error = err instanceof Error ? err.message : 'Generation failed';
       status = '';
@@ -269,8 +276,8 @@
           <option value="sentences">Sentences</option>
           <option value="questions">Questions</option>
           <option value="fill_in_blank">Fill in the blank</option>
-          <option value="story">Story</option>
           <option value="vocabulary_candidates">Vocabulary</option>
+          <option value="story">Story</option>
         </select>
       </label>
 
@@ -302,17 +309,13 @@
       </div>
     {/if}
 
-    <div class="practice-toolbar">
-      <button type="button" onclick={generate} disabled={loading}>
-        {#if loading}
-          Generating…
-        {:else if isStory}
-          Generate model story
-        {:else}
-          Generate session
-        {/if}
-      </button>
-    </div>
+    {#if !isStory}
+      <div class="practice-toolbar">
+        <button type="button" onclick={generate} disabled={loading}>
+          {loading ? 'Generating…' : 'Generate session'}
+        </button>
+      </div>
+    {/if}
 
     {#if status}
       <p class="practice-status">{status}</p>
@@ -322,60 +325,118 @@
     {/if}
 
     {#if isStory}
-      <div class="practice-story-panels">
-        <div class="practice-panel practice-story-panel">
-          <h3>Your story</h3>
-          <p class="practice-story-hint">Answer the prompt in first person as a short paragraph.</p>
-          <textarea
-            class="practice-story-textarea"
-            rows="8"
-            placeholder="예: 지난 주말에 집에 있었어요. TV를 보고 수학 강의를 준비했어요. 대학에서 수학을 가르치고 싶어요…"
-            bind:value={userStory}
-          ></textarea>
-          <div class="practice-toolbar">
-            <button type="button" onclick={evaluateStory} disabled={storyEvaluating || !session?.story || !userStory.trim()}>
-              {storyEvaluating ? 'Evaluating…' : 'Evaluate'}
-            </button>
-          </div>
-          {#if storyFeedback}
-            <div class="practice-item-reveal">
-              <p class="practice-story-feedback">{storyFeedback}</p>
-            </div>
-          {/if}
+      <div class="practice-panel practice-story-panel">
+        <div class="practice-story-tabs" role="tablist" aria-label="Story panels">
+          <button
+            type="button"
+            class="practice-story-tab"
+            role="tab"
+            id="practice-story-tab-yours"
+            aria-selected={storyTab === 'yours'}
+            aria-controls="practice-story-panel-yours"
+            tabindex={storyTab === 'yours' ? 0 : -1}
+            onclick={() => {
+              storyTab = 'yours';
+            }}
+          >
+            Your story
+          </button>
+          <button
+            type="button"
+            class="practice-story-tab"
+            role="tab"
+            id="practice-story-tab-sample"
+            aria-selected={storyTab === 'sample'}
+            aria-controls="practice-story-panel-sample"
+            tabindex={storyTab === 'sample' ? 0 : -1}
+            onclick={() => {
+              storyTab = 'sample';
+            }}
+          >
+            Sample story
+          </button>
         </div>
 
-        {#if session?.story && resultType === 'story'}
-          <div class="practice-panel practice-story-panel">
-            <div class="practice-story-panel__header">
-              <h3>Model story</h3>
-              <button
-                type="button"
-                class="secondary"
-                onclick={() => {
-                  showModelTranslation = !showModelTranslation;
-                }}
-              >
-                {showModelTranslation ? 'Hide translation' : 'Translate'}
+        {#if storyTab === 'yours'}
+          <div
+            class="practice-story-tabpanel"
+            role="tabpanel"
+            id="practice-story-panel-yours"
+            aria-labelledby="practice-story-tab-yours"
+          >
+            <p class="practice-story-hint">Answer the prompt in first person as a short paragraph.</p>
+            <textarea
+              class="practice-story-textarea"
+              rows="12"
+              placeholder="예: 지난 주말에 집에 있었어요. TV를 보고 수학 강의를 준비했어요. 대학에서 수학을 가르치고 싶어요…"
+              bind:value={userStory}
+            ></textarea>
+            <div class="practice-toolbar practice-toolbar--end">
+              <button type="button" onclick={evaluateStory} disabled={storyEvaluating || !hasSampleStory || !userStory.trim()}>
+                {storyEvaluating ? 'Evaluating…' : 'Evaluate'}
               </button>
             </div>
-            {#if session.story.title}
-              <h4 class="practice-story-model-title">{session.story.title}</h4>
+            {#if storyFeedback}
+              <div class="practice-item-reveal">
+                <p class="practice-story-feedback">{storyFeedback}</p>
+              </div>
             {/if}
-            <p class="practice-story-paragraph">
-              {session.story.sentences.map((sentence) => sentence.hangul).join(' ')}
-            </p>
-            {#if showModelTranslation}
-              {@const translation = session.story.sentences
-                .map((sentence) => sentence.english.trim())
-                .filter(Boolean)
-                .join(' ')}
-              {#if translation}
-                <p class="practice-story-paragraph practice-story-paragraph--translation">
-                  {translation}
-                </p>
-              {:else}
-                <p class="practice-story-paragraph practice-story-paragraph--translation">No English translation was returned for this story. Try generating again.</p>
+          </div>
+        {:else}
+          <div
+            class="practice-story-tabpanel"
+            role="tabpanel"
+            id="practice-story-panel-sample"
+            aria-labelledby="practice-story-tab-sample"
+          >
+            {#if hasSampleStory && session?.story}
+              <div class="practice-story-panel__header practice-story-panel__header--actions">
+                <button
+                  type="button"
+                  class="secondary"
+                  onclick={() => {
+                    showModelTranslation = !showModelTranslation;
+                  }}
+                >
+                  {showModelTranslation ? 'Hide translation' : 'Translate'}
+                </button>
+              </div>
+              {#if session.story.title}
+                <h4 class="practice-story-model-title">{session.story.title}</h4>
               {/if}
+              <p class="practice-story-paragraph">
+                {session.story.sentences.map((sentence) => sentence.hangul).join(' ')}
+              </p>
+              {#if showModelTranslation}
+                {@const translation = session.story.sentences
+                  .map((sentence) => sentence.english.trim())
+                  .filter(Boolean)
+                  .join(' ')}
+                {#if translation}
+                  <p class="practice-story-paragraph practice-story-paragraph--translation">
+                    {translation}
+                  </p>
+                {:else}
+                  <p class="practice-story-paragraph practice-story-paragraph--translation">
+                    No English translation was returned for this story. Try generating again.
+                  </p>
+                {/if}
+              {/if}
+              <div class="practice-toolbar practice-toolbar--end">
+                <button type="button" onclick={generate} disabled={loading}>
+                  {loading ? 'Generating…' : 'Regenerate'}
+                </button>
+              </div>
+              <p class="practice-story-disclaimer">
+                <strong>Disclaimer:</strong> AI can make mistakes. Please verify the sample story.
+              </p>
+            {:else}
+              <p class="practice-story-hint">Generate a sample first-person story for this topic to use as a reference.</p>
+              <div class="practice-toolbar">
+                <button type="button" onclick={generate} disabled={loading}>
+                  {loading ? 'Generating…' : 'Generate Sample Story'}
+                </button>
+              </div>
             {/if}
           </div>
         {/if}
