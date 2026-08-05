@@ -5,7 +5,8 @@ This guide (``docs/soju/``, reStructuredText) is command-oriented — there is n
 API/class reference. Building is a thin wrapper around ``docs/Makefile``, which calls
 ``sphinx-build`` / ``sphinx-autobuild`` under the hood.
 
-With Compose (``poe up``), Sphinx HTML is at **http://localhost:14323/** (live-reload).
+With Compose (``poe up``), Sphinx HTML is at **http://localhost:14323/** (live-reload;
+doctrees live in a Compose volume so they are not mixed with a host ``poe docs`` build).
 With ``poe up-prod``, docs are at **http://localhost:8080/docs/** behind nginx (baked HTML).
 Rebuild images after dependency changes (``uv run poe build``).
 
