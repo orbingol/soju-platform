@@ -94,6 +94,23 @@ describe('buildPracticeSystemPrompt', () => {
     expect(prompt).toContain('What did you do last weekend?');
   });
 
+  it('includes the previous sample and regeneration rule when regenerating a story', () => {
+    const prompt = buildPracticeSystemPrompt({
+      ...baseOptions,
+      exerciseType: 'story',
+      count: 5,
+      storyTopic: 'Where would you go on a holiday?',
+      previousStory: {
+        title: '방학 때의 계획',
+        sentences: [{ hangul: '저는 부산에 가고 싶어요.', english: 'I want to go to Busan.' }],
+      },
+    });
+    expect(prompt).toContain('Previous sample');
+    expect(prompt).toContain('방학 때의 계획');
+    expect(prompt).toContain('저는 부산에 가고 싶어요.');
+    expect(prompt).toContain('This is a regeneration');
+  });
+
   it('emits only vocabulary_candidates as the primary payload for the vocabulary type', () => {
     const prompt = buildPracticeSystemPrompt({ ...baseOptions, exerciseType: 'vocabulary_candidates', count: 8 });
     expect(prompt).toContain('Exactly 8 vocabulary item(s) in "vocabulary_candidates"');

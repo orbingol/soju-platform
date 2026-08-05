@@ -24,6 +24,8 @@ export interface PracticeGenerateOptions {
   grammar: RetrievedGrammar[];
   /** Required by the UI when exerciseType is story; included in the system prompt. */
   storyTopic?: string;
+  /** Prior sample to avoid repeating when regenerating a story. */
+  previousStory?: { title?: string; sentences: Array<{ hangul: string; english: string }> };
 }
 
 interface ResponseSpec {
@@ -109,18 +111,25 @@ function formatGrammarList(grammar: RetrievedGrammar[]): string {
 }
 
 export function buildPracticeSystemPrompt(options: PracticeGenerateOptions): string {
-  const { level, themeText, exerciseType, hangul, grammar, storyTopic } = options;
+  const { level, themeText, exerciseType, hangul, grammar, storyTopic, previousStory } = options;
   const count = Math.max(1, Math.floor(options.count));
   const spec = buildResponseSpec(exerciseType, count);
 
   const storyTopicLine = exerciseType === 'story' && storyTopic?.trim() ? `\n\nStory prompt (personal question to answer in first person):\n${storyTopic.trim()}` : '';
+
+  const previousStoryBlock =
+    exerciseType === 'story' && previousStory?.sentences?.length
+      ? `\n\nPrevious sample (do NOT reuse — write a clearly different story with a new title and different events/details):\n${
+          previousStory.title?.trim() ? `Title: ${previousStory.title.trim()}\n` : ''
+        }${previousStory.sentences.map((sentence) => sentence.hangul).join(' ')}`
+      : '';
 
   return `You are a Korean language tutor creating a beginner practice session.
 
 Learner level: ${level.label}
 ${level.guidance}${level.grammarSummary ? `\n\n${level.grammarSummary}` : ''}
 
-Theme: ${themeText}${storyTopicLine}
+Theme: ${themeText}${storyTopicLine}${previousStoryBlock}
 
 Prefer this vocabulary when it fits the theme (hangul only; do not invent unrelated words):
 ${formatHangulList(hangul)}
@@ -134,18 +143,28 @@ ${spec.shape}
 Requirements:
 ${spec.requirements.map((requirement) => `- ${requirement}`).join('\n')}
 - Keep hangul natural and beginner-friendly.
-- Do not include romanization fields anywhere in the JSON.`;
+- Do not include romanization fields anywhere in the JSON.${
+    previousStoryBlock
+      ? '\n- This is a regeneration: invent a fresh narrative; do not copy or lightly paraphrase the previous sample.'
+      : ''
+  }`;
 }
 
 export async function generatePracticeSession(options: PracticeGenerateOptions): Promise<PracticeSessionJson> {
   const count = Math.max(1, Math.floor(options.count));
+  const regenerating = Boolean(options.previousStory?.sentences?.length);
   const content = await complete({
     messages: [
       { role: 'system', content: buildPracticeSystemPrompt(options) },
-      { role: 'user', content: "Generate today's practice session JSON." },
+      {
+        role: 'user',
+        content: regenerating
+          ? 'Generate a different practice session JSON. Do not reuse the previous story.'
+          : "Generate today's practice session JSON.",
+      },
     ],
     jsonMode: true,
-    temperature: 0.6,
+    temperature: regenerating ? 0.9 : 0.6,
     timeoutMs: PRACTICE_TIMEOUT_MS,
     maxTokens: estimateMaxTokens(count),
     // Reasoning models (gemma4, etc.) otherwise fill max_tokens with a reasoning

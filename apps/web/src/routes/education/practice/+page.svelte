@@ -130,6 +130,24 @@
       return;
     }
 
+    const existingStory = session?.story;
+    const previousStory =
+      exerciseType === 'story' && existingStory && resultType === 'story'
+        ? {
+            title: existingStory.title,
+            sentences: existingStory.sentences.map((sentence) => ({
+              hangul: sentence.hangul,
+              english: sentence.english,
+            })),
+          }
+        : undefined;
+
+    // Hide translation immediately so regenerate never keeps the old English on screen.
+    if (exerciseType === 'story') {
+      showModelTranslation = false;
+      storyFeedback = '';
+    }
+
     loading = true;
     try {
       status = 'Embedding theme…';
@@ -150,6 +168,7 @@
         hangul: retrieved.hangul,
         grammar: retrieved.grammar,
         storyTopic: exerciseType === 'story' ? storyTopic.trim() : undefined,
+        previousStory,
       });
       resultType = exerciseType;
       resetItemState();
@@ -389,7 +408,12 @@
             id="practice-story-panel-sample"
             aria-labelledby="practice-story-tab-sample"
           >
-            {#if hasSampleStory && session?.story}
+            {#if loading}
+              <p class="practice-story-hint">Generating a new sample story…</p>
+              <div class="practice-toolbar practice-toolbar--end">
+                <button type="button" disabled>Generating…</button>
+              </div>
+            {:else if hasSampleStory && session?.story}
               <div class="practice-story-panel__header practice-story-panel__header--actions">
                 <button
                   type="button"
@@ -423,17 +447,13 @@
                 {/if}
               {/if}
               <div class="practice-toolbar practice-toolbar--end">
-                <button type="button" onclick={generate} disabled={loading}>
-                  {loading ? 'Generating…' : 'Regenerate'}
-                </button>
+                <button type="button" onclick={generate} disabled={loading}>Regenerate</button>
               </div>
               <p class="practice-story-disclaimer">AI can make mistakes. Please verify the output.</p>
             {:else}
               <p class="practice-story-hint">Generate a sample first-person story for this topic to use as a reference.</p>
               <div class="practice-toolbar">
-                <button type="button" onclick={generate} disabled={loading}>
-                  {loading ? 'Generating…' : 'Generate Sample Story'}
-                </button>
+                <button type="button" onclick={generate} disabled={loading}>Generate Sample Story</button>
               </div>
             {/if}
           </div>
