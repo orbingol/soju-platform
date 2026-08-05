@@ -168,8 +168,7 @@
   width: 100%;
 }
 
-.practice-app:has(.practice-list--interactive),
-.practice-app:has(.practice-story-panels) {
+.practice-app:has(.practice-list--interactive) {
   max-width: min(64rem, 100%);
 }
 
@@ -185,6 +184,10 @@
   margin-top: 0.25rem;
   padding-top: 0.75rem;
   border-top: 1px solid var(--pico-muted-border-color);
+}
+
+.practice-toolbar--end {
+  justify-content: flex-end;
 }
 
 .practice-btn-sm {
@@ -455,21 +458,56 @@
   font-size: var(--kr-font-body);
 }
 
-.practice-story-panels {
-  display: grid;
-  gap: 1rem;
-}
-
-@media (min-width: 52rem) {
-  .practice-story-panels {
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
-  }
-}
-
 .practice-story-panel h3 {
   margin: 0 0 0.75rem;
   font-size: var(--kr-font-body);
+}
+
+.practice-story-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin: 0 0 1rem;
+  border-bottom: 1px solid var(--pico-muted-border-color);
+}
+
+/* Override Pico button chrome — tabs are text links, not filled buttons. */
+.practice-story-tabs button.practice-story-tab,
+.practice-story-tabs button.practice-story-tab:is(:hover, :focus, :focus-visible, :active) {
+  margin: 0;
+  padding: 0.55rem 0.9rem;
+  border: none;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  background-color: transparent;
+  box-shadow: none;
+  outline: none;
+  color: var(--kr-text-primary, var(--pico-color));
+  opacity: 0.55;
+  font-size: var(--kr-font-body-sm);
+  font-weight: 600;
+  line-height: 1.2;
+  height: auto;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.practice-story-tabs button.practice-story-tab:is(:hover, :focus, :focus-visible) {
+  opacity: 0.85;
+  border-bottom-color: color-mix(in srgb, var(--pico-muted-border-color) 70%, var(--pico-primary-border));
+}
+
+.practice-story-tabs button.practice-story-tab[aria-selected='true'],
+.practice-story-tabs button.practice-story-tab[aria-selected='true']:is(:hover, :focus, :focus-visible, :active) {
+  color: var(--kr-text-primary, var(--pico-color));
+  opacity: 1;
+  border-bottom-color: var(--pico-primary-border);
+}
+
+.practice-story-tabpanel {
+  display: grid;
+  gap: 0.75rem;
 }
 
 .practice-story-panel__header {
@@ -478,21 +516,27 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.25rem;
 }
 
-.practice-story-panel__header h3 {
+.practice-story-panel__header--actions {
+  justify-content: flex-end;
+}
+
+.practice-story-panel__header h3,
+.practice-story-sample-heading {
   margin: 0;
+  font-size: var(--kr-font-body);
 }
 
 .practice-story-hint {
-  margin: -0.25rem 0 0.75rem;
+  margin: 0;
   color: var(--pico-muted-color);
   font-size: var(--kr-font-body-sm);
 }
 
 .practice-story-model-title {
-  margin: 0 0 0.5rem;
+  margin: 0;
   font-size: var(--kr-font-body-sm);
   color: var(--pico-muted-color);
   font-weight: 600;
@@ -505,7 +549,7 @@
 }
 
 .practice-story-paragraph--translation {
-  margin-top: 0.85rem;
+  margin-top: 0.15rem;
   padding-top: 0.85rem;
   border-top: 1px solid var(--pico-muted-border-color);
   color: var(--pico-muted-color);
@@ -513,9 +557,9 @@
 }
 
 .practice-story-textarea {
-  margin: 0 0 0.75rem;
+  margin: 0;
   width: 100%;
-  min-height: 10rem;
+  min-height: 16rem;
   resize: vertical;
 }
 
@@ -524,6 +568,14 @@
   white-space: pre-wrap;
   line-height: 1.45;
   color: var(--pico-color);
+}
+
+.practice-story-disclaimer {
+  margin: 0;
+  color: var(--pico-muted-color);
+  font-size: var(--kr-font-caption);
+  font-style: italic;
+  text-align: center;
 }
 
 .chat-log {
