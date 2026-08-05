@@ -49,11 +49,13 @@ Requires [uv](https://docs.astral.sh/uv/) and Docker. From the repo root:
 
 ```bash
 uv sync
-uv run poe up        # Vite :5173 + API :8000
-uv run poe up-prod   # nginx :8080 (same as docker compose up)
+uv run poe up        # Vite :14321 + API :14322 + docs :14323 (no nginx)
+uv run poe up-prod   # nginx :8080 only — UI /, API /api, docs /docs
+uv run poe build     # rebuild container images and exit
 ```
 
-Validation, tests, docs, and the rest of the tooling live in the Sphinx guide:
+Validation, tests, docs, and the rest of the tooling live in the Sphinx guide
+(dev: [http://localhost:14323/](http://localhost:14323/); prod: [http://localhost:8080/docs/](http://localhost:8080/docs/)):
 
 ```bash
 uv run poe docs-serve

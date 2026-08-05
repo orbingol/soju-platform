@@ -5,16 +5,16 @@ export default defineConfig({
   plugins: [sveltekit()],
   server: {
     host: '0.0.0.0',
-    port: 5173,
+    port: 14321,
     // Bind mounts on Docker Desktop (macOS/Windows) often miss native fs events.
     watch: {
       usePolling: true,
       interval: 300,
     },
-    // Browser on the host must open HMR on the published port, not the container IP.
+    // Dev publishes :14321; prod reaches Vite through nginx :8080 (VITE_HMR_CLIENT_PORT).
     hmr: {
       host: 'localhost',
-      clientPort: 5173,
+      clientPort: Number(process.env.VITE_HMR_CLIENT_PORT || 14321),
     },
   },
   test: {

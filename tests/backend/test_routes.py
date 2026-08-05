@@ -88,6 +88,41 @@ def test_health(client: TestClient) -> None:
     assert body["tts_engine"] == "fake-tts"
 
 
+def test_root_redirects_to_docs(client: TestClient) -> None:
+    response = client.get("/", follow_redirects=False)
+    assert response.status_code in {307, 302, 303}
+    assert response.headers["location"] == "/docs"
+
+
+def test_root_redirects_to_docs_with_root_path(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr("soju.backend.app.build_llm_provider", lambda _s: FakeLlm())
+    monkeypatch.setattr("soju.backend.app.build_tts_engine", lambda _s: FakeTts())
+    settings = BackendSettings()
+    settings = settings.model_copy(
+        update={"server": settings.server.model_copy(update={"root_path": "/api"})},
+    )
+    app = create_app(settings)
+    with TestClient(app) as test_client:
+        response = test_client.get("/", follow_redirects=False)
+        assert response.status_code in {307, 302, 303}
+        assert response.headers["location"] == "/api/docs"
+
+
+def test_swagger_openapi_url_respects_root_path(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr("soju.backend.app.build_llm_provider", lambda _s: FakeLlm())
+    monkeypatch.setattr("soju.backend.app.build_tts_engine", lambda _s: FakeTts())
+    settings = BackendSettings()
+    settings = settings.model_copy(
+        update={"server": settings.server.model_copy(update={"root_path": "/api"})},
+    )
+    app = create_app(settings)
+    with TestClient(app) as test_client:
+        docs = test_client.get("/docs")
+        assert docs.status_code == 200
+        assert "/api/openapi.json" in docs.text
+        assert test_client.get("/openapi.json").status_code == 200
+
+
 def test_client_config(client: TestClient) -> None:
     response = client.get("/v1/soju/client-config")
     assert response.status_code == 200

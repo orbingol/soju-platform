@@ -8,9 +8,9 @@ RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
 FROM deps AS dev
 
 WORKDIR /app
-EXPOSE 5173
+EXPOSE 14321
 
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "5173"]
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "14321"]
 
 # Static export (GitHub Pages / offline preview). All PUBLIC_* knobs are build-args.
 # Defaults suit a public static host (AI off, browser TTS, site at /).
@@ -31,7 +31,7 @@ ENV PUBLIC_BASE_PATH=$PUBLIC_BASE_PATH
 
 ARG PUBLIC_TTS_ENGINE=browser
 ENV PUBLIC_TTS_ENGINE=$PUBLIC_TTS_ENGINE
-ARG PUBLIC_TTS_PIPER_BASE_URL=http://localhost:8080
+ARG PUBLIC_TTS_PIPER_BASE_URL=/api
 ENV PUBLIC_TTS_PIPER_BASE_URL=$PUBLIC_TTS_PIPER_BASE_URL
 ARG PUBLIC_TTS_PIPER_VOICE=ko-KR-SunHiNeural
 ENV PUBLIC_TTS_PIPER_VOICE=$PUBLIC_TTS_PIPER_VOICE
@@ -40,7 +40,7 @@ ARG PUBLIC_AI_ENABLED=false
 ENV PUBLIC_AI_ENABLED=$PUBLIC_AI_ENABLED
 ARG PUBLIC_AI_API_MODE=chat-completions
 ENV PUBLIC_AI_API_MODE=$PUBLIC_AI_API_MODE
-ARG PUBLIC_AI_BASE_URL=http://localhost:8080
+ARG PUBLIC_AI_BASE_URL=/api
 ENV PUBLIC_AI_BASE_URL=$PUBLIC_AI_BASE_URL
 ARG PUBLIC_AI_MODEL=gemma4:e4b
 ENV PUBLIC_AI_MODEL=$PUBLIC_AI_MODEL

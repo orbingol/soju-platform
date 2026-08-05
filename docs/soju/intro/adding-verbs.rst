@@ -161,7 +161,7 @@ Start the site (if it is not already running) — same on every OS:
 
    docker compose up
 
-Open http://localhost:8080, go to **Verbs**, and look for **웃다** / to laugh.
+Open http://localhost:14321, go to **Verbs**, and look for **웃다** / to laugh.
 
 Tips
 ----

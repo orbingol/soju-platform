@@ -2,9 +2,10 @@ AI practice & chat
 ==================
 
 Practice and Chat talk to the **Soju backend** (OpenAI-compatible API),
-not directly to Ollama. ``uv run poe up`` exposes Vite and FastAPI on
-``:5173`` / ``:8000``. Prod puts UI and API behind nginx on ``:8080`` —
-see :doc:`docker`. Set ``PUBLIC_AI_ENABLED=true`` (default in Compose).
+not directly to Ollama. ``uv run poe up`` publishes Vite ``:14321``, API ``:14322``,
+and docs ``:14323``. Prod (``poe up-prod``) publishes only nginx on ``:8080`` —
+UI at ``/``, API at ``/api/``, docs at ``/docs/`` — see :doc:`docker`.
+Set ``PUBLIC_AI_ENABLED=true`` (default in Compose).
 
 **Host Ollama (desktop app)** — usual setup:
 
@@ -21,8 +22,8 @@ Pull models on the host (defaults match backend YAML / ``ollama-pull``):
    ollama pull nomic-embed-text
 
 The backend reaches host Ollama at ``http://host.docker.internal:11434``
-(see ``config/backend.yaml``). The **browser** calls ``PUBLIC_AI_BASE_URL``
-(default ``http://localhost:8000`` in ``poe up``; ``http://localhost:8080`` in ``poe up-prod``).
+(see ``docker/soju/backend.yaml``). The **browser** calls ``PUBLIC_AI_BASE_URL``
+(default ``http://localhost:14322`` in ``poe up``; ``/api`` in ``poe up-prod``).
 
 **Ollama in Docker Compose:**
 
@@ -47,8 +48,8 @@ Browser env (Compose)
      - ``true`` / ``false``
      - Show Practice & Chat
    * - ``PUBLIC_AI_BASE_URL``
-     - e.g. ``http://localhost:8080``
-     - Soju API root (nginx → FastAPI)
+     - e.g. ``http://localhost:14322`` or ``/api``
+     - Soju API root (dev direct / prod via nginx)
    * - ``PUBLIC_TTS_ENGINE``
      - ``local`` (default) / ``browser``
      - Default speech engine (Settings can override)
@@ -64,7 +65,7 @@ Edit packaged defaults or overrides:
 
 - Packaged: ``src/soju/backend/config/files/default_config.yaml``
 - User: ``~/.config/soju/backend.yaml``
-- Compose: ``config/backend.yaml`` (``llm.base_url`` for Docker)
+- Compose: ``docker/soju/backend.yaml`` (prod) or ``docker/soju/backend.dev.yaml`` (dev)
 
 Typical keys: ``llm.chat_model``, ``llm.embed_model``, ``llm.base_url``,
 ``client.system_prompt``, ``client.tutor_name``, ``tts.engine`` (``edge`` / ``piper``),
@@ -75,7 +76,7 @@ Run the API on the host (optional):
 .. code-block:: bash
 
    uv sync --group backend
-   uv run soju backend --config config/backend.yaml
+   uv run soju backend --config docker/soju/backend.yaml
 
 See :doc:`/cli/backend`.
 

@@ -5,10 +5,17 @@ This guide (``docs/soju/``, reStructuredText) is command-oriented — there is n
 API/class reference. Building is a thin wrapper around ``docs/Makefile``, which calls
 ``sphinx-build`` / ``sphinx-autobuild`` under the hood.
 
+With Compose (``poe up``), Sphinx HTML is at **http://localhost:14323/** (live-reload).
+With ``poe up-prod``, docs are at **http://localhost:8080/docs/** behind nginx (baked HTML).
+Rebuild images after dependency changes (``uv run poe build``).
+
+For live-reload while editing RST **on the host** (optional; uses :14323 and conflicts
+with nothing in Compose because docs are internal-only):
+
 .. code-block:: bash
 
    uv run poe docs          # HTML → docs/_build/html/
-   uv run poe docs-serve    # live-reload preview on :14321, opens a browser tab
+   uv run poe docs-serve    # live-reload preview on :14323, opens a browser tab
    uv run poe docs-serve --port 9000
 
 Equivalent to running ``make`` directly from ``docs/``:
@@ -17,7 +24,7 @@ Equivalent to running ``make`` directly from ``docs/``:
 
    make -C docs html
    make -C docs clean
-   make -C docs serve              # default PORT=14321
+   make -C docs serve              # default PORT=14323
    make -C docs serve PORT=9000
    # Windows: docs\make.bat html
 

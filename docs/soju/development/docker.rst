@@ -1,14 +1,15 @@
 Docker
 ======
 
-Compose services run the web app, FastAPI backend, and (by default) nginx.
+Compose services run the web app, FastAPI backend, Sphinx docs, and (in prod) nginx.
 The Compose **project name** is ``soju``: containers use the ``soju-`` prefix,
-named volumes use ``soju_``.
+named volumes use ``soju_``. Services share the internal ``soju`` bridge network.
 
 Prod vs dev
 -----------
 
-**Dev (default via poe)** — Vite and FastAPI on the host; nginx is not started.
+**Dev (default via poe)** — Vite, FastAPI, and docs published on the host; nginx is not
+started. Live-reload Sphinx via ``sphinx-autobuild``.
 
 .. code-block:: bash
 
@@ -16,7 +17,8 @@ Prod vs dev
    # or
    docker compose -f docker-compose.yml -f docker-compose.dev.yml up
 
-**Prod** — only nginx is published. UI and API share ``http://localhost:8080``.
+**Prod** — only nginx is published (``:8080``). Backend, Vite, and docs stay on the
+Compose network.
 
 .. code-block:: bash
 
@@ -32,11 +34,18 @@ Prod vs dev
      - Host ports
      - Notes
    * - Dev
-     - ``5173`` (Vite), ``8000`` (API)
-     - ``PUBLIC_AI_BASE_URL=http://localhost:8000``
+     - ``14321`` (UI), ``14322`` (API), ``14323`` (docs)
+     - ``PUBLIC_AI_BASE_URL=http://localhost:14322``; config ``docker/soju/backend.dev.yaml``
    * - Prod
-     - ``8080`` (nginx)
-     - nginx → ``web:5173`` + ``backend:8000``
+     - ``8080`` (nginx only)
+     - ``/`` UI · ``/api/`` FastAPI · ``/docs/`` Sphinx; ``PUBLIC_AI_BASE_URL=/api``;
+       config ``docker/soju/backend.yaml`` (``root_path: /api``)
+   * - Internal
+     - (listen ports)
+     - ``web:14321`` · ``backend:14322`` · ``docs:14323`` on network ``soju``
+
+Host Ollama (desktop app) is reached from the backend via ``host.docker.internal:11434``
+(see ``docker/soju/backend.yaml``).
 
 Do not revive the old ``docker/piper`` TTS image — speech is served by the Soju backend.
 

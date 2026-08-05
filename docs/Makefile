@@ -5,7 +5,7 @@ SPHINXOPTS      ?=
 SPHINXBUILD     ?= sphinx-build
 SPHINXAUTOBUILD ?= sphinx-autobuild
 SPHINX_THEME    ?= furo
-PORT            ?= 14321
+PORT            ?= 14323
 SOURCEDIR       = soju
 BUILDDIR        = _build
 # conf.py lives in docs/ (this directory), not under SOURCEDIR

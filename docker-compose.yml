@@ -1,7 +1,16 @@
-# Default Compose file = prod topology: only nginx is published to the host.
+# Default Compose file = prod: only nginx is published (:8080).
 #   uv run poe up-prod   ·   docker compose up
-# Dev (Vite + FastAPI on the host):
+# Dev (direct host ports, no nginx):
 #   uv run poe up   ·   docker compose -f docker-compose.yml -f docker-compose.dev.yml up
+#
+# Prod (host):  http://localhost:8080/       UI
+#               http://localhost:8080/api/   FastAPI
+#               http://localhost:8080/docs/  Sphinx
+# Dev (host):   http://localhost:14321      UI
+#               http://localhost:14322      API
+#               http://localhost:14323      Docs
+# Internal listen ports (Compose network ``soju``): web:14321 · backend:14322 · docs:14323
+# Host Ollama: backend uses host.docker.internal:11434 (see docker/soju/backend*.yaml).
 #
 # Ollama model cache on the host (default: ~/.ollama). Override with OLLAMA_DATA_DIR.
 x-ollama-volume: &ollama-volume "${OLLAMA_DATA_DIR:-${HOME}/.ollama}:/root/.ollama"
@@ -12,8 +21,8 @@ x-soju-ai-embed-model: &soju-ai-embed-model nomic-embed-text
 
 # Speech: local = Soju backend TTS; browser = Web Speech API.
 x-soju-tts-engine: &soju-tts-engine local
-# Browser-reachable Soju API (prod: nginx :8080).
-x-soju-api-base-url: &soju-api-base-url http://localhost:8080
+# Same-origin API via nginx (browser never talks to internal ports).
+x-soju-api-base-url: &soju-api-base-url /api
 
 # Minimal browser-visible env (models / tutor prompt come from GET /v1/soju/client-config).
 x-soju-web-environment: &soju-web-environment
@@ -24,47 +33,88 @@ x-soju-web-environment: &soju-web-environment
 
 name: soju
 
+networks:
+  soju:
+    driver: bridge
+
 services:
   web:
     build:
       context: .
       dockerfile: docker/Dockerfile.web
       target: dev
+    # Compose command wins over image CMD so port changes apply without a rebuild.
+    command: ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "14321"]
     expose:
-      - "5173"
+      - "14321"
     volumes:
       - ./data:/data:rw
       - ./apps/web:/app:rw
       - web_node_modules:/app/node_modules
     environment:
       <<: *soju-web-environment
+      # HMR websocket through published nginx :8080 (overridden in docker-compose.dev.yml).
+      VITE_HMR_CLIENT_PORT: "8080"
     extra_hosts:
       - host.docker.internal:host-gateway
+    networks:
+      - soju
 
   backend:
     build:
       context: .
       dockerfile: docker/Dockerfile.backend
+    command:
+      [
+        "soju",
+        "backend",
+        "--config",
+        "/config/soju/backend.yaml",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "14322",
+      ]
     volumes:
-      - ./config/backend.yaml:/config/backend.yaml:ro
+      - ./docker/soju:/config/soju:ro
       - ./data:/data:ro
     environment:
       DATA_DIR: /data
     extra_hosts:
       - host.docker.internal:host-gateway
     expose:
-      - "8000"
+      - "14322"
+    networks:
+      - soju
+    restart: unless-stopped
+
+  docs:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.docs
+      target: prod
+    expose:
+      - "14323"
+    networks:
+      - soju
     restart: unless-stopped
 
   nginx:
-    image: nginx:alpine
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.nginx
     ports:
       - "8080:80"
+    environment:
+      SOJU_WEB_PORT: "8080"
     volumes:
       - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - web
       - backend
+      - docs
+    networks:
+      - soju
     restart: unless-stopped
 
   validate:
@@ -79,6 +129,8 @@ services:
       - ./data:/workspace/data:ro
       - ./src:/workspace/src:ro
       - ./pyproject.toml:/workspace/pyproject.toml:ro
+    networks:
+      - soju
 
   ollama:
     image: ollama/ollama
@@ -89,6 +141,8 @@ services:
       - "11434:11434"
     volumes:
       - *ollama-volume
+    networks:
+      - soju
 
   # Ensures the chat + embedding models exist in the shared Ollama cache (pull is incremental).
   ollama-pull:
@@ -103,6 +157,8 @@ services:
       OLLAMA_EMBED_MODEL: *soju-ai-embed-model
     volumes:
       - *ollama-volume
+    networks:
+      - soju
     entrypoint: ["/bin/sh", "-c"]
     command:
       - |

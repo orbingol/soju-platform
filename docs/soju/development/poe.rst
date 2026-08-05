@@ -29,10 +29,12 @@ Compose
 
    * - Task
      - Command
-   * - Dev (Vite :5173, API :8000)
+   * - Dev (Vite :14321, API :14322, docs :14323)
      - ``uv run poe up``
-   * - Prod (nginx :8080)
+   * - Prod (nginx :8080 only)
      - ``uv run poe up-prod``
+   * - Rebuild images (exit when done)
+     - ``uv run poe build``
 
 See :doc:`docker` for the full Compose layout.
 
@@ -69,7 +71,7 @@ Test & docs
      - ``uv run poe test-system`` · ``test-llm`` · ``test-all`` · ``coverage``
    * - Build docs
      - ``uv run poe docs``
-   * - Serve docs (live reload, :14321)
+   * - Serve docs (live reload, :14323)
      - ``uv run poe docs-serve`` · ``--port N``
 
 Lint & pre-commit

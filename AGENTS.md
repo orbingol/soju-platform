@@ -32,18 +32,19 @@ Assume Python commands run as `uv run …` or `uv run poe …` unless the venv i
 | Lint / pre-commit | `uv run poe lint` / `uv run poe pre-commit` |
 | Web format (Docker) | `docker compose run --rm --no-deps web npm run format` |
 | Validate in Docker | `docker compose --profile validate run --rm validate` / `uv run poe validate-docker` |
-| Web (dev) | `uv run poe up` → Vite :5173, API :8000 |
-| Web (prod) | `uv run poe up-prod` / `docker compose up` → http://localhost:8080 |
+| Web (dev) | `uv run poe up` → UI :14321, API :14322, docs :14323 (no nginx) |
+| Web (prod) | `uv run poe up-prod` / `docker compose up` → http://localhost:8080/ (API `/api`, docs `/docs`) |
+| Rebuild images | `uv run poe build` (web + backend + docs + validate; exits when done) |
 | Import words (JSON) | `cat records.json \| uv run soju import words --topic <id> --stdin-json` |
 | Import verbs (JSON) | `cat verbs.json \| uv run soju import verbs --stdin-json` |
 | Assign course levels | `uv run soju levels set --level 1A --all-unassigned` · `--kind grammar` |
 | Promote local words | `uv run soju promote --topic <id>` |
-| Backend API (host) | `uv sync --group backend` · `uv run soju backend --config config/backend.yaml` |
+| Backend API (host) | `uv sync --group backend` · `uv run soju backend --config docker/soju/backend.dev.yaml` |
 | CLI help | `uv run soju --help` · `uv run soju <subcommand> --help` |
 | Python tests | `uv run poe test` (unit + offline system; skips LLM) |
 | System / LLM / coverage | `uv run poe test-system` · `uv run poe test-llm` · `uv run poe test-all` · `uv run poe coverage` |
 | Build embedding cache | `uv run poe embed-index` (requires Ollama + embed model) |
-| Build / serve docs | `uv run poe docs` · `uv run poe docs-serve` |
+| Build / serve docs | `uv run poe docs` · `uv run poe docs-serve` (host live :14323; Compose prod: http://localhost:8080/docs/) |
 
 Docker Compose **project name:** `soju` (`name: soju` in `docker-compose.yml`). Containers use the `soju-` prefix; named volumes use `soju_`.
 
@@ -65,7 +66,7 @@ One console entry is installed by `uv sync`: **`soju`**. Invoke as `uv run soju 
 | **`embed-index`** | Build Ollama embedding cache for Practice retrieval (`data/cache/embeddings/`) |
 | **`backend`** | Run FastAPI Soju API (LLM proxy + TTS; needs `uv sync --group backend`) |
 
-**Poe shortcuts:** `validate`, `validate-schemas`, `validate-align`, `validate-registry`, `validate-docker`, `test`, `pre-commit`, `lint`, `import-words`, `import-verbs`, `translate-words`, `embed-index`, `docs`, `docs-serve`.
+**Poe shortcuts:** `validate`, `validate-schemas`, `validate-align`, `validate-registry`, `validate-docker`, `build`, `test`, `pre-commit`, `lint`, `import-words`, `import-verbs`, `translate-words`, `embed-index`, `docs`, `docs-serve`.
 
 ## Documentation
 

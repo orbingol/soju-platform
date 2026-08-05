@@ -1,9 +1,9 @@
-# Dev override: publish Vite and FastAPI on the host; skip nginx.
+# Dev override: publish Vite / FastAPI / docs on the host; skip nginx.
 #
 #   uv run poe up
 #   docker compose -f docker-compose.yml -f docker-compose.dev.yml up
 #
-# App: http://localhost:5173  ·  API: http://localhost:8000
+# UI http://localhost:14321  ·  API http://localhost:14322  ·  Docs http://localhost:14323
 
 services:
   nginx:
@@ -12,10 +12,48 @@ services:
 
   web:
     ports:
-      - "5173:5173"
+      - "14321:14321"
     environment:
-      PUBLIC_AI_BASE_URL: http://localhost:8000
+      PUBLIC_AI_BASE_URL: http://localhost:14322
+      VITE_HMR_CLIENT_PORT: "14321"
 
   backend:
     ports:
-      - "8000:8000"
+      - "14322:14322"
+    command:
+      [
+        "soju",
+        "backend",
+        "--config",
+        "/config/soju/backend.dev.yaml",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "14322",
+      ]
+
+  docs:
+    build:
+      target: dev
+    command:
+      [
+        "sphinx-autobuild",
+        "soju",
+        "_build/html",
+        "-c",
+        ".",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "14323",
+      ]
+    working_dir: /app/docs
+    ports:
+      - "14323:14323"
+    volumes:
+      - ./docs:/app/docs:rw
+      - ./src:/app/src:ro
+      - ./data:/app/data:ro
+      - ./pyproject.toml:/app/pyproject.toml:ro
+      - ./README.md:/app/README.md:ro
+      - ./LICENSE:/app/LICENSE:ro

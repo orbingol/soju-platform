@@ -1,0 +1,37 @@
+# Sphinx docs: static nginx (prod) or live-reload sphinx-autobuild (dev).
+# Both listen on :14323 inside the Compose network; host access is only via nginx /docs/.
+
+FROM python:3.12-slim AS docs-build
+
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+
+WORKDIR /app
+
+ENV SETUPTOOLS_SCM_PRETEND_VERSION=0.0.0 \
+    UV_COMPILE_BYTECODE=1 \
+    UV_LINK_MODE=copy \
+    PATH="/app/.venv/bin:$PATH"
+
+COPY pyproject.toml uv.lock README.md LICENSE ./
+COPY src ./src
+COPY docs ./docs
+COPY data ./data
+
+RUN uv sync --frozen --no-default-groups --group docs \
+ && sphinx-build -b html -c docs docs/soju docs/_build/html
+
+# Prod/default: baked HTML behind nginx on :14323.
+FROM nginx:alpine AS prod
+
+COPY --from=docs-build /app/docs/_build/html /usr/share/nginx/html
+COPY docker/nginx/nginx-docs.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 14323
+
+# Dev: live-reload over bind-mounted docs/src/data.
+FROM docs-build AS dev
+
+WORKDIR /app/docs
+EXPOSE 14323
+
+CMD ["sphinx-autobuild", "soju", "_build/html", "-c", ".", "--host", "0.0.0.0", "--port", "14323"]

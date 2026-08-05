@@ -11,7 +11,7 @@ Requires the optional backend dependency group:
 
 Config search order: ``--config`` path → ``~/.config/soju/backend.yaml`` (if present) →
 packaged defaults under ``src/soju/backend/config/files/``. Compose mounts
-``config/backend.yaml`` into the backend container.
+``docker/soju/backend.yaml`` into the backend container.
 
 .. list-table::
    :widths: 20 80
@@ -33,9 +33,11 @@ packaged defaults under ``src/soju/backend/config/files/``. Compose mounts
 .. code-block:: bash
 
    uv run soju backend --help
-   uv run soju backend --config config/backend.yaml
-   uv run soju backend --host 127.0.0.1 --port 8000
+   uv run soju backend --config docker/soju/backend.yaml
+   uv run soju backend --host 127.0.0.1 --port 14322
 
-With ``uv run poe up-prod`` / ``docker compose up``, nginx exposes the app and API at ``http://localhost:8080``.
-With ``uv run poe up``, the API is on ``http://localhost:8000``.
+With ``uv run poe up``, the UI is on ``http://localhost:14321``, the API on
+``http://localhost:14322``, and docs on ``http://localhost:14323``.
+With ``uv run poe up-prod`` / ``docker compose up``, only nginx is public:
+``http://localhost:8080/`` (UI), ``/api/`` (FastAPI), ``/docs/`` (Sphinx).
 See :doc:`/development/ai` and :doc:`/development/tts`.
