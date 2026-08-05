@@ -48,7 +48,7 @@ class PracticeStoryTopicRequest(BaseModel):
 
 
 def _practice_service(llm: LlmProxyService, settings: BackendSettings) -> PracticeService:
-    return PracticeService(llm, settings.llm)
+    return PracticeService(llm, settings.llm, prompts=settings.prompts)
 
 
 def _raise_service_error(exc: PracticeServiceError) -> None:

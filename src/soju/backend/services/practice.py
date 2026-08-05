@@ -24,6 +24,8 @@ from soju.backend.services.practice_session import (
     parse_story_topic_json,
 )
 from soju.levels import get_language_level, load_levels_config
+from soju.prompts.loader import get_prompts
+from soju.prompts.models import PromptsSettings
 from soju.services.embeddings.retrieve import PracticeRetrieveError, retrieve_practice
 
 PRACTICE_BASE_MAX_TOKENS = 600
@@ -90,10 +92,18 @@ def _extract_embedding(payload: dict[str, Any]) -> list[float]:
 class PracticeService:
     """Embed theme text, retrieve cache rows, and generate/evaluate practice sessions."""
 
-    def __init__(self, llm: LlmProxyService, settings: LlmSettings, *, data_root: Path | None = None) -> None:
+    def __init__(
+        self,
+        llm: LlmProxyService,
+        settings: LlmSettings,
+        *,
+        data_root: Path | None = None,
+        prompts: PromptsSettings | None = None,
+    ) -> None:
         self._llm = llm
         self._settings = settings
         self._data_root = data_root
+        self._prompts = prompts or get_prompts()
 
     async def _embed_text(self, text: str) -> list[float]:
         try:
@@ -153,7 +163,7 @@ class PracticeService:
             raise PracticeServiceError("story_topic is required for story exercises", 400)
 
         try:
-            screen_practice_text(theme, story_topic or "")
+            screen_practice_text(theme, story_topic or "", prompts=self._prompts)
         except PracticeTopicBlockedError as exc:
             raise PracticeServiceError(str(exc), 400) from exc
 
@@ -187,8 +197,9 @@ class PracticeService:
             grammar=[item.as_dict() for item in retrieved.grammar],
             story_topic=story_topic,
             previous_story=previous_story if regenerating else None,
+            prompts=self._prompts,
         )
-        user = "Generate a different practice session JSON. Do not reuse the previous story." if regenerating else "Generate today's practice session JSON."
+        user = self._prompts.practice.user_regenerate if regenerating else self._prompts.practice.user_generate
         content = await self._complete_json(
             system=system,
             user=user,
@@ -224,7 +235,7 @@ class PracticeService:
             raise PracticeServiceError("model_story is required", 400)
 
         try:
-            screen_practice_text(topic_text, draft)
+            screen_practice_text(topic_text, draft, prompts=self._prompts)
         except PracticeTopicBlockedError as exc:
             raise PracticeServiceError(str(exc), 400) from exc
 
@@ -241,10 +252,11 @@ class PracticeService:
             topic=topic_text,
             user_story=draft,
             model_story=model_text,
+            prompts=self._prompts,
         )
         content = await self._complete_json(
             system=system,
-            user="Evaluate the learner story and return JSON feedback.",
+            user=self._prompts.practice.user_evaluate,
             temperature=0.4,
             max_tokens=EVALUATE_MAX_TOKENS,
         )
@@ -266,7 +278,7 @@ class PracticeService:
             raise PracticeServiceError("theme_text is required", 400)
 
         try:
-            screen_practice_text(theme)
+            screen_practice_text(theme, prompts=self._prompts)
         except PracticeTopicBlockedError as exc:
             raise PracticeServiceError(str(exc), 400) from exc
 
@@ -280,10 +292,15 @@ class PracticeService:
             level_guidance=level.guidance,
             theme_text=theme,
             previous_topic=previous_topic,
+            prompts=self._prompts,
         )
-        last_error = "Could not generate a suitable story topic. Please try again."
+        last_error = self._prompts.practice.story_topic_failed
         for attempt in range(STORY_TOPIC_MAX_ATTEMPTS):
-            user = "Generate one different safe story topic JSON." if attempt > 0 else "Generate one safe story topic JSON for this theme."
+            user = (
+                self._prompts.practice.user_story_topic_retry
+                if attempt > 0
+                else self._prompts.practice.user_story_topic
+            )
             content = await self._complete_json(
                 system=system,
                 user=user,
@@ -296,9 +313,9 @@ class PracticeService:
                 last_error = str(exc)
                 continue
             try:
-                screen_practice_text(topic)
+                screen_practice_text(topic, prompts=self._prompts)
             except PracticeTopicBlockedError:
-                last_error = "Generated topic was not appropriate. Please try again."
+                last_error = self._prompts.practice.story_topic_unsafe
                 continue
             return {"topic": topic}
         raise PracticeServiceError(last_error, 502)

@@ -7,6 +7,8 @@ from typing import Literal
 
 from pydantic import BaseModel, Field, field_validator
 
+from soju.prompts.models import PromptsSettings
+
 
 class ServerSettings(BaseModel):
     """HTTP server bind address and browser CORS origins."""
@@ -76,3 +78,4 @@ class BackendSettings(BaseModel):
     llm: LlmSettings = Field(default_factory=LlmSettings)
     tts: TtsSettings = Field(default_factory=TtsSettings)
     client: ClientSettings = Field(default_factory=ClientSettings)
+    prompts: PromptsSettings = Field(default_factory=PromptsSettings)

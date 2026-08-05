@@ -10,6 +10,8 @@ from typing import Any
 import yaml
 
 from soju.backend.config.settings import BackendSettings
+from soju.prompts.loader import load_prompts
+from soju.prompts.models import PromptsSettings
 
 DEFAULT_CONFIG_RESOURCE = "default_config.yaml"
 CONFIG_FILES_PACKAGE = "soju.backend.config.files"
@@ -81,6 +83,9 @@ def load_settings(path: Path | str | None = None) -> BackendSettings:
         ValidationError: If merged data fails pydantic validation.
     """
     data = _read_default_yaml()
+    # Always ship prompts.yaml; allow ``prompts:`` overrides from backend YAML.
+    prompts = load_prompts()
+    data = deep_merge(data, {"prompts": prompts.model_dump()})
     override_path = resolve_config_path(path)
     if override_path is not None:
         if not override_path.is_file():

@@ -14,6 +14,7 @@ from fastapi.testclient import TestClient
 
 from soju.backend.abstract.llm import LlmProviderError
 from soju.backend.app import create_app
+from soju.backend.config.loader import load_settings
 from soju.backend.config.settings import BackendSettings
 
 
@@ -74,7 +75,7 @@ class FakeTts:
 def client(monkeypatch: pytest.MonkeyPatch) -> Iterator[TestClient]:
     monkeypatch.setattr("soju.backend.app.build_llm_provider", lambda _settings: FakeLlm())
     monkeypatch.setattr("soju.backend.app.build_tts_engine", lambda _settings: FakeTts())
-    app = create_app(BackendSettings())
+    app = create_app(load_settings())
     with TestClient(app) as test_client:
         yield test_client
 
@@ -130,6 +131,9 @@ def test_client_config(client: TestClient) -> None:
     assert body["tts_engine_label"] == "local"
     assert "system_prompt" in body
     assert body["chat_model"]
+    assert body["chat_summarize_prompt"]
+    assert body["ui_disclaimer"]
+    assert "{{vocab_hint}}" in body["chat_vocab_suffix"]
 
 
 def test_speech_missing_text(client: TestClient) -> None:
