@@ -166,6 +166,11 @@ args = [{ name = "detach", options = ["-d", "--detach"], type = "boolean", defau
 help = "Alias for container-up-prod."
 ref = "container-up-prod"
 
+[tool.poe.tasks.container-down]
+help = "Stop and remove Soju Compose containers (after container-up-dev or container-up-prod)."
+cmd = "docker compose -f docker-compose.yml -f docker-compose.dev.yml down ${volumes:+--volumes}"
+args = [{ name = "volumes", options = ["-v", "--volumes"], type = "boolean", default = false, help = "Also remove named volumes (e.g. docs_build, node_modules)." }]
+
 [tool.poe.tasks.build]
 help = "Rebuild all Compose images (web, backend, docs, nginx, validate) and exit."
 cmd = "docker compose -f docker-compose.yml -f docker-compose.dev.yml --profile validate build"

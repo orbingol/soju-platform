@@ -34,6 +34,7 @@ Assume Python commands run as `uv run …` or `uv run poe …` unless the venv i
 | Validate in Docker | `docker compose --profile validate run --rm validate` / `uv run poe validate-docker` |
 | Web (dev) | `uv run poe container-up-dev` (alias `up`) → UI :14321, API :14322, docs :14323 (no nginx) |
 | Web (prod) | `uv run poe container-up-prod` (alias `up-prod`) / `docker compose up` → http://localhost:8080/ (API `/api`, docs `/docs`) |
+| Web (stop) | `uv run poe container-down` · `--volumes` to drop named volumes |
 | Rebuild images | `uv run poe build` (web + backend + docs + validate; exits when done) |
 | Pull Ollama models | `uv run poe setup-ollama` (chat + embed defaults) |
 | Import words (JSON) | `cat records.json \| uv run soju import words --topic <id> --stdin-json` |
@@ -67,7 +68,7 @@ One console entry is installed by `uv sync`: **`soju`**. Invoke as `uv run soju 
 | **`embed-index`** | Build Ollama embedding cache for Practice retrieval (`data/cache/embeddings/`) |
 | **`backend`** | Run FastAPI Soju API (LLM proxy + TTS; needs `uv sync --group backend`) |
 
-**Poe shortcuts:** `validate`, `validate-schemas`, `validate-align`, `validate-registry`, `validate-docker`, `container-up-dev` / `up`, `container-up-prod` / `up-prod`, `build`, `setup-ollama`, `test`, `pre-commit`, `lint`, `import-words`, `import-verbs`, `translate-words`, `embed-index`, `docs`, `docs-serve`.
+**Poe shortcuts:** `validate`, `validate-schemas`, `validate-align`, `validate-registry`, `validate-docker`, `container-up-dev` / `up`, `container-up-prod` / `up-prod`, `container-down`, `build`, `setup-ollama`, `test`, `pre-commit`, `lint`, `import-words`, `import-verbs`, `translate-words`, `embed-index`, `docs`, `docs-serve`.
 
 ## Documentation
 

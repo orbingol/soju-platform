@@ -33,6 +33,8 @@ Compose
      - ``uv run poe container-up-dev`` (alias: ``up``)
    * - Prod (nginx :8080 only)
      - ``uv run poe container-up-prod`` (alias: ``up-prod``)
+   * - Stop / remove containers
+     - ``uv run poe container-down`` · ``--volumes`` drops named volumes
    * - Rebuild images (exit when done)
      - ``uv run poe build``
    * - Pull default Ollama models
