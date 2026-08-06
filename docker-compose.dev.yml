@@ -39,7 +39,7 @@ services:
       [
         "sphinx-autobuild",
         "soju",
-        "_build/html",
+        "/app/docs-build/html",
         "-c",
         ".",
         "--host",
@@ -52,9 +52,10 @@ services:
       - "14323:14323"
     volumes:
       - ./docs:/app/docs:rw
-      # Keep doctrees/HTML in a container volume so host ``poe docs`` (e.g. Python 3.13)
-      # pickles are not loaded by the image's Python 3.12 (pathlib._local mismatch).
-      - docs_build:/app/docs/_build
+      # Build output outside the docs bind mount so Docker never creates a
+      # root-owned docs/_build/ mountpoint on the host (breaks ``poe docs`` clean).
+      # Also keeps container doctrees (Py 3.12) separate from host ``poe docs``.
+      - docs_build:/app/docs-build
       - ./src:/app/src:ro
       - ./data:/app/data:ro
       - ./pyproject.toml:/app/pyproject.toml:ro

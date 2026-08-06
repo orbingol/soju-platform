@@ -4,18 +4,22 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Annotated, Optional
+from typing import TYPE_CHECKING, Annotated, Optional
 
 import typer
 
 from soju.cli._common import make_app
-from soju.backend.config.settings import BackendSettings
-from soju.backend.config.loader import (
-    load_settings,
-    user_config_path,
-)
+
+if TYPE_CHECKING:
+    from soju.backend.config.settings import BackendSettings
 
 app = make_app()
+
+# Keep help text free of runtime config imports so ``sphinxcontrib-typer`` and
+# ``soju --help`` work without the optional backend dependency group (pydantic).
+_USER_CONFIG_HELP = (
+    "YAML override path (default: ~/.config/soju/backend.yaml if present, else packaged defaults)"
+)
 
 
 def _apply_server_overrides(
@@ -41,7 +45,7 @@ def backend(
         typer.Option(
             "--config",
             "-c",
-            help=f"YAML override path (default: {user_config_path()} if present, else packaged defaults)",
+            help=_USER_CONFIG_HELP,
             exists=False,
             dir_okay=False,
             readable=True,
@@ -68,6 +72,7 @@ def backend(
 
     try:
         from soju.backend.app import create_app
+        from soju.backend.config.loader import load_settings
     except ModuleNotFoundError as exc:
         typer.echo(
             "Error: backend dependencies are not installed. Run: uv sync --group backend",
