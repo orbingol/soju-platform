@@ -15,8 +15,8 @@ if TYPE_CHECKING:
 
 app = make_app()
 
-# Keep help text free of runtime config imports so ``sphinxcontrib-typer`` and
-# ``soju --help`` work without the optional backend dependency group (pydantic).
+# Keep help text free of runtime server imports so ``sphinxcontrib-typer`` and
+# ``soju --help`` stay light (uvicorn / FastAPI load only when starting the server).
 _USER_CONFIG_HELP = (
     "YAML override path (default: ~/.config/soju/backend.yaml if present, else packaged defaults)"
 )
@@ -65,7 +65,7 @@ def backend(
         import uvicorn
     except ModuleNotFoundError as exc:
         typer.echo(
-            "Error: backend dependencies are not installed. Run: uv sync --group backend",
+            "Error: backend dependencies are not installed. Run: uv sync",
             err=True,
         )
         raise typer.Exit(code=1) from exc
@@ -75,7 +75,7 @@ def backend(
         from soju.backend.config.loader import load_settings
     except ModuleNotFoundError as exc:
         typer.echo(
-            "Error: backend dependencies are not installed. Run: uv sync --group backend",
+            "Error: backend dependencies are not installed. Run: uv sync",
             err=True,
         )
         raise typer.Exit(code=1) from exc

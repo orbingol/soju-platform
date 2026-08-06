@@ -3,11 +3,11 @@
 
 **Purpose:** Run the FastAPI Soju API (OpenAI-compatible chat/embeddings proxy + local TTS).
 
-Requires the optional backend dependency group:
+Install with ``uv sync``, then:
 
 .. code-block:: bash
 
-   uv sync --group backend
+   uv run soju backend --help
 
 Config search order: ``--config`` path → ``~/.config/soju/backend.yaml`` (if present) →
 packaged defaults under ``src/soju/backend/config/files/``. Compose mounts

@@ -60,8 +60,8 @@ Other commands
      - Command
    * - Web unit tests
      - ``docker compose exec web npm test``
-   * - Validate (canonical image)
-     - ``docker compose --profile validate run --rm validate``
+   * - Validate / soju CLI (backend image)
+     - ``uv run poe container-cli …`` · full suite: ``docker compose run --rm --no-deps backend poe validate``
    * - Static web build
      - ``scripts/docker-build-web.sh`` (see :doc:`static-build`)
 

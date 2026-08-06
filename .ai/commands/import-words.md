@@ -75,7 +75,7 @@ Optional course ``level`` (``1A``, ``1B``, … from ``data/content/levels.yaml``
    uv run poe validate
    ```
 
-   Or in Docker: `docker compose --profile validate run --rm validate`
+   Or in Docker: `uv run poe container-cli validate-schemas` (or `docker compose run --rm --no-deps backend poe validate`)
 
 5. Fix any errors before finishing.
 

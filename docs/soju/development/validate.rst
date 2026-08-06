@@ -7,11 +7,15 @@ Run after any change under ``data/`` — before committing and in CI:
 
    uv run poe validate
 
-Or in the canonical Docker image (no local Python setup needed):
+Or in the backend image (no local Python setup needed):
 
 .. code-block:: bash
 
-   docker compose --profile validate run --rm validate
+   docker compose run --rm --no-deps backend poe validate
+   # or any soju subcommand:
+   uv run poe container-cli validate-schemas
+   uv run poe container-cli align
+   uv run poe container-cli registry
 
 ``poe validate`` runs three checks in sequence, each also runnable on its own:
 

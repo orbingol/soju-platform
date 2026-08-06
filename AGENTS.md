@@ -16,7 +16,6 @@ If an `AGENTS.local.md` file exists at the repository root, agents **should also
 Use **uv** for Python and **poe-the-poet** for repo tasks (`uv run poe <task>`).
 
 - Install deps: `uv sync`
-- Backend/API extras: `uv sync --group backend` (needed for `soju backend` and backend unit tests)
 - If `.venv` is missing or imports fail, ask the user to run that first.
 - If **`uv` is not installed** (command not found), ask the user to install it. Do **not** attempt to install uv yourself. Point users to [uv](https://docs.astral.sh/uv/).
 
@@ -31,17 +30,17 @@ Assume Python commands run as `uv run …` or `uv run poe …` unless the venv i
 | Validate all data | `uv run poe validate` |
 | Lint / pre-commit | `uv run poe lint` / `uv run poe pre-commit` |
 | Web format (Docker) | `docker compose run --rm --no-deps web npm run format` |
-| Validate in Docker | `docker compose --profile validate run --rm validate` / `uv run poe validate-docker` |
+| Validate in Docker | `uv run poe container-cli` (alias `soju`) e.g. `validate-schemas` · full suite: `docker compose run --rm --no-deps backend poe validate` |
 | Web (dev) | `uv run poe container-up-dev` (alias `up`) → UI :14321, API :14322, docs :14323 (no nginx) |
 | Web (prod) | `uv run poe container-up-prod` (alias `up-prod`) / `docker compose up` → http://localhost:8080/ (API `/api`, docs `/docs`) |
 | Web (stop) | `uv run poe container-down` · `--volumes` to drop named volumes |
-| Rebuild images | `uv run poe build` (web + backend + docs + validate; exits when done) |
+| Rebuild images | `uv run poe container-build` (alias `build`; web + backend + docs + nginx; exits when done) |
 | Pull Ollama models | `uv run poe setup-ollama` (chat + embed defaults) |
 | Import words (JSON) | `cat records.json \| uv run soju import words --topic <id> --stdin-json` |
 | Import verbs (JSON) | `cat verbs.json \| uv run soju import verbs --stdin-json` |
 | Assign course levels | `uv run soju levels set --level 1A --all-unassigned` · `--kind grammar` |
 | Promote local words | `uv run soju promote --topic <id>` |
-| Backend API (host) | `uv sync --group backend` · `uv run soju backend --config docker/soju/backend.dev.yaml` |
+| Backend API (host) | `uv run soju backend --config docker/soju/backend.dev.yaml` |
 | CLI help | `uv run soju --help` · `uv run soju <subcommand> --help` |
 | Python tests | `uv run poe test` (unit + offline system; skips LLM) |
 | System / LLM / coverage | `uv run poe test-system` · `uv run poe test-llm` · `uv run poe test-all` · `uv run poe coverage` |
@@ -66,9 +65,9 @@ One console entry is installed by `uv sync`: **`soju`**. Invoke as `uv run soju 
 | **`fill-examples`** | Generate missing noun/verb examples (Ollama or `--local`) |
 | **`fill-verbs`** | Fill missing verb conjugation forms |
 | **`embed-index`** | Build Ollama embedding cache for Practice retrieval (`data/cache/embeddings/`) |
-| **`backend`** | Run FastAPI Soju API (LLM proxy + TTS; needs `uv sync --group backend`) |
+| **`backend`** | Run FastAPI Soju API (LLM proxy + TTS) |
 
-**Poe shortcuts:** `validate`, `validate-schemas`, `validate-align`, `validate-registry`, `validate-docker`, `container-up-dev` / `up`, `container-up-prod` / `up-prod`, `container-down`, `build`, `setup-ollama`, `test`, `pre-commit`, `lint`, `import-words`, `import-verbs`, `translate-words`, `embed-index`, `docs`, `docs-serve`.
+**Poe shortcuts:** `validate`, `validate-schemas`, `validate-align`, `validate-registry`, `container-cli` / `soju`, `container-up-dev` / `up`, `container-up-prod` / `up-prod`, `container-down`, `container-build` / `build`, `setup-ollama`, `test`, `pre-commit`, `lint`, `import-words`, `import-verbs`, `translate-words`, `embed-index`, `docs`, `docs-serve`.
 
 ## Documentation
 
@@ -91,7 +90,7 @@ One console entry is installed by `uv sync`: **`soju`**. Invoke as `uv run soju 
 ### Steps
 
 1. **Environment:** `uv sync` before running Python CLIs or validation.
-2. **Vocabulary changes:** follow [Vocabulary writes](#vocabulary-writes)—always end with `uv run poe validate` (or Docker validate).
+2. **Vocabulary changes:** follow [Vocabulary writes](#vocabulary-writes)—always end with `uv run poe validate` (or `uv run poe container-cli …`).
 3. **Web UI:** place app code under `apps/web/`; data from `DATA_DIR` (`./data` on host, `/data` in Docker).
 4. **Python tooling:** place CLI code under `src/soju/cli/`; services under `src/soju/services/`.
 5. **Before finishing:** `uv run poe validate` after any `data/` change; run web tests in Docker when touching `apps/web/src/lib/`.
@@ -156,7 +155,7 @@ uv run soju promote --topic <id> --dry-run
 uv run poe validate
 ```
 
-Or: `docker compose --profile validate run --rm validate`
+Or: `docker compose run --rm --no-deps backend poe validate`
 
 ### AI slash commands (`.ai/commands/`)
 

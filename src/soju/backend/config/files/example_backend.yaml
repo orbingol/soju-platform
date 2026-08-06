@@ -2,7 +2,7 @@
 # Packaged with soju.backend; only listed keys override shipped defaults (deep merge).
 #
 #   mkdir -p ~/.config/soju
-#   # from a checkout after uv sync --group backend:
+#   # from a checkout after uv sync:
 #   cp src/soju/backend/config/files/example_backend.yaml ~/.config/soju/backend.yaml
 
 llm:

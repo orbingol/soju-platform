@@ -75,7 +75,6 @@ Run the API on the host (optional):
 
 .. code-block:: bash
 
-   uv sync --group backend
    uv run soju backend --config docker/soju/backend.yaml
 
 See :doc:`/cli/backend`.
