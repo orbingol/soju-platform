@@ -25,9 +25,14 @@ classifiers = [
 ]
 dependencies = [
   "check-jsonschema>=0.37.0",
+  "edge-tts>=7.2.3",
+  "fastapi>=0.115.12",
+  "httpx>=0.28.0",
   "poethepoet>=0.48.0",
+  "pydantic>=2.10.0",
   "pyyaml>=6.0.3",
   "typer>=0.27.0",
+  "uvicorn[standard]>=0.34.2",
 ]
 dynamic = ["version"]
 
@@ -52,14 +57,6 @@ dev = [
   "pytest>=9.1.0",
   "pytest-cov>=7.1.0",
   "python-dotenv>=1.2.0",
-]
-# Optional FastAPI runtime: `uv sync --group backend` (Docker backend image installs this).
-backend = [
-  "edge-tts>=7.2.3",
-  "fastapi>=0.115.12",
-  "httpx>=0.28.0",
-  "pydantic>=2.10.0",
-  "uvicorn[standard]>=0.34.2",
 ]
 
 [tool.setuptools.packages.find]
@@ -171,13 +168,21 @@ help = "Stop and remove Soju Compose containers (after container-up-dev or conta
 cmd = "docker compose -f docker-compose.yml -f docker-compose.dev.yml down ${volumes:+--volumes}"
 args = [{ name = "volumes", options = ["-v", "--volumes"], type = "boolean", default = false, help = "Also remove named volumes (e.g. docs_build, node_modules)." }]
 
-[tool.poe.tasks.build]
-help = "Rebuild all Compose images (web, backend, docs, nginx, validate) and exit."
-cmd = "docker compose -f docker-compose.yml -f docker-compose.dev.yml --profile validate build"
+[tool.poe.tasks.container-build]
+help = "Rebuild all Compose images (web, backend, docs, nginx) and exit."
+cmd = "docker compose -f docker-compose.yml -f docker-compose.dev.yml build"
 
-[tool.poe.tasks.validate-docker]
-help = "Run validation inside the validate Docker image."
-cmd = "docker compose --profile validate run --rm validate"
+[tool.poe.tasks.build]
+help = "Alias for container-build."
+ref = "container-build"
+
+[tool.poe.tasks.container-cli]
+help = "Run soju CLI in the backend image (pass any soju args; e.g. poe container-cli validate-schemas)."
+cmd = "docker compose run --rm --no-deps backend soju"
+
+[tool.poe.tasks.soju]
+help = "Alias for container-cli."
+ref = "container-cli"
 
 [tool.poe.tasks.pre-commit]
 help = "Run pre-commit hooks on all files."
