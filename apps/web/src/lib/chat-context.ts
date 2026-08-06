@@ -1,6 +1,6 @@
 import type { AiCompletionRequest, AiMessage } from '$lib/ai/types';
 import type { ChatTurn } from '$lib/chat';
-import { chatKeepRecent, chatSummaryTrigger } from '$lib/config';
+import { chatKeepRecent, chatSummarizePrompt, chatSummaryTrigger } from '$lib/config';
 import { getItem, removeItem, setItem } from '$lib/storage';
 
 const MEMORY_KEY = 'chat-memory';
@@ -17,13 +17,6 @@ export interface ChatContextThresholds {
 }
 
 type CompleteFn = (request: AiCompletionRequest) => Promise<string>;
-
-const SUMMARIZE_SYSTEM = [
-  'You compress a Korean tutoring chat into a short memory note for the teacher AI.',
-  'Preserve: topics the student asked about, grammar forms, Korean+English examples, student goals/focus, open questions.',
-  'Omit: greetings, encouragement fluff, repeated explanations.',
-  'Max ~12 short bullet lines. Plain text only (use "-" bullets). No markdown headings.',
-].join(' ');
 
 function defaultThresholds(): ChatContextThresholds {
   return { trigger: chatSummaryTrigger, keepRecent: chatKeepRecent };
@@ -90,7 +83,7 @@ async function summarizeTurns(previousSummary: string | null, turns: ChatTurn[],
   const text = await complete({
     model,
     messages: [
-      { role: 'system', content: SUMMARIZE_SYSTEM },
+      { role: 'system', content: chatSummarizePrompt },
       { role: 'user', content: userContent },
     ],
     temperature: 0.2,

@@ -32,6 +32,8 @@ def test_load_settings_defaults() -> None:
     assert settings.tts.engine in {"edge", "piper"}
     assert settings.client.tutor_name
     assert settings.server.port >= 1
+    assert settings.prompts.chat.summarize
+    assert settings.prompts.ui.disclaimer
 
 
 def test_load_settings_explicit_override(tmp_path: Path) -> None:

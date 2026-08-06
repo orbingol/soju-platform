@@ -18,6 +18,6 @@ COPY src ./src
 
 RUN uv sync --frozen --no-default-groups --group backend
 
-EXPOSE 8000
+EXPOSE 14322
 
-CMD ["soju", "backend", "--config", "/config/backend.yaml", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["soju", "backend", "--config", "/config/soju/backend.yaml", "--host", "0.0.0.0", "--port", "14322"]

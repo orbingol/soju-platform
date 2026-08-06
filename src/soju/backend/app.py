@@ -8,12 +8,13 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 
 from soju.backend.adapters.llm import build_llm_provider
 from soju.backend.adapters.tts import build_tts_engine
 from soju.backend.config.settings import BackendSettings
 from soju.backend.config.loader import load_settings
-from soju.backend.routes import client_config, health, llm, tts
+from soju.backend.routes import client_config, health, llm, practice, tts
 from soju.backend.services.bag import AppServices
 from soju.backend.services.llm import LlmProxyService
 from soju.backend.services.tts import TtsService
@@ -45,6 +46,8 @@ def create_app(settings: BackendSettings | None = None) -> FastAPI:
         title="Soju Backend",
         version="0.1.0",
         lifespan=lifespan,
+        # So Swagger UI fetches /api/openapi.json when nginx strips the /api prefix.
+        root_path=resolved.server.root_path,
     )
     app.add_middleware(
         CORSMiddleware,
@@ -53,8 +56,17 @@ def create_app(settings: BackendSettings | None = None) -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+
+    @app.get("/", include_in_schema=False)
+    async def redirect_root_to_docs() -> RedirectResponse:
+        # Absolute path (includes root_path) so /api without a trailing slash does not
+        # resolve relative "docs" as host /docs (Sphinx).
+        root = resolved.server.root_path
+        return RedirectResponse(url=f"{root}/docs" if root else "/docs")
+
     app.include_router(health.router)
     app.include_router(tts.router)
     app.include_router(llm.router)
     app.include_router(client_config.router)
+    app.include_router(practice.router)
     return app

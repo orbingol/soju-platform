@@ -8,8 +8,8 @@ Run the site
    uv run poe up
    # or: docker compose -f docker-compose.yml -f docker-compose.dev.yml up
 
-Open http://localhost:5173 (dev). For prod (nginx :8080), use ``uv run poe up-prod`` —
-see :doc:`docker`.
+Open http://localhost:14321 (dev / ``poe up``) or http://localhost:8080 (prod / ``poe up-prod``).
+See :doc:`docker`.
 
 - **Education** — Word types, Grammar, Topics, Flashcards, Practice, Chat (AI features when enabled)
 - Data is bind-mounted from ``./data`` at ``/data`` in the container

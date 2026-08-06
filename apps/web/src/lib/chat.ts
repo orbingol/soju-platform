@@ -1,4 +1,4 @@
-import { aiTutorName, defaultChatSystemPrompt } from '$lib/config';
+import { aiTutorName, chatVocabSuffix, defaultChatSystemPrompt } from '$lib/config';
 import { buildVocabularySummary } from '$lib/data/loader';
 import { getItem, removeItem, setItem } from '$lib/storage';
 
@@ -26,7 +26,8 @@ export function buildChatSystemPrompt(): string {
   const vocabHint = [...vocabulary.words.slice(0, 20).map((word) => word.hangul), ...vocabulary.verbs.slice(0, 10).map((verb) => verb.hangul)].join(', ');
 
   const prompt = applyTutorName(defaultChatSystemPrompt);
-  return `${prompt}\n\nKnown vocabulary includes: ${vocabHint}`;
+  const suffix = chatVocabSuffix.replaceAll('{{vocab_hint}}', vocabHint);
+  return `${prompt}\n\n${suffix}`;
 }
 
 export async function loadChatMessages(): Promise<ChatTurn[]> {

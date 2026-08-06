@@ -7,6 +7,7 @@
   import { buildModelMessages, clearChatMemory, ensureChatMemory, loadChatMemory, needsSummarization, type ChatMemory } from '$lib/chat-context';
   import { type ChatTurn, loadChatMessages, saveChatMessages } from '$lib/chat';
   import { formatChatContent } from '$lib/format-chat-content';
+  import { aiDisclaimer } from '$lib/config';
 
   type ReplyPhase = 'idle' | 'summarizing' | 'thinking' | 'streaming';
 
@@ -150,7 +151,7 @@
     <p class="chat-conversation__error" role="alert">{error}</p>
   {/if}
 
-  <p class="chat-ai-note">AI can make mistakes. Please verify the output.</p>
+  <p class="chat-ai-note">{aiDisclaimer}</p>
 
   <form class="chat-form" class:chat-form--compact={compact} use:nativeSubmit>
     {#if compact}

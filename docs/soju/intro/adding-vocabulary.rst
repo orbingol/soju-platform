@@ -132,7 +132,7 @@ Start the site (if it is not already running) — same on every OS:
 
    docker compose up
 
-Open http://localhost:8080, go to **Topics → Common** (or Word types), and look for
+Open http://localhost:14321, go to **Topics → Common** (or Word types), and look for
 **딸기** / strawberry.
 
 Tips

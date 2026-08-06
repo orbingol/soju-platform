@@ -1,0 +1,7 @@
+# Edge nginx for Soju (publishes :8080 on the host).
+FROM nginx:alpine
+
+COPY docker/nginx/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]

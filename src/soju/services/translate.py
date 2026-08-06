@@ -100,7 +100,11 @@ def build_user_prompt(batch: list[WordHint]) -> str:
         if hint.hint_example:
             payload["example_hint"] = hint.hint_example
         items.append(payload)
-    return "Translate these vocabulary items into records. Return one record per item, in the same order.\n" + json.dumps({"items": items}, ensure_ascii=False, indent=2)
+    items_json = json.dumps({"items": items}, ensure_ascii=False, indent=2)
+    from soju.prompts.format import render
+    from soju.prompts.loader import get_prompts
+
+    return render(get_prompts().korean_cli.translation_user, items_json=items_json).strip()
 
 
 def normalize_record(record: dict[str, Any]) -> dict[str, Any] | None:

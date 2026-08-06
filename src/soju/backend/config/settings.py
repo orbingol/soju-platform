@@ -7,15 +7,27 @@ from typing import Literal
 
 from pydantic import BaseModel, Field, field_validator
 
+from soju.prompts.models import PromptsSettings
+
 
 class ServerSettings(BaseModel):
     """HTTP server bind address and browser CORS origins."""
 
     host: str = "0.0.0.0"
-    port: int = Field(default=8000, ge=1, le=65535)
+    port: int = Field(default=14322, ge=1, le=65535)
     cors_origins: list[str] = Field(
-        default_factory=lambda: ["http://localhost:8080", "http://localhost:5173"],
+        default_factory=lambda: ["http://localhost:8080", "http://localhost:14321"],
     )
+    # Public path prefix when behind nginx (``/api``). Empty for direct host access.
+    root_path: str = ""
+
+    @field_validator("root_path")
+    @classmethod
+    def _normalize_root_path(cls, value: str) -> str:
+        stripped = value.strip().rstrip("/")
+        if not stripped:
+            return ""
+        return stripped if stripped.startswith("/") else f"/{stripped}"
 
 
 class LlmSettings(BaseModel):
@@ -66,3 +78,4 @@ class BackendSettings(BaseModel):
     llm: LlmSettings = Field(default_factory=LlmSettings)
     tts: TtsSettings = Field(default_factory=TtsSettings)
     client: ClientSettings = Field(default_factory=ClientSettings)
+    prompts: PromptsSettings = Field(default_factory=PromptsSettings)

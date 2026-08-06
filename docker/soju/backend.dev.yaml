@@ -1,5 +1,11 @@
-# Compose override for the backend container (mounted at /config/backend.yaml).
+# Compose override for the backend in ``poe up`` (direct host ports, no nginx).
+# Mounted as /config/soju/backend.dev.yaml.
 # Deep-merged over packaged soju.backend.config.files.default_config.yaml.
+
+server:
+  root_path: ""
+  cors_origins:
+    - "http://localhost:14321"
 
 llm:
   # Reach host (or compose-profile) Ollama from the backend container.

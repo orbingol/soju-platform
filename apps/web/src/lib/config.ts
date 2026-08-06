@@ -34,23 +34,21 @@ export function resolveTtsEngine(raw?: string): TtsEngine {
 /** When true, Practice and Chat are available (requires Soju backend + LLM at runtime). */
 export const aiEnabled = firstDefined(PUBLIC_AI_ENABLED, dynamicPublicEnv.PUBLIC_OLLAMA_ENABLED) === 'true';
 
-/** Browser-reachable Soju API root (nginx → FastAPI in prod). */
-export const sojuApiBaseUrl = (firstDefined(PUBLIC_AI_BASE_URL, dynamicPublicEnv.PUBLIC_OLLAMA_BASE_URL) ?? 'http://localhost:8080').replace(/\/$/, '');
+/**
+ * Browser-reachable Soju API root (nginx ``/api`` → FastAPI).
+ * Never point this at Ollama — the backend is the only AI egress.
+ * ``PUBLIC_OLLAMA_BASE_URL`` is a legacy alias for the same Soju base URL.
+ */
+export const sojuApiBaseUrl = (firstDefined(PUBLIC_AI_BASE_URL, dynamicPublicEnv.PUBLIC_OLLAMA_BASE_URL) ?? 'http://localhost:14322').replace(/\/$/, '');
 
 const envChatThresholds = resolveChatContextThresholds(dynamicPublicEnv.PUBLIC_AI_CHAT_SUMMARY_TRIGGER, dynamicPublicEnv.PUBLIC_AI_CHAT_KEEP_RECENT);
 
 export const defaultChatTutorName = 'Hee-jae (희재)';
 
+/** Minimal stub until ``GET /v1/soju/client-config`` supplies ``system_prompt`` from prompts.yaml. */
 const envSystemPrompt =
   firstDefined(dynamicPublicEnv.PUBLIC_AI_SYSTEM_PROMPT, dynamicPublicEnv.PUBLIC_OLLAMA_SYSTEM_PROMPT) ||
-  [
-    'You are {{tutor_name}}, a friendly Korean language teacher for beginners.',
-    'Keep replies short (2–4 sentences). If the question is vague, ask one clarifying question first.',
-    'Once the topic is clear, give a brief explanation and at most one example (Korean + English).',
-    'Be warm and patient with light empathy; a gentle emoji is fine when it fits—keep encouragement brief.',
-    'Prefer Soju vocabulary when helpful. Mix Korean and English naturally.',
-    'Use plain text; **bold** for key Korean forms is fine. Write → for conjugation; avoid LaTeX and ---.',
-  ].join(' ');
+  'You are {{tutor_name}}, a friendly Korean language teacher for beginners.';
 
 /** Overridable at runtime via ``GET /v1/soju/client-config`` (see ``applyClientConfig``). */
 export let aiModel = firstDefined(dynamicPublicEnv.PUBLIC_AI_MODEL, dynamicPublicEnv.PUBLIC_OLLAMA_MODEL) ?? 'gemma4:e4b';
@@ -58,6 +56,10 @@ export let aiEmbedModel = firstDefined(dynamicPublicEnv.PUBLIC_AI_EMBED_MODEL, d
 export let aiApiMode: AiApiMode = firstDefined(dynamicPublicEnv.PUBLIC_AI_API_MODE) === 'conversations' ? 'conversations' : 'chat-completions';
 export let aiTutorName = firstDefined(dynamicPublicEnv.PUBLIC_AI_TUTOR_NAME) ?? defaultChatTutorName;
 export let defaultChatSystemPrompt = envSystemPrompt;
+export let chatSummarizePrompt =
+  'You compress a Korean tutoring chat into a short memory note for the teacher AI. Preserve: topics the student asked about, grammar forms, Korean+English examples, student goals/focus, open questions. Omit: greetings, encouragement fluff, repeated explanations. Max ~12 short bullet lines. Plain text only (use "-" bullets). No markdown headings.';
+export let chatVocabSuffix = 'Known vocabulary includes: {{vocab_hint}}';
+export let aiDisclaimer = 'AI can make mistakes. Please verify the output.';
 export let chatSummaryTrigger = envChatThresholds.trigger;
 export let chatKeepRecent = envChatThresholds.keepRecent;
 export let localTtsVoice = firstDefined(dynamicPublicEnv.PUBLIC_TTS_PIPER_VOICE) ?? 'ko-KR-SunHiNeural';
@@ -72,6 +74,9 @@ export type SojuClientConfigPayload = {
   embed_model?: string;
   tutor_name?: string;
   system_prompt?: string;
+  chat_summarize_prompt?: string;
+  chat_vocab_suffix?: string;
+  ui_disclaimer?: string;
   chat_summary_trigger?: number;
   chat_keep_recent?: number;
   tts_default_voice?: string;
@@ -93,6 +98,15 @@ export function applyClientConfig(payload: SojuClientConfigPayload): void {
   }
   if (typeof payload.system_prompt === 'string' && payload.system_prompt.trim()) {
     defaultChatSystemPrompt = payload.system_prompt;
+  }
+  if (typeof payload.chat_summarize_prompt === 'string' && payload.chat_summarize_prompt.trim()) {
+    chatSummarizePrompt = payload.chat_summarize_prompt.trim();
+  }
+  if (typeof payload.chat_vocab_suffix === 'string' && payload.chat_vocab_suffix.trim()) {
+    chatVocabSuffix = payload.chat_vocab_suffix.trim();
+  }
+  if (typeof payload.ui_disclaimer === 'string' && payload.ui_disclaimer.trim()) {
+    aiDisclaimer = payload.ui_disclaimer.trim();
   }
   if (typeof payload.tts_default_voice === 'string' && payload.tts_default_voice.trim()) {
     localTtsVoice = payload.tts_default_voice.trim();
