@@ -103,10 +103,17 @@ max-line-length = 180
 [tool.ruff]
 line-length = 180
 
-[tool.poe.tasks]
-validate-schemas = "soju validate-schemas"
-validate-align = "soju align"
-validate-registry = "soju registry"
+[tool.poe.tasks.validate-schemas]
+help = "JSON Schema check over data files."
+cmd = "soju validate-schemas"
+
+[tool.poe.tasks.validate-align]
+help = "Check verb forms ↔ registry alignment."
+cmd = "soju align"
+
+[tool.poe.tasks.validate-registry]
+help = "Check UUID / refs / sense uniqueness and unknown vocabulary or grammar level ids."
+cmd = "soju registry"
 
 [tool.poe.tasks.validate]
 help = "Run JSON Schema checks, alignment, and registry validation."
