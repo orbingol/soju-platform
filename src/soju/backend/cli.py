@@ -17,9 +17,7 @@ app = make_app()
 
 # Keep help text free of runtime server imports so ``sphinxcontrib-typer`` and
 # ``soju --help`` stay light (uvicorn / FastAPI load only when starting the server).
-_USER_CONFIG_HELP = (
-    "YAML override path (default: ~/.config/soju/backend.yaml if present, else packaged defaults)"
-)
+_USER_CONFIG_HELP = "YAML override path (default: ~/.config/soju/backend.yaml if present, else packaged defaults)"
 
 
 def _apply_server_overrides(
