@@ -45,12 +45,12 @@ const envChatThresholds = resolveChatContextThresholds(dynamicPublicEnv.PUBLIC_A
 
 export const defaultChatTutorName = 'Hee-jae (희재)';
 
-/** Minimal stub until ``GET /v1/soju/client-config`` supplies ``system_prompt`` from prompts.yaml. */
+/** Minimal stub until ``GET /v1/soju/config/client`` supplies ``system_prompt`` from prompts.yaml. */
 const envSystemPrompt =
   firstDefined(dynamicPublicEnv.PUBLIC_AI_SYSTEM_PROMPT, dynamicPublicEnv.PUBLIC_OLLAMA_SYSTEM_PROMPT) ||
   'You are {{tutor_name}}, a friendly Korean language teacher for beginners.';
 
-/** Overridable at runtime via ``GET /v1/soju/client-config`` (see ``applyClientConfig``). */
+/** Overridable at runtime via ``GET /v1/soju/config/client`` (see ``applyClientConfig``). */
 export let aiModel = firstDefined(dynamicPublicEnv.PUBLIC_AI_MODEL, dynamicPublicEnv.PUBLIC_OLLAMA_MODEL) ?? 'gemma4:e4b';
 export let aiEmbedModel = firstDefined(dynamicPublicEnv.PUBLIC_AI_EMBED_MODEL, dynamicPublicEnv.PUBLIC_OLLAMA_EMBED_MODEL) ?? 'nomic-embed-text';
 export let aiApiMode: AiApiMode = firstDefined(dynamicPublicEnv.PUBLIC_AI_API_MODE) === 'conversations' ? 'conversations' : 'chat-completions';

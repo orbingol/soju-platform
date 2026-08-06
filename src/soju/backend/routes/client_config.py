@@ -14,10 +14,10 @@ from soju.backend.config.client import (
 )
 from soju.backend.services.deps import get_settings
 
-router = APIRouter(tags=["client-config"])
+router = APIRouter(tags=["config"])
 
 
-@router.get("/v1/soju/client-config", response_model=ClientConfigResponse)
+@router.get("/v1/soju/config/client", response_model=ClientConfigResponse)
 async def client_config(settings: Annotated[BackendSettings, Depends(get_settings)]) -> ClientConfigResponse:
     """Return non-secret settings for the web app (models, tutor prompt, TTS defaults)."""
     return client_config_from_settings(settings)

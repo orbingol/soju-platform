@@ -24,7 +24,7 @@ x-soju-tts-engine: &soju-tts-engine local
 # Same-origin API via nginx (browser never talks to internal ports).
 x-soju-api-base-url: &soju-api-base-url /api
 
-# Minimal browser-visible env (models / tutor prompt come from GET /v1/soju/client-config).
+# Minimal browser-visible env (models / tutor prompt come from GET /v1/soju/config/client).
 x-soju-web-environment: &soju-web-environment
   DATA_DIR: /data
   PUBLIC_TTS_ENGINE: *soju-tts-engine

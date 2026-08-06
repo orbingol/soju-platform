@@ -20,7 +20,7 @@ packaged defaults under ``src/soju/backend/config/files/``. Compose mounts
      - Packaged ``default_config.yaml``, optional user/Compose YAML override
    * - **Serves**
      - ``/health``, ``/v1/models``, ``/v1/chat/completions``, ``/v1/embeddings``,
-       ``/v1/audio/speech``, ``/v1/soju/client-config``
+       ``/v1/audio/speech``, ``/v1/soju/config/client``
    * - **Exit codes**
      - ``0`` running until stopped · ``1`` missing deps / bad config
 

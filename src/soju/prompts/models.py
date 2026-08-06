@@ -14,7 +14,7 @@ class GuardrailsSettings(BaseModel):
 
 
 class ChatPromptSettings(BaseModel):
-    """Chat tutor prompts exposed to the browser via client-config."""
+    """Chat tutor prompts exposed to the browser via ``/v1/soju/config/client``."""
 
     system: str = ""
     vocab_suffix: str = "Known vocabulary includes: {{vocab_hint}}"

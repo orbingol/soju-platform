@@ -30,4 +30,4 @@ grammar pattern from the grammar manifest.
 Requires a reachable Ollama server with the embedding model pulled (default
 ``nomic-embed-text``, or ``SOJU_EMBED_MODEL`` / ``--embed-model``). Keep that model
 aligned with backend ``llm.embed_model`` (surfaced to the browser via
-``/v1/soju/client-config``). See :doc:`/development/ai` for the full Practice flow.
+``/v1/soju/config/client``). See :doc:`/development/ai` for the full Practice flow.
