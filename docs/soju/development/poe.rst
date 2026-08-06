@@ -35,6 +35,8 @@ Compose
      - ``uv run poe up-prod``
    * - Rebuild images (exit when done)
      - ``uv run poe build``
+   * - Pull default Ollama models
+     - ``uv run poe setup-ollama``
 
 See :doc:`docker` for the full Compose layout.
 

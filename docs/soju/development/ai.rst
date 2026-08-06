@@ -18,8 +18,8 @@ Pull models on the host (defaults match backend YAML / ``ollama-pull``):
 
 .. code-block:: bash
 
-   ollama pull gemma4:e4b
-   ollama pull nomic-embed-text
+   uv run poe setup-ollama
+   # or: ollama pull gemma4:e4b && ollama pull nomic-embed-text
 
 The backend reaches host Ollama at ``http://host.docker.internal:11434``
 (see ``docker/soju/backend.yaml``). The **browser** calls ``PUBLIC_AI_BASE_URL``

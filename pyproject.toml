@@ -134,6 +134,13 @@ cmd = "soju import verbs --stdin-json"
 help = "Build the Ollama embedding cache for Practice retrieval (data/cache/embeddings/)."
 cmd = "soju embed-index"
 
+[tool.poe.tasks.setup-ollama]
+help = "Pull default Ollama chat + embed models (gemma4:e4b, nomic-embed-text)."
+sequence = [
+  { cmd = "ollama pull gemma4:e4b" },
+  { cmd = "ollama pull nomic-embed-text" },
+]
+
 [tool.poe.tasks.up]
 help = "Start Soju in dev mode: Vite :14321, API :14322, docs :14323 (no nginx)."
 cmd = "docker compose -f docker-compose.yml -f docker-compose.dev.yml up"
