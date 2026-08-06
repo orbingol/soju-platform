@@ -35,7 +35,7 @@ Controllable build-args: ``PUBLIC_BASE_PATH``, ``PUBLIC_TTS_ENGINE``,
 ``PUBLIC_AI_EMBED_MODEL``, ``PUBLIC_AI_SYSTEM_PROMPT``, ``PUBLIC_AI_TUTOR_NAME``.
 (Legacy ``PUBLIC_TTS_PIPER_*`` names still work; prefer ``PUBLIC_AI_BASE_URL`` for the
 Soju API origin. Model/prompt overrides are mainly for static builds — local Compose
-loads them from the backend client-config endpoint.)
+loads them from ``GET /v1/soju/config/client``.)
 
 Practice and Chat **routes are included** in the static output but **hidden from
 navigation** and show an inert gate if visited directly — no model calls are ever

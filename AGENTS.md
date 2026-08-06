@@ -35,6 +35,7 @@ Assume Python commands run as `uv run …` or `uv run poe …` unless the venv i
 | Web (dev) | `uv run poe up` → UI :14321, API :14322, docs :14323 (no nginx) |
 | Web (prod) | `uv run poe up-prod` / `docker compose up` → http://localhost:8080/ (API `/api`, docs `/docs`) |
 | Rebuild images | `uv run poe build` (web + backend + docs + validate; exits when done) |
+| Pull Ollama models | `uv run poe setup-ollama` (chat + embed defaults) |
 | Import words (JSON) | `cat records.json \| uv run soju import words --topic <id> --stdin-json` |
 | Import verbs (JSON) | `cat verbs.json \| uv run soju import verbs --stdin-json` |
 | Assign course levels | `uv run soju levels set --level 1A --all-unassigned` · `--kind grammar` |
@@ -66,7 +67,7 @@ One console entry is installed by `uv sync`: **`soju`**. Invoke as `uv run soju 
 | **`embed-index`** | Build Ollama embedding cache for Practice retrieval (`data/cache/embeddings/`) |
 | **`backend`** | Run FastAPI Soju API (LLM proxy + TTS; needs `uv sync --group backend`) |
 
-**Poe shortcuts:** `validate`, `validate-schemas`, `validate-align`, `validate-registry`, `validate-docker`, `build`, `test`, `pre-commit`, `lint`, `import-words`, `import-verbs`, `translate-words`, `embed-index`, `docs`, `docs-serve`.
+**Poe shortcuts:** `validate`, `validate-schemas`, `validate-align`, `validate-registry`, `validate-docker`, `build`, `setup-ollama`, `test`, `pre-commit`, `lint`, `import-words`, `import-verbs`, `translate-words`, `embed-index`, `docs`, `docs-serve`.
 
 ## Documentation
 

@@ -125,7 +125,7 @@ def test_swagger_openapi_url_respects_root_path(monkeypatch: pytest.MonkeyPatch)
 
 
 def test_client_config(client: TestClient) -> None:
-    response = client.get("/v1/soju/client-config")
+    response = client.get("/v1/soju/config/client")
     assert response.status_code == 200
     body = response.json()
     assert body["tts_engine_label"] == "local"

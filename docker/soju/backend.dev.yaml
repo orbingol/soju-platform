@@ -10,3 +10,6 @@ server:
 llm:
   # Reach host (or compose-profile) Ollama from the backend container.
   base_url: "http://host.docker.internal:11434"
+  # Optional: override packaged default (gemma4:e4b). UI picks this up via
+  # GET /v1/soju/config/client. For macOS MLX on host Ollama, uncomment:
+  # chat_model: "gemma4:e4b-mlx"

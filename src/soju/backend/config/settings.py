@@ -61,7 +61,7 @@ class TtsSettings(BaseModel):
 
 
 class ClientSettings(BaseModel):
-    """Non-secret values exposed to the web app via ``/v1/soju/client-config``."""
+    """Non-secret values exposed to the web app via ``/v1/soju/config/client``."""
 
     ai_enabled: bool = True
     api_mode: Literal["chat-completions", "conversations"] = "chat-completions"

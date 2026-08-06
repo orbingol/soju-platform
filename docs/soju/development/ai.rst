@@ -18,8 +18,8 @@ Pull models on the host (defaults match backend YAML / ``ollama-pull``):
 
 .. code-block:: bash
 
-   ollama pull gemma4:e4b
-   ollama pull nomic-embed-text
+   uv run poe setup-ollama
+   # or: ollama pull gemma4:e4b && ollama pull nomic-embed-text
 
 The backend reaches host Ollama at ``http://host.docker.internal:11434``
 (see ``docker/soju/backend.yaml``). The **browser** calls ``PUBLIC_AI_BASE_URL``
@@ -55,7 +55,7 @@ Browser env (Compose)
      - Default speech engine (Settings can override)
 
 Chat model, embed model, tutor name/prompt, and TTS voice are loaded at runtime from
-``GET /v1/soju/client-config`` (backend YAML). Legacy ``PUBLIC_OLLAMA_*`` / older
+``GET /v1/soju/config/client`` (backend YAML). Legacy ``PUBLIC_OLLAMA_*`` / older
 ``PUBLIC_AI_MODEL`` names remain as fallbacks when set.
 
 Backend config (YAML)
@@ -108,7 +108,7 @@ registry/grammar changes):
 
 This writes ``data/cache/embeddings/`` (gitignored). See :doc:`/cli/embed-index`.
 Python uses ``OLLAMA_HOST`` + ``SOJU_EMBED_MODEL`` (default ``nomic-embed-text``).
-Keep that model in sync with backend ``llm.embed_model`` / client-config.
+Keep that model in sync with backend ``llm.embed_model`` / ``/v1/soju/config/client``.
 
 **Retrieve (dev-only API)**
 
