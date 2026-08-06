@@ -150,7 +150,8 @@ sequence = [
 
 [tool.poe.tasks.container-up-dev]
 help = "Start Soju in dev mode: Vite :14321, API :14322, docs :14323 (no nginx)."
-cmd = "docker compose -f docker-compose.yml -f docker-compose.dev.yml up"
+cmd = "docker compose -f docker-compose.yml -f docker-compose.dev.yml up ${detach:+--detach}"
+args = [{ name = "detach", options = ["-d", "--detach"], type = "boolean", default = false, help = "Run containers in the background." }]
 
 [tool.poe.tasks.up]
 help = "Alias for container-up-dev."
@@ -158,7 +159,8 @@ ref = "container-up-dev"
 
 [tool.poe.tasks.container-up-prod]
 help = "Start Soju in prod mode: nginx :8080 only (UI /, API /api, docs /docs)."
-cmd = "docker compose up"
+cmd = "docker compose up ${detach:+--detach}"
+args = [{ name = "detach", options = ["-d", "--detach"], type = "boolean", default = false, help = "Run containers in the background." }]
 
 [tool.poe.tasks.up-prod]
 help = "Alias for container-up-prod."
