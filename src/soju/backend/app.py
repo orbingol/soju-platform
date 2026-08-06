@@ -43,7 +43,7 @@ def create_app(settings: BackendSettings | None = None) -> FastAPI:
             await tts_service.aclose()
 
     app = FastAPI(
-        title="Soju Backend",
+        title="Soju Platform API",
         version="0.1.0",
         lifespan=lifespan,
         # So Swagger UI fetches /api/openapi.json when nginx strips the /api prefix.
