@@ -30,9 +30,9 @@ Compose
    * - Task
      - Command
    * - Dev (Vite :14321, API :14322, docs :14323)
-     - ``uv run poe up``
+     - ``uv run poe container-up-dev`` (alias: ``up``)
    * - Prod (nginx :8080 only)
-     - ``uv run poe up-prod``
+     - ``uv run poe container-up-prod`` (alias: ``up-prod``)
    * - Rebuild images (exit when done)
      - ``uv run poe build``
    * - Pull default Ollama models

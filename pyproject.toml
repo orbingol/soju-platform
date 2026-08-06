@@ -141,13 +141,21 @@ sequence = [
   { cmd = "ollama pull nomic-embed-text" },
 ]
 
-[tool.poe.tasks.up]
+[tool.poe.tasks.container-up-dev]
 help = "Start Soju in dev mode: Vite :14321, API :14322, docs :14323 (no nginx)."
 cmd = "docker compose -f docker-compose.yml -f docker-compose.dev.yml up"
 
-[tool.poe.tasks.up-prod]
+[tool.poe.tasks.up]
+help = "Alias for container-up-dev."
+ref = "container-up-dev"
+
+[tool.poe.tasks.container-up-prod]
 help = "Start Soju in prod mode: nginx :8080 only (UI /, API /api, docs /docs)."
 cmd = "docker compose up"
+
+[tool.poe.tasks.up-prod]
+help = "Alias for container-up-prod."
+ref = "container-up-prod"
 
 [tool.poe.tasks.build]
 help = "Rebuild all Compose images (web, backend, docs, nginx, validate) and exit."
