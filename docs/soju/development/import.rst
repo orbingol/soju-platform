@@ -12,7 +12,7 @@ directly; see :doc:`data-layout` for what lives where.
    cat verbs.json   | uv run soju import verbs --stdin-json
    uv run poe validate
 
-Always finish with ``uv run poe validate`` (or the Docker validate profile) after an
+Always finish with ``uv run poe validate`` (or ``uv run poe container-cli …`` / backend image) after an
 import — see :doc:`validate`.
 
 Course levels on import

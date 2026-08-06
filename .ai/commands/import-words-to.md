@@ -51,7 +51,7 @@ Do not edit `data/content/topics/manifest.yaml` unless the user asks — topics 
    # cat records.json | uv run soju import words --topic <topic> --stdin-json --level 1A
    ```
 
-5. `uv run poe validate` (or Docker validate profile).
+5. `uv run poe validate` (or `uv run poe container-cli …` in the backend image).
 
 Optional course `level`: see `import-words.md` (per-record `"level"` or CLI `--level`; omit = unassigned).
 

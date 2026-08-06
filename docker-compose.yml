@@ -117,21 +117,6 @@ services:
       - soju
     restart: unless-stopped
 
-  validate:
-    profiles: ["validate"]
-    build:
-      context: .
-      dockerfile: docker/Dockerfile.validate
-    working_dir: /workspace
-    environment:
-      DATA_DIR: /workspace/data
-    volumes:
-      - ./data:/workspace/data:ro
-      - ./src:/workspace/src:ro
-      - ./pyproject.toml:/workspace/pyproject.toml:ro
-    networks:
-      - soju
-
   ollama:
     image: ollama/ollama
     profiles: ["ollama"]

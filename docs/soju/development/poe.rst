@@ -18,7 +18,7 @@ Validate
    * - Schema / align / registry only
      - ``uv run poe validate-schemas`` · ``validate-align`` · ``validate-registry``
    * - Validate in Docker
-     - ``uv run poe validate-docker``
+     - ``uv run poe container-cli validate-schemas`` (alias: ``soju``; any ``soju`` args) · full suite: ``docker compose run --rm --no-deps backend poe validate``
 
 Compose
 -------
@@ -30,11 +30,13 @@ Compose
    * - Task
      - Command
    * - Dev (Vite :14321, API :14322, docs :14323)
-     - ``uv run poe up``
+     - ``uv run poe container-up-dev`` (alias: ``up``)
    * - Prod (nginx :8080 only)
-     - ``uv run poe up-prod``
+     - ``uv run poe container-up-prod`` (alias: ``up-prod``)
+   * - Stop / remove containers
+     - ``uv run poe container-down`` · ``--volumes`` drops named volumes
    * - Rebuild images (exit when done)
-     - ``uv run poe build``
+     - ``uv run poe container-build`` (alias: ``build``)
    * - Pull default Ollama models
      - ``uv run poe setup-ollama``
 

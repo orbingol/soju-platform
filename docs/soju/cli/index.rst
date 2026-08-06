@@ -13,7 +13,8 @@ the live Typer apps (``sphinxcontrib-typer``).
    uv run soju <subcommand> --help
 
 **Validate after any data change:** ``uv run poe validate`` or
-``docker compose --profile validate run --rm validate``
+``uv run poe container-cli validate-schemas`` (and ``align`` / ``registry``) in the backend image;
+full suite: ``docker compose run --rm --no-deps backend poe validate``
 
 - :doc:`soju` (unified entry — all subcommands)
 - :doc:`import`

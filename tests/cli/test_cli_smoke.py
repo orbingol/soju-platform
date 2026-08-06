@@ -419,8 +419,7 @@ def test_levels_set_grammar_all_unassigned_dry_run(data_root: Path) -> None:
 
 
 def test_backend_help_smoke() -> None:
-    """``soju backend --help`` exits cleanly (not pinned byte-for-byte; needs backend extras)."""
-    pytest.importorskip("fastapi")
+    """``soju backend --help`` exits cleanly without starting the server."""
     result = _run_script(["soju", "backend", "--help"])
     assert result.returncode == 0, result.stderr
     assert "backend" in result.stdout.lower()

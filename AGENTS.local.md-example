@@ -51,4 +51,4 @@ Personal task list. Agents may consult this to align on priorities, but should s
 Free-form notes that do not fit elsewhere.
 
 *
-* *(soju-specific: prefer host `uv run poe validate` vs `docker compose --profile validate run --rm validate`; default Ollama model in compose; browser used for Korean TTS testing)*
+* *(soju-specific: prefer host `uv run poe validate` vs `uv run poe container-cli …` / `docker compose run --rm --no-deps backend poe validate`; default Ollama model in compose; browser used for Korean TTS testing)*
