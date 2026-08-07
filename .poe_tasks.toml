@@ -1,0 +1,129 @@
+# Poe tasks for soju-platform.
+# See https://poethepoet.natn.io for more information.
+
+[tool.poe.tasks.validate-schemas]
+help = "JSON Schema check over data files."
+cmd = "soju validate-schemas"
+
+[tool.poe.tasks.validate-align]
+help = "Check verb forms ↔ registry alignment."
+cmd = "soju align"
+
+[tool.poe.tasks.validate-registry]
+help = "Check UUID / refs / sense uniqueness and unknown vocabulary or grammar level ids."
+cmd = "soju registry"
+
+[tool.poe.tasks.validate]
+help = "Run JSON Schema checks, alignment, and registry validation."
+sequence = [
+  "validate-schemas",
+  "validate-align",
+  "validate-registry",
+]
+
+[tool.poe.tasks.import-words]
+help = "Import words from a text file into a topic (existing words: merge examples only)."
+cmd = "soju import words --topic ${topic} --file ${file}"
+args = [{ name = "topic", default = "family" }, { name = "file", options = ["-f", "--file"], required = true }]
+
+[tool.poe.tasks.translate-words]
+help = "Translate a plain-text word list to JSON via Ollama (pipe to soju import)."
+cmd = "soju translate-words --file ${file}"
+args = [{ name = "file", options = ["-f", "--file"], required = true }]
+
+[tool.poe.tasks.import-verbs]
+help = "Import verbs from JSON on stdin (AI-assisted workflow)."
+cmd = "soju import verbs --stdin-json"
+
+[tool.poe.tasks.embed-index]
+help = "Build the Ollama embedding cache for Practice retrieval (data/cache/embeddings/)."
+cmd = "soju embed-index"
+
+[tool.poe.tasks.setup-ollama]
+help = "Pull default Ollama chat + embed models (gemma4:e4b, nomic-embed-text)."
+sequence = [
+  { cmd = "ollama pull gemma4:e4b" },
+  { cmd = "ollama pull nomic-embed-text" },
+]
+
+[tool.poe.tasks.container-up-dev]
+help = "Start Soju in dev mode: Vite :14321, API :14322, docs :14323 (no nginx)."
+cmd = "docker compose -f docker-compose.yml -f docker-compose.dev.yml up ${detach:+--detach}"
+args = [{ name = "detach", options = ["-d", "--detach"], type = "boolean", default = false, help = "Run containers in the background." }]
+
+[tool.poe.tasks.up]
+help = "Alias for container-up-dev."
+ref = "container-up-dev"
+
+[tool.poe.tasks.container-up-prod]
+help = "Start Soju in prod mode: nginx :8080 only (UI /, API /api, docs /docs)."
+cmd = "docker compose up ${detach:+--detach}"
+args = [{ name = "detach", options = ["-d", "--detach"], type = "boolean", default = false, help = "Run containers in the background." }]
+
+[tool.poe.tasks.up-prod]
+help = "Alias for container-up-prod."
+ref = "container-up-prod"
+
+[tool.poe.tasks.container-down]
+help = "Stop and remove Soju Compose containers (after container-up-dev or container-up-prod)."
+cmd = "docker compose -f docker-compose.yml -f docker-compose.dev.yml down ${volumes:+--volumes}"
+args = [{ name = "volumes", options = ["-v", "--volumes"], type = "boolean", default = false, help = "Also remove named volumes (e.g. docs_build, node_modules)." }]
+
+[tool.poe.tasks.container-build]
+help = "Rebuild all Compose images (web, backend, docs, nginx) and exit."
+cmd = "docker compose -f docker-compose.yml -f docker-compose.dev.yml build"
+
+[tool.poe.tasks.build]
+help = "Alias for container-build."
+ref = "container-build"
+
+[tool.poe.tasks.container-cli]
+help = "Run soju CLI in the backend image (pass any soju args; e.g. poe container-cli validate-schemas)."
+cmd = "docker compose run --rm --no-deps backend soju"
+
+[tool.poe.tasks.soju]
+help = "Alias for container-cli."
+ref = "container-cli"
+
+[tool.poe.tasks.pre-commit]
+help = "Run pre-commit hooks on all files."
+cmd = "pre-commit run --all-files"
+
+[tool.poe.tasks.lint]
+help = "Alias for pre-commit (run hooks on all files)."
+ref = "pre-commit"
+
+[tool.poe.tasks.test]
+help = "Run Python unit + offline system tests (skips @pytest.mark.llm)."
+cmd = "pytest -m \"not llm\""
+
+[tool.poe.tasks.test-unit]
+help = "Run Python unit tests only (exclude system and llm)."
+cmd = "pytest -m \"not system and not llm\""
+
+[tool.poe.tasks.test-system]
+help = "Run offline system tests (CLI pipelines on temp data; skips llm)."
+cmd = "pytest -m \"system and not llm\""
+
+[tool.poe.tasks.test-llm]
+help = "Run optional LLM system tests (needs Ollama; pass --llm)."
+cmd = "pytest -m llm --llm"
+
+[tool.poe.tasks.test-all]
+help = "Run unit, offline system, and LLM tests (needs Ollama for @pytest.mark.llm)."
+cmd = "pytest --llm"
+
+[tool.poe.tasks.coverage]
+help = "Run unit + offline system tests with line coverage for soju."
+cmd = "pytest -m \"not llm\" --cov=soju --cov-report=term-missing"
+
+[tool.poe.tasks.docs]
+help = "Build Sphinx HTML user guide into docs/_build/html."
+cmd = "make clean html"
+cwd = "docs"
+
+[tool.poe.tasks.docs-serve]
+help = "Build and serve Sphinx docs with live reload on the host (default :14323; Compose serves /docs via nginx :8080)."
+cmd = "make clean html serve PORT=${port}"
+cwd = "docs"
+args = [{ name = "port", default = "14323", options = ["--port"] }]
