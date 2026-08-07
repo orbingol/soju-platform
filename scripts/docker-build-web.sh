@@ -7,14 +7,13 @@
 #   scripts/docker-build-web.sh ./site-app      # build + extract /app/build into ./site-app
 #
 # Controllable build-args (pass as env; unset → Dockerfile defaults):
-#   PUBLIC_BASE_PATH PUBLIC_TTS_ENGINE PUBLIC_TTS_PIPER_BASE_URL PUBLIC_TTS_PIPER_VOICE
-#   PUBLIC_AI_ENABLED PUBLIC_AI_API_MODE PUBLIC_AI_BASE_URL PUBLIC_AI_MODEL
-#   PUBLIC_AI_EMBED_MODEL PUBLIC_AI_SYSTEM_PROMPT PUBLIC_AI_TUTOR_NAME
+#   PUBLIC_BASE_PATH PUBLIC_TTS_ENGINE PUBLIC_AI_ENABLED PUBLIC_AI_BASE_URL
+# Model/tutor/prompt/voice: backend GET /v1/soju/config/client (config.ts fallbacks).
 #
 # Examples:
 #   scripts/docker-build-web.sh
 #   PUBLIC_BASE_PATH=/soju-platform scripts/docker-build-web.sh ./site-app
-#   PUBLIC_TTS_ENGINE=piper scripts/docker-build-web.sh ./site-app
+#   PUBLIC_TTS_ENGINE=browser scripts/docker-build-web.sh ./site-app
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -33,15 +32,8 @@ build_args=(
 for var in \
   PUBLIC_BASE_PATH \
   PUBLIC_TTS_ENGINE \
-  PUBLIC_TTS_PIPER_BASE_URL \
-  PUBLIC_TTS_PIPER_VOICE \
   PUBLIC_AI_ENABLED \
-  PUBLIC_AI_API_MODE \
-  PUBLIC_AI_BASE_URL \
-  PUBLIC_AI_MODEL \
-  PUBLIC_AI_EMBED_MODEL \
-  PUBLIC_AI_SYSTEM_PROMPT \
-  PUBLIC_AI_TUTOR_NAME
+  PUBLIC_AI_BASE_URL
 do
   if [ -n "${!var+x}" ]; then
     build_args+=(--build-arg "${var}=${!var}")
